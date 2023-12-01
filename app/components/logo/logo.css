@@ -1,0 +1,12 @@
+.logo-svg {
+    --brand-primary-color: #ff00b1;
+    --brand-secondary-color: #fff;
+}
+
+.logo-svg-primary path {
+    fill: var(--brand-primary-color);
+}
+
+.logo-svg-secondary path {
+    fill: var(--brand-secondary-color);
+}
