@@ -1,0 +1,8 @@
+.about .post-content img {
+    max-height: 50vh;
+    width: auto;
+}
+
+.about img {
+    box-shadow: var(--shadow-lg);
+}

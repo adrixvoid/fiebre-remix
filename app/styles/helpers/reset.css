@@ -1,0 +1,97 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 500;
+    line-height: 1.3;
+}
+
+.h1,
+h1 {
+    font-size: var(--variant-h1);
+}
+
+.h2,
+h2 {
+    font-size: var(--variant-h2);
+}
+
+.h3,
+h3 {
+    font-size: var(--variant-h3);
+}
+
+.h4,
+h4 {
+    font-size: var(--variant-h4);
+}
+
+.h5,
+h5 {
+    font-size: var(--variant-h5);
+}
+
+.h6,
+h6 {
+    font-size: var(--variant-h6);
+}
+
+body {
+    --variant-p: 0.8rem;
+    font-size: var(--variant-p);
+    line-height: 1.55rem;
+}
+
+ul,
+ol,
+p {
+    margin-top: 1.8rem;
+    margin-bottom: 1.8rem;
+}
+
+nav a {
+    transition: color 0.2s ease-in-out;
+}
+
+nav ul,
+nav ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    gap: calc(var(--unit) * 2);
+}
+
+nav ol li,
+nav ul li {
+    display: inline-block;
+    list-style: none;
+}
+
+nav ol li a,
+nav ul li a {
+    text-decoration: none;
+}
+
+img {
+    display: inline-block;
+}
+
+div {
+    box-sizing: border-box;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    cursor: pointer;
+    transition: all 0.05s ease-in-out;
+    will-change: background-color, color;
+}
+
+a:focus,
+button:focus {
+    outline: none;
+}

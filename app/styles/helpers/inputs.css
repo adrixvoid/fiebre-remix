@@ -1,0 +1,150 @@
+input,
+textarea,
+select {
+    background-color: var(--paper-bg);
+    color: var(--body-text);
+    border: 1px solid var(--border-color);
+    transition: all 0.05s ease-in-out;
+    will-change: border-color;
+    padding: calc(var(--unit) / 2) var(--unit);
+    box-sizing: border-box;
+    display: inline-block;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    appearance: none;
+    background-color: var(--paper-bg);
+    border: 1px solid var(--border-color);
+    width: calc(var(--unit) * 2);
+    height: calc(var(--unit) * 2);
+    border-radius: var(--border-radius-sm);
+    transition: all 0.05s ease-in-out;
+    will-change: border-color;
+    padding: var(--unit);
+}
+
+input[type="radio"] {
+    border-radius: 50%;
+}
+
+input[type="checkbox"]:checked,
+input[type="radio"]:checked {
+    background-color: var(--accent-bg);
+    border-color: var(--accent-bg);
+}
+
+input[type="checkbox"]:checked::after,
+input[type="radio"]:checked::after {
+    content: "";
+    display: block;
+    width: calc(var(--unit) / 2);
+    height: calc(var(--unit) / 2);
+    background-color: var(--accent-fg);
+    position: relative;
+    top: calc(var(--unit) / 4);
+    left: calc(var(--unit) / 4);
+}
+
+input[type="checkbox"]:hover,
+input[type="radio"]:hover {
+    border-color: var(--input-border-focus);
+}
+
+input[type="checkbox"]:focus,
+input[type="radio"]:focus {
+    outline: none;
+    border-color: var(--accent-bg);
+}
+
+input[type="checkbox"]:disabled,
+input[type="radio"]:disabled {
+    background-color: var(--input-bg-disabled);
+    color: var(--input-text-disabled);
+    border-color: var(--input-border-disabled);
+}
+
+input[type="checkbox"]:checked:disabled,
+input[type="checkbox"]:disabled,
+input[type="radio"]:checked:disabled,
+input[type="radio"]:disabled {
+    cursor: not-allowed;
+}
+
+input[type="checkbox"]:disabled:focus,
+input[type="radio"]:disabled:focus {
+    outline: none;
+}
+
+select {
+    appearance: none;
+    /* background-image: url('/icons/chevron-down.svg'); */
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: calc(var(--unit) * 2) calc(var(--unit) * 2);
+    padding-right: calc(var(--unit) * 3);
+}
+
+input:hover,
+textarea:hover,
+select:hover {
+    border-color: var(--input-border-focus);
+    background-color: var(--input-bg-hover);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--accent-bg);
+}
+
+input:disabled,
+textarea:disabled,
+select:disabled {
+    background-color: var(--input-bg-disabled);
+    color: var(--input-text-disabled);
+    border-color: var(--input-border-disabled);
+    cursor: not-allowed;
+}
+
+input:disabled:focus,
+textarea:disabled:focus,
+select:disabled:focus {
+    outline: none;
+}
+
+input::placeholder,
+textarea::placeholder,
+select::placeholder {
+    color: var(--input-text-placeholder);
+}
+
+input[type="submit"] {
+    background-color: var(--accent-bg);
+    color: var(--accent-fg);
+    border: none;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: var(--accent-bg-hover);
+}
+
+input[type="submit"]:focus {
+    outline: none;
+}
+
+input[type="submit"]:disabled {
+    background-color: var(--button-bg);
+    color: var(--button-color-hover);
+    cursor: not-allowed;
+}
+
+input[type="submit"]:disabled:hover {
+    background-color: var(--button-bg);
+}
+
+input[type="submit"]:disabled:focus {
+    outline: none;
+}

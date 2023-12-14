@@ -1,0 +1,26 @@
+.blogs {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.list {
+    color: var(--body-text);
+}
+
+.item {
+    display: flex;
+    padding: calc(var(--unit) * 2);
+    gap: calc(var(--unit) * 2);
+}
+
+.item a {
+    text-decoration: none;
+}
+
+.item img {
+    width: 10vw;
+    height: auto;
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: var(--border-radius);
+}

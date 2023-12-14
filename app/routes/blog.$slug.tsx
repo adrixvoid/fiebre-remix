@@ -3,28 +3,33 @@ import { useLoaderData, useRouteError, isRouteErrorResponse } from "@remix-run/r
 import { json } from "@remix-run/node";
 
 import styles from "~/styles/post.css";
-import { getBlog } from "~/server/markdown.server";
-import type { Post } from "~/server/markdown.server";
+import { getContent } from "~/server/markdown.server";
+import type { MarkdownDocument } from "~/server/markdown.server";
+
+export const links: LinksFunction = () => [
+    {
+        rel: "stylesheet",
+        href: styles,
+    },
+];
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
-    if (!params.slug) {
-        throw json("Not Found", { status: 404 });
+    try {
+        const slug = params.slug as string;
+        const markdownResult = await getContent('blog', slug);
+
+        if (!markdownResult) {
+            return json({ status: 404, message: 'Page not found' }, { status: 404 });
+        }
+
+        return markdownResult;
+    } catch (error) {
+        return json({ status: 500, message: 'Internal Server Error' }, { status: 500 });
     }
-
-    const post = await getBlog(params.slug)
-
-    if (!post) {
-        throw json(
-            { id: params.slug },
-            { status: 404 }
-        );
-    }
-
-    return post
 }
 
 export default function Post() {
-    const { title, content } = useLoaderData<Post>();
+    const { title, body } = useLoaderData<MarkdownDocument>();
 
     return (
         <div className="post">
@@ -35,7 +40,7 @@ export default function Post() {
             </div>
             <div className="container">
                 <div className="post-content">
-                    <div dangerouslySetInnerHTML={{ __html: content || '' }} />
+                    <div dangerouslySetInnerHTML={{ __html: body || '' }} />
                 </div>
             </div>
         </div>
@@ -50,11 +55,11 @@ export function ErrorBoundary() {
             case 401:
                 return (
                     <div>
-                        <p>You don't have access to this post.</p>
+                        <p>You don't have access to this page.</p>
                     </div>
                 );
             case 404:
-                return <div>Post not found!</div>;
+                return <div>Page not found!</div>;
         }
 
         return (
@@ -72,10 +77,3 @@ export function ErrorBoundary() {
         </div>
     );
 }
-
-export const links: LinksFunction = () => [
-    {
-        rel: "stylesheet",
-        href: styles,
-    },
-];

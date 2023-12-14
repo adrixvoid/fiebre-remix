@@ -1,38 +1,38 @@
-import type { LoaderFunctionArgs, LinksFunction } from "@remix-run/node";
+import type { LinksFunction } from "@remix-run/node";
 import { useLoaderData, useRouteError, isRouteErrorResponse } from "@remix-run/react"
 import { json } from "@remix-run/node";
 
-import styles from "~/styles/post.css";
+import postsStyles from "~/styles/post.css";
+import styles from "~/styles/about.css";
 import { getContent } from "~/server/markdown.server";
 import type { MarkdownDocument } from "~/server/markdown.server";
+
+export const loader = async () => {
+    try {
+        const markdownResult = await getContent('pages', '2023-12-04-about');
+        return markdownResult;
+    } catch (error) {
+        throw json("Not Found", { status: 404 });
+    }
+}
 
 export const links: LinksFunction = () => [
     {
         rel: "stylesheet",
         href: styles,
     },
+    {
+        rel: "stylesheet",
+        href: postsStyles,
+    },
 ];
 
-export const loader = async ({ params }: LoaderFunctionArgs) => {
-    try {
-        const slug = params.slug as string;
-        const markdownResult = await getContent('posts', slug);
 
-        if (!markdownResult) {
-            return json({ status: 404, message: 'Post not found' }, { status: 404 });
-        }
-
-        return markdownResult;
-    } catch (error) {
-        return json({ status: 500, message: 'Internal Server Error' }, { status: 500 });
-    }
-}
-
-export default function Post() {
+export default function AboutPage() {
     const { title, body } = useLoaderData<MarkdownDocument>();
 
     return (
-        <div className="post">
+        <div className="about post">
             <div className="container">
                 <div className="post-header">
                     <h1 className="sr-only">{title}</h1>

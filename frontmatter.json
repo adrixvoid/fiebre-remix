@@ -54,6 +54,14 @@
     {
       "title": "posts",
       "path": "[[workspace]]/app/content/posts"
+    },
+    {
+      "title": "pages",
+      "path": "[[workspace]]/app/content/pages"
+    },
+    {
+      "title": "products",
+      "path": "[[workspace]]/app/content/products"
     }
   ],
   "frontMatter.preview.host": "http://localhost:3004",

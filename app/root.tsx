@@ -10,7 +10,7 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 
-import Logo from "~/components/logo/Logo";
+import Logo from "~/components/svg/Logo";
 import globalStyles from "~/styles/global.css";
 
 const SITE_NAME = "Fiebre";
@@ -22,43 +22,59 @@ export const meta = () => [
   },
 ];
 
+
+// import script from cdn
+export const scripts: LinksFunction = () => [
+  {
+    rel: "preconnect",
+    href: "https://fonts.googleapis.com",
+  },
+  {
+    rel: "preconnect",
+    href: "https://fonts.gstatic.com"
+  }
+];
+
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
   {
     rel: "stylesheet",
-    href: globalStyles,
+    href: "https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap",
+    media: "all",
+    onLoad: "this.media='all'",
   },
+  {
+    rel: "stylesheet",
+    href: globalStyles,
+  }
 ];
 
 function MainLayout() {
   return (
-    <div className="page">
+    <div className="layout">
       <header className="header">
         <div className="header-container container">
           <Link to="/" className="logo">
-            <div className="sr-only">{SITE_NAME} Admin</div>
-            <img src='/logo.svg' alt={`Logo ${SITE_NAME}`} />
-            {/* <Logo /> */}
+            <span className="sr-only">{SITE_NAME}</span>
+            <Logo aria-hidden />
           </Link>
-          <nav>
-            <ul>
-              <li>
-                <a href="/about">Sobre mi</a>
-              </li>
-              <li>
-                <a href="/store">Tienda</a>
-              </li>
-              <li>
-                <a href="/posts">Portafolio</a>
-              </li>
-              <li>
-                <a href="/blog">Blog</a>
-              </li>
-            </ul>
+          <nav className="header-navigation">
+            <span>
+              <a href="/about">Sobre mi</a>
+            </span>
+            <span>
+              <a href="/store">Tienda</a>
+            </span>
+            <span>
+              <a href="/posts">Portafolio</a>
+            </span>
+            <span>
+              <a href="/blog">Blog</a>
+            </span>
           </nav>
         </div>
       </header>
-      <main>
+      <main className="main">
         <Outlet />
       </main>
       <footer className="footer">

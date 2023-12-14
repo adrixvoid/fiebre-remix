@@ -1,0 +1,86 @@
+a.button {
+    text-decoration: none;
+}
+
+.button,
+button {
+    background-color: var(--button-bg);
+    color: var(--button-color);
+    border: var(--border-color);
+    border-radius: calc(var(--border-radius) / 2);
+    padding: var(--unit) calc(var(--unit) * 2);
+}
+
+.button:hover:not(:disabled),
+button:hover:not(:disabled) {
+    background-color: var(--button-bg-hover);
+    color: var(--button-color-hover);
+}
+
+.button:disabled,
+button:disabled {
+    background-color: var(--button-bg);
+    color: var(--button-color-hover);
+    cursor: not-allowed;
+}
+
+/**
+    Buttons Styles
+*/
+button.primary:not(:disabled),
+.button.primary:not(:disabled) {
+    background: var(--button-bg-primary);
+    color: var(--button-color-primary);
+}
+
+button.primary:hover:not(:disabled),
+.button.primary:hover:not(:disabled) {
+    background: var(--button-bg-primary-hover);
+}
+
+button.primary.shadow:not(:disabled),
+.button.primary.shadow:not(:disabled) {
+    box-shadow: var(--shadow-primary);
+}
+
+button.secondary:not(:disabled),
+.button.secondary:not(:disabled) {
+    background: var(--button-bg-secondary);
+    color: var(--button-color-secondary);
+}
+
+button.secondary:hover:not(:disabled),
+.button.secondary:hover:not(:disabled) {
+    background: var(--button-bg-secondary-hover);
+}
+
+button.outline,
+.button.outline {
+    background: transparent;
+    border: 1px solid var(--button-bg);
+    color: var(--button-bg);
+}
+
+button.outline:hover:not(:disabled),
+.button.outline:hover:not(:disabled) {
+    color: var(--button-color-hover);
+}
+
+button.primary.outline:not(:disabled),
+.button.primary.outline:not(:disabled) {
+    background: transparent;
+    border: 1px solid var(--button-bg-primary);
+    color: var(--button-bg-primary);
+}
+
+button.primary.outline:hover:not(:disabled),
+.button.primary.outline:hover:not(:disabled) {
+    color: var(---button-color-hover)
+}
+
+button.secondary.outline:not(:disabled),
+.button.secondary.outline:not(:disabled) {
+    background: transparent;
+    border: 1px solid var(--button-bg-secondary);
+    color: var(--button-bg-secondary);
+}
