@@ -1,31 +1,26 @@
 import type { LinksFunction } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 
-import { getProducts } from "~/server/products.server"
+import { getCart } from "~/server/cart.server"
 import type { Product } from "~/server/products.server"
 
 import { ROUTE_PATH } from "~/constants";
 
-import markdownStyles from "~/styles/markdown.css";
-import styles from "~/styles/store.css";
+import styles from "~/styles/cart.css";
 
 export const loader = async () => {
-    return getProducts()
+    return getCart()
 }
 
 export const links: LinksFunction = () => [
-    {
-        rel: "stylesheet",
-        href: markdownStyles,
-    },
     {
         rel: "stylesheet",
         href: styles,
     },
 ];
 
-const Store = () => {
-    const products = useLoaderData<Product[]>();
+const Cart = () => {
+    const products = useLoaderData<[]>();
     return (
         <section className="markdown">
             <div className="container">
@@ -50,4 +45,4 @@ const Store = () => {
     )
 }
 
-export default Store
+export default Cart

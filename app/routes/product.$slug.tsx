@@ -1,14 +1,14 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import type { LoaderFunctionArgs, LinksFunction } from "@remix-run/node";
-import { useLoaderData, useRouteError, isRouteErrorResponse } from "@remix-run/react"
+import { useLoaderData } from "@remix-run/react"
 import { json } from "@remix-run/node";
 
 import { getProduct } from "~/server/products.server"
 import type { Product } from "~/server/products.server"
 
-import postsStyles from "~/styles/post.css";
+import postStyles from "~/styles/post.css";
 import styles from "~/styles/product.css";
 import FooterTienda from "~/components/Footer";
+import { MarkdownErrorBoundary } from "~/components/errors/Markdown";
 
 function getFormattedPrice(price: number): string {
     if (typeof price !== 'number') {
@@ -45,7 +45,7 @@ function getButtonTextBuyNow(): string {
 export const links: LinksFunction = () => [
     {
         rel: "stylesheet",
-        href: postsStyles,
+        href: postStyles,
     },
     {
         rel: "stylesheet",
@@ -93,7 +93,7 @@ function ProductRoute() {
                             </div>
                             {!priceHidden &&
                                 <p
-                                    className="price"
+                                    className="price h4"
                                     itemProp="offers"
                                     itemScope={false}
                                     itemType="http://schema.org/Offer"
@@ -108,10 +108,10 @@ function ProductRoute() {
                                 </p>}
                             {!priceHidden && price > 0 &&
                                 <div className="payment-options">
-                                    <a href="#">Ver formas de pago</a>
+                                    <a href="#home">Ver formas de pago</a>
                                 </div>}
                             {!priceHidden && price > 0 &&
-                                <div className="quantity">
+                                <div className="quantity input">
                                     <label htmlFor="product-quantity">
                                         <span className="sr-only">Quantity</span>
                                         <span aria-hidden>Qty.</span>
@@ -146,34 +146,7 @@ function ProductRoute() {
 }
 
 export function ErrorBoundary() {
-    const error = useRouteError();
-
-    if (isRouteErrorResponse(error)) {
-        switch (error.status) {
-            case 401:
-                return (
-                    <div>
-                        <p>You don't have access to this post.</p>
-                    </div>
-                );
-            case 404:
-                return <div>Post not found!</div>;
-        }
-
-        return (
-            <div>
-                Something went wrong: {error.status}{" "}
-                {error.statusText}
-            </div>
-        );
-    }
-
-    return (
-        <div>
-            Something went wrong:{" "}
-            "Unknown Error"
-        </div>
-    );
+    return <MarkdownErrorBoundary />;
 }
 
 

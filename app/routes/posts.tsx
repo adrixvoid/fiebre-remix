@@ -1,15 +1,13 @@
 import type { LinksFunction } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 
-import { getAllMarkdownsFromDirectory } from "~/server/markdown.server";
-import type { MarkdownDocument } from "~/server/markdown.server";
-
 import { ROUTE_PATH } from "~/constants";
-
-import styles from "~/styles/posts.css";
+import { getAllFromDirectory } from "~/server/utils/front-matter.server";
+import type { MarkdownDocument } from "~/server/utils/front-matter.server";
+import styles from "~/styles/markdown.css";
 
 export const loader = async () => {
-  const metadata = await getAllMarkdownsFromDirectory('posts');
+  const metadata = await getAllFromDirectory('posts');
   return metadata;
 };
 
@@ -24,17 +22,19 @@ export default function Posts() {
   const posts = useLoaderData<MarkdownDocument[]>();
 
   return (
-    <section className="posts">
+    <section className="markdown">
       <div className="container">
-        <div className="posts-list">
+        <div className="markdown-list">
           {posts.map((post) => (
             <article className="item box" key={post.title}>
               <Link className="link" to={`${ROUTE_PATH.POST}/${post.slug}`}>
                 <div className="image-container">
-                  <div className="image-cover" style={{ backgroundImage: `url('${post.preview}')` }}></div>
+                  <div className="image-cover">
+                    <img src={post.preview} alt={post.title} aria-hidden />
+                  </div>
                 </div>
-                <div className="item-tooltip">
-                  <h2 className="title ellipsis">{post.title}</h2>
+                <div className="item-description">
+                  <h2 className="title h5">{post.title}</h2>
                 </div>
               </Link>
             </article>

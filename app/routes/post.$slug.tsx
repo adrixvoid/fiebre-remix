@@ -1,10 +1,11 @@
 import type { LoaderFunctionArgs, LinksFunction } from "@remix-run/node";
-import { useLoaderData, useRouteError, isRouteErrorResponse } from "@remix-run/react"
+import { useLoaderData } from "@remix-run/react"
 import { json } from "@remix-run/node";
 
-import styles from "~/styles/post.css";
 import { getContent } from "~/server/markdown.server";
-import type { MarkdownDocument } from "~/server/markdown.server";
+import type { MarkdownDocument } from "~/server/utils/front-matter.server";
+import { MarkdownErrorBoundary } from "~/components/errors/Markdown";
+import styles from "~/styles/post.css";
 
 export const links: LinksFunction = () => [
     {
@@ -16,15 +17,9 @@ export const links: LinksFunction = () => [
 export const loader = async ({ params }: LoaderFunctionArgs) => {
     try {
         const slug = params.slug as string;
-        const markdownResult = await getContent('posts', slug);
-
-        if (!markdownResult) {
-            return json({ status: 404, message: 'Post not found' }, { status: 404 });
-        }
-
-        return markdownResult;
+        return await getContent('posts', slug);
     } catch (error) {
-        return json({ status: 500, message: 'Internal Server Error' }, { status: 500 });
+        throw json({ status: 404, message: 'Page not found' }, { status: 404 });
     }
 }
 
@@ -39,7 +34,7 @@ export default function Post() {
                 </div>
             </div>
             <div className="container">
-                <div className="post-content">
+                <div className="markdown-content">
                     <div dangerouslySetInnerHTML={{ __html: body || '' }} />
                 </div>
             </div>
@@ -48,32 +43,5 @@ export default function Post() {
 }
 
 export function ErrorBoundary() {
-    const error = useRouteError();
-
-    if (isRouteErrorResponse(error)) {
-        switch (error.status) {
-            case 401:
-                return (
-                    <div>
-                        <p>You don't have access to this page.</p>
-                    </div>
-                );
-            case 404:
-                return <div>Page not found!</div>;
-        }
-
-        return (
-            <div>
-                Something went wrong: {error.status}{" "}
-                {error.statusText}
-            </div>
-        );
-    }
-
-    return (
-        <div>
-            Something went wrong:{" "}
-            "Unknown Error"
-        </div>
-    );
+    return <MarkdownErrorBoundary />;
 }

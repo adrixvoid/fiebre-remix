@@ -40,8 +40,7 @@ export const links: LinksFunction = () => [
   {
     rel: "stylesheet",
     href: "https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap",
-    media: "all",
-    onLoad: "this.media='all'",
+    media: "all"
   },
   {
     rel: "stylesheet",
@@ -59,18 +58,10 @@ function MainLayout() {
             <Logo aria-hidden />
           </Link>
           <nav className="header-navigation">
-            <span>
-              <a href="/about">Sobre mi</a>
-            </span>
-            <span>
-              <a href="/store">Tienda</a>
-            </span>
-            <span>
-              <a href="/posts">Portafolio</a>
-            </span>
-            <span>
-              <a href="/blog">Blog</a>
-            </span>
+            <a href="/about">Sobre mi</a>
+            <a href="/store">Tienda</a>
+            <a href="/posts">Portafolio</a>
+            <a href="/blog">Blog</a>
           </nav>
         </div>
       </header>

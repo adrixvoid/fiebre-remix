@@ -1,11 +1,12 @@
 import type { LinksFunction } from "@remix-run/node";
-import { useLoaderData, useRouteError, isRouteErrorResponse } from "@remix-run/react"
+import { useLoaderData } from "@remix-run/react"
 import { json } from "@remix-run/node";
 
-import postsStyles from "~/styles/post.css";
-import styles from "~/styles/about.css";
 import { getContent } from "~/server/markdown.server";
-import type { MarkdownDocument } from "~/server/markdown.server";
+import type { MarkdownDocument } from "~/server/utils/front-matter.server";
+import { MarkdownErrorBoundary } from "~/components/errors/Markdown";
+import postStyles from "~/styles/post.css";
+import styles from "~/styles/about.css";
 
 export const loader = async () => {
     try {
@@ -23,7 +24,7 @@ export const links: LinksFunction = () => [
     },
     {
         rel: "stylesheet",
-        href: postsStyles,
+        href: postStyles,
     },
 ];
 
@@ -39,7 +40,7 @@ export default function AboutPage() {
                 </div>
             </div>
             <div className="container">
-                <div className="post-content">
+                <div className="markdown-content">
                     <div dangerouslySetInnerHTML={{ __html: body || '' }} />
                 </div>
             </div>
@@ -48,32 +49,5 @@ export default function AboutPage() {
 }
 
 export function ErrorBoundary() {
-    const error = useRouteError();
-
-    if (isRouteErrorResponse(error)) {
-        switch (error.status) {
-            case 401:
-                return (
-                    <div>
-                        <p>You don't have access to this page.</p>
-                    </div>
-                );
-            case 404:
-                return <div>Page not found!</div>;
-        }
-
-        return (
-            <div>
-                Something went wrong: {error.status}{" "}
-                {error.statusText}
-            </div>
-        );
-    }
-
-    return (
-        <div>
-            Something went wrong:{" "}
-            "Unknown Error"
-        </div>
-    );
+    return <MarkdownErrorBoundary />
 }

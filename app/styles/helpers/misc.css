@@ -29,7 +29,7 @@ pre {
 */
 .box {
     background: var(--paper-bg);
-    border-radius: calc(var(--border-radius) * 2);
+    border-radius: var(--border-radius);
     box-shadow: var(--shadow);
     padding: var(--unit);
 }

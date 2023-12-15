@@ -9,7 +9,6 @@
 
 .item {
     display: flex;
-    padding: calc(var(--unit) * 2);
     gap: calc(var(--unit) * 2);
 }
 
@@ -22,5 +21,9 @@
     height: auto;
     max-width: 80px;
     max-height: 80px;
-    border-radius: var(--border-radius);
+    border-radius: 2px;
+}
+
+.item .title {
+    margin-top: 0;
 }

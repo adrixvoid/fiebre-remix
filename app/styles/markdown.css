@@ -7,7 +7,7 @@ main {
   margin-bottom: 20px;
 }
 
-.posts-list {
+.markdown-list {
   box-sizing: border-box;
   list-style: none;
   display: grid;
@@ -16,39 +16,42 @@ main {
 }
 
 @media screen and (min-width: 768px) {
-  .posts-list {
+  .markdown-list {
     grid-template-columns: 1fr 1fr;
   }
 }
 
 @media screen and (min-width: 1024px) {
-  .posts-list {
+  .markdown-list {
     grid-template-columns: 1fr 1fr 1fr;
   }
 }
 
-.posts-list .item {
+.markdown-list .item {
   position: relative;
   border-radius: 8px;
   padding: 0;
+  border-radius: var(--border-radius);
 }
 
-.posts-list .item .link {
+.markdown-list .item.box:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.markdown-list .item .link {
   display: block;
   width: 100%;
-  height: 300px;
   text-decoration: none;
   position: relative;
 }
 
-.posts-list .item .image-container {
+.markdown-list .item .image-container {
   overflow: hidden;
   position: relative;
   width: 100%;
-  height: 100%;
 }
 
-.posts-list .item .image-container .image {
+.markdown-list .item .image-container .image {
   position: absolute;
   left: 50%;
   transform: translateX(-50%) scale(1);
@@ -56,50 +59,41 @@ main {
   filter: saturate(0.95);
 }
 
-.posts-list .item .image-container:hover .image {
+.markdown-list .item .image-container:hover .image {
   user-select: none;
   pointer-events: none;
 }
 
-.posts-list .item .image-container .image-cover {
+.markdown-list .item .image-container .image-cover {
   width: 100%;
   height: 100%;
-  background-size: cover;
-  background-position: center;
+  min-height: calc(var(--unit) * 30);
+  display: flex;
+  justify-content: center;
+  object-fit: cover;
 }
 
-.posts-list .item:hover .image-container .image-cover {
-  animation: popImageIn 200ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+.markdown-list .item .image-container .image-cover img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
 }
 
-.posts-list .item .item-tooltip {
-  position: absolute;
-  left: var(--unit);
-  bottom: var(--unit);
+.markdown-list .item:hover .image-container .image-cover img {
+  /* animation: popImageIn 200ms cubic-bezier(0.175, 0.385, 0.32, 1.275); */
+  transition: all 0.2s ease-in-out;
+  transform: scale(1.2);
+}
+
+.markdown-list .item .item-description {
   padding: var(--unit) calc(var(--unit) * 2);
-  border-radius: calc(var(--unit) * 2);
-  color: var(--accent-fg);
-  background: #fafafac9;
-  color: #000000;
-  opacity: 0;
   transition: opacity .1s ease-in-out;
 }
 
 @media (prefers-color-scheme: dark) {
-  .posts-list .item .item-tooltip {
-    background: #000000c9;
+  .markdown-list .item .item-description {
     color: #ffffff;
   }
-}
-
-.posts-list .item:hover .item-tooltip {
-  opacity: 1;
-}
-
-.posts-list .title {
-  font-size: var(--variant-p);
-  font-weight: 400;
-  margin: 0;
 }
 
 @keyframes popIn {
@@ -124,10 +118,10 @@ main {
   }
 
   80% {
-    transform: scale(1.2);
+    transform: scale(1.8);
   }
 
   100% {
-    transform: scale(1);
+    transform: scale(1.2);
   }
 }
