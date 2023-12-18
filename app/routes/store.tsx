@@ -31,7 +31,7 @@ const Store = () => {
             <div className="container">
                 <div className="markdown-list">
                     {products.map((post) => (
-                        <article className="item box" key={post.title}>
+                        <article className="item" key={post.title}>
                             <Link className="link" to={`${ROUTE_PATH.PRODUCT}/${post.slug}`}>
                                 <div className="image-container">
                                     <div className="image-cover">
@@ -39,7 +39,7 @@ const Store = () => {
                                     </div>
                                 </div>
                                 <div className="item-description">
-                                    <h2 className="h5">{post.title}</h2>
+                                    <h2 className="title p">{post.title}</h2>
                                 </div>
                             </Link>
                         </article>

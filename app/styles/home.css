@@ -55,10 +55,6 @@ body {
     margin-top: calc(var(--unit) * 2);
 }
 
-.hero-navigation a:hover {
-    color: var(--brand-color4);
-}
-
 .footer {
     position: absolute;
     bottom: 0;

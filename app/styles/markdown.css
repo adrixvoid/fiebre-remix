@@ -29,9 +29,7 @@ main {
 
 .markdown-list .item {
   position: relative;
-  border-radius: 8px;
   padding: 0;
-  border-radius: var(--border-radius);
 }
 
 .markdown-list .item.box:hover {
@@ -41,14 +39,17 @@ main {
 .markdown-list .item .link {
   display: block;
   width: 100%;
+  height: 100%;
   text-decoration: none;
   position: relative;
 }
 
 .markdown-list .item .image-container {
+  background-color: var(--body-bg);
   overflow: hidden;
   position: relative;
   width: 100%;
+  height: 100%;
 }
 
 .markdown-list .item .image-container .image {
@@ -67,10 +68,6 @@ main {
 .markdown-list .item .image-container .image-cover {
   width: 100%;
   height: 100%;
-  min-height: calc(var(--unit) * 30);
-  display: flex;
-  justify-content: center;
-  object-fit: cover;
 }
 
 .markdown-list .item .image-container .image-cover img {
@@ -80,20 +77,32 @@ main {
 }
 
 .markdown-list .item:hover .image-container .image-cover img {
-  /* animation: popImageIn 200ms cubic-bezier(0.175, 0.385, 0.32, 1.275); */
+  animation: popImageIn 200ms cubic-bezier(0.175, 0.385, 0.32, 1.275);
   transition: all 0.2s ease-in-out;
-  transform: scale(1.2);
 }
 
 .markdown-list .item .item-description {
   padding: var(--unit) calc(var(--unit) * 2);
   transition: opacity .1s ease-in-out;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
 }
 
-@media (prefers-color-scheme: dark) {
-  .markdown-list .item .item-description {
-    color: #ffffff;
-  }
+.markdown-list .item .item-description .title {
+  opacity: 0;
+}
+
+.markdown-list .item:hover .item-description .title {
+  background-color: var(--body-bg);
+  color: var(--body-text);
+  padding: 0 12px;
+  transition: all .1s ease-in-out;
+  opacity: 1;
 }
 
 @keyframes popIn {
@@ -118,10 +127,52 @@ main {
   }
 
   80% {
-    transform: scale(1.8);
+    transform: scale(1.2);
   }
 
   100% {
-    transform: scale(1.2);
+    transform: scale(1);
+  }
+}
+
+
+
+/*-------------------*/
+
+.post .container {
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.markdown-content>*:not(img) {
+  width: 90%;
+}
+
+.markdown-content img {
+  max-width: 100%;
+}
+
+.markdown-content p>img {
+  --additional-width: 4vw;
+  width: calc(100% + var(--additional-width));
+}
+
+@media screen and (min-width: 768px) {
+  .markdown-content>*:not(img) {
+    width: 60%;
+  }
+
+  .markdown-content p>img {
+    --additional-width: 16vw;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .markdown-content>*:not(img) {
+    width: 50%;
+  }
+
+  .markdown-content p>img {
+    --additional-width: 13vw;
   }
 }

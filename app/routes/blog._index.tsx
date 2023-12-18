@@ -23,10 +23,10 @@ function Posts() {
     <section className="blogs">
       <div className="container list">
         {posts.map((post) => (
-          <article className="item box" key={post.title}>
+          <article className="item" key={post.title}>
             <img src={post.preview} alt={post.title} aria-hidden />
             <Link className="link" to={`/blog/${post.slug}`}>
-              <h2 className="title h5">{post.title}</h2>
+              <h2 className="title p">{post.title}</h2>
             </Link>
           </article>
         ))}

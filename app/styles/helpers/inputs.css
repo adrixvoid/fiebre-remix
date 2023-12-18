@@ -100,6 +100,7 @@ textarea:focus,
 select:focus {
     outline: none;
     border-color: var(--accent-bg);
+    box-shadow: var(--shadow-primary);
 }
 
 input:disabled,

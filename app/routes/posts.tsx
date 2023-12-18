@@ -26,7 +26,7 @@ export default function Posts() {
       <div className="container">
         <div className="markdown-list">
           {posts.map((post) => (
-            <article className="item box" key={post.title}>
+            <article className="item" key={post.title}>
               <Link className="link" to={`${ROUTE_PATH.POST}/${post.slug}`}>
                 <div className="image-container">
                   <div className="image-cover">
@@ -34,7 +34,7 @@ export default function Posts() {
                   </div>
                 </div>
                 <div className="item-description">
-                  <h2 className="title h5">{post.title}</h2>
+                  <h2 className="title p">{post.title}</h2>
                 </div>
               </Link>
             </article>

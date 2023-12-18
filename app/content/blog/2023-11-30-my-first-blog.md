@@ -1,5 +1,5 @@
 ---
-title: My first blog post
+title: "Google Fonts: Qué es y las 10 mejores tipografías gratuitas"
 description: My first blog post with description
 date: 2023-12-01T01:13:15.927Z
 preview: /blog/me.jpg
@@ -13,8 +13,6 @@ categories:
     - blog
     - about
 ---
-
-# Google Fonts: Qué es y las 10 mejores tipografías gratuitas
 
 ### ¿Qué es Google Fonts?
 

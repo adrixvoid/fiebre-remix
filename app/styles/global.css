@@ -30,7 +30,7 @@
     --brand-color4: #d3fc00;
     --brand-color5: #ff55cb;
 
-    --body-bg: #ffffffe8;
+    --body-bg: #fffffff0;
     --body-text: #332936;
     --paper-bg: #fff;
     --accent-bg: rgb(246, 10, 156);
@@ -94,13 +94,13 @@
     --shadow-primary-inset-xl: inset 0 0 30px var(--brand-color1);
 
     --font-family: "Montserrat";
-    --link-color: var(--brand-color3);
+    --link-color: var(--brand-color2);
     --link-color-hover: var(--brand-color5);
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --body-bg: #431d48eb;
+        --body-bg: #431d48f7;
         --body-text: #cfd3db;
         --paper-bg: #391a3ded;
 
@@ -207,13 +207,12 @@ hr {
 
 .header {
     box-sizing: border-box;
-    padding: var(--unit) 0;
+    padding: calc(var(--unit) * 4) 0;
     position: sticky;
     top: 0;
     z-index: 100;
     display: flex;
     align-items: center;
-    height: calc(var(--unit) * 10);
 }
 
 .header.sticky {

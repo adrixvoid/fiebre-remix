@@ -5,7 +5,7 @@ import { json } from "@remix-run/node";
 import { getProduct } from "~/server/products.server"
 import type { Product } from "~/server/products.server"
 
-import postStyles from "~/styles/post.css";
+import mdStyles from "~/styles/markdown.css";
 import styles from "~/styles/product.css";
 import FooterTienda from "~/components/Footer";
 import { MarkdownErrorBoundary } from "~/components/errors/Markdown";
@@ -45,7 +45,7 @@ function getButtonTextBuyNow(): string {
 export const links: LinksFunction = () => [
     {
         rel: "stylesheet",
-        href: postStyles,
+        href: mdStyles,
     },
     {
         rel: "stylesheet",
@@ -116,7 +116,7 @@ function ProductRoute() {
                                         <span className="sr-only">Quantity</span>
                                         <span aria-hidden>Qty.</span>
                                     </label>
-                                    <input id="product-quantity" name="product-quantity" type="number" value="1" />
+                                    <input id="product-quantity" name="product-quantity" type="number" defaultValue="1" />
                                 </div>
                             }
                             <div className="buy">

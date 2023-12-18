@@ -13,5 +13,19 @@
         "svgr",
         "typecheck",
         "vaporwave"
-    ]
+    ],
+    "search.exclude": {
+        "**/node_modules/**": true,
+        "**/bower_components/**": true,
+        "**/dist/**": true,
+        "**/build/**": true,
+        "**/coverage/**": true,
+        "**/.next/**": true,
+        "**/.vercel/**": true,
+        "**/.cache/**": true,
+        "**/.git/**": true,
+        "package-lock.json": true,
+        "yarn-lock.json": true,
+        "pnpm-lock.json": true,
+    }
 }

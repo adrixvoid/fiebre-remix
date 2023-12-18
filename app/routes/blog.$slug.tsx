@@ -1,11 +1,11 @@
-import type { LoaderFunctionArgs, LinksFunction } from "@remix-run/node";
+import type { LoaderFunction, LinksFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react"
 import { json } from "@remix-run/node";
 
 import { getContent } from "~/server/markdown.server";
 import type { MarkdownDocument } from "~/server/utils/front-matter.server";
 import { MarkdownErrorBoundary } from "~/components/errors/Markdown";
-import styles from "~/styles/post.css";
+import styles from "~/styles/markdown.css";
 
 export const links: LinksFunction = () => [
     {
@@ -14,7 +14,7 @@ export const links: LinksFunction = () => [
     },
 ];
 
-export const loader = async ({ params }: LoaderFunctionArgs) => {
+export const loader: LoaderFunction = async ({ params }) => {
     try {
         const slug = params.slug as string;
         return await getContent('blog', slug);
@@ -24,17 +24,18 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 }
 
 export default function Post() {
-    const { title, body } = useLoaderData<MarkdownDocument>();
+    const { title, preview, body } = useLoaderData<MarkdownDocument>();
 
     return (
         <div className="post">
             <div className="container">
-                <div className="post-header">
-                    <h1 className="sr-only">{title}</h1>
-                </div>
-            </div>
-            <div className="container">
                 <div className="markdown-content">
+                    <div className="post-header">
+                        <h1>{title}</h1>
+                    </div>
+                    <div className="post-preview">
+                        <img src={preview} alt={title} aria-hidden />
+                    </div>
                     <div dangerouslySetInnerHTML={{ __html: body || '' }} />
                 </div>
             </div>

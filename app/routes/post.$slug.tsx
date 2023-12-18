@@ -5,7 +5,7 @@ import { json } from "@remix-run/node";
 import { getContent } from "~/server/markdown.server";
 import type { MarkdownDocument } from "~/server/utils/front-matter.server";
 import { MarkdownErrorBoundary } from "~/components/errors/Markdown";
-import styles from "~/styles/post.css";
+import styles from "~/styles/markdown.css";
 
 export const links: LinksFunction = () => [
     {

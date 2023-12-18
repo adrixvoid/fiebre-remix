@@ -1,6 +1,8 @@
-import {readMarkdownDocument} from "./utils/front-matter.server";
+import path from "path";
+import fs from "fs/promises";
+
+import {getDirectoryFromType, readMarkdownDocument, type MarkdownDocument, type ContentType} from "./utils/front-matter.server";
 import {parse} from "./utils/marked.server";
-import type {MarkdownDocument, ContentType} from "./utils/front-matter.server";
 
 export const getContent = async (type: ContentType, slug: string): Promise<MarkdownDocument> => {
   const file = await readMarkdownDocument(type, `${slug}.md`);
@@ -8,6 +10,38 @@ export const getContent = async (type: ContentType, slug: string): Promise<Markd
     file.body = await parse(file.body);
   }
   return file;
+}
+
+interface Post extends MarkdownDocument {
+  type: string;
+}
+
+export const createContent = async (post: Post): Promise<boolean> => {
+  try {
+    // // if directory does not exist, create it
+    const directory = await getDirectoryFromType(post.type as ContentType);
+
+    // if file already exists, throw error
+    const fileNames = await fs.readdir(directory);
+    const fileName = `${post.slug}.md`;
+    if (fileNames.includes(fileName)) {
+      throw new Error("File already exists");
+    }
+
+    // create file
+    const markdown = `---
+title: ${post.title}
+categories: ${post.categories}
+preview: ${post.preview}
+---
+${post.body}
+`;
+    await fs.writeFile(path.join(directory, `${post.slug}.md`), markdown);
+    return true;
+  } catch (error) {
+    console.log('error', error)
+    return false;
+  }
 }
 
 // export const getCategories = async (): Promise<Post[]> => {
