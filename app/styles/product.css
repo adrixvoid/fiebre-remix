@@ -40,6 +40,20 @@
     margin-top: calc(var(--unit) * 2);
 }
 
+.quantity input,
+.quantity input:focus,
+.quantity input:active,
+.quantity input:hover {
+    padding: 0;
+    border: 0;
+    outline: none;
+    box-shadow: none;
+}
+
+.product-quantity-label {
+    margin-right: var(--unit);
+}
+
 .buy,
 .description {
     margin-top: calc(var(--unit) * 4);

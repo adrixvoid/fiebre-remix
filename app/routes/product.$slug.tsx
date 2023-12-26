@@ -114,7 +114,7 @@ function ProductRoute() {
                                 <div className="quantity input">
                                     <label htmlFor="product-quantity">
                                         <span className="sr-only">Quantity</span>
-                                        <span aria-hidden>Qty.</span>
+                                        <span className="product-quantity-label" aria-hidden>Qty.</span>
                                     </label>
                                     <input id="product-quantity" name="product-quantity" type="number" defaultValue="1" />
                                 </div>

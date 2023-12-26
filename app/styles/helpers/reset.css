@@ -8,42 +8,17 @@ h6 {
     line-height: 1.2;
 }
 
-.h1,
-h1 {
-    font-size: var(--variant-h1);
-}
-
-.h2,
-h2 {
-    font-size: var(--variant-h2);
-}
-
-.h3,
-h3 {
-    font-size: var(--variant-h3);
-}
-
-.h4,
-h4 {
-    font-size: var(--variant-h4);
-}
-
-.h5,
-h5 {
-    font-size: var(--variant-h5);
-}
-
-.h6,
-h6 {
-    font-size: var(--variant-h6);
+body {
+    margin: 0;
+    padding: 0;
 }
 
 body,
 p,
-.p {
-    --variant-p: 0.85rem;
-    font-size: var(--variant-p);
-    line-height: 1.55rem;
+input,
+select,
+textarea {
+    line-height: 1.65;
 }
 
 ul,
@@ -63,7 +38,6 @@ nav ol {
     padding: 0;
     list-style: none;
     display: flex;
-    gap: calc(var(--unit) * 2);
 }
 
 nav ol li,
@@ -86,7 +60,9 @@ figure {
     margin-right: 0;
 }
 
-div {
+div,
+span,
+button {
     box-sizing: border-box;
 }
 
@@ -101,4 +77,8 @@ button {
 a:focus,
 button:focus {
     outline: none;
+}
+
+pre {
+    text-wrap: wrap;
 }

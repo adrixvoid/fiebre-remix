@@ -3,13 +3,29 @@ input,
 textarea,
 select {
     background-color: var(--paper-bg);
-    color: var(--body-text);
     border: 1px solid var(--border-color);
     transition: all 0.05s ease-in-out;
     will-change: border-color;
     padding: calc(var(--unit) / 2) var(--unit);
     box-sizing: border-box;
     display: inline-block;
+}
+
+.input,
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="checkbox"],
+input[type="radio"],
+textarea,
+select {
+    color: var(--body-text);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+    background-color: var(--paper-bg) !important;
+    color: var(--body-text) !important;
 }
 
 input[type="checkbox"],
@@ -41,7 +57,7 @@ input[type="radio"]:checked::after {
     display: block;
     width: calc(var(--unit) / 2);
     height: calc(var(--unit) / 2);
-    background-color: var(--accent-fg);
+    background-color: var(--brand-color3);
     position: relative;
     top: calc(var(--unit) / 4);
     left: calc(var(--unit) / 4);
@@ -90,11 +106,12 @@ select {
 input:hover,
 textarea:hover,
 select:hover {
-    border-color: var(--input-border-focus);
     background-color: var(--input-bg-hover);
+    border-color: var(--input-border-focus);
 }
 
 .input:focus,
+.input:focus-within,
 input:focus,
 textarea:focus,
 select:focus {
@@ -125,8 +142,6 @@ select::placeholder {
 }
 
 input[type="submit"] {
-    background-color: var(--accent-bg);
-    color: var(--accent-fg);
     border: none;
     cursor: pointer;
 }

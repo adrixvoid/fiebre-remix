@@ -78,6 +78,7 @@ function MainLayout() {
 }
 
 export default function App() {
+  console.log("App RENDER")
   return (
     <html lang="en">
       <head>

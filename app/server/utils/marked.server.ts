@@ -27,7 +27,7 @@ renderer.paragraph = function(text) {
 };
 
 // Set the options to use the custom renderer
-marked.setOptions({ renderer });
+marked.setOptions({ renderer, breaks: true });
 
 /**
  * Parse the markdown file

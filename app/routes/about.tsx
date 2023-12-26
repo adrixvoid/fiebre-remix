@@ -5,7 +5,7 @@ import { json } from "@remix-run/node";
 import { getContent } from "~/server/markdown.server";
 import type { MarkdownDocument } from "~/server/utils/front-matter.server";
 import { MarkdownErrorBoundary } from "~/components/errors/Markdown";
-import postStyles from "~/styles/post.css";
+import postStyles from "~/styles/markdown.css";
 import styles from "~/styles/about.css";
 
 export const loader = async () => {

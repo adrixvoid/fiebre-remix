@@ -12,11 +12,6 @@
     border: 0;
 }
 
-pre {
-    border-radius: 8px;
-    text-wrap: wrap;
-}
-
 .ellipsis {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -68,4 +63,16 @@ pre {
 
 .container-fluid {
     padding: 0 calc(var(--unit) * 3);
+}
+
+.block {
+    display: block;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.display-none {
+    display: none;
 }

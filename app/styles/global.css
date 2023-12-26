@@ -22,7 +22,7 @@
     --variant-h4: 1.35rem;
     --variant-h5: 1.1rem;
     --variant-h6: 1rem;
-    --variant-p: 0.8rem;
+    --variant-p: 0.85rem;
 
     --brand-color1: #f91e96;
     --brand-color2: #5e00c1;
@@ -32,10 +32,12 @@
 
     --body-bg: #fffffff0;
     --body-text: #332936;
+
     --paper-bg: #fff;
-    --accent-bg: rgb(246, 10, 156);
-    --accent-bg-hover: #d3fc00;
-    --accent-fg: #fff;
+    --accent-bg: var(--brand-color1);
+    --accent-bg-hover: var(--brand-color4);
+
+    --color-danger: #cd0624;
 
     --input-text: #332936;
     --input-text-disabled: #626262;
@@ -56,18 +58,26 @@
     --color-gray-600: #333333;
     --color-gray-700: #222222;
 
+    --badge-bg: #f3f3f3;
+    --badge-color: #666666;
+    --badge-border-color: #dcdcdccc;
+
     --button-bg: #dfdfdf;
-    --button-bg-hover: #a8a8a8;
-    --button-bg-primary: #ff00b1;
-    --button-bg-primary-hover: #e600a1;
+    --button-bg-hover: #853bfa;
+    --button-bg-active: var(--brand-color3);
     --button-color: #666666;
-    --button-color-hover: #d3d3d3;
+    --button-color-hover: #ffffff;
+    --button-color-active: var(--brand-color2);
+
+    --button-bg-primary: #ff00b1;
+    --button-bg-primary-hover: var(--brand-color4);
     --button-color-primary: #fff;
-    --button-color-primary-hover: #fff;
+    --button-color-primary-hover: #000000;
     --button-color-primary-disabled: #553559;
-    --button-color-secondary: #fff;
+
     --button-bg-secondary: #2b49f9;
     --button-bg-secondary-hover: #2540d8;
+    --button-color-secondary: #fff;
 
     --border-color: #eaeaea;
     --border-radius: 8px;
@@ -100,14 +110,16 @@
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --body-bg: #431d48f7;
+        --body-bg: #0e0e4af5;
         --body-text: #cfd3db;
-        --paper-bg: #391a3ded;
+        --paper-bg: #260954b8;
 
         --button-bg: #6c2777ed;
         --button-bg-hover: var(--brand-color4);
+        --button-bg-disabled: #846b88;
         --button-color: var(--body-text);
-        --button-color-hover: var(--body-bg);
+        --button-color-hover: var(--brand-color2);
+        --button-color-disabled: #8f6e95;
         --button-color-primary-hover: var(--brand-color5);
         --button-color-primary-disabled: var(--body-bg);
 
@@ -121,6 +133,10 @@
         --input-border-focus: #f91e96;
         --input-border-disabled: #735976;
         --input-shadow: 0 1px 4px var(--shadow-color);
+
+        --badge-bg: #5b3f9c;
+        --badge-color: #cfd3db;
+        --badge-border-color: #5b3f9c;
 
         --border-color: #83338d;
 
@@ -157,8 +173,18 @@ body {
     color: var(--body-text);
     background-color: var(--body-bg);
     font-family: var(--font-family);
-    margin: 0;
-    padding: 0;
+}
+
+p,
+a,
+.p,
+button,
+input,
+select,
+textarea,
+ul,
+li {
+    font-size: var(--variant-p);
 }
 
 a:visited {
@@ -175,10 +201,54 @@ pre {
     border: 1px solid var(--border-color);
 }
 
+blockquote {
+    padding: calc(var(--unit) * 2) calc(var(--unit) * 4);
+    margin: calc(var(--unit) * 2) 0;
+}
+
+blockquote p {
+    font-size: 1.2rem;
+}
+
 hr {
     border: none;
     border-top: 1px solid var(--border-color);
     margin: calc(var(--unit) * 2) 0;
+}
+
+.h1,
+h1 {
+    font-size: var(--variant-h1);
+}
+
+.h2,
+h2 {
+    font-size: var(--variant-h2);
+}
+
+.h3,
+h3 {
+    font-size: var(--variant-h3);
+}
+
+.h4,
+h4 {
+    font-size: var(--variant-h4);
+}
+
+.h5,
+h5 {
+    font-size: var(--variant-h5);
+}
+
+.h6,
+h6 {
+    font-size: var(--variant-h6);
+}
+
+nav ul,
+nav ol {
+    gap: calc(var(--unit) * 2);
 }
 
 /**
@@ -208,7 +278,6 @@ hr {
 .header {
     box-sizing: border-box;
     padding: calc(var(--unit) * 4) 0;
-    position: sticky;
     top: 0;
     z-index: 100;
     display: flex;

@@ -27,5 +27,7 @@
         "package-lock.json": true,
         "yarn-lock.json": true,
         "pnpm-lock.json": true,
-    }
+    },
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": null
 }

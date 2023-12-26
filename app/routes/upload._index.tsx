@@ -1,8 +1,12 @@
 import { Form } from "@remix-run/react";
 import { type ActionFunction, type LinksFunction, redirect } from "@remix-run/node";
 
-import styles from "~/styles/upload-content.css";
 import { createContent } from "~/server/markdown.server";
+
+import styles from "~/styles/upload-content.css";
+import FilePreview from "../components/form/file/FilePreview";
+import { uploadFilesAction } from "~/server/upload.server";
+import { getDirectoryFromType, type ContentType } from "~/server/utils/front-matter.server";
 
 export const links: LinksFunction = () => [
     {
@@ -22,48 +26,53 @@ export const action: ActionFunction = async ({ request }) => {
 
     console.log({ title, slug, body, type, categories, preview })
 
+    const directory = await getDirectoryFromType(type as ContentType);
+
+    const imagesResult = uploadFilesAction(request, directory);
+
+    console.log("imagesResult", imagesResult)
+
     createContent({ type, slug, title, body, categories, preview });
 
-    return redirect("/upload-content");
+    return redirect("/upload");
 };
 
 export default function UploadContent() {
+    console.log("RENDER")
     return (
         <div className="container">
             <h1>Upload Content</h1>
             <Form method="post">
-                <label>Title</label>
-                <input name="title" placeholder="Noche de Reyes" />
-                <label htmlFor="slug">
-                    Post Slug
-                </label>
-                <input name="slug" placeholder="noche-de-reyes" />
-                <label htmlFor="body">
-                    Description
-                </label>
-                <textarea name="body" rows={20} />
                 <label htmlFor="type">
                     Type
                 </label>
-                <select name="type" id="type">
+                <select id="type" name="type">
                     <option value="blog">Blog</option>
                     <option value="posts">Post</option>
                     <option value="pages">Page</option>
                     <option value="products">Products</option>
                 </select>
 
+                <label htmlFor="title">Title</label>
+                <input id="title" name="title" placeholder="Noche de Reyes" />
+                <label htmlFor="slug">
+                    Post Slug
+                </label>
+                <input id="slug" name="slug" placeholder="noche-de-reyes" />
+                <label htmlFor="body">
+                    Description
+                </label>
+                <textarea id="body" name="body" rows={5} />
+
                 <label htmlFor="categories">
                     Categories
                 </label>
-                <input name="categories" placeholder="category1, category2" />
+                <input id="categories" name="categories" placeholder="category1, category2" />
 
-                <label htmlFor="preview">
-                    Preview
-                </label>
-                <input name="preview" type="file" />
+                <FilePreview id="file" name="file" />
 
                 <div>
-                    <button type="submit">Save markdown</button>
+                    <input className="button primary" type="submit" value="Save markdown" />
                 </div>
             </Form>
         </div>

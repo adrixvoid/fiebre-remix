@@ -1,0 +1,43 @@
+.fieldset {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.preview {
+    list-style: none;
+    margin: calc(var(--unit) * 2) 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border-color);
+}
+
+.item {
+    padding: calc(var(--unit) * 2) var(--unit);
+    border-top: 1px solid var(--border-color);
+}
+
+.item:first-child {
+    border-top: 0;
+}
+
+.badge {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background: var(--badge-bg);
+    color: var(--badge-color);
+    border-radius: calc(var(--border-radius) * 4);
+    border: 1px solid var(--badge-border-color);
+    box-shadow: var(--shadow);
+    padding: 2px var(--unit);
+    margin-right: var(--unit);
+}
+
+.description {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--unit);
+}

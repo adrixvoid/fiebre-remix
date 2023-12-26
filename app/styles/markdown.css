@@ -144,35 +144,24 @@ main {
   overflow: hidden;
 }
 
-.markdown-content>*:not(img) {
+.markdown-content {
   width: 90%;
+  max-width: 640px;
 }
 
 .markdown-content img {
-  max-width: 100%;
-}
-
-.markdown-content p>img {
-  --additional-width: 4vw;
-  width: calc(100% + var(--additional-width));
+  width: 100%;
+  display: inline-block;
 }
 
 @media screen and (min-width: 768px) {
-  .markdown-content>*:not(img) {
-    width: 60%;
-  }
-
-  .markdown-content p>img {
-    --additional-width: 16vw;
+  .markdown-content {
+    width: 75%;
   }
 }
 
 @media screen and (min-width: 1280px) {
-  .markdown-content>*:not(img) {
-    width: 50%;
-  }
-
-  .markdown-content p>img {
-    --additional-width: 13vw;
+  .markdown-content {
+    width: 65%;
   }
 }

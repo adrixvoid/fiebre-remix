@@ -22,6 +22,8 @@ Además, Google ha ido introduciendo mejoras en el portal de Google Fonts durant
 
     Aquí vas a poder encontrar nuestra selección, las que consideramos las 10 mejores tipografías que podemos encontrar bajo Google Fonts.
 
+> Esto es una cita de ejemplo: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
+
 
 ### Las 10 mejores tipografías de Google
 

@@ -18,7 +18,8 @@ interface Post extends MarkdownDocument {
 
 export const createContent = async (post: Post): Promise<boolean> => {
   try {
-    // // if directory does not exist, create it
+    console.log(post);
+    // if directory does not exist, create it
     const directory = await getDirectoryFromType(post.type as ContentType);
 
     // if file already exists, throw error

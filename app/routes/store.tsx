@@ -35,7 +35,7 @@ const Store = () => {
                             <Link className="link" to={`${ROUTE_PATH.PRODUCT}/${post.slug}`}>
                                 <div className="image-container">
                                     <div className="image-cover">
-                                        <img src={post.preview} alt={post.title} aria-hidden />
+                                        <img src={post.preview} alt={post.title} aria-hidden loading="lazy" />
                                     </div>
                                 </div>
                                 <div className="item-description">
