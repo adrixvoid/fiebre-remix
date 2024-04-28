@@ -1,27 +1,27 @@
-import path from "path";
-import fs from "fs/promises";
-import fm from "front-matter";
+import path from 'path';
+import fs from 'fs/promises';
+import fm from 'front-matter';
 
 export type MarkdownDocument = {
-    slug: string;
-    title: string;
-    tags?: string[];
-    preview?: string;
-    categories?: string;
-    body?: string;
+  slug: string;
+  title: string;
+  tags?: string[];
+  preview?: string;
+  categories?: string;
+  body?: string;
 };
 
 export type FMAttributes = {
-    title: string;
-    categories: string;
+  title: string;
+  categories: string;
 };
 
 export type FMConfigPageFolders = {
   title: string;
   path: string;
-}
+};
 
-export type ContentType = "posts" | "blog" | "products" | "pages";
+export type ContentType = 'posts' | 'blog' | 'products' | 'pages';
 
 /**
  * Read the frontmatter.json file
@@ -44,19 +44,19 @@ async function readFrontMatterConfig(): Promise<FMConfigPageFolders[]> {
 
   return pageFolders.map((item: FMConfigPageFolders) => {
     if (!item.title || !item.path) {
-      throw new Error("Invalid frontmatter");
+      throw new Error('Invalid frontmatter');
     }
 
     // replace the [[workspace]] with the current workspace directory
     let itemPath = item.path.replace('[[workspace]]', process.cwd());
 
-    console.log("itemPath", itemPath)
+    console.log('itemPath', itemPath);
 
     return {
       title: item.title,
-      path: itemPath
+      path: itemPath,
     };
-  })
+  });
 }
 
 /**
@@ -83,61 +83,73 @@ async function readFrontMatterConfig(): Promise<FMConfigPageFolders[]> {
 export async function getDirectoryFromType(type: ContentType): Promise<string> {
   try {
     const pageFolders = await readFrontMatterConfig();
-    const pageFolder = pageFolders.find((item: FMConfigPageFolders) => item.title === type);
+    const pageFolder = pageFolders.find(
+      (item: FMConfigPageFolders) => item.title === type,
+    );
 
     if (!pageFolder) {
-      throw new Error("Invalid type");
+      throw new Error('Invalid type');
     }
 
     return pageFolder.path;
   } catch (error) {
-    console.log('error', error)
-    throw new Error("Invalid type");
+    console.log('error', error);
+    throw new Error('Invalid type');
   }
 }
 
+export const isValidMarkdownAttributes = (
+  attributes: any,
+): attributes is FMAttributes => {
+  return typeof attributes.title === 'string';
+};
 
-export const isValidMarkdownAttributes = (attributes: any): attributes is FMAttributes => {
-  return typeof attributes.title === "string";
+export async function getMarkdownDocument(
+  directory: string,
+  fileName: string,
+): Promise<MarkdownDocument> {
+  const file = await fs.readFile(path.join(directory, fileName), 'utf-8');
+  const {attributes, body} = fm<MarkdownDocument>(file.toString());
+
+  if (!isValidMarkdownAttributes(attributes)) {
+    throw new Error('Invalid attributes');
+  }
+
+  return {
+    slug: fileName.replace('.md', ''),
+    title: attributes.title,
+    categories: attributes.categories,
+    preview: attributes.preview,
+    body: body || '',
+  };
 }
 
-export async function getMarkdownDocument(directory: string, fileName: string): Promise<MarkdownDocument> {
-    const file = await fs.readFile(path.join(directory, fileName), "utf-8");
-    const {attributes, body} = fm<MarkdownDocument>(file.toString());
-
-    if (!isValidMarkdownAttributes(attributes)) {
-        throw new Error("Invalid attributes");
-    }
-
-    return {
-      slug: fileName.replace(".md", ""),
-      title: attributes.title,
-      categories: attributes.categories,
-      preview: attributes.preview,
-      body: body || '',
-    };
+export async function getAllFromDirectory(
+  type: ContentType,
+): Promise<MarkdownDocument[]> {
+  try {
+    const directory = await getDirectoryFromType(type);
+    const fileNames = await fs.readdir(directory);
+    const files = Promise.all(
+      fileNames.map(async (fileName) => {
+        return await getMarkdownDocument(directory, fileName);
+      }),
+    );
+    return files;
+  } catch (error) {
+    console.log(`Directory ${type} does not exist or invalid path`);
+    return [];
+  }
 }
 
-export async function getAllFromDirectory(type: ContentType): Promise<MarkdownDocument[]> {
-    try {
-        const directory = await getDirectoryFromType(type);
-        const fileNames = await fs.readdir(directory);
-        const files = Promise.all(fileNames.map(async (fileName) => {
-            return await getMarkdownDocument(directory, fileName)
-        }));
-        return files;
-    }
-    catch (error) {
-        console.log('error', error)
-        throw new Error("Invalid path");
-    }
-}
-
-export async function readMarkdownDocument(type: ContentType, fileName: string): Promise<MarkdownDocument> {
+export async function readMarkdownDocument(
+  type: ContentType,
+  fileName: string,
+): Promise<MarkdownDocument> {
   try {
     const directory = await getDirectoryFromType(type);
     return await getMarkdownDocument(directory, fileName);
   } catch (error) {
-    throw new Error("Cannot read document");
+    throw new Error('Cannot read document');
   }
 }
