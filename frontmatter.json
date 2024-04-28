@@ -49,19 +49,19 @@
   "frontMatter.content.pageFolders": [
     {
       "title": "blog",
-      "path": "[[workspace]]/app/content/blog"
+      "path": "[[workspace]]/content/blog"
     },
     {
       "title": "posts",
-      "path": "[[workspace]]/app/content/posts"
+      "path": "[[workspace]]/content/posts"
     },
     {
       "title": "pages",
-      "path": "[[workspace]]/app/content/pages"
+      "path": "[[workspace]]/content/pages"
     },
     {
       "title": "products",
-      "path": "[[workspace]]/app/content/products"
+      "path": "[[workspace]]/content/products"
     }
   ],
   "frontMatter.preview.host": "http://localhost:3004",
