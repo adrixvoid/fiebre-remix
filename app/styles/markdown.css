@@ -40,7 +40,6 @@ main {
   display: block;
   width: 100%;
   height: 100%;
-  text-decoration: none;
   position: relative;
 }
 
@@ -72,6 +71,7 @@ main {
 
 .markdown-list .item .image-container .image-cover img {
   width: 100%;
+  height: 100%;
   display: block;
   object-fit: cover;
 }
@@ -139,29 +139,24 @@ main {
 
 /*-------------------*/
 
-.post .container {
-  box-sizing: border-box;
-  overflow: hidden;
-}
-
 .markdown-content {
   width: 90%;
-  max-width: 640px;
+  max-width: 760px;
+  margin-inline: auto;
+}
+
+.markdown-content figure {
+  margin: 0;
 }
 
 .markdown-content img {
   width: 100%;
-  display: inline-block;
+  display: block;
+  object-fit: contain;
+  aspect-ratio: 16 / 9;
 }
 
-@media screen and (min-width: 768px) {
-  .markdown-content {
-    width: 75%;
-  }
-}
-
-@media screen and (min-width: 1280px) {
-  .markdown-content {
-    width: 65%;
-  }
+.markdown-content figcaption {
+  background-color: var(--paper-bg);
+  padding: var(--unit);
 }

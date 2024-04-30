@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 
-export default function Image({ name, url }: { name: string; url: string }) {
+interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+    name: string;
+    url: string;
+}
+
+export default function Image({ name, url, ...rest }: ImageProps) {
     // Here we store the object URL in a state to keep it between renders
     let [objectUrl] = useState(() => {
         if (url.startsWith("blob:")) return url;
@@ -16,8 +21,7 @@ export default function Image({ name, url }: { name: string; url: string }) {
         <img
             alt={name}
             src={url}
-            width={320}
-            height={240}
+            {...rest}
         />
     );
 }

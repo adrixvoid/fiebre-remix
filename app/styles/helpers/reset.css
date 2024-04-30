@@ -1,3 +1,25 @@
+div,
+span,
+button,
+input,
+select,
+textarea,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    min-width: 0;
+}
+
+*,
+:after,
+:before {
+    box-sizing: border-box;
+}
+
 h1,
 h2,
 h3,
@@ -5,20 +27,26 @@ h4,
 h5,
 h6 {
     font-weight: 500;
-    line-height: 1.2;
+    line-height: 1;
+    text-wrap: balance;
 }
 
 body {
+    min-height: 100dvh;
     margin: 0;
     padding: 0;
 }
 
-body,
 p,
 input,
 select,
 textarea {
-    line-height: 1.65;
+    line-height: 1.5;
+    max-width: 100%;
+}
+
+textarea {
+    field-sizing: content;
 }
 
 ul,
@@ -26,6 +54,7 @@ ol,
 p {
     margin-top: 1.8rem;
     margin-bottom: 1.8rem;
+    text-wrap: pretty;
 }
 
 nav a {
@@ -46,13 +75,21 @@ nav ul li {
     list-style: none;
 }
 
-nav ol li a,
-nav ul li a {
-    text-decoration: none;
+img,
+video,
+svg {
+    display: inline-block;
+    height: auto;
+}
+
+img,
+video {
+    max-width: 100%;
+    height: auto
 }
 
 img {
-    display: inline-block;
+    width: 100%;
 }
 
 figure {
@@ -60,25 +97,93 @@ figure {
     margin-right: 0;
 }
 
-div,
-span,
-button {
-    box-sizing: border-box;
+a {
+    cursor: pointer;
 }
 
 button {
     cursor: pointer;
     border: none;
-    cursor: pointer;
+    text-overflow: ellipsis;
+    text-wrap: balance;
     transition: all 0.05s ease-in-out;
-    will-change: background-color, color;
+    line-height: 1;
 }
 
-a:focus,
-button:focus {
-    outline: none;
+button:disabled,
+button:disabled:hover,
+button:disabled:active,
+button:disabled:focus-within {
+    cursor: not-allowed;
 }
 
 pre {
     text-wrap: wrap;
+}
+
+hr {
+    height: 0;
+    color: inherit;
+    border-top-width: 1px
+}
+
+b,
+strong {
+    font-weight: bolder
+}
+
+small {
+    font-size: 80%
+}
+
+sub,
+sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline
+}
+
+sub {
+    bottom: -.25em
+}
+
+sup {
+    top: -.5em
+}
+
+table {
+    border-collapse: collapse
+}
+
+:-moz-focusring {
+    outline: auto
+}
+
+:-moz-ui-invalid {
+    box-shadow: none
+}
+
+progress {
+    vertical-align: baseline
+}
+
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+    height: auto
+}
+
+[type=search] {
+    appearance: textfield;
+    -webkit-appearance: textfield;
+    outline-offset: -2px
+}
+
+::-webkit-search-decoration {
+    -webkit-appearance: none
+}
+
+::-webkit-file-upload-button {
+    -webkit-appearance: button;
+    font: inherit
 }

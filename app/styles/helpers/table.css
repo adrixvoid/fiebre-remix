@@ -1,0 +1,33 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    font-weight: 700;
+    text-align: left;
+}
+
+tr {
+    border-bottom: 1px solid var(--low-contrast)
+}
+
+td,
+th {
+    padding: 0.5rem 1rem;
+}
+
+table .actions {
+    display: flex;
+    gap: var(--unit);
+    justify-content: flex-end;
+    align-items: center;
+}
+
+table .button {
+    display: inline-block;
+}
+
+table .column-actions {
+    width: 4rem;
+}

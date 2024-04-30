@@ -1,12 +1,10 @@
 ---
 title: Vibramos lo mismo
 categories: ilustración
-preview: vibramos-lo-mismo.jpg
+preview: null
 ---
+
 # Este es el nuevo contenido
 
 Vamos a intentar agregar este texto
-
-```
-<input value="hola" />
-```
+Noche de reyes description

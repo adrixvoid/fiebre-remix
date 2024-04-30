@@ -1,0 +1,92 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("MONGO_URL")
+}
+
+model User {
+  id    String  @id @default(auto()) @map("_id") @db.ObjectId
+  email String
+  name  String?
+}
+
+model Post {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  title     String
+  slug      String
+  body      String
+  preview   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+type Image {
+  url   String
+  title String
+}
+
+model Product {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  slug        String
+  body        String?
+  preview     Json?
+  images      Json     @default("[]")
+  downloadUrl String?
+  tags        Json     @default("[]")
+  price       Int      @default(0)
+  priceHidden Boolean  @default(false)
+  published   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ShoppingCart {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String
+  products  Json     @default("[]")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PaymentType {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  type      String   @unique @default("cash")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model OrderDetails {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  orderId   String   @map("order_id") @db.ObjectId
+  productId String   @map("product_id") @db.ObjectId
+  quantity  Int
+  title     String
+  price     Int
+  preview   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model OrderPaymentDetails {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  orderId   String   @map("order_id") @db.ObjectId
+  paymentId String   @map("payment_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Orders {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @map("user_id") @db.ObjectId
+  products  Json     @default("[]") // model Product
+  details   Json     @default("[]") // model OrderDetails
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

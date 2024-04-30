@@ -65,5 +65,7 @@
     }
   ],
   "frontMatter.preview.host": "http://localhost:3004",
-  "frontMatter.framework.startCommand": "npm run dev"
+  "frontMatter.framework.startCommand": "npm run dev",
+  "frontMatter.content.publicFolder": "public",
+  "frontMatter.framework.id": "remix"
 }

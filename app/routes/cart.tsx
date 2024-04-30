@@ -1,15 +1,16 @@
 import type { LinksFunction } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 
-import { getCart } from "~/server/cart.server"
-import type { Product } from "~/server/products.server"
+// import { getCart } from "~/server/shoppingCart.server"
+// import type { Product } from "~/server/products.service"
 
 import { ROUTE_PATH } from "~/constants";
 
 import styles from "~/styles/cart.css";
 
 export const loader = async () => {
-    return getCart()
+    // return getCart()
+    return {};
 }
 
 export const links: LinksFunction = () => [

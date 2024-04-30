@@ -7,16 +7,16 @@ export function MarkdownErrorBoundary() {
         switch (error.status) {
             case 401:
                 return (
-                    <div>
+                    <div className="container">
                         <p>You don't have access to this page.</p>
                     </div>
                 );
             case 404:
-                return <div>Page not found!</div>;
+                return <div className="container">Markdown not found!</div>;
         }
 
         return (
-            <div>
+            <div className="container">
                 Something went wrong: {error.status}{" "}
                 {error.statusText}
             </div>
@@ -24,9 +24,8 @@ export function MarkdownErrorBoundary() {
     }
 
     return (
-        <div>
-            Something went wrong:{" "}
-            "Unknown Error"
+        <div className="container">
+            <h1>0__x We could not load the page</h1>
         </div>
     );
 }

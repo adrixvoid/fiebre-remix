@@ -20,7 +20,12 @@
 .image-preview {
     width: 100%;
     margin-bottom: calc(var(--unit) * 2);
+}
+
+.image-preview img {
     display: block;
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
 }
 
 .product-images {
@@ -32,6 +37,12 @@
 .product-images img {
     width: 100%;
     cursor: pointer;
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
+}
+
+.title h1 {
+    margin-top: 0;
 }
 
 .price,

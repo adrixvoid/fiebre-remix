@@ -1,8 +1,7 @@
 import type { LinksFunction } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 
-import { getAllFromDirectory } from "~/server/utils/front-matter.server";
-import type { MarkdownDocument } from "~/server/utils/front-matter.server";
+import { getMarkdowns } from "~/server/services/front-matter";
 import styles from "~/styles/blog.css";
 
 export const links: LinksFunction = () => [
@@ -13,11 +12,11 @@ export const links: LinksFunction = () => [
 ];
 
 export const loader = async () => {
-  return await getAllFromDirectory('blog');
+  return await getMarkdowns('blog');
 };
 
 function Posts() {
-  const posts = useLoaderData<MarkdownDocument[]>();
+  const posts = useLoaderData<typeof loader>();
 
   return (
     <section className="blogs">

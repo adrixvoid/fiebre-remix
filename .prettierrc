@@ -1,7 +1,11 @@
 {
-    "printWidth": 80,
-    "tabWidth": 2,
-    "useTabs": false,
-    "singleQuote": true,
-    "bracketSpacing": false
+  "printWidth": 80,
+  "tabWidth": 2,
+  "useTabs": false,
+  "singleQuote": true,
+  "bracketSpacing": false,
+  "bracketSameLine": false,
+  "spaceBeforeFunctionParen": true,
+  "trailingComma": "none",
+  "insertFinalNewline": true
 }

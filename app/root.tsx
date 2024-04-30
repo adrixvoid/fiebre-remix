@@ -1,19 +1,21 @@
 import { cssBundleHref } from "@remix-run/css-bundle";
 import type { LinksFunction } from "@remix-run/node";
 import {
-  Link,
   Links,
   LiveReload,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
+  useRouteError,
+  isRouteErrorResponse,
+  useNavigate,
 } from "@remix-run/react";
-
-import Logo from "~/components/svg/Logo";
+import { SITE_NAME } from "~/constants";
 import globalStyles from "~/styles/global.css";
 
-const SITE_NAME = "Fiebre";
+import Header from "~/components/header/Header";
+import Button from "./components/button/Button";
 
 export const meta = () => [
   {
@@ -32,16 +34,11 @@ export const scripts: LinksFunction = () => [
   {
     rel: "preconnect",
     href: "https://fonts.gstatic.com"
-  }
+  },
 ];
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
-  {
-    rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap",
-    media: "all"
-  },
   {
     rel: "stylesheet",
     href: globalStyles,
@@ -51,20 +48,7 @@ export const links: LinksFunction = () => [
 function MainLayout() {
   return (
     <div className="layout">
-      <header className="header">
-        <div className="header-container container">
-          <Link to="/" className="logo">
-            <span className="sr-only">{SITE_NAME}</span>
-            <Logo aria-hidden />
-          </Link>
-          <nav className="header-navigation">
-            <a href="/about">Sobre mi</a>
-            <a href="/store">Tienda</a>
-            <a href="/posts">Portafolio</a>
-            <a href="/blog">Blog</a>
-          </nav>
-        </div>
-      </header>
+      <Header />
       <main className="main">
         <Outlet />
       </main>
@@ -78,7 +62,6 @@ function MainLayout() {
 }
 
 export default function App() {
-  console.log("App RENDER")
   return (
     <html lang="en">
       <head>
@@ -88,10 +71,60 @@ export default function App() {
         <Links />
       </head>
       <body>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" media="all" />
         <MainLayout />
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
+      </body>
+    </html>
+  );
+}
+
+export function ErrorBoundary() {
+  const error = useRouteError();
+  const navigate = useNavigate()
+  const goBack = () => navigate(-1)
+
+  let errorTitle = "Ok... 0__x We could not load the page"
+  let errorDetail = null
+
+  if (isRouteErrorResponse(error)) {
+    switch (error.status) {
+      case 401:
+        errorDetail = <p>You don't have access to this page.</p>
+      case 404:
+        errorDetail = <p>Page not found!</p>;
+      default:
+        errorTitle = error.status.toString()
+        errorDetail = <p>{error.statusText} {error.data.message}</p>
+    }
+  } else if (error instanceof Error) {
+    errorDetail = error.message;
+  }
+
+  return (
+    <html>
+      <head>
+        <title>Oh no!</title>
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" media="all" />
+        <div className="layout">
+          <Header />
+          <main className="main">
+            <div className="container">
+              <h1>{errorTitle}</h1>
+              {errorDetail}
+              <div>
+                <Button onClick={goBack}>Go Back</Button>
+              </div>
+            </div>
+          </main>
+        </div>
+        <Scripts />
       </body>
     </html>
   );

@@ -1,0 +1,75 @@
+.fieldset {
+    margin: 16px 0;
+    padding: 0;
+    border: 0;
+}
+
+.preview {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+}
+
+.item {
+    display: grid;
+    grid-template-columns: minmax(96px, 120px) auto minmax(80px, 120px);
+    align-items: center;
+    border-top: 1px solid var(--border-color);
+    position: relative;
+    gap: 1.5rem;
+}
+
+.item:first-child {
+    border-top: 0;
+}
+
+.itemFooter {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--unit);
+    padding: 2rem;
+}
+
+.badge {
+    background: var(--badge-bg);
+    color: var(--badge-color);
+    border-radius: calc(var(--border-radius) * 4);
+    border: 1px solid var(--badge-border-color);
+    box-shadow: var(--shadow);
+    padding: 2px var(--unit);
+    margin-right: var(--unit);
+    overflow: hidden;
+    white-space: nowrap;
+    display: inline-block;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+.image {
+    width: 100%;
+    height: auto;
+}
+
+.uploadArea {
+    cursor: pointer;
+    border-radius: calc(var(--unit) / 2);
+    padding: 2rem 1rem;
+    background-color: var(--paper-bg);
+    border: 2px dashed var(--border-color);
+    color: var(--body-text);
+    display: block;
+    text-align: center;
+    transition: background .1s ease-in-out;
+    will-change: background;
+}
+
+.uploadArea:hover {
+    background-color: var(--backgrounds);
+}

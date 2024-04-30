@@ -2,9 +2,8 @@ import type { LoaderFunction, LinksFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react"
 import { json } from "@remix-run/node";
 
-import { getContent } from "~/server/markdown.server";
-import type { MarkdownDocument } from "~/server/utils/front-matter.server";
-import { MarkdownErrorBoundary } from "~/components/errors/Markdown";
+import { getMarkdown } from "~/server/controllers/markdown.controller";
+import type { MarkdownDocument } from "~/server/services/front-matter";
 import styles from "~/styles/markdown.css";
 
 export const links: LinksFunction = () => [
@@ -17,14 +16,15 @@ export const links: LinksFunction = () => [
 export const loader: LoaderFunction = async ({ params }) => {
     try {
         const slug = params.slug as string;
-        return await getContent('blog', slug);
+        return await getMarkdown('blog', slug);
     } catch (error) {
-        throw json({ status: 404, message: 'Page not found' }, { status: 404 });
+        throw json({ status: 404, message: 'Blog not found' }, { status: 404 });
     }
 }
 
 export default function Post() {
-    const { title, preview, body } = useLoaderData<MarkdownDocument>();
+    const result = useLoaderData<MarkdownDocument>();
+    const { title, preview, body } = result;
 
     return (
         <div className="post">
@@ -41,8 +41,4 @@ export default function Post() {
             </div>
         </div>
     )
-}
-
-export function ErrorBoundary() {
-    return <MarkdownErrorBoundary />
 }

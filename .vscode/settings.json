@@ -1,33 +1,37 @@
 {
-    "[markdown]": {
-    },
-    "frontMatter.framework.id": "next",
-    "frontMatter.content.publicFolder": "public",
-    "cSpell.words": [
-        "Behance",
-        "Canva",
-        "isbot",
-        "markdoc",
-        "Markdoc",
-        "Renderable",
-        "svgr",
-        "typecheck",
-        "vaporwave"
-    ],
-    "search.exclude": {
-        "**/node_modules/**": true,
-        "**/bower_components/**": true,
-        "**/dist/**": true,
-        "**/build/**": true,
-        "**/coverage/**": true,
-        "**/.next/**": true,
-        "**/.vercel/**": true,
-        "**/.cache/**": true,
-        "**/.git/**": true,
-        "package-lock.json": true,
-        "yarn-lock.json": true,
-        "pnpm-lock.json": true,
-    },
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": null
+  "[markdown]": {},
+  "cSpell.words": [
+    "Behance",
+    "Canva",
+    "clss",
+    "datetime",
+    "isbot",
+    "markdoc",
+    "Markdoc",
+    "Renderable",
+    "subcategorías",
+    "svgr",
+    "tailwindcss",
+    "tanstack",
+    "typecheck",
+    "vaporwave",
+    "virtuals",
+    "zustand"
+  ],
+  "search.exclude": {
+    "**/node_modules/**": true,
+    "**/bower_components/**": true,
+    "**/dist/**": true,
+    "**/build/**": true,
+    "**/coverage/**": true,
+    "**/.next/**": true,
+    "**/.vercel/**": true,
+    "**/.cache/**": true,
+    "**/.git/**": true,
+    "package-lock.json": true,
+    "yarn-lock.json": true,
+    "pnpm-lock.json": true
+  },
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": null
 }

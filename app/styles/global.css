@@ -1,9 +1,15 @@
 @import url('./helpers/reset.css');
 @import url('./helpers/misc.css');
 @import url('./helpers/inputs.css');
-@import url('./helpers/buttons.css');
+@import url('./helpers/table.css');
 
 :root {
+    --brand-color1: #f91e96;
+    --brand-color2: #5e00c1;
+    --brand-color3: #bd9af4;
+    --brand-color4: #d3fc00;
+    --brand-color5: #ff55cb;
+
     --unit: 8px;
     --unit-2: calc(var(--unit) * 2);
     --unit-3: calc(var(--unit) * 3);
@@ -16,77 +22,78 @@
     --breakpoint-xl: 1280px;
     --breakpoint-xxl: 1536px;
 
-    --variant-h1: 2.3rem;
-    --variant-h2: 1.85rem;
-    --variant-h3: 1.6rem;
-    --variant-h4: 1.35rem;
-    --variant-h5: 1.1rem;
-    --variant-h6: 1rem;
-    --variant-p: 0.85rem;
+    --variant-h1: 2.95rem;
+    --variant-h2: 2.5rem;
+    --variant-h3: 1.85rem;
+    --variant-h4: 1.6rem;
+    --variant-h5: 1.35rem;
+    --variant-h6: 1.1rem;
+    --variant-p: 1rem;
+    --variant-xs: 0.8rem;
 
-    --brand-color1: #f91e96;
-    --brand-color2: #5e00c1;
-    --brand-color3: #bd9af4;
-    --brand-color4: #d3fc00;
-    --brand-color5: #ff55cb;
+    --font-family: "Montserrat";
+    --low-contrast: #ececec;
+    --medium-contrast: #c3c3c3;
+    --high-contrast: #333333;
+    --backgrounds: #fafafa;
 
-    --body-bg: #fffffff0;
-    --body-text: #332936;
-
+    --body-bg: var(--backgrounds);
+    --body-text: #272727;
     --paper-bg: #fff;
+
     --accent-bg: var(--brand-color1);
     --accent-bg-hover: var(--brand-color4);
 
-    --color-danger: #cd0624;
+    --color-danger: #f47373;
+    --color-success: #76d576;
+    --color-warning: #e5de86;
 
-    --input-text: #332936;
-    --input-text-disabled: #626262;
-    --input-text-placeholder: #a0a0a0;
-    --input-bg: #fff;
-    --input-bg-hover: #f3f3f3;
-    --input-bg-disabled: #f3f3f3;
-    --input-border: #dcdcdccc;
-    --input-border-focus: #f91e96;
-    --input-border-disabled: #a0a0a0;
-    --input-shadow: 0 1px 4px var(--shadow-color);
+    --link-color: #868484;
+    --link-color-hover: var(--brand-color5);
 
-    --color-gray-100: #f3f3f3;
-    --color-gray-200: #eaeaea;
-    --color-gray-300: #a0a0a0;
-    --color-gray-400: #666666;
-    --color-gray-500: #444444;
-    --color-gray-600: #333333;
-    --color-gray-700: #222222;
+    --input-color: #332936;
+    --input-color-disabled: #c3c3c3;
+    --input-color-placeholder: #cacaca;
+    --input-bg: #fefefe;
+    --input-bg-hover: var(--backgrounds);
+    --input-bg-disabled: #eaeaea;
+    --input-bg-focus: #ffffff;
+    --input-border: #cfd3db;
+    --input-border-focus: #b6b6b6;
+    --input-border-disabled: #735976;
+    --input-shadow: inset 0 1px 1px #eaeaea;
+    --input-shadow-focus: inset 0 2px 4px var(--shadow-color);
 
     --badge-bg: #f3f3f3;
     --badge-color: #666666;
     --badge-border-color: #dcdcdccc;
 
-    --button-bg: #dfdfdf;
-    --button-bg-hover: #853bfa;
+    --button-bg: #6e6e6e;
+    --button-bg-hover: var(--brand-color2);
     --button-bg-active: var(--brand-color3);
-    --button-color: #666666;
+    --button-bg-disabled: var(--low-contrast);
+    --button-color: #ffffff;
     --button-color-hover: #ffffff;
     --button-color-active: var(--brand-color2);
-
+    --button-color-disabled: #959595;
     --button-bg-primary: #ff00b1;
     --button-bg-primary-hover: var(--brand-color4);
     --button-color-primary: #fff;
     --button-color-primary-hover: #000000;
     --button-color-primary-disabled: #553559;
 
-    --button-bg-secondary: #2b49f9;
-    --button-bg-secondary-hover: #2540d8;
-    --button-color-secondary: #fff;
+    --button-bg-accent: #2b49f9;
+    --button-bg-accent-hover: #2540d8;
+    --button-color-accent: #fff;
 
-    --border-color: #eaeaea;
+    --border-color: var(--low-contrast);
     --border-radius: 8px;
     --border-radius-sm: 4px;
     --border-radius-lg: 12px;
     --border-radius-xl: 16px;
     --border-radius-xxl: 20px;
 
-    --shadow-color: #00000014;
+    --shadow-color: #d5d5d5;
     --shadow: 0px 3px 1px -2px var(--shadow-color);
     --shadow-md: 0 1px 8px var(--shadow-color);
     --shadow-lg: 0 1px 12px var(--shadow-color);
@@ -95,55 +102,60 @@
     --shadow-inset: inset 0 0 10px var(--shadow-color);
     --shadow-inset-lg: inset 0px 2px 7px var(--shadow-color);
     --shadow-inset-xl: inset 0 2px 20px var(--shadow-color);
-    --shadow-primary: 0 0 10px var(--brand-color1);
-    --shadow-primary-lg: 0 0 20px var(--brand-color1);
-    --shadow-primary-xl: 0 0 30px var(--brand-color1);
-    --shadow-primary-xxl: 0 0 40px var(--brand-color1);
+    --shadow-primary: 0 0 8px var(--brand-color1);
+    --shadow-primary-lg: 0 0 16px var(--brand-color1);
+    --shadow-primary-xl: 0 0 24px var(--brand-color1);
+    --shadow-primary-xxl: 0 0 32px var(--brand-color1);
     --shadow-primary-inset: inset 0 0 10px var(--brand-color1);
     --shadow-primary-inset-lg: inset 0 0 20px var(--brand-color1);
     --shadow-primary-inset-xl: inset 0 0 30px var(--brand-color1);
-
-    --font-family: "Montserrat";
-    --link-color: var(--brand-color2);
-    --link-color-hover: var(--brand-color5);
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --body-bg: #0e0e4af5;
-        --body-text: #cfd3db;
-        --paper-bg: #260954b8;
+        --high-contrast: #bc9ed0;
+        --medium-contrast: #79439d;
+        --low-contrast: #472c59;
+        --backgrounds: #402255;
 
-        --button-bg: #6c2777ed;
-        --button-bg-hover: var(--brand-color4);
-        --button-bg-disabled: #846b88;
+        --body-bg: #4c305f;
+        --body-text: #cfd3db;
+        --paper-bg: #260954;
+
+        /* --button-bg: #2a0a2f; */
+        --button-bg: var(--medium-contrast);
+        --button-bg-hover: var(--brand-color2);
+        --button-bg-disabled: var(--low-contrast);
         --button-color: var(--body-text);
-        --button-color-hover: var(--brand-color2);
+        --button-color-hover: var(--brand-color4);
         --button-color-disabled: #8f6e95;
+        --button-color-primary: #eaeaee;
         --button-color-primary-hover: var(--brand-color5);
         --button-color-primary-disabled: var(--body-bg);
 
-        --input-text: #cfd3db;
-        --input-text-disabled: #735976;
-        --input-text-placeholder: #806583;
-        --input-bg: #391a3ded;
-        --input-bg-hover: #6c2777ed;
-        --input-bg-disabled: #532a58ed;
+        --input-color: #cfd3db;
+        --input-color-disabled: #735976;
+        --input-color-placeholder: #806583;
+        --input-bg: #300c34;
+        --input-bg-hover: #4c2764;
+        --input-bg-disabled: var(--low-contrast);
+        --input-bg-focus: #7e1e8ded;
         --input-border: #cfd3db;
         --input-border-focus: #f91e96;
         --input-border-disabled: #735976;
-        --input-shadow: 0 1px 4px var(--shadow-color);
+        --input-shadow: inset 0 1px 1px var(--shadow-color);
 
-        --badge-bg: #5b3f9c;
+        --badge-bg: #5b3f9cbd;
         --badge-color: #cfd3db;
         --badge-border-color: #5b3f9c;
 
-        --border-color: #83338d;
+        --border-color: #ad6db6;
 
         --shadow-color: rgba(0, 0, 0, 0.5);
 
         --link-color: var(--brand-color3);
         --link-color-hover: var(--accent-bg-hover);
+        --link-color-visited: var(--brand-color5);
     }
 }
 
@@ -165,11 +177,6 @@
 }
 
 body {
-    background-image: url('/hero/hero.jpg');
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-attachment: fixed;
-    background-size: cover;
     color: var(--body-text);
     background-color: var(--body-bg);
     font-family: var(--font-family);
@@ -182,38 +189,78 @@ button,
 input,
 select,
 textarea,
+label,
 ul,
 li {
     font-size: var(--variant-p);
 }
 
-a:visited {
+a,
+button,
+input,
+select {
+    outline-color: var(--accent-bg);
+}
+
+a {
     color: var(--link-color);
+}
+
+a:visited {
+    color: var(--link-color-visited);
 }
 
 a:hover {
     color: var(--link-color-hover);
 }
 
+button {
+    border-radius: calc(var(--border-radius) / 2);
+    padding: var(--unit) calc(var(--unit) * 2);
+}
+
+button:active:not(:disabled) {
+    transform: scale(1.03);
+}
+
+button:focus-within {
+    transform: scale(1.05);
+}
+
 pre {
     padding: calc(var(--unit) * 2);
     background: var(--paper-bg);
     border: 1px solid var(--border-color);
+    margin: 2.5rem 0;
 }
 
 blockquote {
-    padding: calc(var(--unit) * 2) calc(var(--unit) * 4);
     margin: calc(var(--unit) * 2) 0;
+    padding: calc(var(--unit) * 4) calc(var(--unit) * 3);
+    border: 1px solid #e7e7e7;
+    background: var(--backgrounds);
+    border-radius: 8px;
 }
 
 blockquote p {
-    font-size: 1.2rem;
+    margin: 0;
 }
 
 hr {
     border: none;
     border-top: 1px solid var(--border-color);
     margin: calc(var(--unit) * 2) 0;
+    width: 100%;
+    display: block;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 1rem 0;
 }
 
 .h1,
@@ -251,12 +298,22 @@ nav ol {
     gap: calc(var(--unit) * 2);
 }
 
+dialog {
+    width: 65vw;
+    min-height: 50vh;
+    inset: 0;
+    padding: 32px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-md);
+    background: var(--paper-bg);
+    color: var(--body-text);
+}
+
 /**
 * Layout
 */
 
 .layout {
-    background-color: var(--body-bg);
     min-height: 100dvh;
     display: grid;
     grid:
@@ -273,56 +330,6 @@ nav ol {
 
 .footer {
     grid-area: footer;
-}
-
-.header {
-    box-sizing: border-box;
-    padding: calc(var(--unit) * 4) 0;
-    top: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-}
-
-.header.sticky {
-    background: var(--paper-bg);
-    box-shadow: var(--shadow);
-    height: calc(var(--unit) * 8);
-}
-
-.header-container {
-    position: static;
-    display: flex;
-    gap: calc(var(--unit) * 2) 0;
-}
-
-.logo {
-    display: inline-block;
-    align-items: center;
-    height: calc(var(--unit) * 6);
-}
-
-.logo svg,
-.logo img {
-    height: 100%;
-    aspect-ratio: 300 / 131;
-}
-
-.logo svg path {
-    fill: var(--accent-bg);
-}
-
-.header-navigation {
-    display: flex;
-    gap: calc(var(--unit) * 2);
-    align-items: center;
-    flex-grow: 1;
-    text-align: center;
-    justify-content: flex-end;
-}
-
-.header-navigation a {
-    text-decoration: none;
 }
 
 .footer {

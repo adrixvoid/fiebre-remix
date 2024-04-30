@@ -2,15 +2,14 @@ import type { LinksFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react"
 import { json } from "@remix-run/node";
 
-import { getContent } from "~/server/markdown.server";
-import type { MarkdownDocument } from "~/server/utils/front-matter.server";
-import { MarkdownErrorBoundary } from "~/components/errors/Markdown";
+import { getMarkdown } from "~/server/controllers/markdown.controller";
+import type { MarkdownDocument } from "~/server/services/front-matter";
 import postStyles from "~/styles/markdown.css";
 import styles from "~/styles/about.css";
 
 export const loader = async () => {
     try {
-        const markdownResult = await getContent('pages', '2023-12-04-about');
+        const markdownResult = await getMarkdown('pages', '2023-12-04-about');
         return markdownResult;
     } catch (error) {
         throw json("Not Found", { status: 404 });
@@ -36,18 +35,12 @@ export default function AboutPage() {
         <div className="about post">
             <div className="container">
                 <div className="post-header">
-                    <h1 className="sr-only">{title}</h1>
+                    <h1>{title}</h1>
                 </div>
-            </div>
-            <div className="container">
                 <div className="markdown-content">
                     <div dangerouslySetInnerHTML={{ __html: body || '' }} />
                 </div>
             </div>
         </div>
     )
-}
-
-export function ErrorBoundary() {
-    return <MarkdownErrorBoundary />
 }

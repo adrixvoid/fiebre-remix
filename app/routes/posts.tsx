@@ -2,12 +2,11 @@ import type { LinksFunction } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 
 import { ROUTE_PATH } from "~/constants";
-import { getAllFromDirectory } from "~/server/utils/front-matter.server";
-import type { MarkdownDocument } from "~/server/utils/front-matter.server";
+import { getMarkdowns, type MarkdownDocument } from "~/server/services/front-matter";
 import styles from "~/styles/markdown.css";
 
 export const loader = async () => {
-  const metadata = await getAllFromDirectory('posts');
+  const metadata = await getMarkdowns('posts');
   return metadata;
 };
 

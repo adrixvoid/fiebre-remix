@@ -1,5 +1,5 @@
 body {
-    background: url('/hero/hero.jpg');
+    /* background: url('/hero/hero.jpg'); */
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: fixed;
@@ -10,19 +10,6 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-}
-
-.layout::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
-    pointer-events: none;
-    user-select: none;
-    z-index: -1;
 }
 
 .header {
@@ -36,7 +23,7 @@ body {
     position: relative;
 }
 
-.hero-content {
+.hero-body {
     display: flex;
     flex-direction: column;
     align-items: center;

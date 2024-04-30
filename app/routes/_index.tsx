@@ -1,4 +1,4 @@
-import type { LinksFunction, MetaFunction } from "@remix-run/node";
+import type { LinksFunction, LoaderFunction, MetaFunction } from "@remix-run/node";
 import styles from "~/styles/home.css";
 import Logo from "~/components/svg/Logo";
 
@@ -16,11 +16,17 @@ export const links: LinksFunction = () => [
   },
 ];
 
+export const loader: LoaderFunction = ({ params }) => {
+  const lang = params.lang as string;
+  console.log("lang", lang)
+  return {};
+}
+
 export default function Index() {
   return (
     <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
       <div className="hero">
-        <div className="hero-content">
+        <div className="hero-body">
           <Logo className="hero-logo" />
           <nav className="hero-navigation">
             <ul>
@@ -28,7 +34,7 @@ export default function Index() {
                 <a href="/about">Sobre mi</a>
               </li>
               <li>
-                <a href="/store">Tienda</a>
+                <a href="/products">Tienda</a>
               </li>
               <li>
                 <a href="/posts">Portafolio</a>
