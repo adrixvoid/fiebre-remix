@@ -45,22 +45,6 @@ export const links: LinksFunction = () => [
   }
 ];
 
-function MainLayout() {
-  return (
-    <div className="layout">
-      <Header />
-      <main className="main">
-        <Outlet />
-      </main>
-      <footer className="footer">
-        <div className="container">
-          @2024 - {SITE_NAME} - <a href="https://www.behance.net/fiebre_creativa" title="My Behance portfolio">https://www.behance.net/fiebre_creativa</a>
-        </div>
-      </footer>
-    </div>
-  );
-}
-
 export default function App() {
   return (
     <html lang="en">
@@ -72,7 +56,7 @@ export default function App() {
       </head>
       <body>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" media="all" />
-        <MainLayout />
+        <Outlet />
         <ScrollRestoration />
         <Scripts />
         <LiveReload />

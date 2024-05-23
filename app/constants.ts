@@ -1,16 +1,17 @@
 export const SITE_NAME = 'Fiebre';
 
-export const MARKDOWN_TYPES = [
-  {value: 'blog', label: 'Blog'},
-  {value: 'posts', label: 'Post'},
-  {value: 'pages', label: 'Page'},
-  {value: 'products', label: 'Products'}
-];
+export const CONTENT_TYPE = {
+  blog: 'Blog',
+  post: 'Post',
+  page: 'Page',
+  product: 'Product'
+};
 
 export const ASSET_PATH = {
-  MARKDOWN: '/markdown',
-  CATEGORIES: '/categories',
-  PRODUCTS: '/products'
+  CONTENT: 'public/content',
+  CATEGORIES: 'public/categories',
+  PRODUCTS: 'public/products',
+  PRODUCTS_PRIVATE: 'private/products'
 };
 
 export const ROUTE_PATH = {
@@ -27,13 +28,10 @@ export const ROUTE_PATH = {
 
 export const ADMIN_ROUTE_PATH = {
   CATEGORY_LIST: '/admin/categories',
-  CATEGORY_CREATE: '/admin/categories/add',
+  CATEGORY_CREATE: '/admin/categories/create',
   CATEGORY_EDIT: '/admin/categories/edit',
   CATEGORY_DELETE: '/admin/categories/delete',
   PRODUCT: '/admin/products',
-  PRODUCT_CREATE: '/admin/content/create'
-};
-
-export const CATEGORY_PARAMS = {
-  PARENT: 'parent'
+  PRODUCT_CREATE: '/admin/products/create',
+  CONTENT_CREATE: '/admin/content/create'
 };

@@ -33,7 +33,7 @@
 }
 
 .logo svg path {
-    fill: var(--accent-bg);
+    fill: var(--color-brand);
 }
 
 .headerNavigation {

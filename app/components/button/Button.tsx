@@ -4,32 +4,32 @@ import styles from "./Button.module.css";
 import cx from "classnames";
 import { RemixLinkProps } from "@remix-run/react/dist/components";
 
-export interface ButtonBaseProps extends React.HTMLAttributes<HTMLButtonElement> {
-    children?: React.ReactNode;
+export interface ButtonElementProps extends React.HTMLAttributes<HTMLButtonElement> {
+    to?: never;
     type?: "button" | "submit" | "reset";
+    loading?: boolean;
 }
 
-export interface ButtonProps {
-    children?: React.ReactNode;
-    type?: "button" | "submit" | "reset";
-    className?: string;
-    to?: RemixLinkProps['to'] & React.RefAttributes<HTMLAnchorElement>;
-    onClick?: (event: React.MouseEvent | React.KeyboardEvent) => void;
-    color?: "default" | "primary" | "accent" | "danger" | "success" | "warning";
-    size?: "sm" | "md" | "lg";
-    variant?: "outline" | "solid";
-    disabled?: boolean;
+export interface LinkElementProps extends React.RefAttributes<HTMLAnchorElement> {
     loading?: boolean;
 }
 
 interface ButtonClassNames {
-    color?: ButtonProps['color'];
-    size?: ButtonProps['size'];
-    variant?: ButtonProps['variant'];
-    disabled?: ButtonProps['disabled'];
+    color?: "default" | "primary" | "accent" | "danger" | "success" | "warning";
+    size?: "sm" | "md" | "lg";
+    variant?: "outline" | "solid";
+    disabled?: boolean;
+    className?: string;
 }
 
-const getClassName = ({ color = "default", size = "md", variant = "solid", disabled = false, className }: ButtonClassNames & { className?: string }): string => {
+type ButtonProps = ButtonElementProps & ButtonClassNames;
+type LinkProps = LinkElementProps & ButtonClassNames & RemixLinkProps;
+interface IconButtonProps {
+    icon: React.ReactNode;
+    after?: boolean
+}
+
+const getClassName = ({ color = "default", size = "md", variant = "solid", disabled = false, className }: ButtonClassNames): string => {
     return cx(styles.button,
         {
             [styles[variant]]: !!variant,
@@ -39,29 +39,26 @@ const getClassName = ({ color = "default", size = "md", variant = "solid", disab
         className);
 }
 
-export function ButtonBase(props: ButtonBaseProps) {
-    return (
-        <button className={props.className} {...props} />
-    )
+export function LinkState(props: RemixLinkProps) {
+
+
+    return <Link {...props} state={state} />
 }
 
-export function Button(props: ButtonProps) {
-    const { className, color, size, variant, to, onClick = () => { }, ...rest } = props;
+type ButtonOrRemixLink = ButtonProps | LinkProps
+export function Button(props: ButtonOrRemixLink) {
+    const { className, color, size, variant, ...rest } = props;
 
     const clss = getClassName({ color, size, variant, className });
 
-    if (to) {
-        return (
-            <Link to={to} className={clss} {...rest} />
-        )
+    if (props.to) {
+        return <Link className={clss} {...rest as RemixLinkProps} />
     }
 
-    return (
-        <ButtonBase onClick={onClick} className={clss} {...rest} />
-    )
+    return <button className={clss} {...rest as ButtonProps} />
 }
 
-export function IconButton(props: ButtonProps & { icon: React.ReactNode, after?: boolean }) {
+export function IconButton(props: IconButtonProps & ButtonOrRemixLink) {
     const { after, icon, children, ...rest } = props;
 
     return (

@@ -1,13 +1,6 @@
 .label {
-    border: 1px solid var(--border-color);
-    background-color: var(--input-bg);
     display: flex;
     align-items: center;
-    gap: 0.5rem;
     padding: 0.2rem 0.5rem;
     margin-top: 0.4rem;
-}
-
-.label:hover {
-    background-color: var(--input-bg-hover);
 }

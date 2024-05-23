@@ -1,20 +1,27 @@
+export interface Breadcrumb {
+  name: string;
+  path: string;
+  isActive: boolean;
+}
+
+export type MapFile = {
+  url: string;
+  fileName: string;
+  filePath: string;
+  directory: string;
+};
+
+export interface Image extends MapFile {}
+
 export interface Category {
   _id: string;
   id?: string;
   name: string;
-  cover?: Image;
+  image?: Image;
   slug: string;
   path: string;
   parentId?: string;
   subcategories: Category[];
-  createdAt?: Date;
-  updatedAt?: Date;
-}
-
-export interface Image {
-  _id?: string;
-  name?: string;
-  url: string;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -24,11 +31,12 @@ export type Product = {
   title: string;
   body?: string;
   slug: string;
-  price: number;
+  price?: number;
+  priceInCents: number;
   stock?: number;
   priceHidden?: boolean;
-  preview: Image;
-  images: Image[] | [];
+  preview?: Image;
+  images?: Image[] | [];
   downloadUrl?: string;
   categories?: Category[];
   tags?: string[];

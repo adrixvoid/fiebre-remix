@@ -1,171 +1,92 @@
-import {useState, useRef, useCallback} from 'react';
-import type {FilePreview} from './InputFilePreview.type';
+import {useState, useCallback} from 'react';
 import {atom, useAtom} from 'jotai';
+import {FilePreview} from './InputFilePreview.types';
+import {
+  filterFileList,
+  findRevokeObjectURL,
+  generatePreviewAttributes,
+  mergeFiles
+} from './InputFilePreview.utils';
 
 const buffer = atom<FileList | null>(null);
-
-export function generatePreviewAttributes(files: FileList | null) {
-  if (files) {
-    return Array.from(files)
-      .map((file) => {
-        let filePreviewAttrs = {type: file.type, name: file.name, url: ''};
-        if (file.type.match('image')) {
-          filePreviewAttrs.url = URL.createObjectURL(file);
-        }
-        return filePreviewAttrs;
-      })
-      .filter((file) => file !== undefined) as FilePreview[];
-  }
-  return [];
-}
-
-export function filterFileList(
-  files: FileList | null,
-  cb: (file: File) => File | undefined
-) {
-  if (files) {
-    const dT = new DataTransfer();
-    Array.from(files).forEach((file) => {
-      const cbResult = cb(file);
-      if (cbResult) {
-        dT.items.add(cbResult);
-      }
-    });
-    return dT.files;
-  }
-  return null;
-}
-
-export function mergeFiles(
-  originalFileList: FileList | null,
-  newFileList: FileList | null
-) {
-  if (!originalFileList) {
-    return newFileList;
-  }
-
-  if (!newFileList) {
-    return originalFileList;
-  }
-
-  const dT = new DataTransfer();
-  Array.from(originalFileList).forEach((file) => {
-    dT.items.add(file);
-  });
-  Array.from(newFileList).forEach((file) => {
-    dT.items.add(file);
-  });
-
-  return dT.files;
-}
-
-export function cloneFileList(files: FileList | null) {
-  if (files) {
-    const dT = new DataTransfer();
-    Array.from(files).forEach((file) => {
-      dT.items.add(file);
-    });
-    return dT.files;
-  }
-  return null;
-}
-
-export const removePreview = (preview: FilePreview[], fileName: string) =>
-  preview?.filter((file: FilePreview) => file.name !== fileName);
-
-export const removeFromObjectURL = (preview: FilePreview[], fileName: string) =>
-  URL.revokeObjectURL(
-    preview.find((file) => file.name === fileName)?.url || ''
-  );
-
-export const preventDuplicates = (
-  preview: FilePreview[],
-  newPreview: FilePreview[]
-) =>
-  newPreview.filter((file) => {
-    return !preview.some(
-      (prevFile: FilePreview) => prevFile.name === file.name
-    );
-  });
-
-export const mergePreview = (
-  preview: FilePreview[],
-  newPreview: FilePreview[]
-) => {
-  // prevent duplicates in preview
-  const filteredPreview = preventDuplicates(preview, newPreview);
-  return [...preview, ...filteredPreview];
-};
+const inputAtom = atom<HTMLInputElement | null>(null);
 
 function useFilePreview({multiple = false}) {
   const [preview, setPreview] = useState<FilePreview[]>([]);
-  const inputRef = useRef<HTMLInputElement>(null);
   const [fileBuffer, setFileBuffer] = useAtom(buffer);
+  const [inputCurrent, setInputCurrent] = useAtom(inputAtom);
 
-  const saveBuffer = () => {
-    if (
-      multiple &&
-      inputRef?.current?.files &&
-      inputRef.current.files.length > 0
-    ) {
-      setFileBuffer(inputRef.current?.files);
+  const saveBuffer = (files: FileList | null) => {
+    if (multiple && files && files.length > 0) {
+      setFileBuffer(files);
     }
   };
 
-  const cleanBuffer = () => {
-    setFileBuffer(null);
-  };
-
-  const removeFile = useCallback(
+  const removePreview = useCallback(
     (fileName: string) => {
-      const inputCurrent = inputRef.current;
-
-      if (!inputCurrent || !inputCurrent?.files) {
+      if (!inputCurrent) {
         return;
       }
 
-      removeFromObjectURL(preview, fileName);
+      findRevokeObjectURL(preview, fileName);
 
-      const filteredList = filterFileList(inputCurrent.files, (file: File) => {
-        if (file.name !== fileName) {
-          return file;
-        }
-      });
+      inputCurrent.files = filterFileList(inputCurrent.files, (file: File) =>
+        file.name !== fileName ? file : undefined
+      );
 
-      if (filteredList && filteredList.length > 0) {
-        inputCurrent.files = filteredList;
-      }
-
-      const newPreview = removePreview(preview, fileName);
+      const newPreview = preview?.filter(
+        (file: FilePreview) => file.name !== fileName
+      );
       setPreview(newPreview);
       return newPreview;
     },
-    [inputRef?.current?.files, preview]
+    [inputCurrent, preview]
   );
 
-  const createPreview = useCallback(() => {
-    const inputCurrent = inputRef.current as HTMLInputElement;
-
-    if (multiple) {
-      if (fileBuffer && fileBuffer.length > 0) {
-        inputCurrent.files = mergeFiles(fileBuffer, inputCurrent.files);
-        cleanBuffer();
+  const createPreview = useCallback(
+    (inputCurrent: HTMLInputElement) => {
+      const files = inputCurrent.files;
+      if (multiple) {
+        if (fileBuffer && fileBuffer.length > 0) {
+          inputCurrent.files = mergeFiles(fileBuffer, files);
+          setFileBuffer(null);
+        }
       }
-    }
 
-    const newPreview = generatePreviewAttributes(inputCurrent.files);
-    setPreview(newPreview);
+      const newPreview = generatePreviewAttributes(inputCurrent.files);
+      setPreview(newPreview);
 
-    return newPreview;
-  }, [preview, fileBuffer]);
+      return newPreview;
+    },
+    [preview, fileBuffer]
+  );
+
+  const onClickHandler = (
+    event: React.MouseEvent<HTMLInputElement, MouseEvent>
+  ) => {
+    setInputCurrent(event.target as HTMLInputElement);
+    saveBuffer((event.target as HTMLInputElement).files);
+  };
+
+  const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInputCurrent(event.target as HTMLInputElement);
+    createPreview(event.target as HTMLInputElement);
+  };
+
+  const onKeyDownHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    const target = event.target as HTMLInputElement;
+    setInputCurrent(target);
+    saveBuffer(target.files);
+  };
 
   return {
-    inputRef,
     preview,
-    removeFile,
+    removePreview,
     createPreview,
     saveBuffer,
-    cleanBuffer
+    onClickHandler,
+    onChangeHandler,
+    onKeyDownHandler
   };
 }
 

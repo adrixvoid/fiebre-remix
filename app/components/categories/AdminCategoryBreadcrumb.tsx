@@ -2,9 +2,9 @@ import { Fragment } from "react/jsx-runtime";
 import { Link } from "@remix-run/react";
 
 import { ADMIN_ROUTE_PATH } from "~/constants";
-import { type LoaderAdminCategoryList } from "../categories.controller";
+import { type AdminCategoryLoaderList } from "../categories.controller";
 
-function AdminCategoryBreadcrumb({ breadcrumb }: { breadcrumb: LoaderAdminCategoryList['breadcrumb'] }) {
+function AdminCategoryBreadcrumb({ breadcrumb }: { breadcrumb: AdminCategoryLoaderList['breadcrumb'] }) {
     const links = breadcrumb?.map((b, index) => (
         <Fragment key={b.path}>
             {index !== 0 && ' / '}

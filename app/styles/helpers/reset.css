@@ -27,7 +27,7 @@ h4,
 h5,
 h6 {
     font-weight: 500;
-    line-height: 1;
+    line-height: 1.5;
     text-wrap: balance;
 }
 
@@ -186,4 +186,13 @@ progress {
 ::-webkit-file-upload-button {
     -webkit-appearance: button;
     font: inherit
+}
+
+input[type=file]::file-selector-button {
+    cursor: pointer;
+    border: none;
+    text-overflow: ellipsis;
+    text-wrap: balance;
+    transition: all 0.05s ease-in-out;
+    line-height: 1;
 }

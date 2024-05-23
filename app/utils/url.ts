@@ -11,15 +11,14 @@ export function slugify(title: string): string {
     ñ: 'n'
   };
 
-  let slug = title.toLowerCase().trim();
+  let slug = title.toLowerCase().trim().replace(/\s/g, '-');
 
   for (let character in map) {
     let re = new RegExp(character, 'g');
     slug = slug.replace(re, map[character]);
   }
 
-  slug = slug.replace(/[^\w\s]|_/g, '').replace(/\s+/g, ' ');
-  return slug.replace(/\s/g, '-');
+  return slug;
 }
 
 export function createPath(parentPath: string, localName: string) {

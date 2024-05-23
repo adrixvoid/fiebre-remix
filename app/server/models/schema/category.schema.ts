@@ -11,7 +11,7 @@ export interface CategoryDocument extends Category {
 export const schema = new mongoose.Schema<CategoryDocument>(
   {
     name: {type: String, required: true},
-    cover: {type: Object, default: null},
+    image: {type: Object, default: null},
     slug: {type: String, required: true},
     path: {type: String, required: true, unique: true},
     parentId: {

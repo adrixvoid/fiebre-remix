@@ -1,16 +1,15 @@
-.fieldset {
-    margin: 16px 0;
-    padding: 0;
-    border: 0;
-}
-
-.preview {
+.previewList {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
-    margin-top: 2rem;
+}
+
+.previewList input {
+    transform: translateX(-100vw);
+    position: absolute;
+    left: -100vw;
 }
 
 .item {
@@ -57,19 +56,24 @@
     height: auto;
 }
 
-.uploadArea {
+.label {
     cursor: pointer;
-    border-radius: calc(var(--unit) / 2);
     padding: 2rem 1rem;
-    background-color: var(--paper-bg);
-    border: 2px dashed var(--border-color);
+    border: 1em dashed var(--input-border);
     color: var(--body-text);
     display: block;
     text-align: center;
-    transition: background .1s ease-in-out;
-    will-change: background;
+    transition: background-color .1s ease-in-out;
+    will-change: background-color;
 }
 
-.uploadArea:hover {
-    background-color: var(--backgrounds);
+.label:hover,
+.label:focus-within {
+    background-color: var(--input-bg-hover);
+}
+
+.label:focus,
+.label:focus-within,
+.label:focus-visible {
+    outline: 2px solid var(--input-outline-color);
 }

@@ -1,0 +1,35 @@
+fieldset,
+input:not([type="checkbox"]):not([type="radio"]),
+textarea,
+select,
+legend {
+  display: block;
+  width: 100%;
+}
+
+fieldset {
+  margin: 2rem 0;
+  padding: 2rem;
+  background-color: var(--fieldset-bg);
+  border: 0;
+}
+
+fieldset label {
+  display: inline-block;
+}
+
+input[type="file"] {
+  margin-top: 10px;
+}
+
+fieldset label+input,
+fieldset label+select,
+fieldset label+textarea {
+  margin-top: 0.3rem;
+}
+
+fieldset label+input:not(:last-child),
+fieldset label+select:not(:last-child),
+fieldset label+textarea:not(:last-child) {
+  margin-bottom: 1.5rem;
+}

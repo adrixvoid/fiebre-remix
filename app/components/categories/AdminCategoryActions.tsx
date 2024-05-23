@@ -1,12 +1,12 @@
 import { useSubmit, useNavigation, useParams } from "@remix-run/react";
 import { CellContext } from '@tanstack/react-table'
 
-import { CategoryDocument } from "~/server/models/schema/category.schema";
+import { Category } from '~/types/global.type';
 import { ADMIN_ROUTE_PATH } from "~/constants";
 import Button, { IconButton } from "~/components/button/Button";
 import IconTrash from '~/components/svg/IconTrash'
 
-const ButtonActions = (props: CellContext<CategoryDocument, unknown>) => {
+const ButtonActions = (props: CellContext<Category, unknown>) => {
     const slug = props.row.original.slug as string;
     const id = props.row.original._id?.toString() || "";
     const name = props.row.original.name as string;

@@ -4,11 +4,31 @@
 @import url('./helpers/table.css');
 
 :root {
-    --brand-color1: #f91e96;
-    --brand-color2: #5e00c1;
-    --brand-color3: #bd9af4;
-    --brand-color4: #d3fc00;
-    --brand-color5: #ff55cb;
+    --color-brand: #f91e96;
+    --color-brand-secondary: hsl(269, 100%, 38%);
+    --color-brand-light: #bd9af4;
+    --color-brand-highlight: #d3fc00;
+    --color-brand-a90: #ff55cb;
+
+    --primary: var(--color-brand);
+    --primary-a90: color-mix(in srgb, var(--color-brand), transparent 10%);
+    --primary-a80: color-mix(in srgb, var(--color-brand), transparent 20%);
+    --primary-a50: color-mix(in srgb, var(--color-brand), transparent 50%);
+
+    --accent-bg: var(--color-brand);
+    --accent-bg-hover: var(--color-brand-highlight);
+
+    --color-danger: #f47373;
+    --color-success: #76d576;
+    --color-warning: #e5de86;
+
+    --body-bg: #fafafa;
+    --body-text: #272727;
+    --paper-bg: #ececec;
+
+    --low-contrast: #eaeaea;
+    --medium-contrast: #c9c9c9;
+    --high-contrast: #333333;
 
     --unit: 8px;
     --unit-2: calc(var(--unit) * 2);
@@ -32,58 +52,46 @@
     --variant-xs: 0.8rem;
 
     --font-family: "Montserrat";
-    --low-contrast: #ececec;
-    --medium-contrast: #c3c3c3;
-    --high-contrast: #333333;
-    --backgrounds: #fafafa;
-
-    --body-bg: var(--backgrounds);
-    --body-text: #272727;
-    --paper-bg: #fff;
-
-    --accent-bg: var(--brand-color1);
-    --accent-bg-hover: var(--brand-color4);
-
-    --color-danger: #f47373;
-    --color-success: #76d576;
-    --color-warning: #e5de86;
 
     --link-color: #868484;
-    --link-color-hover: var(--brand-color5);
+    --link-color-hover: var(--color-brand);
 
+    --fieldset-bg: #f4f4f4;
     --input-color: #332936;
     --input-color-disabled: #c3c3c3;
     --input-color-placeholder: #cacaca;
     --input-bg: #fefefe;
-    --input-bg-hover: var(--backgrounds);
-    --input-bg-disabled: #eaeaea;
+    --input-bg-hover: #f8f8f8;
+    --input-bg-disabled: #e2e2e2;
     --input-bg-focus: #ffffff;
     --input-border: #cfd3db;
-    --input-border-focus: #b6b6b6;
-    --input-border-disabled: #735976;
+    --input-border-disabled: #cfd3db;
     --input-shadow: inset 0 1px 1px #eaeaea;
     --input-shadow-focus: inset 0 2px 4px var(--shadow-color);
+    --input-bg-checked: var(--accent-bg);
+    --input-outline-color: var(--accent-bg);
 
     --badge-bg: #f3f3f3;
     --badge-color: #666666;
     --badge-border-color: #dcdcdccc;
 
     --button-bg: #6e6e6e;
-    --button-bg-hover: var(--brand-color2);
-    --button-bg-active: var(--brand-color3);
+    --button-bg-hover: var(--color-brand-secondary);
+    --button-bg-active: var(--color-brand-light);
     --button-bg-disabled: var(--low-contrast);
     --button-color: #ffffff;
     --button-color-hover: #ffffff;
-    --button-color-active: var(--brand-color2);
+    --button-color-active: var(--color-brand-secondary);
     --button-color-disabled: #959595;
-    --button-bg-primary: #ff00b1;
-    --button-bg-primary-hover: var(--brand-color4);
+    --button-bg-primary: var(--primary-a90);
+    /* #f91e96 */
+    --button-bg-primary-hover: var(--primary);
+    /* #f91e96*/
     --button-color-primary: #fff;
     --button-color-primary-hover: #000000;
     --button-color-primary-disabled: #553559;
-
-    --button-bg-accent: #2b49f9;
-    --button-bg-accent-hover: #2540d8;
+    --button-bg-accent: #ff00b1;
+    --button-bg-accent-hover: var(--color-brand-highlight);
     --button-color-accent: #fff;
 
     --border-color: var(--low-contrast);
@@ -102,62 +110,79 @@
     --shadow-inset: inset 0 0 10px var(--shadow-color);
     --shadow-inset-lg: inset 0px 2px 7px var(--shadow-color);
     --shadow-inset-xl: inset 0 2px 20px var(--shadow-color);
-    --shadow-primary: 0 0 8px var(--brand-color1);
-    --shadow-primary-lg: 0 0 16px var(--brand-color1);
-    --shadow-primary-xl: 0 0 24px var(--brand-color1);
-    --shadow-primary-xxl: 0 0 32px var(--brand-color1);
-    --shadow-primary-inset: inset 0 0 10px var(--brand-color1);
-    --shadow-primary-inset-lg: inset 0 0 20px var(--brand-color1);
-    --shadow-primary-inset-xl: inset 0 0 30px var(--brand-color1);
+    --shadow-primary: 0 0 8px var(--color-brand);
+    --shadow-primary-lg: 0 0 16px var(--color-brand);
+    --shadow-primary-xl: 0 0 24px var(--color-brand);
+    --shadow-primary-xxl: 0 0 32px var(--color-brand);
+    --shadow-primary-inset: inset 0 0 10px var(--color-brand);
+    --shadow-primary-inset-lg: inset 0 0 20px var(--color-brand);
+    --shadow-primary-inset-xl: inset 0 0 30px var(--color-brand);
+
+    --link-color: #347d9b;
+    --link-color-hover: var(--accent-bg);
+    --link-color-visited: #88349b;
+
+    --selection-color: var(--color-brand);
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --high-contrast: #bc9ed0;
-        --medium-contrast: #79439d;
-        --low-contrast: #472c59;
-        --backgrounds: #402255;
+        --color-danger: rgb(185 28 28);
+        --color-success: #40e240;
+        --color-warning: #fff254;
 
-        --body-bg: #4c305f;
-        --body-text: #cfd3db;
-        --paper-bg: #260954;
+        /* --backgrounds: #402255; */
+        --high-contrast: var(--color-brand-secondary);
+        --medium-contrast: #2e2344;
+        --low-contrast: #3a2e52;
 
-        /* --button-bg: #2a0a2f; */
-        --button-bg: var(--medium-contrast);
-        --button-bg-hover: var(--brand-color2);
+        --body-bg: #302745;
+        --body-text: #dfd7ec;
+        --special-text: var(--color-brand-light);
+        --paper-bg: #382c51;
+
+        --accent-bg: #9adbf4;
+
+        --button-bg: #6d4cbb;
+        --button-bg-hover: #6c2eff;
         --button-bg-disabled: var(--low-contrast);
-        --button-color: var(--body-text);
-        --button-color-hover: var(--brand-color4);
+        --button-color: #ffffff;
+        --button-color-hover: var(--color-brand-highlight);
         --button-color-disabled: #8f6e95;
-        --button-color-primary: #eaeaee;
-        --button-color-primary-hover: var(--brand-color5);
+        --button-color-primary: #ffffff;
+        --button-color-primary-hover: var(--color-brand-secondary);
         --button-color-primary-disabled: var(--body-bg);
 
-        --input-color: #cfd3db;
-        --input-color-disabled: #735976;
-        --input-color-placeholder: #806583;
-        --input-bg: #300c34;
-        --input-bg-hover: #4c2764;
-        --input-bg-disabled: var(--low-contrast);
-        --input-bg-focus: #7e1e8ded;
-        --input-border: #cfd3db;
-        --input-border-focus: #f91e96;
-        --input-border-disabled: #735976;
-        --input-shadow: inset 0 1px 1px var(--shadow-color);
+        --fieldset-bg: var(--medium-contrast);
+        --input-color: #ffffff;
+        --input-color-disabled: #535066;
+        --input-color-placeholder: #544570;
+        --input-bg: #3e3159;
+        --input-bg-hover: #382c51;
+        --input-bg-disabled: #312745;
+        --input-bg-focus: #40325f;
+        --input-bg-checked: var(--color-brand);
+        --input-border: hsl(260deg 30.37% 25.37%);
+        --input-border-disabled: rgb(67 46 104);
+        --input-shadow: inset 2px 2px 1px #261545;
+        --input-shadow-disabled: inset 0 1px 1px #2c1b45;
+        --input-outline-color: #d2fc00b0;
 
         --badge-bg: #5b3f9cbd;
         --badge-color: #cfd3db;
         --badge-border-color: #5b3f9c;
 
-        --border-color: #ad6db6;
-
         --shadow-color: rgba(0, 0, 0, 0.5);
 
-        --link-color: var(--brand-color3);
+        --link-color: #9adbf4;
         --link-color-hover: var(--accent-bg-hover);
-        --link-color-visited: var(--brand-color5);
+        --link-color-visited: #85dcff;
+
+        --selection-color: var(--color-brand-highlight);
     }
 }
+
+
 
 @media screen and (min-width: 768px) {
 
@@ -180,6 +205,33 @@ body {
     color: var(--body-text);
     background-color: var(--body-bg);
     font-family: var(--font-family);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--special-text);
+}
+
+button,
+img,
+figure,
+svg {
+    user-select: none;
+}
+
+h1::selection,
+h2::selection,
+h3::selection,
+h4::selection,
+h5::selection,
+h6::selection,
+p::selection {
+    background-color: var(--selection-color);
+    color: var(--low-contrast);
 }
 
 p,
@@ -232,18 +284,20 @@ pre {
     background: var(--paper-bg);
     border: 1px solid var(--border-color);
     margin: 2.5rem 0;
+    line-height: 1.5;
 }
 
 blockquote {
-    margin: calc(var(--unit) * 2) 0;
+    margin: 2.5rem 0;
     padding: calc(var(--unit) * 4) calc(var(--unit) * 3);
-    border: 1px solid #e7e7e7;
-    background: var(--backgrounds);
+    border: 1px solid var(--color-brand-secondary);
+    background: var(--low-contrast);
     border-radius: 8px;
 }
 
 blockquote p {
     margin: 0;
+    font-size: var(--variant-h5);
 }
 
 hr {
@@ -260,7 +314,7 @@ h3,
 h4,
 h5,
 h6 {
-    margin: 1rem 0;
+    margin: 2rem 0;
 }
 
 .h1,

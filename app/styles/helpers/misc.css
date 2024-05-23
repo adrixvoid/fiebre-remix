@@ -138,6 +138,10 @@
     display: flex;
 }
 
+.items-center {
+    align-items: center;
+}
+
 .cursor-pointer {
     cursor: pointer;
     user-select: none;
