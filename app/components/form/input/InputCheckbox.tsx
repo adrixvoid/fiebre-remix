@@ -11,7 +11,7 @@ export function InputCheckbox({ label, labelProps, id, name, type, error, classN
         <input type={type || "checkbox"} name={name} id={id ? id : name} {...rest} />
         {label}
       </label>
-      {Boolean(error) && <p className="box text-destructive">{error}</p>}
+      {Boolean(error) && <p className="box paper text-destructive">{error}</p>}
     </>
   )
 }

@@ -1,18 +1,16 @@
 import {FilePreview} from './InputFilePreview.types';
 
-export function generatePreviewAttributes(files: FileList | null) {
-  if (files) {
-    return Array.from(files)
-      .map((file) => {
-        let filePreviewAttrs = {type: file.type, name: file.name, url: ''};
-        if (file.type.match('image')) {
-          filePreviewAttrs.url = URL.createObjectURL(file);
-        }
-        return filePreviewAttrs;
-      })
-      .filter((file) => file !== undefined) as FilePreview[];
-  }
-  return [];
+export function toFilePreview(files: FileList | null): FilePreview[] {
+  if (!files) return [];
+
+  return Array.from(files)
+    .filter((file) => file.type.match('image'))
+    .map((file) => ({
+      type: file.type,
+      name: file.name,
+      src: URL.createObjectURL(file)
+    }))
+    .filter((file) => file !== undefined) as FilePreview[];
 }
 
 export function filterFileList(
@@ -68,7 +66,7 @@ export function cloneFileList(files: FileList | null) {
 
 export const findRevokeObjectURL = (preview: FilePreview[], fileName: string) =>
   URL.revokeObjectURL(
-    preview.find((file) => file.name === fileName)?.url || ''
+    preview.find((file) => file.name === fileName)?.src || ''
   );
 
 export const preventDuplicates = (

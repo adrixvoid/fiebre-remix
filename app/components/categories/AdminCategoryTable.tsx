@@ -1,11 +1,11 @@
 import { Link, useLocation } from "@remix-run/react";
-import { createColumnHelper, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table'
-import cx from 'classnames'
+import { createColumnHelper, getCoreRowModel, useReactTable } from '@tanstack/react-table'
 
-import { CategoryDocument } from "~/server/models/schema/category.schema";
+import { CategoryDocument } from "~/server/schema/category.schema";
 import { ADMIN_ROUTE_PATH } from "~/constants";
 import ButtonActions from "./AdminCategoryActions";
 import { t } from "~/i18n/translate";
+import AdminTable from "../table/AdminTable";
 
 const initialState = [{
     name: "Categories",
@@ -42,51 +42,12 @@ const columns = [
     }),
     columnHelper.display({
         id: 'actions',
-        header: () => <span>{t('CATEGORY.TABLE.ACTIONS')}</span>,
+        header: () => <span>{t('TABLE.ACTIONS')}</span>,
         cell: (props) => <ButtonActions {...props} />
     }),
 ]
 
-interface AdminCategoriesProps {
-    categories: CategoryDocument[]
-}
-
-export default function AdminCategoryList({ categories = [] }: AdminCategoriesProps) {
+export default function AdminCategoryList({ categories = [] }: { categories: CategoryDocument[] }) {
     const table = useReactTable({ columns, data: categories as CategoryDocument[], getCoreRowModel: getCoreRowModel() })
-    const getClassName = (columnId: string) => cx({
-        'text-align-right': columnId === 'actions',
-        'column-actions': columnId === 'actions'
-    })
-
-    return (
-        <table className="table">
-            <thead>
-                {table.getHeaderGroups().map(headerGroup => (
-                    <tr key={headerGroup.id}>
-                        {headerGroup.headers.map(header => (
-                            <th key={header.id} className={getClassName(header.column.id)}>
-                                {header.isPlaceholder
-                                    ? null
-                                    : flexRender(
-                                        header.column.columnDef.header,
-                                        header.getContext()
-                                    )}
-                            </th>
-                        ))}
-                    </tr>
-                ))}
-            </thead>
-            <tbody>
-                {table.getRowModel().rows.map(row => (
-                    <tr key={row.id}>
-                        {row.getVisibleCells().map(cell => (
-                            <td key={cell.id} className={getClassName(cell.column.id)}>
-                                {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                            </td>
-                        ))}
-                    </tr>
-                ))}
-            </tbody>
-        </table>
-    )
+    return <AdminTable columns={columns} data={categories} />
 }

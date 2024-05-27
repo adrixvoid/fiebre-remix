@@ -21,15 +21,14 @@
 }
 
 .logo {
-    display: inline-block;
     align-items: center;
-    height: calc(var(--unit) * 6);
+    height: 2.8rem;
 }
 
 .logo svg,
 .logo img {
     height: 100%;
-    aspect-ratio: 300 / 131;
+    aspect-ratio: 2 / 1;
 }
 
 .logo svg path {

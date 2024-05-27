@@ -48,7 +48,6 @@ export default function AdminProductList() {
               ? <AdminCategoryTable categories={list} />
               : <p className="m-0">{t('CATEGORY.EMPTY')}</p>
             }
-            <div className="h-4" />
           </div>
         </div>
       </div>

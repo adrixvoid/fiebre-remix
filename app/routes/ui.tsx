@@ -26,10 +26,7 @@ function ProductRoute() {
                                 <h5>Flower Power - Kit de dibujos</h5>
                                 <h6>Flower Power - Kit de dibujos</h6>
                             </div>
-                            <div className="payment-options">
-                                <a href="#">Ver formas de pago</a>
-                            </div>
-                            <div itemProp="description" className="description">
+                            <p>
                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia quo omnis
                                     dolore tempore maxime minima illum blanditiis dolores quod nostrum officiis magni est non aut distinctio quisquam, saepe tenetur nisi!
                                 </p>
@@ -37,7 +34,8 @@ function ProductRoute() {
                                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia quo omnis
                                     dolore tempore maxime minima illum blanditiis dolores quod nostrum officiis magni est non aut distinctio quisquam, saepe tenetur nisi!
                                 </p>
-                            </div>
+                                <a href="#">Ver formas de pago</a>
+                            </p>
 
                             <h2>Inputs</h2>
                             <div className="quantity">
@@ -46,35 +44,35 @@ function ProductRoute() {
                                     <span aria-hidden>Qty.</span>
                                 </label>
                                 <div className="mt-1">
-                                    <label htmlFor="test">With Placeholder</label>
+                                    <label htmlFor="test">Placeholder</label>
                                     <input id="test" name="test" type="text" placeholder="Placeholder" />
                                 </div>
                                 <div className="mt-1">
-                                    <label htmlFor="test1">Example 1</label>
+                                    <label htmlFor="test1">Text</label>
                                     <input id="test1" name="test1" type="text" value="Example 1" />
                                 </div>
                                 <div className="mt-1">
-                                    <label htmlFor="test2">Example 2</label>
-                                    <input id="email" name="email" type="email" value="john@doe.com" />
+                                    <label htmlFor="test2">Email</label>
+                                    <input id="test2" name="test2" type="email" value="john@doe.com" />
                                 </div>
                                 <div className="mt-1">
-                                    <label htmlFor="test3">Example 3</label>
-                                    <input id="product-quantity" name="product-quantity" type="number" value="1" />
+                                    <label htmlFor="test3">Number</label>
+                                    <input id="test3" name="test3" type="number" value="1" />
                                 </div>
                                 <div className="mt-1">
-                                    <label htmlFor="test4">Example 4</label>
+                                    <label htmlFor="test4">Read Only</label>
                                     <input id="test4" name="test4" type="text" value="Example 4" readOnly />
                                 </div>
                                 <div className="mt-1">
-                                    <label htmlFor="test5">Example 5</label>
-                                    <input id="test5" name="test5" type="text" value="Example 5" disabled />
+                                    <label htmlFor="test5">Disabled</label>
+                                    <input id="test5" name="test5" type="text" value="Disabled" disabled />
                                 </div>
                                 <div className="mt-1">
-                                    <label htmlFor="test6">Example 6</label>
-                                    <input id="test6" name="test6" type="text" value="Example 6" aria-readonly="true" />
+                                    <label htmlFor="test6">Search</label>
+                                    <input id="test6" name="test6" type="search" value="Search" aria-readonly="true" />
                                 </div>
                                 <div className="mt-1">
-                                    <label htmlFor="test7">Example 7</label>
+                                    <label htmlFor="test7">Text</label>
                                     <input id="test7" name="test7" type="text" value="Example 7" aria-disabled="true" />
                                 </div>
                                 <div className="mt-1">

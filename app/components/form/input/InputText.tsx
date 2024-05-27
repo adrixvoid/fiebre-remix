@@ -9,7 +9,7 @@ export function InputText({ label, labelProps, id, name, error, ...rest }: Input
     <>
       {label && <label htmlFor={String(id ? id : name)} {...labelProps}>{label}</label>}
       <input name={name} id={id} {...rest} />
-      {Boolean(error) && <p className="box color-danger">{error}</p>}
+      {Boolean(error) && <p className="box paper color-danger">{error}</p>}
     </>
   )
 }

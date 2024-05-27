@@ -34,7 +34,7 @@ export function TextArea({ label, labelProps, id, name, error, className, onChan
         {...field.getInputProps()}
         {...props}
       />
-      {field.error && <p className="box color-danger">{field.error}</p>}
+      {field.error && <p className="box paper color-danger">{field.error}</p>}
     </>
   )
 }

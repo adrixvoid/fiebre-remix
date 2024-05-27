@@ -1,5 +1,5 @@
 import type {Product} from '~/types/global.type';
-import productModel from './schema/product.schema';
+import productModel from '../schema/product.schema';
 import {slugify} from '~/utils/url';
 
 export const productService = {

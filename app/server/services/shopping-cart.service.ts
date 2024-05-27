@@ -1,4 +1,4 @@
-import shoppingCartModel from './schema/shopping-cart.schema';
+import shoppingCartModel from '../schema/shopping-cart.schema';
 
 export const shoppingCartService = {
   update: async (form: {[k: string]: FormDataEntryValue}) => {
@@ -26,11 +26,6 @@ export const shoppingCartService = {
     return model;
   },
   find: async () => {
-    console.log('get');
-
-    // // prisma
-    // const users = await prisma.user.findMany();
-
     // mongo
     const model = await shoppingCartModel.find();
     return model;

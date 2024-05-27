@@ -7,11 +7,12 @@ import {z} from 'zod';
 import {withZod} from '@remix-validated-form/with-zod';
 import {validationError} from 'remix-validated-form';
 
-import productModel from '~/server/models/schema/product.schema';
-import categoryModel from '~/server/models/schema/category.schema';
-import {uploadService} from '../services/upload.service';
+import productModel from '~/server/schema/product.schema';
+import categoryModel from '~/server/schema/category.schema';
+import {fileService} from '../services/file.service';
 import {ADMIN_ROUTE_PATH, ASSET_PATH} from '~/constants';
-import {productService} from '../models/products.model';
+import {productService} from '../services/products.service';
+import {Product} from '~/types/global.type';
 
 export const PRODUCT_PARAMS = {
   CATEGORY_ID: 'categoryId'
@@ -71,7 +72,7 @@ export const adminProductCreateSchema = z
       z.literal('link'),
       z.literal('file')
     ]),
-    stock: z.coerce.number().int(),
+    stock: z.coerce.number().int().optional(),
     downloadUrl: z.string().url().optional(),
     file: z.instanceof(File).optional(),
     images: zImageSchema.optional(),
@@ -90,7 +91,8 @@ export const adminProductCreateSchema = z
     }
   )
   .refine(
-    (data) => (data.productType === 'physical' ? data.stock >= 0 : true),
+    (data) =>
+      data.productType === 'physical' && data.stock ? data.stock >= 0 : true,
     {
       message: 'Stock have at least 1 product',
       path: ['stock', 'productType']
@@ -121,19 +123,24 @@ export async function actionAdminProductCreate({request}: ActionFunctionArgs) {
     return validationError(validation.error);
   }
 
-  let {referrer, ...data} = validation.data;
+  let {referrer, categoryId, ...data} = validation.data;
 
   let images = null;
   if (data.images) {
-    images = await uploadService.saveFiles(ASSET_PATH.PRODUCTS, data.images);
+    images = await fileService.saveAll(ASSET_PATH.PRODUCTS, data.images);
   }
 
   let file = null;
   if (data.file) {
-    file = await uploadService.saveFile(ASSET_PATH.PRODUCTS_PRIVATE, data.file);
+    file = await fileService.save(ASSET_PATH.PRODUCTS_PRIVATE, data.file);
   }
 
-  const toSave = Object.assign(data, {images}, {file});
+  let categories: Product['categories'] = [];
+  if (categoryId) {
+    categories = [categoryId];
+  }
+
+  const toSave = Object.assign(data, {categories}, {images}, {file});
 
   await productService.create(toSave);
 

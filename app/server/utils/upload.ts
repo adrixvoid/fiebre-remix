@@ -18,8 +18,9 @@ export type FileType = 'image' | 'video' | 'audio' | 'files' | string;
  * @returns {string}
  */
 export function createName(fileName: string): string {
-  const shortName = path.parse(fileName).name.slice(20);
-  return `${crypto.randomUUID()}-${shortName}`;
+  const shortName = path.parse(fileName).name.slice(10);
+  const extension = path.extname(fileName);
+  return `${crypto.randomUUID()}-${shortName}${extension}`;
 }
 
 export function getFolderType(fileType: FileType): string {

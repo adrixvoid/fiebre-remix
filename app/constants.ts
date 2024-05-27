@@ -3,8 +3,7 @@ export const SITE_NAME = 'Fiebre';
 export const CONTENT_TYPE = {
   blog: 'Blog',
   post: 'Post',
-  page: 'Page',
-  product: 'Product'
+  page: 'Page'
 };
 
 export const ASSET_PATH = {

@@ -1,24 +1,20 @@
-import { useActionData, useLoaderData, useLocation, useNavigate, useNavigation } from "@remix-run/react";
-import { type LoaderFunction, type ActionFunction } from "@remix-run/node";
+import { useActionData, useLoaderData, useLocation } from "@remix-run/react";
 import { atom, useAtom } from 'jotai'
 import { ValidatedForm } from "remix-validated-form";
 
-import { loaderAdminProductCreate, actionAdminProductCreate, adminProductCreateValidator } from "~/server/controllers/products.controller";
+import { loaderAdminProductCreate, adminProductCreateValidator } from "~/server/controllers/products.controller";
 import TextArea from "~/components/form/input/Textarea";
 import InputValidation from "~/components/form/input/InputValidation";
 import { InputSubmit } from "~/components/form/input/InputSubmit";
 import Input from "~/components/form/input/Input";
+import { Category, ErrorResponse } from "~/types/global.type";
 
 const priceHidden = atom(false);
 const currentProductType = atom("physical");
 
-export const loader: LoaderFunction = loaderAdminProductCreate;
-export const action: ActionFunction = actionAdminProductCreate;
-
-
 export default function AdminProductsCreate() {
-  const { category } = useLoaderData<typeof loader>();
-  const error = useActionData<typeof action>()
+  const { category } = useLoaderData<typeof loaderAdminProductCreate>() as { category: Category };
+  const error = useActionData<ErrorResponse>() as ErrorResponse;
   const location = useLocation();
   const [productType, setProductType] = useAtom(currentProductType)
   const [isPriceHidden, setPriceHidden] = useAtom(priceHidden)

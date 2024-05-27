@@ -7,14 +7,13 @@ import {
 
 import {categoryService} from '~/server/services/category.service';
 import {ADMIN_ROUTE_PATH, ASSET_PATH} from '~/constants';
-import categoryModel, {
-  CategoryDocument
-} from '~/server/models/schema/category.schema';
+import categoryModel, {CategoryDocument} from '~/server/schema/category.schema';
+import productModel from '~/server/schema/product.schema';
 
 import {sanitizeUrl} from '~/utils/sanitizeUrl';
 import {getBreadcrumb} from '~/utils/breadcrumb';
-import {Breadcrumb, Category, MapFile} from '~/types/global.type';
-import {uploadService} from '../services/upload.service';
+import {Breadcrumb, Category, MapFile, Product} from '~/types/global.type';
+import {fileService} from '../services/file.service';
 
 export interface CategoryFormFields {
   name?: string;
@@ -37,6 +36,7 @@ export interface AdminCategoryLoaderList {
   category?: CategoryDocument;
   list: CategoryDocument[];
   breadcrumb?: Breadcrumb[];
+  products: Product[];
 }
 
 export const CATEGORY_PARAMS = {
@@ -56,7 +56,13 @@ export async function loaderAdminCategoriesList({
   const list = await categoryModel.find({
     parentId: null
   });
-  return {list, breadcrumb: undefined, category: undefined};
+
+  const products = await productModel.find({
+    categories: []
+  });
+  // const products = await productModel.find({$where:'this.categories.length>0'});
+
+  return {list, breadcrumb: undefined, category: undefined, products};
 }
 
 export async function getSubcategory(
@@ -71,6 +77,11 @@ export async function getSubcategory(
     (d: CategoryDocument) => d.path === sanitizeUrl(path)
   );
 
+  const products = await productModel.find({
+    categories: {$in: [category?._id]}
+  });
+  // .where('likes').in(['vaporizing', 'talking']);
+
   const breadcrumb = getBreadcrumb<CategoryDocument>(
     category?.path,
     categories
@@ -78,7 +89,7 @@ export async function getSubcategory(
 
   const subcategories = category?.subcategories || [];
 
-  return {category, list: subcategories, breadcrumb};
+  return {category, list: subcategories, breadcrumb, products};
 }
 
 export async function loaderAdminCategoriesCreate({
@@ -148,49 +159,46 @@ export async function actionAdminCategoriesCreateUpdate({
     fields: {}
   };
 
-  try {
-    const isNewItem = (fromEntries._action as string).includes(
-      ADMIN_ROUTE_PATH.CATEGORY_CREATE
-    );
+  const isNewItem = (fromEntries._action as string).includes(
+    ADMIN_ROUTE_PATH.CATEGORY_CREATE
+  );
 
-    const insertData = {
-      id: undefined,
-      name: String(formData.get('name')),
-      parentId: String(formData.get('parentId')),
-      image: <MapFile | undefined>undefined
-    };
+  const insertData = {
+    id: undefined,
+    name: String(formData.get('name')),
+    parentId: String(formData.get('parentId')),
+    image: <MapFile | undefined>undefined
+  };
 
-    if (insertData.name.length === 0) {
-      error.fields.name = 'required';
-    }
-
-    if (Object.keys(error.fields).length > 0) {
-      return json({error});
-    }
-
-    insertData.image = await uploadService.saveFile(
-      ASSET_PATH.CATEGORIES,
-      formData.get('image') as File
-    );
-
-    if (isNewItem) {
-      await categoryService.create(insertData);
-    } else {
-      const id = String(formData.get('id'));
-
-      if (!id) {
-        throw new Error('Could not edit the record');
-      }
-
-      await categoryService.update(Object.assign(insertData, {id}));
-    }
-
-    return redirect(ADMIN_ROUTE_PATH.CATEGORY_LIST);
-  } catch (e) {
-    console.error('Failed on save the document', e);
-    error.message = e.message;
-    return json({error}, {status: 404});
+  if (insertData.name.length === 0) {
+    error.fields.name = 'required';
   }
+
+  if (Object.keys(error.fields).length > 0) {
+    return json({error});
+  }
+
+  insertData.image = await fileService.save(
+    ASSET_PATH.CATEGORIES,
+    formData.get('image') as File
+  );
+
+  if (isNewItem) {
+    await categoryService.create(insertData);
+  } else {
+    const id = String(formData.get('id'));
+
+    if (!id) {
+      json({error: new Error('Could not edit the record')}, {status: 500});
+    }
+
+    await categoryService.update(Object.assign(insertData, {id}));
+  }
+
+  fileService.deleteAll(formData.getAll('toDelete') as string[]);
+
+  // return json({error: 'test'});
+  return redirect(ADMIN_ROUTE_PATH.CATEGORY_LIST);
 }
 
 // this still unused. Waiting for refactor
@@ -228,7 +236,7 @@ export async function actionAdminCategoriesUpdate({
     }
 
     // uploadImages
-    insertData.image = await uploadService.saveFile(
+    insertData.image = await fileService.save(
       ASSET_PATH.CATEGORIES,
       formData.get('image') as File
     );

@@ -27,21 +27,18 @@ h4,
 h5,
 h6 {
     font-weight: 500;
-    line-height: 1.5;
     text-wrap: balance;
 }
 
 body {
     min-height: 100dvh;
     margin: 0;
-    padding: 0;
 }
 
 p,
 input,
 select,
 textarea {
-    line-height: 1.5;
     max-width: 100%;
 }
 
@@ -52,8 +49,8 @@ textarea {
 ul,
 ol,
 p {
-    margin-top: 1.8rem;
-    margin-bottom: 1.8rem;
+    /* margin-top: 1.8rem;
+    margin-bottom: 1.8rem; */
     text-wrap: pretty;
 }
 
@@ -80,16 +77,11 @@ video,
 svg {
     display: inline-block;
     height: auto;
-}
-
-img,
-video {
     max-width: 100%;
-    height: auto
 }
 
 img {
-    width: 100%;
+    display: block;
 }
 
 figure {

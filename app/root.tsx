@@ -12,7 +12,9 @@ import {
   useNavigate,
 } from "@remix-run/react";
 import { SITE_NAME } from "~/constants";
+import resetStyles from "~/styles/helpers/reset.css";
 import globalStyles from "~/styles/global.css";
+import tailwindStyles from "~/styles/tailwind.css";
 
 import Header from "~/components/header/Header";
 import Button from "./components/button/Button";
@@ -38,11 +40,19 @@ export const scripts: LinksFunction = () => [
 ];
 
 export const links: LinksFunction = () => [
-  ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
+  {
+    rel: 'stylesheet',
+    href: resetStyles
+  },
+  {
+    rel: "stylesheet",
+    href: tailwindStyles
+  },
   {
     rel: "stylesheet",
     href: globalStyles,
-  }
+  },
+  ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
 ];
 
 export default function App() {

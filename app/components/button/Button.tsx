@@ -39,12 +39,6 @@ const getClassName = ({ color = "default", size = "md", variant = "solid", disab
         className);
 }
 
-export function LinkState(props: RemixLinkProps) {
-
-
-    return <Link {...props} state={state} />
-}
-
 type ButtonOrRemixLink = ButtonProps | LinkProps
 export function Button(props: ButtonOrRemixLink) {
     const { className, color, size, variant, ...rest } = props;

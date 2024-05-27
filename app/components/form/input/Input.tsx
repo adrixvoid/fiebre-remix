@@ -1,6 +1,6 @@
 import InputCheckbox, { InputCheckboxProps } from "./InputCheckbox";
 import InputText, { InputTextProps } from "./InputText";
-import InputFilePreview from "~/components/form/file/InputFilePreview";
+import InputFilePreview from "~/components/form/input-file-preview/InputFilePreview";
 
 export type InputProps = InputCheckboxProps | InputTextProps | React.InputHTMLAttributes<HTMLInputElement> & { label?: string };
 

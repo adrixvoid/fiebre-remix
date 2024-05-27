@@ -1,7 +1,7 @@
 import type { LinksFunction, LoaderFunction } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 
-import { productService } from "~/server/models/products.model"
+import { productService } from "~/server/services/products.service"
 import type { Product } from "~/types/global.type"
 
 import { ROUTE_PATH } from "~/constants";

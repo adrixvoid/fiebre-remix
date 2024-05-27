@@ -2,7 +2,7 @@ import type { LoaderFunctionArgs, ActionFunctionArgs, LinksFunction } from "@rem
 import { useFetcher, useLoaderData, useRouteError } from "@remix-run/react"
 import { json } from "@remix-run/node";
 
-import { getProduct } from "~/server/models/products.model"
+import { getProduct } from "~/server/services/products.service"
 import type { Product } from "~/types/global.type";
 
 import mdStyles from "~/styles/markdown.css";
@@ -91,7 +91,7 @@ function ProductRoute() {
                             </div>
                             <div className="product-images">
                                 {images?.map((image) => (
-                                    <img key={image.fileName} src={image.fileName} alt={title} />
+                                    <img key={image.fileName} src={image.url} alt={title} />
                                 ))}
                             </div>
                         </div>

@@ -1,5 +1,6 @@
 import type { LinksFunction, LoaderFunction, MetaFunction } from "@remix-run/node";
 import { Link, NavLink, Outlet } from "@remix-run/react";
+import cx from "classnames";
 
 import { SITE_NAME } from "~/constants";
 
@@ -31,11 +32,13 @@ export default function Admin() {
     <div className="layout">
       <header className={headerStyles.header}>
         <div className={`${headerStyles.headerContainer} container`}>
-          <Link to="/admin" className={headerStyles.logo}>
-            <span className="sr-only">{SITE_NAME}</span>
+          <span className="sr-only">{SITE_NAME}</span>
+          <div className={cx(headerStyles.logo, 'flex')}>
             <Logo aria-hidden />
-            <span>Admin</span>
-          </Link>
+            <Link to="/admin">
+              <span className="ml-1">Admin</span>
+            </Link>
+          </div>
           <nav className={headerStyles.headerNavigation}>
             <NavLink to="/admin/categories">Categories</NavLink>
             <NavLink to="/admin/content/create">Content</NavLink>

@@ -5,5 +5,7 @@ export default {
   // assetsBuildDirectory: "public/build",
   // publicPath: "/build/",
   // serverBuildPath: "build/index.js",
-  devServerPort: 8002
+  devServerPort: 8002,
+  tailwind: true,
+  postcss: true,
 };

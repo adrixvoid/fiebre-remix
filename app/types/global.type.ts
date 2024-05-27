@@ -1,3 +1,5 @@
+export type ErrorResponse = {[key: string]: string};
+
 export interface Breadcrumb {
   name: string;
   path: string;
@@ -11,13 +13,13 @@ export type MapFile = {
   directory: string;
 };
 
-export interface Image extends MapFile {}
+export interface MapImage extends MapFile {}
 
 export interface Category {
   _id: string;
   id?: string;
   name: string;
-  image?: Image;
+  image?: MapImage;
   slug: string;
   path: string;
   parentId?: string;
@@ -35,10 +37,10 @@ export type Product = {
   priceInCents: number;
   stock?: number;
   priceHidden?: boolean;
-  preview?: Image;
-  images?: Image[] | [];
+  preview?: MapImage;
+  images?: MapImage[] | [];
   downloadUrl?: string;
-  categories?: Category[];
+  categories?: string[];
   tags?: string[];
   content?: string;
   published?: boolean;

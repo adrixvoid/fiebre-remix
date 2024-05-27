@@ -45,4 +45,4 @@ schema.pre('save', {document: true}, async function (next) {
   next();
 });
 
-export default mongoose.model<Product>('Product', schema);
+export default mongoose.model('Product', schema);

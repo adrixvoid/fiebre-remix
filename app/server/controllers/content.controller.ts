@@ -1,11 +1,11 @@
 import {type ActionFunctionArgs, redirect} from '@remix-run/node';
 
 import markdownService from '~/server/services/markdown.service';
-import {productService} from '~/server/models/products.model';
+import {productService} from '~/server/services/products.service';
 import {slugify} from '~/utils/url';
 import {ASSET_PATH} from '~/constants';
-import categoryModel from '~/server/models/schema/category.schema';
-import {uploadService} from '../services/upload.service';
+import categoryModel from '~/server/schema/category.schema';
+import {fileService} from '../services/file.service';
 import path from 'path';
 
 const prepareInsertProduct = (formData: {[k: string]: FormDataEntryValue}) => ({
@@ -42,14 +42,8 @@ export async function contentAction({request}: ActionFunctionArgs) {
     type: ''
   };
 
-  const preview = await uploadService.saveFile(
-    ASSET_PATH.CONTENT,
-    formData.preview
-  );
-  const images = await uploadService.saveFiles(
-    ASSET_PATH.CONTENT,
-    formData.images
-  );
+  const preview = await fileService.save(ASSET_PATH.CONTENT, formData.preview);
+  const images = await fileService.saveAll(ASSET_PATH.CONTENT, formData.images);
 
   Object.assign(insertData, {
     preview,

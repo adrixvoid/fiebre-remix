@@ -128,7 +128,6 @@ export async function getMarkdownDocument(
 export async function getMarkdowns(
   type: ContentType
 ): Promise<MarkdownDocument[]> {
-  console.log('getMarkdowns', type);
   try {
     const directory = await getDirectoryPath(type);
     const fileNames = await fs.readdir(directory);
@@ -151,7 +150,6 @@ export async function readMarkdownDocument(
   fileName: string
 ): Promise<MarkdownDocument | undefined> {
   try {
-    console.log('readMarkdownDocument', type, fileName);
     const directory = await getDirectoryPath(type);
     const markdownDocument = await getMarkdownDocument(
       path.join(directory, fileName)

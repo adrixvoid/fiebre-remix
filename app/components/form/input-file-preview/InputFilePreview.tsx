@@ -1,9 +1,12 @@
 import cx from 'classnames';
 
-import useFilePreview, { FilePreview } from './useFilePreview'
-import Image from "~/components/Image";
+import useFilePreview from './useFilePreview'
+import { FilePreview } from './InputFilePreview.types';
 import styles from "./InputFilePreview.module.css";
-import Button from '~/components/button/Button';
+
+import ImageBlob from "./ImageBlob";
+import { IconButton } from '~/components/button/Button';
+import { IconTrash } from '~/components/svg';
 
 type ComponentType<T> =
     | React.JSXElementConstructor<T>
@@ -18,33 +21,6 @@ export interface InputFilePreviewProps
     component?: ComponentType<any>;
 }
 
-export function PreviewList({ preview, onRemove }: {
-    onRemove: (fileName: string) => void,
-    preview: FilePreview[]
-}) {
-    if (preview.length > 0) {
-        return (
-            <ul className={styles.previewList}>
-                {preview.map((file: FilePreview) => (
-                    <li key={file.name} className={cx(styles.item, "box")}>
-                        {file.type.match("image") && (
-                            <span className="block">
-                                <Image className={styles.image} name={file.name} url={file.url} />
-                            </span>
-                        )}
-                        <div>
-                            <span className={`${styles.badge} text-small`}>{file.name}</span>
-                        </div>
-                        <Button type="button" color="danger" onClick={() => onRemove(file.name)}>Delete</Button>
-                    </li>
-                ))}
-            </ul>
-        );
-    }
-
-    return null;
-}
-
 export default function InputFilePreview({
     id = "file",
     name = "file",
@@ -57,7 +33,7 @@ export default function InputFilePreview({
     onKeyDown,
     ...rest
 }: InputFilePreviewProps) {
-    let { preview, removePreview, onClickHandler, onChangeHandler, onKeyDownHandler } = useFilePreview({ multiple });
+    let { previewList, removePreview, onSaveBuffer, onCreatePreview } = useFilePreview({ multiple });
 
     const injectedProps = {
         tabIndex: 0,
@@ -66,15 +42,15 @@ export default function InputFilePreview({
         multiple,
         ...rest,
         onClick: (event: React.MouseEvent<HTMLInputElement>) => {
-            onClickHandler(event)
+            onSaveBuffer(event)
             onClick?.(event);
         },
         onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
-            onChangeHandler(event)
+            onCreatePreview(event)
             onChange?.(event);
         },
         onKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => {
-            onKeyDownHandler(event)
+            onSaveBuffer(event)
             onKeyDown?.(event);
         },
         type: "file",
@@ -82,9 +58,25 @@ export default function InputFilePreview({
 
     return (
         <>
-            <PreviewList onRemove={removePreview} preview={preview} />
+            {(previewList.length > 0) &&
+                <ul className={styles.previewList}>
+                    {previewList.map((file: FilePreview) => (
+                        <li key={file.name} className={cx(styles.item, "box paper")}>
+                            {file.type.match("image") && (
+                                <span className="flex">
+                                    <ImageBlob className={styles.image} name={file.name} src={file.src} />
+                                </span>
+                            )}
+                            <div>
+                                <span className={`${styles.badge} text-sm`}>{file.name}</span>
+                            </div>
+                            <IconButton type="button" color="danger" size='sm' onClick={() => removePreview(file.name)} icon={<IconTrash />}>Delete</IconButton>
+                        </li>
+                    ))}
+                </ul>
+            }
             <label role="button"
-                className={cx(styles.label, { "mt-1": preview.length > 0 })}
+                className={cx(styles.label, { "mt-2": previewList.length > 0 })}
                 htmlFor={injectedProps.id}
                 {...labelProps}
             >
@@ -95,7 +87,7 @@ export default function InputFilePreview({
                     </span>
                 </span>
             </label>
-            {Boolean(error) && <p className="box color-danger">{error}</p>}
+            {Boolean(error) && <p className="box paper color-danger">{error}</p>}
         </>
     );
 }

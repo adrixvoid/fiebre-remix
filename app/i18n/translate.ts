@@ -11,30 +11,51 @@ export const translations: Translations = {
     ADD_TO_CART: 'Add to cart',
     INQUIRE: 'Inquire',
     CATEGORY: {
+      LIST: 'List',
       ADD: 'Add',
       EMPTY: "There isn't any category associated",
       NEW: 'New Category',
-      TABLE: {
-        ACTIONS: 'Actions'
-      }
+      CATEGORIES: 'Categories',
+      SUBCATEGORY: 'Subcategory'
     },
     PRODUCT: {
+      PRODUCT: 'Product',
+      PRODUCTS: 'Products',
       NEW: 'New Product'
+    },
+    DATA: {
+      EMPTY: 'Empty'
+    },
+    TABLE: {
+      IMAGE: 'Image',
+      ACTIONS: 'Actions'
     }
   },
   'es-AR': {
     ADD_TO_CART: 'Agregar al carrito',
     INQUIRE: 'Consultar',
     CATEGORY: {
+      LIST: 'Lista',
       ADD: 'Agregar',
       EMPTY: 'No hay subcategorías agregadas',
       NEW: 'Nueva Categoría',
+      CATEGORIES: 'Categorías',
+      SUBCATEGORY: 'Subcategoría',
       TABLE: {
         ACTIONS: 'Acciones'
       }
     },
     PRODUCT: {
+      PRODUCT: 'Producto',
+      PRODUCTS: 'Productos',
       NEW: 'Nuevo Producto'
+    },
+    DATA: {
+      EMPTY: 'Vacío'
+    },
+    TABLE: {
+      IMAGE: 'Imagen',
+      ACTIONS: 'Acciones'
     }
   }
 };
