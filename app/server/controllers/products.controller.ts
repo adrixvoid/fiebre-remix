@@ -1,10 +1,9 @@
 import {
   ActionFunctionArgs,
+  json,
   LoaderFunctionArgs,
   redirect
 } from '@remix-run/node';
-import {z} from 'zod';
-import {withZod} from '@remix-validated-form/with-zod';
 import {validationError} from 'remix-validated-form';
 
 import productModel from '~/server/schema/product.schema';
@@ -12,123 +11,75 @@ import categoryModel from '~/server/schema/category.schema';
 import {fileService} from '../services/file.service';
 import {ADMIN_ROUTE_PATH, ASSET_PATH} from '~/constants';
 import {productService} from '../services/products.service';
-import {Product} from '~/types/global.type';
+import {Category, Product} from '~/types/global.type';
+import {productValidator} from '../zod/products.zod';
 
 export const PRODUCT_PARAMS = {
+  PRODUCT_ID: 'id',
   CATEGORY_ID: 'categoryId'
 };
 
 // ----- loaders
+export interface LoaderAdminProduct {
+  category?: Category;
+  categories?: Category[];
+  product?: Product | null;
+  referrer?: string | null;
+}
 
-export async function loaderAdminProductCreate({
+export async function loaderAdminProduct({
   request,
   params
-}: LoaderFunctionArgs) {
+}: LoaderFunctionArgs): Promise<LoaderAdminProduct> {
   const url = new URL(request.url);
+  const productId = params[PRODUCT_PARAMS.PRODUCT_ID];
   const categoryId = url.searchParams.get(PRODUCT_PARAMS.CATEGORY_ID);
+  const referrer = url.searchParams.get('referrer');
 
-  let category = null;
-  if (Boolean(categoryId)) {
-    category = await categoryModel.findOne({_id: categoryId});
+  let product = null;
+  if (Boolean(productId)) {
+    product = await productModel.findOne({_id: productId});
   }
-  // const referrer = request.headers.get('referer') || '';
-  // const list = await productModel.find({
-  //   parentId: null
-  // });
 
-  return {category};
+  const categories = await categoryModel.find();
+
+  const toFilterId = product?.categories?.[0] || categoryId;
+  let category = categories.find((c) => c._id.toJSON() === toFilterId);
+
+  return {category, product, categories, referrer};
 }
 
 export async function loaderAdminProductList({params}: LoaderFunctionArgs) {
-  const list = await productModel.find();
-  return {list};
+  const products = await productModel.find();
+  return {products};
 }
 
 // ----- actions
 
-const MAX_FILE_SIZE = 1024 * 1024 * 5;
-const zImageSchema = z
-  .any()
-  // .refine((files) => files?.[0]?.size > 0, 'Image required')
-  .refine(
-    (files) =>
-      files?.[0]?.size > 0 ? files?.[0]?.size <= MAX_FILE_SIZE : true,
-    `Max image size is 5MB.`
-  )
-  .refine(
-    (files) =>
-      files?.[0]?.size > 0 ? files?.[0]?.type.startsWith('image/') : true,
-    'Only .jpg, .jpeg, .png and .webp formats are supported.'
-  );
-
-export const adminProductCreateSchema = z
-  .object({
-    title: z.string().min(1),
-    description: z.string(),
-    priceHidden: z.coerce.boolean(),
-    priceInCents: z.coerce.number().int().default(0),
-    productType: z.union([
-      z.literal('physical'),
-      z.literal('link'),
-      z.literal('file')
-    ]),
-    stock: z.coerce.number().int().optional(),
-    downloadUrl: z.string().url().optional(),
-    file: z.instanceof(File).optional(),
-    images: zImageSchema.optional(),
-    tags: z.string().optional(),
-    slug: z.string().optional(),
-    draft: z.string().transform((value) => value === 'draft'),
-    categoryId: z.string().optional(),
-    referrer: z.string().optional()
-  })
-  .refine(
-    (data) =>
-      !data.priceHidden && data.priceInCents ? data.priceInCents > 0 : true,
-    {
-      message: 'Price must be greater than 0 when priceHidden is false',
-      path: ['price']
-    }
-  )
-  .refine(
-    (data) =>
-      data.productType === 'physical' && data.stock ? data.stock >= 0 : true,
-    {
-      message: 'Stock have at least 1 product',
-      path: ['stock', 'productType']
-    }
-  )
-  .refine(
-    (data) => (data.productType === 'link' ? data.downloadUrl !== '' : true),
-    {
-      message: 'Should have a valid URL',
-      path: ['downloadUrl', 'productType']
-    }
-  )
-  .refine(
-    (data) => (data.productType === 'file' ? Boolean(data?.file?.size) : true),
-    {
-      message: 'File Required',
-      path: ['file', 'productType']
-    }
-  );
-
-export const adminProductCreateValidator = withZod(adminProductCreateSchema);
-
-export async function actionAdminProductCreate({request}: ActionFunctionArgs) {
+export async function actionAdminProduct({request}: ActionFunctionArgs) {
   const formData = await request.formData();
-  const validation = await adminProductCreateValidator.validate(formData);
+  const validation = await productValidator.validate(formData);
 
   if (validation.error) {
     return validationError(validation.error);
   }
 
-  let {referrer, categoryId, ...data} = validation.data;
+  let {referrer, toDelete, id, categoryId, ...data} = validation.data;
 
-  let images = null;
-  if (data.images) {
-    images = await fileService.saveAll(ASSET_PATH.PRODUCTS, data.images);
+  let original = null;
+  if (id) {
+    original = await productModel.findById(id);
   }
+
+  let images = original && Boolean(original?.images) ? original.images : [];
+  if (data.images) {
+    const newImages = await fileService.saveAll(
+      ASSET_PATH.PRODUCTS,
+      data.images
+    );
+    images = images.concat(newImages);
+  }
+  images = images.filter((img) => !toDelete.includes(img.filePath));
 
   let file = null;
   if (data.file) {
@@ -142,14 +93,35 @@ export async function actionAdminProductCreate({request}: ActionFunctionArgs) {
 
   const toSave = Object.assign(data, {categories}, {images}, {file});
 
-  await productService.create(toSave);
+  if (id) {
+    await productService.update(toSave, id);
+  } else {
+    await productService.create(toSave);
+  }
 
-  return redirect(String(referrer) || ADMIN_ROUTE_PATH.CATEGORY_LIST);
+  fileService.deleteAll(toDelete as string[]);
+
+  return redirect(referrer || ADMIN_ROUTE_PATH.PRODUCT_LIST);
 }
 
-// export async function actionAdminProductCreate({request}: ActionFunctionArgs) {
+export async function actionAdminProductDelete({request}: ActionFunctionArgs) {
+  let formData = await request.formData();
+  let id = String(formData.get('id'));
+
+  if (!id) {
+    return json({ok: false}, {status: 404});
+  }
+
+  const deleted = await productModel.findOneAndDelete({
+    _id: id
+  });
+
+  return json({ok: true, category: deleted});
+}
+
+// export async function actionAdminProduct({request}: ActionFunctionArgs) {
 //   const formData = await request.formData();
-//   const validation = await adminProductCreateValidator.validate(formData);
+//   const validation = await productValidator.validate(formData);
 // const result = adminProductCreateSchema.safeParse(
 //   Object.fromEntries(formData)
 // );

@@ -1,10 +1,15 @@
-import cx from 'classnames';
-import { MapImage } from "~/types/global.type";
-import { IconButton } from '~/components/button/Button';
+import { useField } from "remix-validated-form";
 import { useState } from 'react';
-import styles from "~/components/form/input-file-preview/InputFilePreview.module.css";
-import { IconTrash } from '~/components/svg';
 import { atom, useAtom } from 'jotai';
+import { Trash2 } from 'lucide-react';
+import cx from 'clsx';
+
+import { t } from '~/i18n/translate';
+import { MapImage } from "~/types/global.type";
+
+import { Button } from '~/components/ui/button';
+import styles from "./InputFilePreview.module.css";
+import InputFilePreview, { InputFilePreviewProps } from './InputFilePreview';
 
 const DEFAULT_INPUT_NAME = 'toDelete';
 
@@ -18,48 +23,51 @@ const showUploadAtom = atom(false);
 
 export function UploadedImagesItem({ source, onDelete, checked = false }: UploadedImagesItem) {
   const [isDeleteChecked, setDelete] = useState(checked)
+  const field = useField(DEFAULT_INPUT_NAME);
+
   return (
     <div className={cx(styles.item, "box paper", { [styles.imageDisabled]: isDeleteChecked })}>
       <div>
+        <input name={DEFAULT_INPUT_NAME} defaultChecked={isDeleteChecked} value={source.filePath} {...field.getInputProps({ type: "checkbox", value: source.filePath })} />
         <span style={{ display: "none" }}>
-          <input type="checkbox" name={DEFAULT_INPUT_NAME} value={source.filePath} defaultChecked={isDeleteChecked} />
         </span>
         <img className={cx(styles.image, {
           [styles.imageDisabled]: isDeleteChecked
-        })} src={source.url} />
+        })} src={source?.url} />
       </div>
       <div>
         <span className={cx(`${styles.badge} text-sm`, {
           'line-through': isDeleteChecked
-        })}>{source.fileName}</span>
+        })}>{source?.fileName}</span>
       </div>
       <div>
-        <IconButton
+        <Button
+          aria-label="delete"
+          type="button"
+          variant={isDeleteChecked ? "default" : "destructive"}
+          size='sm'
           onClick={(event) => {
             event.preventDefault();
             setDelete(!isDeleteChecked)
             onDelete?.(!isDeleteChecked, source)
           }}
-          aria-label="delete"
-          size='sm'
-          color={isDeleteChecked ? "primary" : "danger"}
-          icon={<IconTrash />}
         >
-          {isDeleteChecked ? "Restore" : "Delete"}
-        </IconButton>
+          <Trash2 className="h-5 w-5" />
+          {isDeleteChecked ? "Restore" : t('GLOBAL.DELETE')}
+        </Button>
       </div>
     </div>
   );
 }
 
-type UploadedImages = {
+type UploadedImages = InputFilePreviewProps & {
   source: MapImage[] | MapImage | undefined;
-  className: string;
+  className?: string;
   multiple?: boolean;
   children?: React.ReactNode;
 }
 
-export default function UploadedImages({ className, source, multiple, children }: UploadedImages) {
+export default function UploadedImages({ className, source, multiple, ...props }: UploadedImages) {
   const [isDeleteChecked, setDelete] = useAtom(showUploadAtom)
   const showUploadInput = (multiple || isDeleteChecked || !source);
   let imageComponent = null;
@@ -76,9 +84,7 @@ export default function UploadedImages({ className, source, multiple, children }
         </ul>
       </>
     );
-  }
-
-  if (source) {
+  } else if (source) {
     imageComponent = (<UploadedImagesItem onDelete={(isChecked) => setDelete(isChecked)} source={source as MapImage} />)
   }
 
@@ -87,7 +93,7 @@ export default function UploadedImages({ className, source, multiple, children }
       <div className={cx(styles.previewList, className)}>
         {imageComponent}
       </div>
-      {showUploadInput && children}
+      {showUploadInput && <InputFilePreview type="file" multiple={multiple} {...props} />}
     </>
   )
 }

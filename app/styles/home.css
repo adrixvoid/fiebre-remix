@@ -26,7 +26,6 @@ body {
 }
 
 .hero-logo {
-    fill: var(--color-brand);
     width: 50vw;
     max-width: 500px;
     height: auto;

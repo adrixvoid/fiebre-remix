@@ -2,7 +2,7 @@ import {type ActionFunctionArgs, redirect} from '@remix-run/node';
 
 import markdownService from '~/server/services/markdown.service';
 import {productService} from '~/server/services/products.service';
-import {slugify} from '~/utils/url';
+import {slugify} from '~/lib/url';
 import {ASSET_PATH} from '~/constants';
 import categoryModel from '~/server/schema/category.schema';
 import {fileService} from '../services/file.service';

@@ -12,23 +12,26 @@ export const translations: Translations = {
     INQUIRE: 'Inquire',
     CATEGORY: {
       LIST: 'List',
-      ADD: 'Add',
       EMPTY: "There isn't any category associated",
-      NEW: 'New Category',
       CATEGORIES: 'Categories',
       SUBCATEGORY: 'Subcategory'
     },
     PRODUCT: {
+      NEW: 'New Product',
       PRODUCT: 'Product',
-      PRODUCTS: 'Products',
-      NEW: 'New Product'
+      PRODUCTS: 'Products'
     },
     DATA: {
       EMPTY: 'Empty'
     },
-    TABLE: {
+    GLOBAL: {
+      ACTIONS: 'Actions',
+      CREATE: 'Create',
+      DELETE: 'Delete',
+      EDIT: 'Edit',
+      EMPTY: 'Empty',
       IMAGE: 'Image',
-      ACTIONS: 'Actions'
+      NEW: 'New'
     }
   },
   'es-AR': {
@@ -36,26 +39,24 @@ export const translations: Translations = {
     INQUIRE: 'Consultar',
     CATEGORY: {
       LIST: 'Lista',
-      ADD: 'Agregar',
       EMPTY: 'No hay subcategorías agregadas',
       NEW: 'Nueva Categoría',
       CATEGORIES: 'Categorías',
-      SUBCATEGORY: 'Subcategoría',
-      TABLE: {
-        ACTIONS: 'Acciones'
-      }
+      SUBCATEGORY: 'Subcategoría'
     },
     PRODUCT: {
+      NEW: 'Nuevo Producto',
       PRODUCT: 'Producto',
-      PRODUCTS: 'Productos',
-      NEW: 'Nuevo Producto'
+      PRODUCTS: 'Productos'
     },
-    DATA: {
-      EMPTY: 'Vacío'
-    },
-    TABLE: {
+    GLOBAL: {
+      ACTIONS: 'Acciones',
+      CREATE: 'Crear',
+      DELETE: 'Eliminar',
+      EDIT: 'Editar',
+      EMPTY: 'Vacío',
       IMAGE: 'Imagen',
-      ACTIONS: 'Acciones'
+      NEW: 'Nuevo'
     }
   }
 };

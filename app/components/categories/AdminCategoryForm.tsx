@@ -1,5 +1,5 @@
 import { Form, useActionData, useLoaderData, useLocation, useNavigation, useSearchParams } from "@remix-run/react";
-import cx from "classnames";
+import cx from "clsx";
 
 import InputFilePreview from "~/components/form/input-file-preview/InputFilePreview";
 import Button from "~/components/button/Button";
@@ -30,7 +30,7 @@ export default function AdminCategoryForm() {
 
     return (
         <div className="container">
-            <h1>{Boolean(category) ? 'Edit Category' : 'New Category'}</h1>
+            <h1 className="h1 text-2xl font-600 tracking-tight">{Boolean(category) ? 'Edit Category' : 'New Category'}</h1>
             <nav className="navigation-back">
                 <a href="#" onClick={() => history.back()}>Volver</a>
             </nav>
@@ -61,9 +61,7 @@ export default function AdminCategoryForm() {
                 </fieldset>
 
                 <fieldset>
-                    <UploadedImages className='mb-2' source={category?.image}>
-                        <InputFilePreview id="image" name="image" label="Select image" />
-                    </UploadedImages>
+                    <UploadedImages id="image" name="image" label="Select image" className='mb-2' source={category?.image} />
                 </fieldset>
 
                 <fieldset>

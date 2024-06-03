@@ -29,14 +29,18 @@ export const fileService = {
 
     if (files instanceof File) {
       const image = await fileService.save(directory, files);
-      result.push(image);
+      if (image) {
+        result.push(image);
+      }
       return result;
     }
 
     if (files instanceof Array) {
       for (const file of files) {
         const saved = await fileService.save(directory, file);
-        result.push(saved);
+        if (saved) {
+          result.push(saved);
+        }
       }
     }
 

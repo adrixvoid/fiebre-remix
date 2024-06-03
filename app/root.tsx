@@ -15,8 +15,6 @@ import { SITE_NAME } from "~/constants";
 import resetStyles from "~/styles/helpers/reset.css";
 import globalStyles from "~/styles/global.css";
 import tailwindStyles from "~/styles/tailwind.css";
-
-import Header from "~/components/header/Header";
 import Button from "./components/button/Button";
 
 export const meta = () => [
@@ -107,7 +105,6 @@ export function ErrorBoundary() {
       <body>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" media="all" />
         <div className="layout">
-          <Header />
           <main className="main">
             <div className="container">
               <h1>{errorTitle}</h1>

@@ -10,8 +10,8 @@ import {ADMIN_ROUTE_PATH, ASSET_PATH} from '~/constants';
 import categoryModel, {CategoryDocument} from '~/server/schema/category.schema';
 import productModel from '~/server/schema/product.schema';
 
-import {sanitizeUrl} from '~/utils/sanitizeUrl';
-import {getBreadcrumb} from '~/utils/breadcrumb';
+import {sanitizeUrl} from '~/lib/sanitizeUrl';
+import {getBreadcrumb} from '~/lib/breadcrumb';
 import {Breadcrumb, Category, MapFile, Product} from '~/types/global.type';
 import {fileService} from '../services/file.service';
 
@@ -62,7 +62,7 @@ export async function loaderAdminCategoriesList({
   });
   // const products = await productModel.find({$where:'this.categories.length>0'});
 
-  return {list, breadcrumb: undefined, category: undefined, products};
+  return {list, breadcrumb: [], category: undefined, products};
 }
 
 export async function getSubcategory(

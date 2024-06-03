@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import {Category} from '~/types/global.type';
-import {slugify, createPath} from '~/utils/url';
+import {slugify, createPath} from '~/lib/url';
 
 export interface CategoryDocument extends Category {
   _id: mongoose.Document['_id'];

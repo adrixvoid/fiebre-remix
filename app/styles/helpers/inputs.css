@@ -2,55 +2,25 @@ label[for] {
     cursor: pointer;
 }
 
-.input,
 input,
 textarea,
 select {
-    color: var(--input-color);
-    background-color: var(--input-bg);
-    border: 1px solid var(--input-border);
+    background-color: hsl(var(--input));
+    border-width: 1px;
+    border-style: solid;
+    border-color: hsl(var(--border-input));
+    border-radius: calc(var(--radius) - 4px);
     transition: all 0.05s ease-in-out;
     will-change: border-color;
-    padding: calc(var(--unit) / 2) var(--unit);
+    padding: 0.2rem 0.4rem;
     box-sizing: border-box;
     display: inline-block;
 }
 
-.input:hover,
 input:hover,
 textarea:hover,
 select:hover {
-    background-color: var(--input-bg-hover);
-}
-
-.input:focus,
-input:focus,
-textarea:focus,
-select:focus {
-    background-color: var(--input-bg-focus);
-}
-
-.input,
-input[type="text"],
-input[type="email"],
-input[type="number"],
-input[type="checkbox"],
-input[type="radio"],
-textarea,
-select {
-    color: var(--input-color);
-}
-
-.input,
-input:not([type="submit"]),
-textarea {
-    box-shadow: var(--input-shadow);
-}
-
-.input:disabled,
-input:disabled:not([type="submit"]),
-textarea:disabled {
-    box-shadow: var(--input-shadow-disabled);
+    background-color: hsl(var(--accent));
 }
 
 input:-webkit-autofill,
@@ -105,7 +75,7 @@ input[type="checkbox"]:disabled,
 input[type="radio"]:disabled {
     background-color: var(--input-bg-disabled);
     color: var(--input-color-disabled);
-    border-color: var(--input-border-disabled);
+    border-color: var(--border-input-disabled);
 }
 
 input[type="checkbox"]:checked:disabled,
@@ -144,7 +114,7 @@ textarea:disabled,
 select:disabled {
     background-color: var(--input-bg-disabled);
     color: var(--input-color-disabled);
-    border-color: var(--input-border-disabled);
+    border-color: var(--border-input-disabled);
     cursor: not-allowed;
 }
 
@@ -169,12 +139,12 @@ select:disabled::placeholder {
 input[type="submit"] {
     border: none;
     cursor: pointer;
-    background-color: var(--button-bg);
+    background-color: hsl(var(--background));
     color: var(--button-color);
 }
 
 input[type="submit"]:hover {
-    background-color: var(--button-bg-hover);
+    background-color: hsl(var(--accent));
     color: var(--button-color-hover);
 }
 
@@ -185,15 +155,11 @@ input[type="submit"]:disabled {
 }
 
 input[type="submit"]:disabled:hover {
-    background-color: var(--button-bg);
+    background-color: hsl(var(--background));
 }
 
 input[type="submit"]:disabled:focus {
     outline: none;
-}
-
-fieldset {
-    border: 1px solid var(--medium-contrast)
 }
 
 fieldset label:has(input) {
@@ -213,7 +179,7 @@ input.error {
 
 input[type=file]::file-selector-button {
     padding: .8rem 2rem;
-    background-color: var(--button-bg);
+    background-color: hsl(var(--background));
     color: var(--button-color);
     fill: var(--button-color);
     padding: .4em .4em;
@@ -222,7 +188,7 @@ input[type=file]::file-selector-button {
 }
 
 input[type=file]::file-selector-button:hover {
-    background-color: var(--button-bg-hover);
+    background-color: hsl(var(--accent));
     color: var(--button-color-hover);
     fill: var(--button-color-hover);
 }

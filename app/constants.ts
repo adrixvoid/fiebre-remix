@@ -30,7 +30,7 @@ export const ADMIN_ROUTE_PATH = {
   CATEGORY_CREATE: '/admin/categories/create',
   CATEGORY_EDIT: '/admin/categories/edit',
   CATEGORY_DELETE: '/admin/categories/delete',
-  PRODUCT: '/admin/products',
-  PRODUCT_CREATE: '/admin/products/create',
+  PRODUCT_LIST: '/admin/products',
+  PRODUCT_FORM: '/admin/products/form',
   CONTENT_CREATE: '/admin/content/create'
 };

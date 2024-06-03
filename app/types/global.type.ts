@@ -3,7 +3,7 @@ export type ErrorResponse = {[key: string]: string};
 export interface Breadcrumb {
   name: string;
   path: string;
-  isActive: boolean;
+  isActive?: boolean;
 }
 
 export type MapFile = {
@@ -31,15 +31,17 @@ export interface Category {
 export type Product = {
   _id: string;
   title: string;
-  body?: string;
+  description?: string;
   slug: string;
   price?: number;
   priceInCents: number;
-  stock?: number;
   priceHidden?: boolean;
   preview?: MapImage;
-  images?: MapImage[] | [];
+  images: MapImage[];
+  productType: 'stock' | 'downloadUrl' | 'file';
+  stock?: number;
   downloadUrl?: string;
+  file?: MapFile;
   categories?: string[];
   tags?: string[];
   content?: string;

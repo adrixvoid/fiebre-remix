@@ -1,10 +1,9 @@
 import type { LoaderFunction, LinksFunction } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react"
 import { json } from "@remix-run/node";
 
 import markdownService from "~/server/services/markdown.service";
-import type { MarkdownDocument } from "~/server/utils/front-matter";
 import styles from "~/styles/markdown.css";
+import MarkdownPage from "./_public.post.$slug";
 
 export const links: LinksFunction = () => [
     {
@@ -16,29 +15,11 @@ export const links: LinksFunction = () => [
 export const loader: LoaderFunction = async ({ params }) => {
     try {
         const slug = params.slug as string;
-        return await markdownService.read('blog', slug);
+        const content = await markdownService.read('blog', slug);
+        return json({ content }, { status: 200 })
     } catch (error) {
-        throw json({ status: 404, message: 'Blog not found' }, { status: 404 });
+        throw json({ message: 'Blog not found' }, { status: 404 });
     }
 }
 
-export default function Post() {
-    const result = useLoaderData<MarkdownDocument>();
-    const { title, preview, body } = result;
-
-    return (
-        <div className="post">
-            <div className="container">
-                <div className="markdown-content">
-                    <div className="post-header">
-                        <h1>{title}</h1>
-                    </div>
-                    <div className="post-preview">
-                        <img src={preview} alt={title} aria-hidden />
-                    </div>
-                    <div dangerouslySetInnerHTML={{ __html: body || '' }} />
-                </div>
-            </div>
-        </div>
-    )
-}
+export default MarkdownPage

@@ -1,1 +1,1 @@
-{"app":{"server":{"utils":{},"modules":{"products":{},"categories":{}}},"content":{"blog":{}},"components":{"form":{"file":{}}}},"public":{"content":{"images":{}},"public":{"content":{"images":{"images":{}}}},"categories":{},"products":{}}}
+{"app":{"server":{"utils":{},"modules":{"products":{},"categories":{}}},"content":{"blog":{}},"components":{"form":{"file":{}},"categories":{}}},"public":{"content":{"images":{}},"public":{"content":{"images":{"images":{}}}},"categories":{},"products":{}}}

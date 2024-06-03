@@ -1,12 +1,13 @@
-import cx from 'classnames';
+import { Trash2 } from 'lucide-react';
+import cx from 'clsx';
+
+import { t } from '~/i18n/translate';
+import { Button } from '~/components/ui/button';
 
 import useFilePreview from './useFilePreview'
 import { FilePreview } from './InputFilePreview.types';
 import styles from "./InputFilePreview.module.css";
-
 import ImageBlob from "./ImageBlob";
-import { IconButton } from '~/components/button/Button';
-import { IconTrash } from '~/components/svg';
 
 type ComponentType<T> =
     | React.JSXElementConstructor<T>
@@ -70,13 +71,16 @@ export default function InputFilePreview({
                             <div>
                                 <span className={`${styles.badge} text-sm`}>{file.name}</span>
                             </div>
-                            <IconButton type="button" color="danger" size='sm' onClick={() => removePreview(file.name)} icon={<IconTrash />}>Delete</IconButton>
+                            <Button aria-label="delete" type="button" variant="destructive" size='sm' onClick={() => removePreview(file.name)}>
+                                <Trash2 strokeWidth={1.75} className="h-5 w-5" />
+                                {t('GLOBAL.DELETE')}
+                            </Button>
                         </li>
                     ))}
                 </ul>
             }
             <label role="button"
-                className={cx(styles.label, { "mt-2": previewList.length > 0 })}
+                className={cx("border text-button bg-input shadow-sm hover:bg-accent mt-2", styles.label, { "mt-2": previewList.length > 0 })}
                 htmlFor={injectedProps.id}
                 {...labelProps}
             >

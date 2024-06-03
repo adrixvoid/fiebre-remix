@@ -2,7 +2,7 @@ import { Form, useLoaderData, useNavigation } from "@remix-run/react";
 import { type LoaderFunction, type ActionFunction, type LinksFunction } from "@remix-run/node";
 import { Fragment } from "react";
 import { atom, useAtom } from 'jotai'
-import cx from "classnames";
+import cx from "clsx";
 
 import { CONTENT_TYPE } from "~/constants";
 import useToggle from "~/hooks/useToggle"
@@ -10,7 +10,7 @@ import { Category } from "~/types/global.type";
 
 import Button from "~/components/button/Button";
 import InputFilePreview from "~/components/form/input-file-preview/InputFilePreview";
-import { CategoriesCheckbox } from "~/components/form/checkbox/CheckboxCategory";
+import { CategoriesCheckbox } from "./checkbox/CheckboxCategory";
 import { contentAction, contentLoader } from "~/server/controllers/content.controller";
 
 const modalCategory = atom(false);

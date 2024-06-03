@@ -8,7 +8,7 @@ import {
   type ContentType
 } from '../utils/front-matter';
 import {parse} from '../utils/marked';
-import {slugify} from '~/utils/url';
+import {slugify} from '~/lib/url';
 
 export interface MarkdownPost extends MarkdownDocument {
   type: string;

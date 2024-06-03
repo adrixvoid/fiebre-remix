@@ -66,17 +66,11 @@
 .label {
     cursor: pointer;
     padding: 2rem 1rem;
-    border: 1em dashed var(--input-border);
-    color: var(--body-text);
+    border: 0.2em dashed hsl(var(--border));
     display: block;
     text-align: center;
     transition: background-color .1s ease-in-out;
     will-change: background-color;
-}
-
-.label:hover,
-.label:focus-within {
-    background-color: var(--input-bg-hover);
 }
 
 .label:focus,

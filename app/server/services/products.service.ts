@@ -1,18 +1,20 @@
 import type {Product} from '~/types/global.type';
 import productModel from '../schema/product.schema';
-import {slugify} from '~/utils/url';
+import {slugify} from '~/lib/url';
+import {toObjectId} from '../utils/mongoose';
 
 export const productService = {
   find: async () => {
     return productModel.find().lean();
   },
-  update: async (form: {[k: string]: FormDataEntryValue}) => {
-    const model = await productModel.findById(form.id);
-    if (!model) {
-      throw new Error('data not found');
-    }
-    await model.save();
-    return model;
+  update: async (data: {[k: string]: any}, id: string) => {
+    const doc = await productModel.findOneAndUpdate(
+      {_id: toObjectId(id)},
+      {$set: data},
+      {new: true}
+    );
+
+    return {success: true, record: doc};
   },
   delete: async (form: {[k: string]: FormDataEntryValue}) => {
     const model = await productModel.findById(form.id);
@@ -37,16 +39,9 @@ export const productService = {
       form.tags = [];
     }
 
-    console.log('SAVE FORM TO MONGO', form);
-
     const model = await productModel.create(form);
     if (!model) {
       throw new Error('Could not save the record');
     }
   }
 };
-
-export async function getProduct(slug: string) {
-  const product = await productModel.findOne({slug: slug}).exec();
-  return product;
-}

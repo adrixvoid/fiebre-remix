@@ -1,9 +1,10 @@
 import type { LoaderFunctionArgs, ActionFunctionArgs, LinksFunction } from "@remix-run/node";
 import { useFetcher, useLoaderData, useRouteError } from "@remix-run/react"
 import { json } from "@remix-run/node";
+import productModel from '~/server/schema/product.schema';
+import { FolderPlus } from "lucide-react";
 
-import { getProduct } from "~/server/services/products.service"
-import type { Product } from "~/types/global.type";
+import type { MapImage, Product } from "~/types/global.type";
 
 import mdStyles from "~/styles/markdown.css";
 import styles from "~/styles/product.css";
@@ -11,6 +12,7 @@ import FooterTienda from "~/components/Footer";
 import Button from "~/components/button/Button";
 import { getFormattedPrice, accessibilityPrice } from "~/i18n/money";
 import { t } from "~/i18n/translate";
+import { Link } from "~/components/link/Link";
 
 export const links: LinksFunction = () => [
     {
@@ -29,14 +31,22 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
             throw new Error('The slug is required');
         }
 
-        const product = await getProduct(params.slug);
+        const product = await productModel.findOne({ slug: params.slug }).exec();
 
-        console.log('product', product)
 
-        return product;
+        if (!product) {
+            throw new Error('Product not found');
+        }
+
+        const gallery: MapImage[] = product && product.images ? [...product.images] : [];
+        if (gallery.length > 1) {
+            gallery.shift()
+        }
+
+        return { product, gallery };
     } catch (error) {
         console.log(error);
-        throw json("Not Found", { status: 404 });
+        throw json({ success: false, message: "Product not Found" }, { status: 404 });
     }
 }
 
@@ -70,27 +80,28 @@ export async function action({ request }: ActionFunctionArgs) {
     return json({ ok: true });
 };
 
-function ProductRoute() {
-    const { title, body, preview, priceInCents, tags, images, priceHidden } = useLoaderData<Product>() as Product;
+function ProductPage() {
     const fetcher = useFetcher({ key: "add-to-bag" });
+    const { product, gallery } = useLoaderData<typeof loader>() as { product: Product, gallery: MapImage[] };
+    const { title, description, preview, priceInCents, tags, images, priceHidden } = product;
 
     return (
         <>
             <section className="product">
                 <div className="container">
                     <nav className="navigation-back">
-                        <a href="/products">
+                        <Link to="/products">
                             <span className="sr-only">Volver a la tienda</span>
                             <span aria-hidden>Volver</span>
-                        </a>
+                        </Link>
                     </nav>
-                    <div className="flex">
+                    <div className="product-flex">
                         <div className="left">
                             <div className="image-preview">
                                 <img src={images?.[0].fileName} alt={title} />
                             </div>
                             <div className="product-images">
-                                {images?.map((image) => (
+                                {gallery.map((image) => (
                                     <img key={image.fileName} src={image.url} alt={title} />
                                 ))}
                             </div>
@@ -130,14 +141,15 @@ function ProductRoute() {
                                         </div>
                                     }
                                     <div className="buy">
-                                        <Button color="primary" className="buy-button">
+                                        <Button variant="primary" size="lg" className="text-lg">
+                                            <FolderPlus width={24} height={24} />
                                             {!priceHidden ? t("ADD_TO_CART") : t("INQUIRE")}
                                         </Button>
                                     </div>
                                 </fetcher.Form>
                             </div>
                             <div itemProp="description" className="description">
-                                <div dangerouslySetInnerHTML={{ __html: body || '' }} />
+                                <div dangerouslySetInnerHTML={{ __html: description || '' }} />
                             </div>
                             {tags &&
                                 <div className="tags">
@@ -157,4 +169,4 @@ function ProductRoute() {
     )
 }
 
-export default ProductRoute
+export default ProductPage

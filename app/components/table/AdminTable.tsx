@@ -1,5 +1,15 @@
 import { flexRender, getCoreRowModel, TableOptions, useReactTable } from '@tanstack/react-table'
-import cx from 'classnames'
+import cx from 'clsx'
+
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "~/components/ui/table"
 
 export type ColumnMap = { [key: string]: object };
 
@@ -17,45 +27,49 @@ const getColumnClassName = (columnClassName?: ColumnMap, columnId?: string) => c
 const getColumnStyle = (columnStyles?: ColumnMap, columnId?: string) => (columnStyles && columnId) ? columnStyles[columnId] : {}
 
 interface AdminTable<TData> extends Omit<TableOptions<TData>, 'getCoreRowModel'> {
-  columnStyles?: ColumnMap
-  columnClassName?: ColumnMap
+  caption?: string;
+  columnStyles?: ColumnMap;
+  columnClassName?: ColumnMap;
 }
 
-export default function AdminTable<TData>({ columns, data, columnClassName, columnStyles }: AdminTable<TData>) {
+export default function AdminTable<TData>({ columns, data, caption, columnClassName, columnStyles }: AdminTable<TData>) {
   const table = useReactTable({ columns, data, getCoreRowModel: getCoreRowModel(), defaultColumn })
 
   return (
-    <table className="table">
-      <thead>
-        {table.getHeaderGroups().map(headerGroup => (
-          <tr key={headerGroup.id}>
-            {headerGroup.headers.map(header => (
-              <th key={header.id}
-                className={getColumnClassName(columnClassName, header.column.id)}
-                style={getColumnStyle(columnStyles, header.column.id)}
-              >
-                {header.isPlaceholder
-                  ? null
-                  : flexRender(
-                    header.column.columnDef.header,
-                    header.getContext()
-                  )}
-              </th>
-            ))}
-          </tr>
-        ))}
-      </thead>
-      <tbody>
-        {table.getRowModel().rows.map(row => (
-          <tr key={row.id}>
-            {row.getVisibleCells().map(cell => (
-              <td key={cell.id} className={getColumnClassName(columnClassName, cell.column.id)}>
-                {flexRender(cell.column.columnDef.cell, cell.getContext())}
-              </td>
-            ))}
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <div className='rounded-md border'>
+      <Table>
+        {caption && <TableCaption className='border-t p-1'>{caption}</TableCaption>}
+        <TableHeader>
+          {table.getHeaderGroups().map(headerGroup => (
+            <TableRow key={headerGroup.id}>
+              {headerGroup.headers.map(header => (
+                <TableHead key={header.id}
+                  className={getColumnClassName(columnClassName, header.column.id)}
+                  style={getColumnStyle(columnStyles, header.column.id)}
+                >
+                  {header.isPlaceholder
+                    ? null
+                    : flexRender(
+                      header.column.columnDef.header,
+                      header.getContext()
+                    )}
+                </TableHead>
+              ))}
+            </TableRow>
+          ))}
+        </TableHeader>
+        <TableBody>
+          {table.getRowModel().rows.map(row => (
+            <TableRow key={row.id}>
+              {row.getVisibleCells().map(cell => (
+                <TableCell key={cell.id} className={getColumnClassName(columnClassName, cell.column.id)}>
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </TableCell>
+              ))}
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </div>
   )
 }

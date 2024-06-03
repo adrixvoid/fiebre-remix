@@ -1,16 +1,14 @@
 import type { LinksFunction } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react"
 import { json } from "@remix-run/node";
 
 import markdownService from "~/server/services/markdown.service";
-import type { MarkdownDocument } from "~/server/utils/front-matter";
-import postStyles from "~/styles/markdown.css";
-import styles from "~/styles/about.css";
+import markdownStyles from "~/styles/markdown.css";
+import MarkdownPage from "./_public.post.$slug";
 
 export const loader = async () => {
     try {
         const markdownResult = await markdownService.read('pages', '2023-12-04-about');
-        return markdownResult;
+        return { content: markdownResult };
     } catch (error) {
         throw json("Not Found", { status: 404 });
     }
@@ -19,28 +17,9 @@ export const loader = async () => {
 export const links: LinksFunction = () => [
     {
         rel: "stylesheet",
-        href: styles,
-    },
-    {
-        rel: "stylesheet",
-        href: postStyles,
+        href: markdownStyles,
     },
 ];
 
 
-export default function AboutPage() {
-    const { title, body } = useLoaderData<MarkdownDocument>();
-
-    return (
-        <div className="about post">
-            <div className="container">
-                <div className="post-header">
-                    <h1>{title}</h1>
-                </div>
-                <div className="markdown-content">
-                    <div dangerouslySetInnerHTML={{ __html: body || '' }} />
-                </div>
-            </div>
-        </div>
-    )
-}
+export default MarkdownPage

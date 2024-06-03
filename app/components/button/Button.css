@@ -28,7 +28,7 @@ a.button:focus-within {
 .button.solid:focus:not(:disabled),
 .button.solid:focus-within:not(:disabled),
 .button.solid:hover:not(:disabled) {
-    background-color: var(--button-bg-hover);
+    background-color: hsl(var(--accent));
     color: var(--button-color-hover);
     fill: var(--button-color-hover);
 }
@@ -58,13 +58,13 @@ a.button:focus-within {
 */
 
 .solid.default {
-    background-color: var(--button-bg);
+    background-color: hsl(var(--background));
     color: var(--button-color);
     fill: var(--button-color);
 }
 
 .solid.default:hover {
-    background-color: var(--button-bg-hover);
+    background-color: hsl(var(--accent));
     color: var(--button-color-hover);
     fill: var(--button-color-hover);
 }
@@ -106,16 +106,16 @@ a.button:focus-within {
 }
 
 .outline.default:not(:disabled) {
-    border-color: var(--button-bg);
-    color: var(--button-bg);
-    fill: var(--button-bg);
+    border-color: hsl(var(--background));
+    color: hsl(var(--background));
+    fill: hsl(var(--background));
 }
 
 .button.outline:focus:not(:disabled),
 .button.outline:focus-within:not(:disabled),
 .button.outline:hover:not(:disabled) {
-    border-color: var(--button-bg-hover);
-    background-color: var(--button-bg-hover);
+    border-color: hsl(var(--accent));
+    background-color: hsl(var(--accent));
     color: var(--button-color-hover);
     fill: var(--button-color-hover);
 }
@@ -190,18 +190,27 @@ a.button:focus-within {
     object-fit: contain;
 }
 
-.sm.buttonIcon .icon {
+.buttonIcon .icon svg {
+    width: 100%;
+    height: auto;
+    min-width: 16px;
+    max-width: 16px;
+    min-height: 16px;
+    max-height: 16px;
+}
+
+.sm.buttonIcon .icon svg {
     padding: 1px;
-    width: 16px;
-    height: 16px;
+    max-width: 16px;
+    max-height: 16px;
 }
 
-.md.buttonIcon .icon {
-    width: 24px;
-    height: 24px;
+.md.buttonIcon .icon svg {
+    max-width: 24px;
+    max-height: 24px;
 }
 
-.lg.buttonIcon .icon {
-    width: 32px;
-    height: 32px;
+.lg.buttonIcon .icon svg {
+    max-width: 32px;
+    max-height: 32px;
 }

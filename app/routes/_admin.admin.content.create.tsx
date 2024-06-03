@@ -31,7 +31,7 @@ export default function UploadContent() {
                         ))}
                     </select>
                 </fieldset>
-
+                <hr />
                 <fieldset>
                     <label htmlFor="title">Title</label>
                     <input id="title" name="title" placeholder="Noche de Reyes" />
@@ -40,6 +40,9 @@ export default function UploadContent() {
                         Description
                     </label>
                     <textarea id="body" name="body" rows={5} className="mb-1" />
+                </fieldset>
+                <hr />
+                <fieldset>
 
                     <label htmlFor="categories">
                         Tags
@@ -49,23 +52,23 @@ export default function UploadContent() {
                     <label htmlFor="slug">Post Slug</label>
                     <input id="slug" name="slug" placeholder="noche-de-reyes" />
                 </fieldset>
-
+                <hr />
                 <fieldset>
                     <InputFilePreview id="images" name="images" label='Add images' multiple={true} />
                 </fieldset>
-
+                <hr />
                 <fieldset>
                     <div className="block">
                         <label htmlFor="markdown">
+                            <input id="markdown" name="markdown" type="checkbox" defaultChecked={true} className="mr-2" />
                             Save as markdown file
-                            <input id="markdown" name="markdown" type="checkbox" defaultChecked={true} />
                         </label>
                     </div>
 
                     <div className="block">
                         <label htmlFor="draft">
+                            <input id="draft" name="draft" type="checkbox" defaultChecked={true} className="mr-2" />
                             Save as draft
-                            <input id="draft" name="draft" type="checkbox" defaultChecked={true} />
                         </label>
                     </div>
                 </fieldset>

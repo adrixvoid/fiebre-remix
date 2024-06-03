@@ -1,21 +1,27 @@
 import mongoose from 'mongoose';
 import {Product} from '~/types/global.type';
-import {slugify} from '~/utils/url';
+import {slugify} from '~/lib/url';
 
 const Schema = mongoose.Schema;
 
 export const schema = new Schema<Product>(
   {
     title: {type: String, required: true},
+    description: String,
     slug: {type: String, required: true},
     price: {type: Number, default: 0},
     priceInCents: {type: Number, default: 0},
-    stock: Number,
     priceHidden: {type: Boolean, default: false},
-    body: String,
     preview: Object,
     images: [Object],
+    productType: {
+      type: String,
+      enum: ['stock', 'downloadUrl', 'file'],
+      required: true
+    },
+    stock: Number,
     downloadUrl: String,
+    file: String,
     tags: {type: [String], default: []},
     categories: [{type: mongoose.Schema.Types.ObjectId, ref: 'Category'}],
     published: {type: Boolean, default: false},

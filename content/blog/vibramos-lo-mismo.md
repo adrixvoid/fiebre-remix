@@ -1,7 +1,7 @@
 ---
 title: Vibramos lo mismo
 categories: ilustración
-preview: null
+preview: /hero/hero.jpg
 ---
 
 # Este es el nuevo contenido

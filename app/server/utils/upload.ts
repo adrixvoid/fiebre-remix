@@ -7,6 +7,10 @@ import {MapFile} from '~/types/global.type';
 export type AssetPathKey = keyof typeof ASSET_PATH;
 export type FileType = 'image' | 'video' | 'audio' | 'files' | string;
 
+export function shortenName(name: string) {
+  return name.length > 10 ? name.slice(10) : name;
+}
+
 /**
  * On this version, I used the new Date().toISOString() function to get the current date and time in ISO format,
  * Then, I used the path.parse() function to get the name and extension of the file.
@@ -18,7 +22,7 @@ export type FileType = 'image' | 'video' | 'audio' | 'files' | string;
  * @returns {string}
  */
 export function createName(fileName: string): string {
-  const shortName = path.parse(fileName).name.slice(10);
+  const shortName = shortenName(path.parse(fileName).name);
   const extension = path.extname(fileName);
   return `${crypto.randomUUID()}-${shortName}${extension}`;
 }

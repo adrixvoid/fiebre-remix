@@ -28,15 +28,15 @@ export const links: LinksFunction = () => [
 const Store = () => {
     const { products } = useLoaderData<{ products: Product[] }>() as { products: Product[] };
     return (
-        <section className="markdown">
+        <section className="product">
             <div className="container">
-                <div className="markdown-list">
+                <div className="product-list">
                     {products.map((product) => (
                         <article className="item" key={product.title}>
                             <Link className="link" to={`${ROUTE_PATH.PRODUCT}/${product.slug}`}>
                                 <div className="image-container">
                                     <div className="image-cover">
-                                        <img src={product.images?.[0]?.fileName} alt={product.title} aria-hidden loading="lazy" />
+                                        <img src={product.images?.[0]?.url} alt={product.title} aria-hidden loading="lazy" />
                                     </div>
                                 </div>
                                 <div className="item-description">

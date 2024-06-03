@@ -1,3 +1,5 @@
+import Label from "./Label";
+
 export interface InputFileProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   labelProps?: React.LabelHTMLAttributes<HTMLLabelElement>;
@@ -7,7 +9,7 @@ export interface InputFileProps extends React.InputHTMLAttributes<HTMLInputEleme
 export function InputFile({ label, labelProps, id, name, error, className, ...rest }: InputFileProps) {
   return (
     <>
-      {label && <label htmlFor={String(id ? id : name)} {...labelProps}>{label}</label>}
+      {label && <Label id={id} name={name} {...labelProps}>{label}</Label>}
       <input type='file' id={id} {...rest} />
       {Boolean(error) && <p className="box paper color-danger">{error}</p>}
     </>

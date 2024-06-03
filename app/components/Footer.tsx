@@ -2,27 +2,12 @@ function FooterTienda() {
     return (
         <div className="product-footer">
             <div className="container">
-                <div className="product-footer-items flex" uk-grid="">
-                    <div className="product-footer-item product-footer-payment-options">
+                <div className="product-footer-items flex gap-4 items-start" uk-grid="">
+                    <div className="">
                         <h5 className="product-footer-title">Medios de pago</h5>
-                        <div className="product-footer-cards">
-                            <img src="https://dk0k1i3js6c49.cloudfront.net/iconos-pago/mercadopago.png" className="footer__top__icon" alt="Medio Pago" />
-                            <img src="https://dk0k1i3js6c49.cloudfront.net/iconos-pago/mastercard.png" className="footer__top__icon" alt="Medio Pago" />
-                            <img src="https://dk0k1i3js6c49.cloudfront.net/iconos-pago/visa.png" className="footer__top__icon" alt="Medio Pago" />
-                            <img src="https://dk0k1i3js6c49.cloudfront.net/iconos-pago/american-express.png" className="footer__top__icon" alt="Medio Pago" />
-                            <img src="https://dk0k1i3js6c49.cloudfront.net/iconos-pago/naranja.png" className="footer__top__icon" alt="Medio Pago" />
-                            <img src="https://dk0k1i3js6c49.cloudfront.net/iconos-pago/cabal.png" className="footer__top__icon" alt="Medio Pago" />
-                            <img src="https://dk0k1i3js6c49.cloudfront.net/iconos-pago/maestro.png" className="footer__top__icon" alt="Medio Pago" />
-                            <img src="https://dk0k1i3js6c49.cloudfront.net/iconos-pago/diners-club.png" className="footer__top__icon" alt="Medio Pago" />
-                            <img src="https://dk0k1i3js6c49.cloudfront.net/iconos-pago/nativa.png" className="footer__top__icon" alt="Medio Pago" />
-                            <img src="https://dk0k1i3js6c49.cloudfront.net/iconos-pago/argencard.png" className="footer__top__icon" alt="Medio Pago" />
-                            <img src="https://dk0k1i3js6c49.cloudfront.net/iconos-pago/pagofacil.png" className="footer__top__icon" alt="Medio Pago" />
-                            <img src="https://dk0k1i3js6c49.cloudfront.net/iconos-pago/rapipago.png" className="footer__top__icon" alt="Medio Pago" />
-                            <img src="https://dk0k1i3js6c49.cloudfront.net/iconos-pago/deposito.png" className="footer__top__icon" alt="Medio Pago" />
-                            <img src="https://dk0k1i3js6c49.cloudfront.net/iconos-pago/acordar.png" className="footer__top__icon" alt="Medio Pago" />
-                        </div>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit...
                     </div>
-                    <div className="product-footer-item">
+                    <div>
                         <h5 className="footer__top__title text--primary">Nuestras redes sociales</h5>
                         <ul className="footer__top__social-media-list uk-flex uk-flex-row uk-flex-wrap">
                             <li className="footer__top__social-media-item text--primary">
@@ -32,7 +17,7 @@ function FooterTienda() {
                             </li>
                         </ul>
                     </div>
-                    <div className="product-footer-item">
+                    <div>
                         <h5 className="footer__top__title text--primary">Contacto</h5>
                         <div className="product-footer-icons uk-flex uk-flex-row uk-flex-wrap">
                             <ul className="footer__top__info-list uk-flex uk-flex-column">

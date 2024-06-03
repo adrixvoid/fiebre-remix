@@ -1,9 +1,10 @@
 import { useField } from "remix-validated-form";
-import cx from 'classnames';
+import { Slot } from "@radix-ui/react-slot"
+import clsx from 'clsx';
 
 import Input, { InputProps } from "./Input";
 
-export function InputValidation({ name, className, onChange, onBlur, ...rest }: InputProps & { name: string }) {
+export function InputValidation({ name, className, onChange, onBlur, asChild, ...rest }: InputProps & { name: string } & { asChild?: boolean } & { [key: string]: any }) {
   const field = useField(name);
 
   const props = {
@@ -13,6 +14,7 @@ export function InputValidation({ name, className, onChange, onBlur, ...rest }: 
       if (!field.touched) {
         field.setTouched(true);
       } else {
+        if (field.error) field.clearError();
         field.validate()
       }
       onChange?.(event);
@@ -21,10 +23,12 @@ export function InputValidation({ name, className, onChange, onBlur, ...rest }: 
       field.validate()
       onBlur?.(event);
     },
-    className: cx(className, { 'error': Boolean(field.error) })
+    className: clsx({ 'error': Boolean(field.error) }, className)
   }
 
-  return <Input {...rest} {...field.getInputProps()} {...props} />;
+  const Comp = asChild ? Slot : Input
+
+  return <Comp {...field.getInputProps()} {...rest} {...props} />;
 }
 
 export default InputValidation;

@@ -1,12 +1,13 @@
 import type { LinksFunction, LoaderFunction, MetaFunction } from "@remix-run/node";
-import { Link, NavLink, Outlet } from "@remix-run/react";
-import cx from "classnames";
+import { Outlet } from "@remix-run/react";
 
 import { SITE_NAME } from "~/constants";
 
 import Logo from "~/components/svg/Logo";
-import headerStyles from "~/components/header/Header.module.css";
+import { Link, NavLink } from "~/components/link/Link";
 import styles from "~/styles/admin.css";
+import { Nav } from "~/components/nav/Nav";
+import { Button } from "~/components/ui/button";
 
 export const meta: MetaFunction = () => {
   return [
@@ -30,44 +31,32 @@ export const loader: LoaderFunction = ({ params }) => {
 export default function Admin() {
   return (
     <div className="layout">
-      <header className={headerStyles.header}>
-        <div className={`${headerStyles.headerContainer} container`}>
+      <header className={"flex items-center py-3"}>
+        <div className={`container static flex gap-2`}>
           <span className="sr-only">{SITE_NAME}</span>
-          <div className={cx(headerStyles.logo, 'flex')}>
-            <Logo aria-hidden />
-            <Link to="/admin">
-              <span className="ml-1">Admin</span>
-            </Link>
-          </div>
-          <nav className={headerStyles.headerNavigation}>
+          <Link to="/admin" className="flex items-center gap-1">
+            <Logo aria-hidden className="h-10" />
+            <span className="ml-1">Admin</span>
+          </Link>
+          <Nav className='flex-1 justify-end'>
             <NavLink to="/admin/categories">Categories</NavLink>
             <NavLink to="/admin/content/create">Content</NavLink>
             <NavLink to="/">Exit</NavLink>
-          </nav>
+          </Nav>
         </div>
       </header>
-      <nav className="hero-navigation">
-        <ul>
-          <li>
-            <a href="/about">Sobre mi</a>
-          </li>
-          <li>
-            <a href="/products">Tienda</a>
-          </li>
-          <li>
-            <a href="/posts">Portafolio</a>
-          </li>
-          <li>
-            <a href="/blog">Blog</a>
-          </li>
-        </ul>
-      </nav>
       <main className="main">
         <Outlet />
       </main>
       <footer className="footer">
         <div className="container">
-          @2024 - {SITE_NAME} - <a href="https://www.behance.net/fiebre_creativa" title="My Behance portfolio">https://www.behance.net/fiebre_creativa</a>
+          <div className="text-sm">@2024 - {SITE_NAME} - <a href="https://www.behance.net/fiebre_creativa" title="My Behance portfolio">https://www.behance.net/fiebre_creativa</a></div>
+          <Nav className="text-sm flex items-center align-center gap-2 pt-2">
+            <Link to="/about">Sobre mi</Link>
+            <Link to="/products">Tienda</Link>
+            <Link to="/posts">Portafolio</Link>
+            <Link to="/blog">Blog</Link>
+          </Nav>
         </div>
       </footer>
     </div>

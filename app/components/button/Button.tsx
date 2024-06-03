@@ -1,67 +1,20 @@
 import { Link } from "@remix-run/react";
-
-import styles from "./Button.module.css";
-import cx from "classnames";
 import { RemixLinkProps } from "@remix-run/react/dist/components";
 
-export interface ButtonElementProps extends React.HTMLAttributes<HTMLButtonElement> {
-    to?: never;
-    type?: "button" | "submit" | "reset";
-    loading?: boolean;
-}
+import { Button as UIButton, ButtonProps } from "~/components/ui/button";
 
-export interface LinkElementProps extends React.RefAttributes<HTMLAnchorElement> {
-    loading?: boolean;
-}
+type ButtonOrRemixLink = ButtonProps & { to?: never } | RemixLinkProps & { variant: ButtonProps['variant'], size: ButtonProps['size'] }
 
-interface ButtonClassNames {
-    color?: "default" | "primary" | "accent" | "danger" | "success" | "warning";
-    size?: "sm" | "md" | "lg";
-    variant?: "outline" | "solid";
-    disabled?: boolean;
-    className?: string;
-}
-
-type ButtonProps = ButtonElementProps & ButtonClassNames;
-type LinkProps = LinkElementProps & ButtonClassNames & RemixLinkProps;
-interface IconButtonProps {
-    icon: React.ReactNode;
-    after?: boolean
-}
-
-const getClassName = ({ color = "default", size = "md", variant = "solid", disabled = false, className }: ButtonClassNames): string => {
-    return cx(styles.button,
-        {
-            [styles[variant]]: !!variant,
-            [styles[color]]: !!color && !disabled,
-            [styles[size]]: !!size,
-        },
-        className);
-}
-
-type ButtonOrRemixLink = ButtonProps | LinkProps
 export function Button(props: ButtonOrRemixLink) {
-    const { className, color, size, variant, ...rest } = props;
-
-    const clss = getClassName({ color, size, variant, className });
-
     if (props.to) {
-        return <Link className={clss} {...rest as RemixLinkProps} />
+        return (
+            <UIButton asChild variant={props.variant} size={props.size}>
+                <Link {...props as RemixLinkProps} />
+            </UIButton>
+        )
     }
 
-    return <button className={clss} {...rest as ButtonProps} />
-}
-
-export function IconButton(props: IconButtonProps & ButtonOrRemixLink) {
-    const { after, icon, children, ...rest } = props;
-
-    return (
-        <Button className={styles.buttonIcon} {...rest}>
-            {!after && <span className={styles.icon}>{icon}</span>}
-            {children}
-            {after && <span className={styles.icon}>{icon}</span>}
-        </Button>
-    )
+    return <UIButton {...props as ButtonProps} />
 }
 
 export default Button
