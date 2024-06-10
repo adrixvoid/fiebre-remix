@@ -1,5 +1,5 @@
 body {
-    /* background: url('/hero/hero.jpg'); */
+    background: url('/hero/hero.jpg');
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: fixed;
@@ -29,8 +29,16 @@ body {
     width: 50vw;
     max-width: 500px;
     height: auto;
+    aspect-ratio: 2 / 1;
+    color: hsl(var(--color-brand));
+    fill: hsl(var(--color-brand));
 }
 
 .hero-navigation {
-    margin-top: calc(var(--unit) * 2);
+    margin-top: 1rem;
+}
+
+
+.hero-logo path {
+    fill: hsl(var(--color-brand));
 }

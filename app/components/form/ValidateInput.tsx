@@ -4,11 +4,11 @@ import clsx from 'clsx';
 
 import Input, { InputProps } from "./Input";
 
-export function InputValidation({ name, className, onChange, onBlur, asChild, ...rest }: InputProps & { name: string } & { asChild?: boolean } & { [key: string]: any }) {
+export function ValidateInput({ name, className, onChange, onBlur, ...rest }: InputProps & { name: string } & { [key: string]: any }) {
   const field = useField(name);
 
-  const props = {
-    name,
+  const overwriteProps = {
+    ...rest,
     error: field.error,
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
       if (!field.touched) {
@@ -26,9 +26,9 @@ export function InputValidation({ name, className, onChange, onBlur, asChild, ..
     className: clsx({ 'error': Boolean(field.error) }, className)
   }
 
-  const Comp = asChild ? Slot : Input
+  const Comp = Slot || Input
 
-  return <Comp {...field.getInputProps()} {...rest} {...props} />;
+  return <Comp {...field.getInputProps()} {...overwriteProps} />;
 }
 
-export default InputValidation;
+export default ValidateInput;

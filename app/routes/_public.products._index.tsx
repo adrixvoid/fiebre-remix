@@ -1,51 +1,45 @@
 import type { LinksFunction, LoaderFunction } from "@remix-run/node";
-import { Link, useLoaderData } from "@remix-run/react";
+import { useLoaderData } from "@remix-run/react";
 
 import { productService } from "~/server/services/products.service"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardImage, CardTitle } from "~/components/card/Card";
 import type { Product } from "~/types/global.type"
 
 import { ROUTE_PATH } from "~/constants";
 
-import markdownStyles from "~/styles/markdown.css";
-import styles from "~/styles/store.css";
+import Button from "~/components/button/Button";
+import { ProductList } from "~/components/products/Product";
 
 export const loader: LoaderFunction = async () => {
     const products = await productService.find();
     return { products };
 }
 
-export const links: LinksFunction = () => [
-    {
-        rel: "stylesheet",
-        href: markdownStyles,
-    },
-    {
-        rel: "stylesheet",
-        href: styles,
-    },
-];
-
 const Store = () => {
     const { products } = useLoaderData<{ products: Product[] }>() as { products: Product[] };
     return (
-        <section className="product">
+        <section>
             <div className="container">
-                <div className="product-list">
+                <ProductList>
                     {products.map((product) => (
-                        <article className="item" key={product.title}>
-                            <Link className="link" to={`${ROUTE_PATH.PRODUCT}/${product.slug}`}>
-                                <div className="image-container">
-                                    <div className="image-cover">
-                                        <img src={product.images?.[0]?.url} alt={product.title} aria-hidden loading="lazy" />
-                                    </div>
-                                </div>
-                                <div className="item-description">
-                                    <h2 className="title p">{product.title}</h2>
-                                </div>
-                            </Link>
+                        <article key={product.title}>
+                            <Card>
+                                <CardImage src={product.images?.[0]?.url} alt={product.title} aria-hidden loading="lazy" />
+                                <CardHeader>
+                                    <CardTitle>{product.title}</CardTitle>
+                                </CardHeader>
+                                <CardContent className="item-description">
+                                    <CardDescription>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo sint expedita modi doloremque at quisquam, dolore corporis ea. Laboriosam sint natus neque vel dolorem expedita repellendus, in iusto iste nostrum?</CardDescription>
+                                </CardContent>
+                                <CardFooter>
+                                    <Button to={`${ROUTE_PATH.PRODUCT}/${product.slug}`}>
+                                        More Details
+                                    </Button>
+                                </CardFooter>
+                            </Card>
                         </article>
                     ))}
-                </div>
+                </ProductList>
             </div>
         </section>
     )

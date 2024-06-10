@@ -6,19 +6,10 @@ import { Link, useLoaderData } from "@remix-run/react";
 
 import { ROUTE_PATH } from "~/constants";
 
-import styles from "~/styles/cart.css";
-
 export const loader = async () => {
     // return getCart()
     return { products: [] };
 }
-
-export const links: LinksFunction = () => [
-    {
-        rel: "stylesheet",
-        href: styles,
-    },
-];
 
 const Cart = () => {
     const { products } = useLoaderData<typeof loader>();

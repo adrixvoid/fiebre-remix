@@ -6,7 +6,7 @@ import { Product } from "~/types/global.type";
 import { ADMIN_ROUTE_PATH } from "~/constants";
 
 import AdminTable from "~/components/table/AdminTable";
-import { Button } from "~/components/ui/button";
+import { Button } from "~/components/button/Button";
 import { Trash2 } from "lucide-react"
 
 const styles = {
@@ -58,8 +58,8 @@ const columns = [
                     <Button asChild variant="outline">
                         <Link to={editPath} state={location.state}>{t('GLOBAL.EDIT')}</Link>
                     </Button>
-                    <Button onClick={handleOnDelete} aria-label="delete" size='icon' disabled={isDisabled} variant="destructive" color="danger">
-                        <Trash2 className="h-5 w-5" />
+                    <Button onClick={handleOnDelete} aria-label="delete" disabled={isDisabled} variant="destructive" color="danger">
+                        <Trash2 />
                         <span className="sr-only">{t('GLOBAL.DELETE')}</span>
                     </Button>
                 </div>

@@ -1,37 +1,47 @@
-import type { LinksFunction } from "@remix-run/node";
-import { Link, useLoaderData } from "@remix-run/react";
+import { useLoaderData } from "@remix-run/react";
 
-import { getMarkdowns } from "~/server/utils/front-matter";
-import styles from "~/styles/blog.css";
+import { ROUTE_PATH } from "~/constants";
 
-export const links: LinksFunction = () => [
-  {
-    rel: "stylesheet",
-    href: styles,
-  },
-];
+import { getDocuments, type MarkdownDocument } from "~/server/utils/front-matter";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardImage, CardTitle } from "~/components/card/Card";
+import { MarkdownList, MarkdownSection } from "~/components/markdown/Markdown";
+
+import Button from "~/components/button/Button";
 
 export const loader = async () => {
-  return await getMarkdowns('blog');
+  const documents = await getDocuments('blog');
+  return { documents }
 };
 
-function Posts() {
-  const posts = useLoaderData<typeof loader>();
+function Blog() {
+  const { documents } = useLoaderData<typeof loader>() as { documents: MarkdownDocument[] };
 
   return (
-    <section className="blogs">
-      <div className="container list">
-        {posts.map((post) => (
-          <article className="item" key={post.title}>
-            <img src={post.preview} alt={post.title} aria-hidden />
-            <Link className="link" to={`/blog/${post.slug}`}>
-              <h2 className="title p">{post.title}</h2>
-            </Link>
-          </article>
-        ))}
+    <MarkdownSection>
+      <div className="container">
+        <MarkdownList>
+          {documents.map((content) => (
+            <article key={content.title}>
+              <Card>
+                <CardImage src={content.preview} alt={content.title} aria-hidden />
+                <CardHeader>
+                  <CardTitle>{content.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nostrum ipsa assumenda fugit, magni perspiciatis aliquam, qui reprehenderit ullam at nam nobis consequatur! Eum earum dolor assumenda! Illo suscipit ea sequi.</CardDescription>
+                </CardContent>
+                <CardFooter>
+                  <Button to={`${ROUTE_PATH.BLOG}/${content.slug}`}>
+                    Read More...
+                  </Button>
+                </CardFooter>
+              </Card>
+            </article>
+          ))}
+        </MarkdownList>
       </div>
-    </section>
+    </MarkdownSection>
   );
 }
 
-export default Posts;
+export default Blog;

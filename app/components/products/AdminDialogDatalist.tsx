@@ -4,8 +4,6 @@ import { Fragment } from "react";
 import { atom, useAtom } from 'jotai'
 import cx from "clsx";
 
-import { CONTENT_TYPE } from "~/constants";
-import useToggle from "~/hooks/useToggle"
 import { Category } from "~/types/global.type";
 
 import Button from "~/components/button/Button";

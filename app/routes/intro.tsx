@@ -1,5 +1,5 @@
 import type { LinksFunction, LoaderFunction, MetaFunction } from "@remix-run/node";
-import styles from "~/styles/home.css";
+import styles from "~/styles/intro.css";
 import Logo from "~/components/svg/Logo";
 
 export const meta: MetaFunction = () => {
@@ -37,7 +37,7 @@ export default function Index() {
                 <a href="/products">Tienda</a>
               </li>
               <li>
-                <a href="/posts">Portafolio</a>
+                <a href="/portfolio">Portafolio</a>
               </li>
               <li>
                 <a href="/blog">Blog</a>

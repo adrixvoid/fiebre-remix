@@ -1,0 +1,12 @@
+.link {
+  color: hsl(var(--foreground));
+  text-underline-offset: .2rem;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.primary {
+  color: hsl(var(--primary))
+}

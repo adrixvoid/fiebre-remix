@@ -6,13 +6,14 @@ import { ValidatedForm } from "remix-validated-form";
 import { loaderAdminProduct, actionAdminProduct, LoaderAdminProduct } from "~/server/controllers/products.controller";
 import { productValidator } from "~/server/zod/products.zod";
 
-import InputValidation from "~/components/form/InputValidation";
+import ValidateInput from "~/components/form/ValidateInput";
 import { InputSubmit } from "~/components/form/InputSubmit";
 import Input from "~/components/form/Input";
-import UploadedImages from "~/components/form/input-file-preview/UploadedImages";
+import { InputImageList } from "~/components/form/input-file-preview/UploadedImages";
 import { CategorySelect } from "~/components/categories/CategorySelect";
 import useReferrer from "~/hooks/useReferrer";
 import TextEditor from "~/components/form/text-editor/TextEditor";
+import InputFilePreview from "~/components/form/input-file-preview/InputFilePreview";
 
 const priceHidden = atom(false);
 const currentProductType = atom("stock");
@@ -38,15 +39,17 @@ export default function AdminProductForm() {
       >
         <fieldset className="mt-10">
           <div className="mt-6">
-            <InputValidation name="categoryId" asChild>
+            <ValidateInput name="categoryId">
               <CategorySelect defaultValue={category?._id} label="Category" placeholder="Select a category" />
-            </InputValidation>
+            </ValidateInput>
           </div>
         </fieldset>
         <hr className="mt-8" />
         <fieldset>
           <div className="mt-6">
-            <InputValidation type="text" label="Title" id="title" name="title" placeholder="Noche de Reyes" required defaultValue={product?.title} />
+            <ValidateInput name="title">
+              <Input type="text" label="Title" id="title" name="title" placeholder="Noche de Reyes" required defaultValue={product?.title} />
+            </ValidateInput>
           </div>
           <div className="mt-6">
             <TextEditor label='Description' id="description" name="description" rows={5} defaultValue={product?.description} />
@@ -55,9 +58,12 @@ export default function AdminProductForm() {
         <hr className="mt-8" />
         <fieldset>
           <div className="mt-6">
-            <InputValidation className='mb-2' label="Images" multiple={true} name="images" asChild>
-              <UploadedImages source={product?.images} />
-            </InputValidation>
+            <ValidateInput name='toDelete' className='mb-2'>
+              <InputImageList source={product?.images} multiple={true} />
+            </ValidateInput>
+            <ValidateInput type="file" name="images" label="Images" className='mb-2' multiple={true}>
+              <InputFilePreview />
+            </ValidateInput>
             {error?.images && <p className="box paper color-danger">{error.images}</p>}
           </div>
         </fieldset>
@@ -65,11 +71,15 @@ export default function AdminProductForm() {
         <fieldset>
           <div className="mt-6">
             <legend>Price</legend>
-            <InputValidation id="priceHidden" name="priceHidden" type="checkbox" label="Don't show" labelProps={{ className: "flex items-center mb-1" }} defaultChecked={false} onChange={() => setPriceHidden(!isPriceHidden)} defaultValue={product?.title} />
+            <ValidateInput name="priceHidden">
+              <Input type="checkbox" id="priceHidden" name="priceHidden" label="Don't show" labelProps={{ className: "flex items-center mb-1" }} defaultChecked={false} onChange={() => setPriceHidden(!isPriceHidden)} defaultValue={product?.title} />
+            </ValidateInput>
           </div>
 
           <div className="mt-6">
-            <InputValidation id="priceInCents" name="priceInCents" type="text" label="Amount in cents" placeholder="1000 = $1.00" disabled={isPriceHidden} defaultValue={product?.priceInCents || 0} />
+            <ValidateInput name="priceHidden">
+              <Input type="text" id="priceInCents" name="priceInCents" label="Amount in cents" placeholder="1000 = $1.00" disabled={isPriceHidden} defaultValue={product?.priceInCents || 0} />
+            </ValidateInput>
           </div>
         </fieldset>
         <hr className="mt-8" />
@@ -81,11 +91,21 @@ export default function AdminProductForm() {
             <Input type="radio" id="productType[file]" name="productType" label="Download File" value="file" onChange={() => setProductType("file")} labelProps={{ className: "flex items-center mb-1" }} checked={productType === "file"} />
           </div>
           <div className="mt-6">
-            {productType === "stock" && <InputValidation type="text" label='Stock' key="stock" id="stock" name="stock" placeholder="0" defaultValue={product?.stock} />}
-            {productType === "downloadUrl" && <InputValidation type="text" label='Download URL' key="downloadUrl" id="downloadUrl" name="downloadUrl" placeholder="https://fiebrediseno.empretienda.com.ar/plantillas-para-redes/flower-power-kit-de-dibujos" defaultValue={product?.downloadUrl} />}
+            {productType === "stock" && (
+              <ValidateInput name="stock">
+                <Input type="text" key="stock" id="stock" name="stock" label='Stock' placeholder="0" defaultValue={product?.stock} />
+              </ValidateInput>
+            )}
+            {productType === "downloadUrl" && (
+              <ValidateInput name="downloadUrl">
+                <Input type="text" key="downloadUrl" id="downloadUrl" name="downloadUrl" label='Download URL' placeholder="https://fiebrediseno.empretienda.com.ar/plantillas-para-redes/flower-power-kit-de-dibujos" defaultValue={product?.downloadUrl} />
+              </ValidateInput>
+            )}
             {productType === "file" && (
               <>
-                <InputValidation type="file" label="File" id="file" name="file" />
+                <ValidateInput name="file">
+                  <Input type="file" label="File" id="file" name="file" />
+                </ValidateInput>
                 <p className='mb-2'>{product?.file?.url}</p>
               </>
             )}
@@ -96,10 +116,14 @@ export default function AdminProductForm() {
 
         <fieldset className="mt-4">
           <div className="mt-6">
-            <InputValidation type="text" label='Tags' key="tags" id="tags" name="tags" placeholder="illustration, sunset, beer" defaultValue={product?.tags} />
+            <ValidateInput name="tags">
+              <Input type="text" label='Tags' key="tags" id="tags" name="tags" placeholder="illustration, sunset, beer" defaultValue={product?.tags} />
+            </ValidateInput>
           </div>
           <div className="mt-6">
-            <InputValidation type="text" label='Slug' key="slug" id="slug" name="slug" placeholder="my-custom-slug-for-SEO" defaultValue={product?.slug} />
+            <ValidateInput name="slug">
+              <Input type="text" label='Slug' key="slug" id="slug" name="slug" placeholder="my-custom-slug-for-SEO" defaultValue={product?.slug} />
+            </ValidateInput>
           </div>
         </fieldset>
 
@@ -107,14 +131,16 @@ export default function AdminProductForm() {
         <hr className="mt-8" />
         <fieldset className="mt-4">
           <div className="inline-block">
-            <InputValidation type="checkbox" label="Save as draft" id="draft" name="draft" defaultChecked={true} />
+            <ValidateInput name="draft">
+              <Input type="checkbox" label="Save as draft" id="draft" name="draft" defaultChecked={true} />
+            </ValidateInput>
           </div>
         </fieldset>
 
         <fieldset className="mt-4">
           <input type="hidden" name="state" value={JSON.stringify(location.state) || ""} />
           <input type="hidden" name="referrer" value={referrer} />
-          <InputValidation type="hidden" id="id" name="id" value={product?._id} />
+          <input type="hidden" id="id" name="id" value={product?._id} />
           <InputSubmit label="Save" />
         </fieldset>
       </ValidatedForm>

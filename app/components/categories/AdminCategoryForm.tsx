@@ -1,12 +1,17 @@
-import { Form, useActionData, useLoaderData, useLocation, useNavigation, useSearchParams } from "@remix-run/react";
-import cx from "clsx";
-
-import InputFilePreview from "~/components/form/input-file-preview/InputFilePreview";
-import Button from "~/components/button/Button";
-import UploadedImages from "~/components/form/input-file-preview/UploadedImages";
+import { useActionData, useLoaderData, useLocation, useNavigation, useSearchParams } from "@remix-run/react";
+import { ValidatedForm } from "remix-validated-form";
 
 import { Category } from "~/types/global.type";
 import { AdminCategoryActionForm, CATEGORY_PARAMS } from "~/server/controllers/categories.controller";
+import { productValidator } from "~/server/zod/category.zod";
+
+import Button from "~/components/button/Button";
+import { InputImageList, showUploadAtom } from "~/components/form/input-file-preview/UploadedImages";
+import InputFilePreview from "../form/input-file-preview/InputFilePreview";
+import { useAtom } from "jotai";
+import ValidateInput from "../form/ValidateInput";
+import Input from "../form/Input";
+import { Select } from "../form/Select";
 
 function getErrorText(errorMessage: string) {
     if (errorMessage.includes("duplicate key")) {
@@ -23,7 +28,7 @@ export default function AdminCategoryForm() {
     const actionData = useActionData<AdminCategoryActionForm>() as AdminCategoryActionForm;
     const navigation = useNavigation()
     const location = useLocation();
-
+    const [showUploadFile] = useAtom(showUploadAtom)
 
     const isSubmitting = navigation.state === "submitting";
     const filteredCategories = categories.filter(c => c.slug !== category?.slug)
@@ -32,36 +37,37 @@ export default function AdminCategoryForm() {
         <div className="container">
             <h1 className="h1 text-2xl font-600 tracking-tight">{Boolean(category) ? 'Edit Category' : 'New Category'}</h1>
             <nav className="navigation-back">
-                <a href="#" onClick={() => history.back()}>Volver</a>
+                <Button variant="link" asChild>
+                    <a href="#" onClick={() => history.back()}>Volver</a>
+                </Button>
             </nav>
-            <Form method="post" encType="multipart/form-data">
+            <ValidatedForm validator={productValidator} method="post" encType="multipart/form-data">
                 {actionData?.error?.message && (
                     <div className="box paper message mt-1 bg-danger">
                         {getErrorText(actionData?.error?.message)}
                     </div>
                 )}
                 <fieldset>
-                    <label htmlFor="type">
-                        Parent Category
-                    </label>
-                    <select id="parentId" name="parentId" defaultValue={category?.parentId || selectedParentCategory?._id || undefined}>
+                    <Select id="parentId" name="parentId" label="Parent Category" defaultValue={category?.parentId || selectedParentCategory?._id || undefined}>
                         <option value="">No parent category</option>
                         {filteredCategories.map((parentCategory) => (
                             <option key={parentCategory._id} value={parentCategory._id}>
                                 {parentCategory.name}
                             </option>
                         ))}
-                    </select>
+                    </Select>
 
-                    <label htmlFor="name">Category name</label>
-                    <input id="name" name="name" placeholder="Street Art" defaultValue={category?.name} />
+                    <ValidateInput name="name">
+                        <Input id="name" name="name" label="Category name" placeholder="Street Art" defaultValue={category?.name} />
+                    </ValidateInput>
                     {actionData?.error?.fields?.name ? (
                         <em>{actionData?.error.fields.name}</em>
                     ) : null}
                 </fieldset>
 
                 <fieldset>
-                    <UploadedImages id="image" name="image" label="Select image" className='mb-2' source={category?.image} />
+                    <InputImageList source={category?.image} />
+                    {showUploadFile && (<InputFilePreview id="image" name="image" label="Select image" className='mb-2' />)}
                 </fieldset>
 
                 <fieldset>
@@ -69,7 +75,7 @@ export default function AdminCategoryForm() {
                     <input type="hidden" name="_action" value={location.pathname} readOnly />
                     <Button color="primary" type="submit" disabled={isSubmitting}>{isSubmitting ? "Saving..." : "Save"}</Button>
                 </fieldset>
-            </Form>
+            </ValidatedForm>
         </div>
     );
 }

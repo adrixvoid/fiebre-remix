@@ -1,7 +1,3 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -18,13 +14,12 @@
     --secondary-foreground: 271.44 7.9% 15.7%;
     --muted: 220 14.3% 95.9%;
     --muted-foreground: 220 8.9% 46.1%;
-    --accent: 220 14.3% 95.9%;
-    --accent-foreground: 220.9 39.3% 11%;
+    --accent: 318.52 100% 70.16%;
+    --accent-foreground: 0 0% 100%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 20% 98%;
     --border: 220 13% 91%;
     --input: 220 13% 91% / 11%;
-    --border-input: 220 11.22% 83.59%;
     --ring: 327.1 83.3% 57.8%;
     --radius: 0.5rem;
   }
@@ -40,38 +35,19 @@
       --button: 260 28.13% 25.1%;
       --button-foreground: 210 20% 98%;
       --primary: 318 80% 79%;
-      --primary-foreground: 270.57 27.58% 7.1%;
+      --primary-foreground: 270.57deg 42.98% 15.97%;
       --secondary: 240.92 28.18% 19.35%;
       --secondary-foreground: 210 20% 98%;
       --muted: 240.92 28.18% 19.35%;
       --muted-foreground: 217.9 10.6% 64.9%;
-      --accent: 260 41.45% 9.18%;
-      --accent-foreground: 210 20% 98%;
+      --accent: 78.82 100% 60%;
+      --accent-foreground: 260 41.45% 9.18%;
       --destructive: 337 86% 37%;
       --destructive-foreground: 210 20% 98%;
       --border: 240.92deg 28.18% 19.35%;
       --border: 260 28.13% 25.1%;
-      --border-input: 264.52 27.9% 16.9%;
       --input: 242 25% 19% / 18%;
       --ring: 263.4 70% 50.4%;
     }
   }
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-
-.border-input {
-  border-color: hsl(var(--border-input));
-}
-
-.text-button {
-  color: hsl(var(--button-foreground));
 }

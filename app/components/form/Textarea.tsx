@@ -1,6 +1,6 @@
 import cx from 'clsx';
 import cva from 'class-variance-authority';
-import Label from './Label';
+import { Label } from './Label';
 import { forwardRef } from 'react';
 
 export interface TextAreaProps

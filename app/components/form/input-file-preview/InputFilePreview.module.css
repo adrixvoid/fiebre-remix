@@ -26,30 +26,13 @@
     border-top: 0;
 }
 
-.itemFooter {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: var(--unit);
-    padding: 2rem;
-}
-
 .badge {
-    background: var(--badge-bg);
-    color: var(--badge-color);
-    border-radius: calc(var(--border-radius) * 4);
-    border: 1px solid var(--badge-border-color);
-    box-shadow: var(--shadow);
-    padding: 2px var(--unit);
-    margin-right: var(--unit);
     overflow: hidden;
     white-space: nowrap;
     display: inline-block;
     text-overflow: ellipsis;
     max-width: 100%;
+    font-size: 0.8rem;
 }
 
 .image {
@@ -64,17 +47,25 @@
 }
 
 .label {
+    --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / .05);
+    --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
     cursor: pointer;
     padding: 2rem 1rem;
-    border: 0.2em dashed hsl(var(--border));
+    background-color: hsl(var(--input));
+    border: 1px dashed hsl(var(--border));
     display: block;
     text-align: center;
     transition: background-color .1s ease-in-out;
     will-change: background-color;
+    margin-top: 2rem;
+}
+
+.label:hover {
+    background-color: color-mix(in hsl, hsl(var(--input)), hsl(var(--foreground)) 2%);
 }
 
 .label:focus,
 .label:focus-within,
 .label:focus-visible {
-    outline: 2px solid var(--input-outline-color);
+    outline: 2px solid var(--ring);
 }

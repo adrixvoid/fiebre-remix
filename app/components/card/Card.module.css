@@ -1,0 +1,43 @@
+.card {
+  background-color: hsl(var(--card));
+  color: hsl(var(--card-foreground));
+  border-width: 1px;
+  border-radius: .75rem;
+  border-style: solid;
+}
+
+.header {
+  display: flex;
+  padding: 1.5rem 1.5rem 0.2rem 1.5rem;
+  /* "flex-col space-y-1.5 p-6" */
+}
+
+.title {
+  letter-spacing: -.025em;
+  line-height: 1;
+  font-weight: 600;
+}
+
+.description {
+  font-size: .875rem;
+  line-height: 1.25rem;
+  color: hsl(var(--muted-foreground));
+  /* "text-muted-foreground" */
+}
+
+.content {
+  padding: 1.5rem;
+  padding-top: 0;
+}
+
+.image {
+  padding: 1rem;
+  border-radius: var(--radius);
+}
+
+.footer {
+  display: flex;
+  padding: 1.5rem;
+  padding-top: 0;
+  align-items: center;
+}

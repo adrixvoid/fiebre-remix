@@ -7,7 +7,7 @@ import Logo from "~/components/svg/Logo";
 import { Link, NavLink } from "~/components/link/Link";
 import styles from "~/styles/admin.css";
 import { Nav } from "~/components/nav/Nav";
-import { Button } from "~/components/ui/button";
+import { Button } from "~/components/button/Button";
 
 export const meta: MetaFunction = () => {
   return [
@@ -35,7 +35,7 @@ export default function Admin() {
         <div className={`container static flex gap-2`}>
           <span className="sr-only">{SITE_NAME}</span>
           <Link to="/admin" className="flex items-center gap-1">
-            <Logo aria-hidden className="h-10" />
+            <Logo aria-hidden className="logo" />
             <span className="ml-1">Admin</span>
           </Link>
           <Nav className='flex-1 justify-end'>
@@ -54,7 +54,7 @@ export default function Admin() {
           <Nav className="text-sm flex items-center align-center gap-2 pt-2">
             <Link to="/about">Sobre mi</Link>
             <Link to="/products">Tienda</Link>
-            <Link to="/posts">Portafolio</Link>
+            <Link to="/portfolio">Portafolio</Link>
             <Link to="/blog">Blog</Link>
           </Nav>
         </div>

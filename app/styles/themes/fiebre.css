@@ -57,6 +57,7 @@ bkp
 */
 @layer base {
   :root {
+    --logoSVG: #ff4dd5;
     --background: hsl(0 0% 100%);
     --foreground: hsl(271.44 7.9% 15.7%);
     --card: hsl(0 0% 100%);
@@ -100,7 +101,6 @@ bkp
     --destructive-foreground: hsl(210 20% 98%);
     --border: hsl(240.92deg 28.18% 19.35%);
     --border: hsl(260 28.13% 25.1%);
-    --border-input: hsl(264.52 27.9% 16.9%);
     --input: hsl(242 25% 19% / 18%);
     --ring: hsl(263.4 70% 50.4%);
 

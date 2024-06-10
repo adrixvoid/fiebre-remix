@@ -1,4 +1,4 @@
-import Label from "./Label";
+import { Label } from "./Label";
 
 export interface InputCheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;

@@ -1,0 +1,177 @@
+.button {
+    display: inline-flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+
+    border-radius: calc(var(--radius) - 2px);
+    font-size: .875rem;
+    line-height: 1.25rem;
+    font-weight: 500;
+
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+    transition-duration: .15s;
+    will-change: color, background-color, border-color, text-decoration-color, fill, stroke;
+}
+
+.button:has(>svg) {
+    padding-block: 0;
+}
+
+.button:active,
+.button:hover {
+    cursor: pointer;
+    box-shadow: var(--tw-shadow-hover);
+}
+
+.button:focus-within,
+.button:focus-visible {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    box-shadow: var(--tw-ring-offset-shadow);
+}
+
+.button:disabled,
+.button:disabled:hover,
+.button:disabled:active,
+.button:disabled:focus-within {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+/**
+    Button Color
+*/
+
+.base {
+    background-color: hsl(var(--button));
+    fill: hsl(var(--button-foreground));
+    color: hsl(var(--button-foreground));
+}
+
+.base:hover {
+    background-color: hsl(var(--button-foreground) / .05);
+    color: hsl(var(--foreground));
+    fill: hsl(var(--foreground));
+}
+
+.primary {
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+}
+
+.primary:hover {
+    background-color: hsl(var(--primary) / .8);
+}
+
+.secondary {
+    background-color: hsl(var(--secondary));
+    color: hsl(var(--secondary-foreground));
+}
+
+.secondary:hover {
+    background-color: hsl(var(--secondary) / .8);
+}
+
+.outline {
+    background: transparent;
+    border-width: 1px;
+    border-style: solid;
+}
+
+.link:focus,
+.link:focus-within,
+.link:hover,
+.outline:focus,
+.outline:focus-within,
+.outline:hover {
+    background-color: hsl(var(--button-foreground) / .05);
+    color: hsl(var(--button-foreground));
+    fill: hsl(var(--button-foreground));
+}
+
+.dashed {
+    border-style: dashed;
+    border-width: 1px;
+}
+
+.dashed:hover,
+.dashed:focus-within,
+.dashed:hover {
+    background-color: hsl(var(--button-foreground) / .05);
+    color: hsl(var(--button-foreground));
+    fill: hsl(var(--button-foreground));
+}
+
+.accent {
+    background: hsl(var(--accent));
+    color: hsl(var(--foreground));
+    fill: hsl(var(--foreground));
+}
+
+.destructive {
+    fill: hsl(var(--destructive-foreground));
+    background-color: hsl(var(--destructive));
+    color: hsl(var(--destructive-foreground));
+}
+
+.destructive:hover {
+    background-color: hsl(var(--destructive) / .8);
+}
+
+.link {
+    text-decoration: none;
+    border-radius: 0.35rem;
+    line-height: 1;
+}
+
+.link:hover,
+.link:focus-within,
+.link:hover {
+    text-underline-offset: 4px;
+    text-decoration-line: underline;
+}
+
+/**
+    Button Sizes
+*/
+
+.small {
+    gap: 0.45rem;
+    padding-left: .75rem;
+    padding-right: .75rem;
+    height: 2rem;
+    min-width: 2rem;
+    font-size: .75rem;
+    line-height: 1rem;
+}
+
+.medium {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    min-width: 2.25rem;
+    height: 2.25rem;
+}
+
+.large {
+    gap: 0.55rem;
+    padding-left: 1.75rem;
+    padding-right: 1.75rem;
+    min-width: 2.5rem;
+    height: 2.5rem;
+}
+
+
+/* Icons */
+
+.button svg {
+    width: 16px;
+    height: 16px;
+    width: 1.9cap;
+    height: 1.9cap;
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+}

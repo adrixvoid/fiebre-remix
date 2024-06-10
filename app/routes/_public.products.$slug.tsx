@@ -1,29 +1,13 @@
-import type { LoaderFunctionArgs, ActionFunctionArgs, LinksFunction } from "@remix-run/node";
+import type { LoaderFunctionArgs, ActionFunctionArgs } from "@remix-run/node";
 import { useFetcher, useLoaderData, useRouteError } from "@remix-run/react"
 import { json } from "@remix-run/node";
 import productModel from '~/server/schema/product.schema';
-import { FolderPlus } from "lucide-react";
 
 import type { MapImage, Product } from "~/types/global.type";
 
-import mdStyles from "~/styles/markdown.css";
-import styles from "~/styles/product.css";
-import FooterTienda from "~/components/Footer";
-import Button from "~/components/button/Button";
-import { getFormattedPrice, accessibilityPrice } from "~/i18n/money";
-import { t } from "~/i18n/translate";
-import { Link } from "~/components/link/Link";
+import { parse } from '~/server/utils/marked';
 
-export const links: LinksFunction = () => [
-    {
-        rel: "stylesheet",
-        href: mdStyles,
-    },
-    {
-        rel: "stylesheet",
-        href: styles,
-    },
-];
+import { ProductButtonAddToCart, ProductDescription, ProductGallery, ProductGrid, ProductImagePreview, ProductPrice, ProductQuantity, ProductTags, ProductTitle } from "~/components/products/detail/ProductDetail";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
     try {
@@ -42,6 +26,8 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
         if (gallery.length > 1) {
             gallery.shift()
         }
+
+        product.description = await parse(product.description || '');
 
         return { product, gallery };
     } catch (error) {
@@ -83,89 +69,38 @@ export async function action({ request }: ActionFunctionArgs) {
 function ProductPage() {
     const fetcher = useFetcher({ key: "add-to-bag" });
     const { product, gallery } = useLoaderData<typeof loader>() as { product: Product, gallery: MapImage[] };
-    const { title, description, preview, priceInCents, tags, images, priceHidden } = product;
+    const { title, description, priceInCents, tags, images, priceHidden } = product;
 
     return (
-        <>
-            <section className="product">
-                <div className="container">
-                    <nav className="navigation-back">
-                        <Link to="/products">
-                            <span className="sr-only">Volver a la tienda</span>
-                            <span aria-hidden>Volver</span>
-                        </Link>
-                    </nav>
-                    <div className="product-flex">
-                        <div className="left">
-                            <div className="image-preview">
-                                <img src={images?.[0].fileName} alt={title} />
-                            </div>
-                            <div className="product-images">
-                                {gallery.map((image) => (
-                                    <img key={image.fileName} src={image.url} alt={title} />
-                                ))}
-                            </div>
-                        </div>
-                        <div className="right">
-                            <div className="title">
-                                <h1 itemProp="name">{title}</h1>
-                            </div>
-                            {!priceHidden &&
-                                <p
-                                    className="price h4"
-                                    itemProp="offers"
-                                    itemScope={false}
-                                    itemType="http://schema.org/Offer"
-                                >
-                                    <meta itemProp="price" content="35129" />
-                                    <span className="price-label">Precio:</span>{' '}
-                                    <span className="sr-only">{accessibilityPrice(priceInCents)}</span>
-                                    <span className="price-value" aria-hidden>
-                                        {priceInCents === 0 ? "Gratis" : getFormattedPrice(priceInCents)}
-                                    </span>
-                                    {priceInCents > 0 && <span className="sr-only">pesos argentinos</span>}
-                                </p>}
-                            {!priceHidden && priceInCents > 0 &&
-                                <div className="payment-options">
-                                    <a href="#home">Ver formas de pago</a>
-                                </div>}
-                            <div className="right">
-                                <fetcher.Form method="post">
-                                    {!priceHidden && priceInCents > 0 &&
-                                        <div className="quantity input">
-                                            <label htmlFor="product-quantity">
-                                                <span className="sr-only">Quantity</span>
-                                                <span className="product-quantity-label" aria-hidden>Qty.</span>
-                                            </label>
-                                            <input id="product-quantity" name="product-quantity" type="number" defaultValue="1" />
-                                        </div>
-                                    }
-                                    <div className="buy">
-                                        <Button variant="primary" size="lg" className="text-lg">
-                                            <FolderPlus width={24} height={24} />
-                                            {!priceHidden ? t("ADD_TO_CART") : t("INQUIRE")}
-                                        </Button>
-                                    </div>
-                                </fetcher.Form>
-                            </div>
-                            <div itemProp="description" className="description">
-                                <div dangerouslySetInnerHTML={{ __html: description || '' }} />
-                            </div>
-                            {tags &&
-                                <div className="tags">
-                                    <span>Tags</span>
-                                    <ul>
-                                        {tags.map((tag) => (
-                                            <li key={tag}>{tag}</li>
-                                        ))}
-                                    </ul>
-                                </div>}
-                        </div>
+        <section id="product-detail">
+            <div className="container">
+
+                <ProductGrid>
+                    <div>
+                        <ProductImagePreview src={images?.[0].fileName} />
+                        <ProductGallery images={gallery} />
                     </div>
-                </div>
-            </section>
-            <FooterTienda />
-        </>
+                    <div>
+                        <ProductTitle title={title} />
+                        {!priceHidden && <ProductPrice priceInCents={priceInCents} />}
+                        {!priceHidden && priceInCents > 0 &&
+                            <div className="payment-options">
+                                <a href="#home">Ver formas de pago</a>
+                            </div>}
+                        <div>
+                            <fetcher.Form method="post">
+                                {!priceHidden && priceInCents > 0 &&
+                                    <ProductQuantity />
+                                }
+                                <ProductButtonAddToCart priceHidden={priceHidden} />
+                            </fetcher.Form>
+                        </div>
+                        {description && <ProductDescription description={description} />}
+                        {tags && <ProductTags tags={tags} />}
+                    </div>
+                </ProductGrid>
+            </div>
+        </section>
     )
 }
 

@@ -5,7 +5,7 @@ import TextArea, { TextAreaProps } from '../Textarea';
 import Button from '~/components/button/Button';
 import { atom, useAtom } from 'jotai';
 import useDebounce from '~/hooks/useDebounce';
-import Label from '../Label';
+import { Label } from '../Label';
 
 const historyAtom = atom<string[]>([])
 const historyIndexAtom = atom(-1)

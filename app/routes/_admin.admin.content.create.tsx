@@ -1,7 +1,7 @@
 import { Form, useNavigation } from "@remix-run/react";
 import { type LoaderFunction, type ActionFunction } from "@remix-run/node";
 
-import { CONTENT_TYPE } from "~/constants";
+import { MARKDOWN_TYPE } from "~/constants";
 
 import { contentAction, contentLoader } from "~/server/controllers/content.controller";
 import Button from "~/components/button/Button";
@@ -24,9 +24,9 @@ export default function UploadContent() {
                         Content Type
                     </label>
                     <select id="type" name="type">
-                        {Object.keys(CONTENT_TYPE).map((key) => (
+                        {Object.keys(MARKDOWN_TYPE).map((key) => (
                             <option key={key} value={key}>
-                                {CONTENT_TYPE[key as keyof typeof CONTENT_TYPE]}
+                                {MARKDOWN_TYPE[key as keyof typeof MARKDOWN_TYPE]}
                             </option>
                         ))}
                     </select>

@@ -2,13 +2,16 @@ import path from 'path';
 import fs from 'fs/promises';
 
 import {
-  getDirectoryPath,
-  readMarkdownDocument,
+  getPath,
+  getDocument,
   type MarkdownDocument,
-  type ContentType
+  type MarkdownType,
+  readMarkdownFile
 } from '../utils/front-matter';
 import {parse} from '../utils/marked';
 import {slugify} from '~/lib/url';
+import {sanitizeUrl} from '~/lib/sanitizeUrl';
+import {FRONT_MATTER_FOLDER} from '~/constants';
 
 export interface MarkdownPost extends MarkdownDocument {
   type: string;
@@ -16,11 +19,6 @@ export interface MarkdownPost extends MarkdownDocument {
     name: string;
     url: string;
   }[];
-}
-
-// ${images?.map((image) => formatImage(image.url, image.name)).join('\n')}
-function formatImage(url: string, name: string): string {
-  return `![${name}](${url})`;
 }
 
 export const template = ({
@@ -42,11 +40,21 @@ ${body}
 `;
 
 const markdownService = {
-  read: async (
-    type: ContentType,
+  read: async (url: string): Promise<MarkdownDocument | null> => {
+    const sanitizedPath = sanitizeUrl(url);
+    const filepath = path.join(FRONT_MATTER_FOLDER, `${sanitizedPath}.md`);
+    const markdownDocument = await readMarkdownFile(filepath);
+    if (!markdownDocument) {
+      return null;
+    }
+    markdownDocument.body = await parse(markdownDocument.body || '');
+    return markdownDocument;
+  },
+  readType: async (
+    type: MarkdownType,
     slug: string
   ): Promise<MarkdownDocument | undefined> => {
-    const file = await readMarkdownDocument(type, `${slug}.md`);
+    const file = await getDocument(type, `${slug}.md`);
     if (file?.body) {
       file.body = await parse(file.body);
       return file;
@@ -57,7 +65,11 @@ const markdownService = {
   create: async (post: MarkdownPost): Promise<boolean> => {
     try {
       // if directory does not exist, create it
-      const directory = await getDirectoryPath(post.type as ContentType);
+      const directory = await getPath(post.type as MarkdownType);
+
+      if (!directory) {
+        return false;
+      }
 
       // if file already exists, throw error
       const fileNames = await fs.readdir(directory);

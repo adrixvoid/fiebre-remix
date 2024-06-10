@@ -1,15 +1,24 @@
 import cx from 'clsx';
+import { cva, type VariantProps } from "class-variance-authority"
+
+import styles from './Label.module.css'
+
+const labelVariants = cva(styles.label)
 
 export interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
   name?: string;
 }
 
-export function Label({ children, id, name, className, ...rest }: LabelProps) {
+function Label({ id, name, className, ...rest }: LabelProps & VariantProps<typeof labelVariants>) {
   return (
-    <label className={cx("w-full mb-2", className)} htmlFor={String(id ? id : name)} {...rest}>
-      {children}
-    </label>
+    <label
+      className={cx(labelVariants(), className)}
+      htmlFor={String(id ? id : name)}
+      {...rest}
+    />
   )
 }
 
-export default Label;
+Label.displayName = "Label"
+
+export { Label }

@@ -1,3 +1,27 @@
+/* :root {
+    --input-color-placeholder: #cacaca;
+    --input-bg: #fefefe;
+    --input-bg-hover: #f8f8f8;
+    --input-bg-focus: #ffffff;
+    --input-shadow: inset 0 1px 1px #eaeaea;
+    --input-shadow-focus: inset 0 2px 4px hsla(var(--shadow-color));
+    --accent: var(--accent-bg);
+    --ring: var(--accent-bg);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --input-color-placeholder: #544570;
+        --input-bg: #3e3159;
+        --input-bg-hover: #382c51;
+        --input-bg-focus: #40325f;
+        --accent: hsl(var(--color-brand));
+        --input-shadow: inset 2px 2px 1px #261545;
+        --ring: #d2fc00b0;
+    }
+} */
+
+
 label[for] {
     cursor: pointer;
 }
@@ -8,37 +32,38 @@ select {
     background-color: hsl(var(--input));
     border-width: 1px;
     border-style: solid;
-    border-color: hsl(var(--border-input));
+    border-color: hsl(var(--border));
     border-radius: calc(var(--radius) - 4px);
     transition: all 0.05s ease-in-out;
     will-change: border-color;
     padding: 0.2rem 0.4rem;
     box-sizing: border-box;
     display: inline-block;
+    color: hsl(var(--foreground))
 }
 
 input:hover,
 textarea:hover,
 select:hover {
-    background-color: hsl(var(--accent));
+    background-color: color-mix(in srgb, hsl(var(--input)), hsl(var(--foreground)) 3%)
 }
 
 input:-webkit-autofill,
 input:-webkit-autofill:focus {
-    background-color: var(--paper-bg) !important;
-    color: var(--body-text) !important;
+    background-color: hsl(var(--input)) !important;
+    color: hsl(var(--foreground)) !important;
 }
 
 input[type="checkbox"],
 input[type="radio"] {
     cursor: pointer;
     appearance: none;
-    width: calc(var(--unit) * 2);
-    height: calc(var(--unit) * 2);
+    width: 1rem;
+    height: 1rem;
     border-radius: var(--border-radius-sm);
     transition: all 0.05s ease-in-out;
     will-change: border-color;
-    padding: var(--unit);
+    padding: 0.5rem;
 }
 
 input[type="radio"] {
@@ -47,16 +72,16 @@ input[type="radio"] {
 
 input[type="checkbox"]:checked,
 input[type="radio"]:checked {
-    border-color: var(--input-bg-checked);
+    border-color: hsl(var(--accent));
 }
 
 input[type="checkbox"]:checked::after,
 input[type="radio"]:checked::after {
     content: "";
     display: block;
-    width: 0.8rem;
-    height: 0.8rem;
-    background-color: var(--input-bg-checked);
+    width: .7rem;
+    height: .7rem;
+    background-color: hsl(var(--accent));
     position: relative;
     top: 50%;
     left: 50%;
@@ -72,21 +97,21 @@ input[type="radio"]:checked::after {
 }
 
 input[type="checkbox"]:disabled,
-input[type="radio"]:disabled {
-    background-color: var(--input-bg-disabled);
-    color: var(--input-color-disabled);
-    border-color: var(--border-input-disabled);
-}
-
-input[type="checkbox"]:checked:disabled,
 input[type="checkbox"]:disabled,
-input[type="radio"]:checked:disabled,
-input[type="radio"]:disabled {
-    cursor: not-allowed;
-}
-
+input[type="checkbox"]:checked:disabled,
 input[type="checkbox"]:disabled:focus,
-input[type="radio"]:disabled:focus {
+input[type="radio"]:checked:disabled,
+input[type="radio"]:disabled,
+input[type="radio"]:disabled,
+input[type="radio"]:disabled:focus,
+input:disabled,
+textarea:disabled,
+select:disabled,
+input:disabled:focus,
+textarea:disabled:focus,
+select:disabled:focus {
+    opacity: 0.5;
+    cursor: initial;
     outline: none;
 }
 
@@ -96,61 +121,44 @@ select {
     background-repeat: no-repeat;
     background-position: 98% center;
     background-size: 1.5rem;
-    padding-right: calc(var(--unit) * 3);
+    padding-right: 1.5rem;
 }
 
-.input:focus,
-.input:focus-within,
+input:focus-within,
 input:focus,
 textarea:focus,
 select:focus,
 input[type="checkbox"]:hover,
 input[type="radio"]:hover {
-    outline: 2px solid var(--input-outline-color);
-}
-
-input:disabled,
-textarea:disabled,
-select:disabled {
-    background-color: var(--input-bg-disabled);
-    color: var(--input-color-disabled);
-    border-color: var(--border-input-disabled);
-    cursor: not-allowed;
-}
-
-input:disabled:focus,
-textarea:disabled:focus,
-select:disabled:focus {
-    outline: none;
+    outline: 1px solid hsl(var(--ring));
 }
 
 input::placeholder,
 textarea::placeholder,
 select::placeholder {
-    color: var(--input-color-placeholder);
+    color: color-mix(in srgb, hsl(var(--foreground)), transparent 90%)
 }
 
 input:disabled::placeholder,
 textarea:disabled::placeholder,
 select:disabled::placeholder {
-    color: var(--input-bg-disabled);
+    opacity: 0.5;
 }
 
 input[type="submit"] {
     border: none;
     cursor: pointer;
-    background-color: hsl(var(--background));
-    color: var(--button-color);
+    background-color: hsl(var(--button));
+    color: hsl(var(--button-foreground));
 }
 
 input[type="submit"]:hover {
     background-color: hsl(var(--accent));
-    color: var(--button-color-hover);
+    color: color-mix(in hsl, hsl(var(--button)), hsl(var(--button-foreground)) 20%);
 }
 
 input[type="submit"]:disabled {
-    background-color: var(--button-bg-disabled);
-    color: var(--button-color-disabled);
+    opacity: 0.5;
     cursor: not-allowed;
 }
 
@@ -169,26 +177,26 @@ fieldset label:has(input) {
 }
 
 textarea {
-    min-height: 4rem;
+    min-height: 2.2rem;
 }
 
 /* Custom styles */
 input.error {
-    border-color: var(--color-danger);
+    border-color: hsl(var(--destructive));
 }
 
 input[type=file]::file-selector-button {
     padding: .8rem 2rem;
-    background-color: hsl(var(--background));
-    color: var(--button-color);
-    fill: var(--button-color);
+    background-color: hsl(var(--button));
+    color: hsl(var(--button-foreground));
+    fill: hsl(var(--button-foreground));
     padding: .4em .4em;
     border-radius: .2em;
     transition: 0.5s;
 }
 
-input[type=file]::file-selector-button:hover {
-    background-color: hsl(var(--accent));
-    color: var(--button-color-hover);
-    fill: var(--button-color-hover);
+input[type=file]:hover::file-selector-button {
+    background-color: hsl(var(--button));
+    color: hsl(var(--button-foreground));
+    fill: hsl(var(--button-foreground));
 }

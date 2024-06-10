@@ -2,7 +2,7 @@ import { Trash2 } from 'lucide-react';
 import cx from 'clsx';
 
 import { t } from '~/i18n/translate';
-import { Button } from '~/components/ui/button';
+import { Button } from '~/components/button/Button';
 
 import useFilePreview from './useFilePreview'
 import { FilePreview } from './InputFilePreview.types';
@@ -72,7 +72,7 @@ export default function InputFilePreview({
                                 <span className={`${styles.badge} text-sm`}>{file.name}</span>
                             </div>
                             <Button aria-label="delete" type="button" variant="destructive" size='sm' onClick={() => removePreview(file.name)}>
-                                <Trash2 strokeWidth={1.75} className="h-5 w-5" />
+                                <Trash2 strokeWidth={1.5} />
                                 {t('GLOBAL.DELETE')}
                             </Button>
                         </li>
@@ -80,7 +80,7 @@ export default function InputFilePreview({
                 </ul>
             }
             <label role="button"
-                className={cx("border text-button bg-input shadow-sm hover:bg-accent mt-2", styles.label, { "mt-2": previewList.length > 0 })}
+                className={cx(styles.label, { "mt-2": previewList.length > 0 })}
                 htmlFor={injectedProps.id}
                 {...labelProps}
             >

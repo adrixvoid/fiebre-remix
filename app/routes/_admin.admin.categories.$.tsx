@@ -11,7 +11,7 @@ import { loaderAdminCategoriesList } from "~/server/controllers/categories.contr
 import { AdminCategoryLoaderList, CATEGORY_PARAMS } from "~/server/controllers/categories.controller";
 import { PRODUCT_PARAMS } from "~/server/controllers/products.controller";
 
-import { Button } from "~/components/ui/button";
+import { Button } from "~/components/button/Button";
 import AdminCategoryBreadcrumb from "~/components/categories/AdminCategoryBreadcrumb";
 import AdminProductsTable from "~/components/products/AdminProductsTable";
 import AdminTable from "~/components/table/AdminTable";
@@ -90,8 +90,8 @@ const columns = [
           <Button asChild variant="outline">
             <Link to={editPath}>{t('GLOBAL.EDIT')}</Link>
           </Button>
-          <Button onClick={handleOnDelete} aria-label="delete" size='icon' disabled={isDisabled} variant="destructive">
-            <Trash2 className="h-5 w-5" />
+          <Button onClick={handleOnDelete} aria-label="delete" disabled={isDisabled} variant="destructive">
+            <Trash2 />
             <span className="sr-only">{t('GLOBAL.DELETE')}</span>
           </Button>
         </div>

@@ -1,8 +1,11 @@
 export const SITE_NAME = 'Fiebre';
 
-export const CONTENT_TYPE = {
+// @see frontmatter.json config file
+export const FRONT_MATTER_FOLDER = 'content';
+
+export const MARKDOWN_TYPE = {
   blog: 'Blog',
-  post: 'Post',
+  portfolio: 'Portfolio',
   page: 'Page'
 };
 
@@ -18,8 +21,7 @@ export const ROUTE_PATH = {
   ABOUT: '/about',
   BLOG: '/blog',
   CONTACT: '/contact',
-  POSTS: '/posts',
-  POST: '/post',
+  PORTFOLIO: '/portfolio',
   STORE: '/products',
   PRODUCT: '/products',
   NOT_FOUND: '/404'

@@ -1,0 +1,106 @@
+.list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.title {
+  font-size: 2.5rem;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+  margin-inline: auto;
+  margin-block: 3.5rem;
+  max-width: 48rem;
+  text-align: center;
+}
+
+.articles article>div {
+  height: 100%;
+}
+
+.preview {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 60dvh;
+  width: 100%;
+  margin: 2rem auto;
+  text-align: center;
+}
+
+.markdown-content {
+  max-width: 60rem;
+  max-width: 48rem;
+  margin-inline: auto;
+}
+
+.markdown-content>* {
+  margin-bottom: 2rem;
+}
+
+.markdown-content>*:not(img):not(figure) {
+  max-width: 48rem;
+  /* margin-left: auto;
+  margin-right: auto; */
+}
+
+.markdown-content figure {
+  margin: 0;
+}
+
+.markdown-content p {
+  font-size: var(--text-base);
+}
+
+.markdown-content img {
+  width: 100%;
+  display: block;
+  object-fit: contain;
+  aspect-ratio: 16 / 9;
+}
+
+.markdown-content figcaption {
+  background-color: hsl(var(--card));
+  padding: 0.5rem;
+}
+
+.markdown-content blockquote {
+  margin: 2.5rem 0;
+  padding: 2rem 1rem;
+  border-radius: var(--radius);
+  background-color: hsl(var(--card));
+}
+
+.markdown-content blockquote p {
+  margin: 0;
+}
+
+.markdown-content h1 {
+  font-size: var(--text-2xl);
+  line-height: 2rem;
+}
+
+.markdown-content h2 {
+  font-size: var(--text-xl);
+  line-height: 1.75rem;
+}
+
+.markdown-content h3 {
+  font-size: var(--text-lg);
+  line-height: 1.75rem;
+}
+
+.markdown-content h4 {
+  font-size: var(--text-base);
+  line-height: 1.5rem;
+}
+
+.markdown-content h5 {
+  font-size: var(--text-sm);
+  line-height: 1.25rem;
+}
+
+.markdown-content h6 {
+  font-size: var(--text-xs);
+  line-height: 1.2rem;
+}

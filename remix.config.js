@@ -6,6 +6,6 @@ export default {
   // publicPath: "/build/",
   // serverBuildPath: "build/index.js",
   devServerPort: 8002,
-  tailwind: true,
+  tailwind: false,
   postcss: true,
 };

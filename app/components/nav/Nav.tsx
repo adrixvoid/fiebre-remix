@@ -1,9 +1,11 @@
 import { ReactNode } from "react";
-import { cn } from "~/lib/utils";
+import { clsx } from "clsx"
+
+import styles from './Nav.module.css'
 
 export function Nav({ children, className }: { children: ReactNode, className?: string }) {
   return (
-    <nav className={cn(className, "text-sm flex items-center align-center gap-3")}>
+    <nav className={clsx(styles.nav, className)}>
       {children}
     </nav>
   )

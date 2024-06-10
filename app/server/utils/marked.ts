@@ -41,3 +41,8 @@ export const parse = async (body: string): Promise<string> => {
     throw new Error('Cannot parse markdown file');
   }
 };
+
+// ${images?.map((image) => formatImage(image.url, image.name)).join('\n')}
+export function formatImage(url: string, name: string): string {
+  return `![${name}](${url})`;
+}

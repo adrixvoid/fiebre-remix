@@ -24,6 +24,7 @@ export interface Category {
   path: string;
   parentId?: string;
   subcategories: Category[];
+  published?: boolean;
   createdAt?: Date;
   updatedAt?: Date;
 }

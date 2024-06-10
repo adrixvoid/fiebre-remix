@@ -12,12 +12,15 @@ function useReferrer() {
     referrer: string;
   }>() as {referrer: string};
   const location = useLocation();
+  const docReferrer =
+    typeof document !== 'undefined' && document.referrer
+      ? document.referrer
+      : '';
 
   return (
     referrerFromParams ||
     (location?.state?.referrer as string) ||
-    encodeURIComponent(document?.referrer) ||
-    ''
+    encodeURIComponent(docReferrer)
   );
 }
 
