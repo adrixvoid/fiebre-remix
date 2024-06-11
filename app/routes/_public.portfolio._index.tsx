@@ -1,10 +1,11 @@
 import { useLoaderData } from "@remix-run/react";
 
 import { getDocuments, MarkdownDocument } from "~/server/utils/front-matter";
-import { MarkdownList, MarkdownSection } from "~/components/markdown/Markdown";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardImage, CardTitle } from "~/components/card/Card";
 import Button from "~/components/button/Button";
 import { ROUTE_PATH } from "~/constants";
+import { Grid } from "~/components/grid/Grid";
+import { Container } from "~/components/container/Container";
 
 export const loader = async () => {
   const documents = await getDocuments('portfolio');
@@ -15,9 +16,9 @@ function Portfolio() {
   const { documents } = useLoaderData<typeof loader>() as { documents: MarkdownDocument[] };
 
   return (
-    <MarkdownSection>
-      <div className="container">
-        <MarkdownList>
+    <section id="portfolio">
+      <Container>
+        <Grid>
           {documents.map((content) => (
             <article key={content.title}>
               <Card>
@@ -36,9 +37,9 @@ function Portfolio() {
               </Card>
             </article>
           ))}
-        </MarkdownList>
-      </div>
-    </MarkdownSection>
+        </Grid>
+      </Container>
+    </section>
   );
 }
 

@@ -12,6 +12,7 @@ import { useAtom } from "jotai";
 import ValidateInput from "../form/ValidateInput";
 import Input from "../form/Input";
 import { Select } from "../form/Select";
+import { Container } from "../container/Container";
 
 function getErrorText(errorMessage: string) {
     if (errorMessage.includes("duplicate key")) {
@@ -34,7 +35,7 @@ export default function AdminCategoryForm() {
     const filteredCategories = categories.filter(c => c.slug !== category?.slug)
 
     return (
-        <div className="container">
+        <Container>
             <h1 className="h1 text-2xl font-600 tracking-tight">{Boolean(category) ? 'Edit Category' : 'New Category'}</h1>
             <nav className="navigation-back">
                 <Button variant="link" asChild>
@@ -76,6 +77,6 @@ export default function AdminCategoryForm() {
                     <Button color="primary" type="submit" disabled={isSubmitting}>{isSubmitting ? "Saving..." : "Save"}</Button>
                 </fieldset>
             </ValidatedForm>
-        </div>
+        </Container>
     );
 }

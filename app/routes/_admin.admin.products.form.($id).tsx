@@ -14,6 +14,7 @@ import { CategorySelect } from "~/components/categories/CategorySelect";
 import useReferrer from "~/hooks/useReferrer";
 import TextEditor from "~/components/form/text-editor/TextEditor";
 import InputFilePreview from "~/components/form/input-file-preview/InputFilePreview";
+import { Container } from "~/components/container/Container";
 
 const priceHidden = atom(false);
 const currentProductType = atom("stock");
@@ -30,7 +31,7 @@ export default function AdminProductForm() {
   const [isPriceHidden, setPriceHidden] = useAtom(priceHidden)
 
   return (
-    <div className="container">
+    <Container>
       <h1 className="h1 text-2xl font-600 tracking-tight">{Boolean(product) ? "Edit Product" : "New Product"}</h1>
       <ValidatedForm
         validator={productValidator}
@@ -144,6 +145,6 @@ export default function AdminProductForm() {
           <InputSubmit label="Save" />
         </fieldset>
       </ValidatedForm>
-    </div >
+    </Container >
   );
 }

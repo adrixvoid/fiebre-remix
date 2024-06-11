@@ -1,0 +1,18 @@
+.skeleton {
+  --skeleton-background-color: color-mix(in hsl, hsl(var(--card-foreground)), hsl(var(--card)) 90%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--skeleton-background-color);
+  color: hsl(var(--foreground));
+}
+
+.radius {
+  border-radius: 50%;
+}
+
+@media (prefers-color-scheme: dark) {
+  .skeleton {
+    --skeleton-background-color: color-mix(in hsl, hsl(var(--background)), hsl(var(--card)) 50%);
+  }
+}

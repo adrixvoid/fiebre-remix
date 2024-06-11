@@ -1,4 +1,4 @@
-export const SITE_NAME = 'Fiebre';
+export const SITE_NAME = 'F I E B R E ®';
 
 // @see frontmatter.json config file
 export const FRONT_MATTER_FOLDER = 'content';
@@ -22,12 +22,12 @@ export const ROUTE_PATH = {
   BLOG: '/blog',
   CONTACT: '/contact',
   PORTFOLIO: '/portfolio',
-  STORE: '/products',
-  PRODUCT: '/products',
+  SHOP: '/shop',
+  SHOP_DETAIL: '/shop/detail',
   NOT_FOUND: '/404'
 };
 
-export const ADMIN_ROUTE_PATH = {
+export const ROUTE_PATH_ADMIN = {
   CATEGORY_LIST: '/admin/categories',
   CATEGORY_CREATE: '/admin/categories/create',
   CATEGORY_EDIT: '/admin/categories/edit',

@@ -1,7 +1,9 @@
+import { Container } from "../container/Container"
+
 function FooterTienda() {
     return (
         <div className="product-footer">
-            <div className="container">
+            <Container>
                 <div className="product-footer-items flex gap-4 items-start" uk-grid="">
                     <div className="">
                         <h5 className="product-footer-title">Medios de pago</h5>
@@ -36,7 +38,7 @@ function FooterTienda() {
                     </div>
 
                 </div>
-            </div>
+            </Container>
         </div>
     )
 }

@@ -46,6 +46,7 @@
 */
 
 .base {
+    border-color: color-mix(in hsl, hsl(var(--button)), hsl(var(--button)) 80%);
     background-color: hsl(var(--button));
     fill: hsl(var(--button-foreground));
     color: hsl(var(--button-foreground));
@@ -58,6 +59,7 @@
 }
 
 .primary {
+    border-color: color-mix(in hsl, hsl(var(--primary)), hsl(var(--button)) 10%);
     background-color: hsl(var(--primary));
     color: hsl(var(--primary-foreground));
 }
@@ -67,6 +69,7 @@
 }
 
 .secondary {
+    border-color: color-mix(in hsl, hsl(var(--secondary)), hsl(var(--button)) 10%);
     background-color: hsl(var(--secondary));
     color: hsl(var(--secondary-foreground));
 }
@@ -76,9 +79,22 @@
 }
 
 .outline {
-    background: transparent;
     border-width: 1px;
     border-style: solid;
+}
+
+.outline,
+.ghost,
+.dashed,
+.link {
+    background-color: transparent;
+    color: hsl(var(--foreground));
+    fill: hsl(var(--foreground));
+}
+
+.ghost,
+.link {
+    border-color: transparent;
 }
 
 .link:focus,
@@ -167,6 +183,8 @@
 /* Icons */
 
 .button svg {
+    min-height: 16px;
+    min-width: 16px;
     width: 16px;
     height: 16px;
     width: 1.9cap;

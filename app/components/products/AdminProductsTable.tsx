@@ -3,7 +3,7 @@ import { createColumnHelper } from '@tanstack/react-table'
 
 import { t } from "~/i18n/translate";
 import { Product } from "~/types/global.type";
-import { ADMIN_ROUTE_PATH } from "~/constants";
+import { ROUTE_PATH_ADMIN } from "~/constants";
 
 import AdminTable from "~/components/table/AdminTable";
 import { Button } from "~/components/button/Button";
@@ -37,8 +37,8 @@ const columns = [
             const id = props.row.original._id?.toString() || "";
             const name = props.row.original.title as string;
 
-            const editPath = `${ADMIN_ROUTE_PATH.PRODUCT_FORM}/${id}?referrer=${location.pathname}`;
-            const deletePath = `${ADMIN_ROUTE_PATH.PRODUCT_LIST}/${id}?referrer=${location.pathname}`;
+            const editPath = `${ROUTE_PATH_ADMIN.PRODUCT_FORM}/${id}?referrer=${location.pathname}`;
+            const deletePath = `${ROUTE_PATH_ADMIN.PRODUCT_LIST}/${id}?referrer=${location.pathname}`;
 
             const params = useParams();
             const navigation = useNavigation();

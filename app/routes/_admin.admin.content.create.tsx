@@ -6,6 +6,7 @@ import { MARKDOWN_TYPE } from "~/constants";
 import { contentAction, contentLoader } from "~/server/controllers/content.controller";
 import Button from "~/components/button/Button";
 import InputFilePreview from "~/components/form/input-file-preview/InputFilePreview";
+import { Container } from "~/components/container/Container";
 
 export const action: ActionFunction = contentAction;
 
@@ -16,7 +17,7 @@ export default function UploadContent() {
     const isSubmitting = navigation.state === "submitting";
 
     return (
-        <div className="container">
+        <Container>
             <h1>New Content</h1>
             <Form method="post" encType="multipart/form-data">
                 <fieldset>
@@ -77,6 +78,6 @@ export default function UploadContent() {
                     <Button color="primary" type="submit" disabled={isSubmitting}>{isSubmitting ? "Please Wait..." : "Save markdown"}</Button>
                 </div>
             </Form>
-        </div>
+        </Container>
     );
 }

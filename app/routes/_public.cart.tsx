@@ -1,5 +1,6 @@
 import type { LinksFunction } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
+import { Container } from "~/components/container/Container";
 
 // import { getCart } from "~/server/shoppingCart.server"
 // import type { Product } from "~/server/products.service"
@@ -15,11 +16,11 @@ const Cart = () => {
     const { products } = useLoaderData<typeof loader>();
     return (
         <section className="markdown">
-            <div className="container">
+            <Container>
                 <div className="markdown-list">
                     {products.map((post) => (
                         // <article className="item box" key={post.title}>
-                        //     <Link className="link" to={`${ROUTE_PATH.PRODUCT}/${post.slug}`}>
+                        //     <Link className="link" to={`${ROUTE_PATH.SHOP_DETAIL}/${post.slug}`}>
                         //         <div className="image-container">
                         //             <div className="image">
                         //                 <img src={post.preview} alt={post.title} aria-hidden />
@@ -33,7 +34,7 @@ const Cart = () => {
                         <div>empty</div>
                     ))}
                 </div>
-            </div>
+            </Container>
         </section>
     )
 }

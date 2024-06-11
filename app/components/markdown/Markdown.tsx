@@ -2,33 +2,18 @@ import { useRouteError, isRouteErrorResponse, useLoaderData } from "@remix-run/r
 import type { MarkdownDocument } from "~/server/utils/front-matter";
 
 import styles from './Markdown.module.css'
-
-export function MarkdownSection({ children }: { children: React.ReactNode }) {
-  return (
-    <div className={styles.section}>
-      {children}
-    </div>
-  );
-}
-
-export function MarkdownList({ children }: { children: React.ReactNode }) {
-  return (
-    <div className={styles.list}>
-      {children}
-    </div>
-  );
-}
+import { Container } from "../container/Container";
 
 export function MarkdownPage() {
   const { content } = useLoaderData<{ content: MarkdownDocument }>() as { content: MarkdownDocument };
   return (
     <div>
-      <div className="container">
+      <Container>
         <h1 className={styles.title}>{content.title}</h1>
         {content.preview && (
           <div className={styles.preview} style={{ backgroundImage: `url('${content.preview}')` }} />
         )}
-      </div>
+      </Container>
       <div className={styles['markdown-content']} dangerouslySetInnerHTML={{ __html: content.body || '' }} />
     </div>
   )
@@ -41,25 +26,25 @@ export function MarkdownErrorBoundary() {
     switch (error.status) {
       case 401:
         return (
-          <div className="container">
+          <Container>
             <p>You don't have access to this page.</p>
-          </div>
+          </Container>
         );
       case 404:
-        return <div className="container">Markdown not found!</div>;
+        return <Container>Markdown not found!</Container>;
     }
 
     return (
-      <div className="container">
+      <Container>
         Something went wrong: {error.status}{" "}
         {error.statusText}
-      </div>
+      </Container>
     );
   }
 
   return (
-    <div className="container">
+    <Container>
       <h1>0__x We could not load the page</h1>
-    </div>
+    </Container>
   );
 }

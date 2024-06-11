@@ -26,8 +26,7 @@ h3,
 h4,
 h5,
 h6 {
-    text-wrap: pretty;
-    font-weight: 500;
+    font-weight: 600;
     text-wrap: balance;
 }
 
@@ -74,7 +73,6 @@ nav ul li {
 img,
 video,
 svg {
-    display: inline-block;
     height: auto;
     max-width: 100%;
 }

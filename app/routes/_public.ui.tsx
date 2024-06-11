@@ -3,12 +3,13 @@ import { Trash2 } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "~/components/card/Card";
 import Input from "~/components/form/Input";
 import { Select } from "~/components/form/Select";
+import { Container } from "~/components/container/Container";
 
 function ProductRoute() {
     return (
         <>
             <section className="product">
-                <div className="container">
+                <Container>
                     <nav className="navigation-back mt-10">
                         <a href="/products">
                             <span className="sr-only">Volver a la tienda</span>
@@ -342,7 +343,7 @@ function ProductRoute() {
                             </CardFooter>
                         </Card>
                     </div>
-                </div>
+                </Container>
             </section >
         </>
     )

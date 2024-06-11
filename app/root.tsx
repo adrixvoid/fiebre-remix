@@ -16,6 +16,7 @@ import resetStyles from "~/styles/helpers/reset.css";
 import globalStyles from "~/styles/global.css";
 import tailwindStyles from "~/styles/tailwind.css";
 import Button from "./components/button/Button";
+import { Container } from "./components/container/Container";
 
 export const meta = () => [
   {
@@ -107,13 +108,13 @@ export function ErrorBoundary() {
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" media="all" />
         <div className="layout">
           <main className="main">
-            <div className="container">
+            <Container>
               <h1>{errorTitle}</h1>
               {errorDetail}
               <div>
                 <Button onClick={goBack}>Go Back</Button>
               </div>
-            </div>
+            </Container>
           </main>
         </div>
         <Scripts />

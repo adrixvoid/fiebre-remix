@@ -9,7 +9,7 @@ import {validationError} from 'remix-validated-form';
 import productModel from '~/server/schema/product.schema';
 import categoryModel from '~/server/schema/category.schema';
 import {fileService} from '../services/file.service';
-import {ADMIN_ROUTE_PATH, ASSET_PATH} from '~/constants';
+import {ROUTE_PATH_ADMIN, ASSET_PATH} from '~/constants';
 import {productService} from '../services/products.service';
 import {Category, Product} from '~/types/global.type';
 import {productValidator} from '../zod/products.zod';
@@ -101,7 +101,7 @@ export async function actionAdminProduct({request}: ActionFunctionArgs) {
 
   fileService.deleteAll(toDelete as string[]);
 
-  return redirect(referrer || ADMIN_ROUTE_PATH.PRODUCT_LIST);
+  return redirect(referrer || ROUTE_PATH_ADMIN.PRODUCT_LIST);
 }
 
 export async function actionAdminProductDelete({request}: ActionFunctionArgs) {

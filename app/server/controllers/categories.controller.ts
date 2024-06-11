@@ -6,7 +6,7 @@ import {
 } from '@remix-run/node';
 
 import {categoryService} from '~/server/services/category.service';
-import {ADMIN_ROUTE_PATH, ASSET_PATH} from '~/constants';
+import {ROUTE_PATH_ADMIN, ASSET_PATH} from '~/constants';
 import categoryModel, {CategoryDocument} from '~/server/schema/category.schema';
 import productModel from '~/server/schema/product.schema';
 
@@ -160,7 +160,7 @@ export async function actionAdminCategoriesCreateUpdate({
   };
 
   const isNewItem = (fromEntries._action as string).includes(
-    ADMIN_ROUTE_PATH.CATEGORY_CREATE
+    ROUTE_PATH_ADMIN.CATEGORY_CREATE
   );
 
   const insertData = {
@@ -198,7 +198,7 @@ export async function actionAdminCategoriesCreateUpdate({
   fileService.deleteAll(formData.getAll('toDelete') as string[]);
 
   // return json({error: 'test'});
-  return redirect(ADMIN_ROUTE_PATH.CATEGORY_LIST);
+  return redirect(ROUTE_PATH_ADMIN.CATEGORY_LIST);
 }
 
 // this still unused. Waiting for refactor
@@ -217,7 +217,7 @@ export async function actionAdminCategoriesUpdate({
   try {
     // a partir de aca se sigue
     const isNewItem = (fromEntries._action as string).includes(
-      ADMIN_ROUTE_PATH.CATEGORY_CREATE
+      ROUTE_PATH_ADMIN.CATEGORY_CREATE
     );
 
     const insertData = {
@@ -253,7 +253,7 @@ export async function actionAdminCategoriesUpdate({
       await categoryService.update(Object.assign(insertData, {id}));
     }
 
-    return redirect(ADMIN_ROUTE_PATH.CATEGORY_LIST);
+    return redirect(ROUTE_PATH_ADMIN.CATEGORY_LIST);
   } catch (e) {
     console.error('Failed on save the document', e);
     error.message = e.message;

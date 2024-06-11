@@ -8,6 +8,7 @@ import type { MapImage, Product } from "~/types/global.type";
 import { parse } from '~/server/utils/marked';
 
 import { ProductButtonAddToCart, ProductDescription, ProductGallery, ProductGrid, ProductImagePreview, ProductPrice, ProductQuantity, ProductTags, ProductTitle } from "~/components/products/detail/ProductDetail";
+import { Container } from "~/components/container/Container";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
     try {
@@ -73,11 +74,11 @@ function ProductPage() {
 
     return (
         <section id="product-detail">
-            <div className="container">
+            <Container>
 
                 <ProductGrid>
                     <div>
-                        <ProductImagePreview src={images?.[0].fileName} />
+                        <ProductImagePreview src={images?.[0].url} />
                         <ProductGallery images={gallery} />
                     </div>
                     <div>
@@ -99,7 +100,7 @@ function ProductPage() {
                         {tags && <ProductTags tags={tags} />}
                     </div>
                 </ProductGrid>
-            </div>
+            </Container>
         </section>
     )
 }

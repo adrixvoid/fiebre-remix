@@ -1,0 +1,25 @@
+.grid {
+  display: grid;
+  gap: 1rem;
+}
+
+@media screen and (min-width: 768px) {
+  .three {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .two {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .three {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .masonry {
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: 1fr 2fr 1fr;
+  }
+}

@@ -15,7 +15,7 @@ const buttonVariants = cva(
         destructive: styles.destructive,
         outline: styles.outline,
         dashed: styles.dashed,
-        ghost: "",
+        ghost: styles.ghost,
         link: styles.link,
       },
       size: {

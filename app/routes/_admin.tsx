@@ -8,6 +8,7 @@ import { Link, NavLink } from "~/components/link/Link";
 import styles from "~/styles/admin.css";
 import { Nav } from "~/components/nav/Nav";
 import { Button } from "~/components/button/Button";
+import { Container } from "~/components/container/Container";
 
 export const meta: MetaFunction = () => {
   return [
@@ -49,7 +50,7 @@ export default function Admin() {
         <Outlet />
       </main>
       <footer className="footer">
-        <div className="container">
+        <Container>
           <div className="text-sm">@2024 - {SITE_NAME} - <a href="https://www.behance.net/fiebre_creativa" title="My Behance portfolio">https://www.behance.net/fiebre_creativa</a></div>
           <Nav className="text-sm flex items-center align-center gap-2 pt-2">
             <Link to="/about">Sobre mi</Link>
@@ -57,7 +58,7 @@ export default function Admin() {
             <Link to="/portfolio">Portafolio</Link>
             <Link to="/blog">Blog</Link>
           </Nav>
-        </div>
+        </Container>
       </footer>
     </div>
   );

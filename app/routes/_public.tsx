@@ -1,5 +1,5 @@
 import { Link, Outlet } from "@remix-run/react";
-import type { LinksFunction, LoaderFunction, MetaFunction } from "@remix-run/node";
+import type { LinksFunction, MetaFunction } from "@remix-run/node";
 
 import { SITE_NAME } from "~/constants";
 
@@ -8,6 +8,12 @@ import { Nav } from "~/components/nav/Nav";
 import { NavLink } from "~/components/link/Link";
 
 import styles from "~/styles/layout/public.css";
+import { Container } from "~/components/container/Container";
+import { Skeleton } from "~/components/skeleton/Skeleton";
+import { Grid } from "~/components/grid/Grid";
+import Button from "~/components/button/Button";
+import { Behance, Instagram, Linkedin, Pinterest } from "~/components/svg";
+import { Center } from "~/components/center/Center";
 
 export const meta: MetaFunction = () => {
   return [
@@ -33,27 +39,53 @@ export default function AdminLayout() {
   return (
     <div className="layout">
       <header>
-        <div className="header-static container">
+        <Container className="header-static">
           <Link to="/" className="logo-link">
             <span className="sr-only">Go to home-page</span>
             <Logo aria-hidden className="logo" />
           </Link>
           <Nav>
-            <NavLink to="/about">Sobre mi</NavLink>
-            <NavLink to="/products">Tienda</NavLink>
-            <NavLink to="/portfolio">Portafolio</NavLink>
             <NavLink to="/blog">Blog</NavLink>
+            <NavLink to="/portfolio">Proyectos</NavLink>
+            <NavLink to="/courses">Cursos</NavLink>
+            <NavLink to="/shop">Shop</NavLink>
+            <NavLink to="/about">Sobre mi</NavLink>
           </Nav>
-        </div>
+        </Container>
       </header>
       <main className="main">
         <Outlet />
       </main>
-      <footer className="footer">
-        <div className="container">
-          @2024 - {SITE_NAME} - <a href="https://www.behance.net/fiebre_creativa" title="My Behance portfolio">https://www.behance.net/fiebre_creativa</a>
-        </div>
-      </footer>
+      <Skeleton height="20dvh" style={{ minHeight: "152px" }}>
+        <footer className="footer">
+          <Grid>
+            <Center style={{ justifyContent: "flex-start" }}>
+              {SITE_NAME}
+            </Center>
+            <Nav>
+              <NavLink to="/blog">Blog</NavLink>
+              <NavLink to="/portfolio">Proyectos</NavLink>
+              <NavLink to="/courses">Cursos</NavLink>
+              <NavLink to="/shop">Shop</NavLink>
+              <NavLink to="/about">Sobre mi</NavLink>
+            </Nav>
+            <div style={{ display: "flex", justifyContent: "flex-end" }}>
+              <Button variant="link">
+                <Linkedin />
+              </Button>
+              <Button variant="link">
+                <Pinterest />
+              </Button>
+              <Button variant="link">
+                <Instagram />
+              </Button>
+              <Button variant="link" to="https://www.behance.net/fiebre_creativa" title="My Behance portfolio">
+                <Behance />
+              </Button>
+            </div>
+          </Grid>
+        </footer>
+      </Skeleton>
     </div>
   );
 }

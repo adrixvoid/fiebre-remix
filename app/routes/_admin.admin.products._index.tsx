@@ -4,13 +4,14 @@ import { Trash2 } from "lucide-react";
 
 import { t } from "~/i18n/translate";
 import { Product } from '~/types/global.type';
-import { ADMIN_ROUTE_PATH } from "~/constants";
+import { ROUTE_PATH_ADMIN } from "~/constants";
 import { loaderAdminProductList } from "~/server/controllers/products.controller";
 
 import Button from "~/components/button/Button";
 import AdminCategoryBreadcrumb from "~/components/categories/AdminCategoryBreadcrumb";
 import { Link } from "~/components/link/Link";
 import AdminTable from "~/components/table/AdminTable";
+import { Container } from "~/components/container/Container";
 
 const styles = {
   images: {
@@ -38,8 +39,8 @@ const columns = [
       const id = props.row.original._id?.toString() || "";
       const name = props.row.original.title as string;
 
-      const editPath = `${ADMIN_ROUTE_PATH.PRODUCT_FORM}/${id}`;
-      const deletePath = `${ADMIN_ROUTE_PATH.PRODUCT_LIST}/${id}`;
+      const editPath = `${ROUTE_PATH_ADMIN.PRODUCT_FORM}/${id}`;
+      const deletePath = `${ROUTE_PATH_ADMIN.PRODUCT_LIST}/${id}`;
 
       const params = useParams();
       const navigation = useNavigation();
@@ -75,17 +76,17 @@ export default function AdminProductList() {
   const { products } = useLoaderData<typeof loader>() as { products: Product[]; }
 
   const pathToNewProduct = {
-    pathname: ADMIN_ROUTE_PATH.PRODUCT_FORM,
+    pathname: ROUTE_PATH_ADMIN.PRODUCT_FORM,
     search: ''
   };
 
   const pathToNewCategory = {
-    pathname: ADMIN_ROUTE_PATH.CATEGORY_CREATE
+    pathname: ROUTE_PATH_ADMIN.CATEGORY_CREATE
   };
 
   return (
     <section className="admin admin-categories">
-      <div className="container">
+      <Container>
         <h1 className="h1 text-2xl font-600 tracking-tight">{t("PRODUCT.NEW")}</h1>
         <div className="flex admin-top text-sm mt-2 py-2 justify-between items-center">
           <div className="justify-end">
@@ -104,7 +105,7 @@ export default function AdminProductList() {
             }
           </div>
         </div>
-      </div>
+      </Container>
     </section>
   )
 }

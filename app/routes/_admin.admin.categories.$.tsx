@@ -4,7 +4,7 @@ import { Trash2 } from "lucide-react";
 
 import { t } from "~/i18n/translate";
 import { Breadcrumb, Category } from '~/types/global.type';
-import { ADMIN_ROUTE_PATH } from "~/constants";
+import { ROUTE_PATH_ADMIN } from "~/constants";
 
 import { CategoryDocument } from "~/server/schema/category.schema";
 import { loaderAdminCategoriesList } from "~/server/controllers/categories.controller";
@@ -15,13 +15,14 @@ import { Button } from "~/components/button/Button";
 import AdminCategoryBreadcrumb from "~/components/categories/AdminCategoryBreadcrumb";
 import AdminProductsTable from "~/components/products/AdminProductsTable";
 import AdminTable from "~/components/table/AdminTable";
+import { Container } from "~/components/container/Container";
 
 import { FolderPlus } from "lucide-react";
 
 const initialLocationState = {
   breadcrumb: [{
     name: "Categories",
-    path: ADMIN_ROUTE_PATH.CATEGORY_LIST
+    path: ROUTE_PATH_ADMIN.CATEGORY_LIST
   }]
 };
 
@@ -33,7 +34,7 @@ const columns = [
     cell: props => {
       const location = useLocation();
       const breadcrumbState: Breadcrumb[] = location.state?.breadcrumb || initialLocationState?.breadcrumb || [];
-      const subcategoryURL = `${ADMIN_ROUTE_PATH.CATEGORY_LIST}/${props.row.original.path as string}`;
+      const subcategoryURL = `${ROUTE_PATH_ADMIN.CATEGORY_LIST}/${props.row.original.path as string}`;
 
       return (
         <Link
@@ -62,8 +63,8 @@ const columns = [
       const id = props.row.original._id?.toString() || "";
       const name = props.row.original.name as string;
 
-      const editPath = `${ADMIN_ROUTE_PATH.CATEGORY_EDIT}/${id}`;
-      const deletePath = `${ADMIN_ROUTE_PATH.CATEGORY_DELETE}/${id}`;
+      const editPath = `${ROUTE_PATH_ADMIN.CATEGORY_EDIT}/${id}`;
+      const deletePath = `${ROUTE_PATH_ADMIN.CATEGORY_DELETE}/${id}`;
 
       const params = useParams();
       const navigation = useNavigation();
@@ -107,19 +108,19 @@ function AdminCategoriesList() {
   const { list, category, breadcrumb, products } = useLoaderData<AdminCategoryLoaderList>() as AdminCategoryLoaderList;
   const location = useLocation();
 
-  const editPath = category?.id ? `${ADMIN_ROUTE_PATH.CATEGORY_EDIT}/${category.id}` : undefined;
+  const editPath = category?.id ? `${ROUTE_PATH_ADMIN.CATEGORY_EDIT}/${category.id}` : undefined;
   const newCategoryPath = {
-    pathname: ADMIN_ROUTE_PATH.CATEGORY_CREATE,
+    pathname: ROUTE_PATH_ADMIN.CATEGORY_CREATE,
     search: category?.slug ? `?${CATEGORY_PARAMS.PARENT}=${category.slug}` : '',
   };
   const pathToNewProduct = {
-    pathname: ADMIN_ROUTE_PATH.PRODUCT_FORM,
+    pathname: ROUTE_PATH_ADMIN.PRODUCT_FORM,
     search: category?.slug ? `?${PRODUCT_PARAMS.CATEGORY_ID}=${category._id}` : ''
   };
 
   return (
     <section className="admin admin-categories">
-      <div className="container">
+      <Container>
         <div className="flex justify-between items-center mt-4">
           <h1 className="h1 text-2xl font-600 tracking-tight">{category?.name && <span>{category?.name} in</span>} {t("CATEGORY.CATEGORIES")}</h1>
         </div>
@@ -148,7 +149,7 @@ function AdminCategoriesList() {
         <div className="admin-list mt-4">
           {products.length > 0 && <AdminProductsTable data={products} />}
         </div>
-      </div>
+      </Container>
     </section>
   )
 }
