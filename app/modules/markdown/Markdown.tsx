@@ -1,9 +1,10 @@
-import { useRouteError, isRouteErrorResponse, useLoaderData } from "@remix-run/react"
+import { isRouteErrorResponse, useLoaderData, useRouteError } from "@remix-run/react";
 import type { MarkdownDocument } from "~/server/utils/front-matter";
 
-import styles from './Markdown.module.css'
-import { Container } from "../container/Container";
-import { Section } from "../section/Section";
+import { Container } from "~/components/container/Container";
+import { Section } from "~/components/section/Section";
+
+import styles from "./Markdown.module.css";
 
 export function MarkdownPage() {
   const { content } = useLoaderData<{ content: MarkdownDocument }>() as { content: MarkdownDocument };

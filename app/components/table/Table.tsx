@@ -1,6 +1,6 @@
-import * as React from "react"
+import * as React from "react";
 
-import { cn } from "~/lib/utils"
+import clsx from "clsx";
 import styles from "./Table.module.css";
 
 const Table = React.forwardRef<
@@ -10,7 +10,7 @@ const Table = React.forwardRef<
   <div className={styles['table-wrapper']}>
     <table
       ref={ref}
-      className={cn(styles.table, className)}
+      className={clsx(styles.table, className)}
       {...props}
     />
   </div>
@@ -21,7 +21,7 @@ const TableHeader = React.forwardRef<
   HTMLTableSectionElement,
   React.HTMLAttributes<HTMLTableSectionElement>
 >(({ className, ...props }, ref) => (
-  <thead ref={ref} className={cn(styles.header, className)} {...props} />
+  <thead ref={ref} className={clsx(styles.header, className)} {...props} />
 ))
 TableHeader.displayName = "TableHeader"
 
@@ -31,7 +31,7 @@ const TableBody = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <tbody
     ref={ref}
-    className={cn(styles.body, className)}
+    className={clsx(styles.body, className)}
     {...props}
   />
 ))
@@ -43,7 +43,7 @@ const TableFooter = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <tfoot
     ref={ref}
-    className={cn(
+    className={clsx(
       styles.footer,
       className
     )}
@@ -58,7 +58,7 @@ const TableRow = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <tr
     ref={ref}
-    className={cn(
+    className={clsx(
       styles.row,
       className
     )}
@@ -73,7 +73,7 @@ const TableHead = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <th
     ref={ref}
-    className={cn(
+    className={clsx(
       styles.head,
       className
     )}
@@ -88,7 +88,7 @@ const TableHeadAction = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <span
     ref={ref}
-    className={cn(
+    className={clsx(
       styles["head-action"],
       className
     )}
@@ -103,7 +103,7 @@ const TableCell = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <td
     ref={ref}
-    className={cn(
+    className={clsx(
       styles.cell,
       className
     )}
@@ -118,7 +118,7 @@ const TableCellAction = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn(
+    className={clsx(
       styles["cell-action"],
       className
     )}
@@ -133,21 +133,16 @@ const TableCaption = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <caption
     ref={ref}
-    className={cn(styles.caption, className)}
+    className={clsx(styles.caption, className)}
     {...props}
   />
 ))
 TableCaption.displayName = "TableCaption"
 
 export {
-  Table,
-  TableHeader,
-  TableBody,
-  TableFooter,
+  Table, TableBody, TableCaption, TableCell,
+  TableCellAction, TableFooter,
   TableHead,
-  TableHeadAction,
-  TableRow,
-  TableCell,
-  TableCellAction,
-  TableCaption,
-}
+  TableHeadAction, TableHeader, TableRow
+};
+

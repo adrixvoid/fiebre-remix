@@ -1,7 +1,7 @@
-import type { LinksFunction } from "@remix-run/node";
-import { Link, useLoaderData } from "@remix-run/react";
+import { useLoaderData } from "@remix-run/react";
+
 import Button from "~/components/button/Button";
-import { Card, CardContent, CardPadding } from "~/components/card/Card";
+import { Card, CardPadding } from "~/components/card/Card";
 import { Container } from "~/components/container/Container";
 import { Flex } from "~/components/flex/Flex";
 import { Section } from "~/components/section/Section";
@@ -9,7 +9,6 @@ import { Section } from "~/components/section/Section";
 // import { getCart } from "~/server/shoppingCart.server"
 // import type { Product } from "~/server/products.service"
 
-import { ROUTE_PATH } from "~/constants";
 
 export const loader = async () => {
     // return getCart()

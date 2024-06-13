@@ -1,22 +1,22 @@
+import type { LinksFunction } from "@remix-run/node";
 import { Link, Outlet } from "@remix-run/react";
-import type { LinksFunction, MetaFunction } from "@remix-run/node";
+import { Mail } from "lucide-react";
 
 import { SITE_NAME } from "~/constants";
 
-import Logo from "~/components/svg/Logo";
-import { Nav } from "~/components/nav/Nav";
+import Button from "~/components/button/Button";
+import { Center } from "~/components/center/Center";
+import { Container } from "~/components/container/Container";
+import { Flex } from "~/components/flex/Flex";
+import { Grid } from "~/components/grid/Grid";
+import { Header } from "~/components/header/Header";
 import { NavLink } from "~/components/link/Link";
+import { Nav } from "~/components/nav/Nav";
+import { Skeleton } from "~/components/skeleton/Skeleton";
+import { Behance, Instagram, Linkedin, Pinterest } from "~/components/svg";
+import Logo from "~/components/svg/Logo";
 
 import styles from "~/styles/layout/public.css";
-import { Container } from "~/components/container/Container";
-import { Skeleton } from "~/components/skeleton/Skeleton";
-import { Grid } from "~/components/grid/Grid";
-import Button from "~/components/button/Button";
-import { Behance, Instagram, Linkedin, Pinterest } from "~/components/svg";
-import { Center } from "~/components/center/Center";
-import { Mail } from "lucide-react";
-import { Header } from "~/components/header/Header";
-import { Flex } from "~/components/flex/Flex";
 
 export const links: LinksFunction = () => [
   {

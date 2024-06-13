@@ -1,6 +1,6 @@
-import { cva, type VariantProps } from "class-variance-authority"
+import { cva, type VariantProps } from "class-variance-authority";
 
-import styles from './Flex.module.css'
+import styles from './Flex.module.css';
 
 const cvaVariants = cva(
   styles.flex, {

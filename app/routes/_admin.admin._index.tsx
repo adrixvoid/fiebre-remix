@@ -1,4 +1,4 @@
-import type { LoaderFunctionArgs } from "@remix-run/node"
+import type { LoaderFunctionArgs } from "@remix-run/node";
 import { Container } from "~/components/container/Container";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {

@@ -1,16 +1,16 @@
-import type { LinksFunction, LoaderFunction } from "@remix-run/node";
+import type { LoaderFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 
-import { productService } from "~/server/services/products.service"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardImage, CardTitle } from "~/components/card/Card";
-import type { Product } from "~/types/global.type"
-
 import { ROUTE_PATH } from "~/constants";
+import type { Product } from "~/types/global.type";
+
+import { productService } from "~/server/services/products.service";
 
 import Button from "~/components/button/Button";
-import { ProductList } from "~/components/products/Product";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardImage, CardTitle } from "~/components/card/Card";
 import { Container } from "~/components/container/Container";
 import { Section } from "~/components/section/Section";
+import { ProductList } from "~/modules/products/Product";
 
 export const loader: LoaderFunction = async () => {
     const products = await productService.find();

@@ -1,18 +1,18 @@
 import { useActionData, useLoaderData, useLocation, useNavigation, useSearchParams } from "@remix-run/react";
+import { useAtom } from "jotai";
 import { ValidatedForm } from "remix-validated-form";
 
-import { Category } from "~/types/global.type";
 import { AdminCategoryActionForm, CATEGORY_PARAMS } from "~/server/controllers/categories.controller";
 import { productValidator } from "~/server/zod/category.zod";
+import { Category } from "~/types/global.type";
 
 import Button from "~/components/button/Button";
+import { Container } from "~/components/container/Container";
+import Input from "~/components/form/Input";
+import InputFilePreview from "~/components/form/input-file-preview/InputFilePreview";
 import { InputImageList, showUploadAtom } from "~/components/form/input-file-preview/UploadedImages";
-import InputFilePreview from "../form/input-file-preview/InputFilePreview";
-import { useAtom } from "jotai";
-import ValidateInput from "../form/ValidateInput";
-import Input from "../form/Input";
-import { Select } from "../form/Select";
-import { Container } from "../container/Container";
+import { Select } from "~/components/form/Select";
+import ValidateInput from "~/components/form/ValidateInput";
 
 function getErrorText(errorMessage: string) {
     if (errorMessage.includes("duplicate key")) {

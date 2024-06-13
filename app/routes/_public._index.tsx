@@ -1,19 +1,20 @@
 import type { LoaderFunction, MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
+import { Send } from 'lucide-react';
 
+import { ROUTE_PATH } from "~/constants";
 import { Product } from "~/types/global.type";
+
 import productModel from '~/server/schema/product.schema';
 
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardImage, CardTitle } from "~/components/card/Card";
 import Button from "~/components/button/Button";
-import { ROUTE_PATH } from "~/constants";
-import { Grid } from "~/components/grid/Grid";
-import { Skeleton } from "~/components/skeleton/Skeleton";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardImage, CardTitle } from "~/components/card/Card";
 import { Center } from "~/components/center/Center";
 import { Container } from "~/components/container/Container";
 import Input from "~/components/form/Input";
-import { Send } from 'lucide-react';
+import { Grid } from "~/components/grid/Grid";
 import { Section } from "~/components/section/Section";
+import { Skeleton } from "~/components/skeleton/Skeleton";
 
 export const meta: MetaFunction = () => {
   return [

@@ -1,19 +1,20 @@
+import { type ActionFunction, type LoaderFunction } from "@remix-run/node";
 import { useLoaderData, useLocation, useNavigation } from "@remix-run/react";
-import { type LoaderFunction, type ActionFunction } from "@remix-run/node";
+import { ValidatedForm } from "remix-validated-form";
 
 import { MARKDOWN_TYPE } from "~/constants";
+import useReferrer from "~/hooks/useReferrer";
 
 import { contentAction, contentLoader } from "~/server/controllers/content.controller";
 import { formValidator } from "~/server/zod/content.zod";
+
 import Button from "~/components/button/Button";
-import InputFilePreview from "~/components/form/input-file-preview/InputFilePreview";
 import { Container } from "~/components/container/Container";
-import ValidateInput from "~/components/form/ValidateInput";
 import Input from "~/components/form/Input";
-import TextEditor from "~/components/form/text-editor/TextEditor";
+import InputFilePreview from "~/components/form/input-file-preview/InputFilePreview";
 import InputImageList from "~/components/form/input-file-preview/UploadedImages";
-import useReferrer from "~/hooks/useReferrer";
-import { ValidatedForm } from "remix-validated-form";
+import TextEditor from "~/components/form/text-editor/TextEditor";
+import ValidateInput from "~/components/form/ValidateInput";
 
 
 export const loader: LoaderFunction = contentLoader;

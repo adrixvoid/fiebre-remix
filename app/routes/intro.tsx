@@ -1,6 +1,8 @@
-import type { LinksFunction, LoaderFunction, MetaFunction } from "@remix-run/node";
-import styles from "~/styles/intro.css";
+import type { LinksFunction, LoaderFunction } from "@remix-run/node";
+
 import Logo from "~/components/svg/Logo";
+
+import styles from "~/styles/intro.css";
 
 export const links: LinksFunction = () => [
   {

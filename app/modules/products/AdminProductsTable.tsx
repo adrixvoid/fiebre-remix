@@ -1,14 +1,14 @@
-import { useSubmit, useNavigation, useParams, Link, useLocation } from "@remix-run/react";
-import { createColumnHelper } from '@tanstack/react-table'
+import { Link, useLocation, useNavigation, useParams, useSubmit } from "@remix-run/react";
+import { createColumnHelper } from '@tanstack/react-table';
+import { Trash2 } from "lucide-react";
 
+import { ROUTE_PATH_ADMIN } from "~/constants";
 import { t } from "~/i18n/translate";
 import { Product } from "~/types/global.type";
-import { ROUTE_PATH_ADMIN } from "~/constants";
 
-import AdminTable from "~/components/table/AdminTable";
 import { Button } from "~/components/button/Button";
-import { Trash2 } from "lucide-react"
-import { TableCellAction, TableHeadAction } from "../table/Table";
+import AdminTable from "~/components/table/AdminTable";
+import { TableCellAction, TableHeadAction } from "~/components/table/Table";
 
 const styles = {
     images: {

@@ -1,8 +1,9 @@
-import type { LoaderFunction, LinksFunction } from "@remix-run/node";
+import type { LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { MarkdownPage } from "~/components/markdown/Markdown";
 
 import markdownService from "~/server/services/markdown.service";
+
+import { MarkdownPage } from "~/modules/markdown/Markdown";
 
 export const loader: LoaderFunction = async ({ params }) => {
     try {

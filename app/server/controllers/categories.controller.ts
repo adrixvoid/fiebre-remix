@@ -5,15 +5,15 @@ import {
   json
 } from '@remix-run/node';
 
-import {categoryService} from '~/server/services/category.service';
 import {ROUTE_PATH_ADMIN, ASSET_PATH} from '~/constants';
-import categoryModel, {CategoryDocument} from '~/server/schema/category.schema';
-import productModel from '~/server/schema/product.schema';
-
 import {sanitizeUrl} from '~/lib/sanitizeUrl';
 import {getBreadcrumb} from '~/lib/breadcrumb';
 import {Breadcrumb, Category, MapFile, Product} from '~/types/global.type';
-import {fileService} from '../services/file.service';
+
+import {categoryService} from '~/server/services/category.service';
+import categoryModel, {CategoryDocument} from '~/server/schema/category.schema';
+import productModel from '~/server/schema/product.schema';
+import {fileService} from '~/server/services/file.service';
 
 export interface CategoryFormFields {
   name?: string;

@@ -1,16 +1,16 @@
-import type { LoaderFunctionArgs, ActionFunctionArgs } from "@remix-run/node";
-import { useFetcher, useLoaderData, useRouteError } from "@remix-run/react"
+import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
-import productModel from '~/server/schema/product.schema';
+import { useFetcher, useLoaderData } from "@remix-run/react";
 
+import { ROUTE_PATH } from "~/constants";
 import type { MapImage, Product } from "~/types/global.type";
 
+import productModel from '~/server/schema/product.schema';
 import { parse } from '~/server/utils/marked';
 
-import { ProductButtonAddToCart, ProductDescription, ProductGallery, ProductGrid, ProductImagePreview, ProductPrice, ProductQuantity, ProductTags, ProductTitle } from "~/components/products/detail/ProductDetail";
 import { Container } from "~/components/container/Container";
-import { ROUTE_PATH } from "~/constants";
 import { Section } from "~/components/section/Section";
+import { ProductButtonAddToCart, ProductDescription, ProductGallery, ProductGrid, ProductImagePreview, ProductPrice, ProductQuantity, ProductTags, ProductTitle } from "~/modules/products/detail/ProductDetail";
 
 const ACTIONS = {
     ADD_TO_CART: "add-to-cart"

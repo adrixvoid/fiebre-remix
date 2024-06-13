@@ -1,9 +1,10 @@
-import { Button } from "~/components/button/Button"
 import { Trash2 } from 'lucide-react';
+
+import { Button } from "~/components/button/Button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "~/components/card/Card";
+import { Container } from "~/components/container/Container";
 import Input from "~/components/form/Input";
 import { Select } from "~/components/form/Select";
-import { Container } from "~/components/container/Container";
 import { Section } from "~/components/section/Section";
 
 function ProductRoute() {

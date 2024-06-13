@@ -1,6 +1,9 @@
 import { useLoaderData } from "@remix-run/react";
+
 import { Category } from "~/types/global.type";
-import { Select, SelectProps } from "../form/Select";
+
+import { Select, SelectProps } from "~/components/form/Select";
+
 
 export function CategorySelect(props: SelectProps) {
   const { categories } = useLoaderData<{ categories: Category[] }>() as { categories: Category[] };

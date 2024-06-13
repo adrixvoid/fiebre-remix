@@ -1,21 +1,20 @@
-import { Link, useSubmit, useNavigation, useParams, useLocation, useLoaderData } from "@remix-run/react";
-import { createColumnHelper, CellContext } from '@tanstack/react-table'
+import { Link, useLoaderData, useLocation, useNavigation, useParams, useSubmit } from "@remix-run/react";
+import { CellContext, createColumnHelper } from '@tanstack/react-table';
 import { Trash2 } from "lucide-react";
 
+import { ROUTE_PATH_ADMIN } from "~/constants";
 import { t } from "~/i18n/translate";
 import { Breadcrumb, Category } from '~/types/global.type';
-import { ROUTE_PATH_ADMIN } from "~/constants";
 
-import { CategoryDocument } from "~/server/schema/category.schema";
-import { loaderAdminCategoriesList } from "~/server/controllers/categories.controller";
-import { AdminCategoryLoaderList, CATEGORY_PARAMS } from "~/server/controllers/categories.controller";
+import { AdminCategoryLoaderList, CATEGORY_PARAMS, loaderAdminCategoriesList } from "~/server/controllers/categories.controller";
 import { PRODUCT_PARAMS } from "~/server/controllers/products.controller";
+import { CategoryDocument } from "~/server/schema/category.schema";
 
 import { Button } from "~/components/button/Button";
-import AdminCategoryBreadcrumb from "~/components/categories/AdminCategoryBreadcrumb";
-import AdminProductsTable from "~/components/products/AdminProductsTable";
-import AdminTable from "~/components/table/AdminTable";
 import { Container } from "~/components/container/Container";
+import AdminTable from "~/components/table/AdminTable";
+import AdminCategoryBreadcrumb from "~/modules/categories/AdminCategoryBreadcrumb";
+import AdminProductsTable from "~/modules/products/AdminProductsTable";
 
 import { FolderPlus } from "lucide-react";
 import { TableCellAction } from "~/components/table/Table";

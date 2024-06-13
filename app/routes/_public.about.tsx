@@ -1,5 +1,5 @@
 import { json } from "@remix-run/node";
-import { MarkdownPage } from "~/components/markdown/Markdown";
+import { MarkdownPage } from "~/modules/markdown/Markdown";
 
 import markdownService from "~/server/services/markdown.service";
 

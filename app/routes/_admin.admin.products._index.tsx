@@ -1,17 +1,17 @@
-import { useSubmit, useNavigation, useParams, useLoaderData } from "@remix-run/react";
-import { createColumnHelper } from '@tanstack/react-table'
+import { useLoaderData, useNavigation, useParams, useSubmit } from "@remix-run/react";
+import { createColumnHelper } from '@tanstack/react-table';
 import { Trash2 } from "lucide-react";
 
+import { ROUTE_PATH_ADMIN } from "~/constants";
 import { t } from "~/i18n/translate";
 import { Product } from '~/types/global.type';
-import { ROUTE_PATH_ADMIN } from "~/constants";
+
 import { loaderAdminProductList } from "~/server/controllers/products.controller";
 
 import Button from "~/components/button/Button";
-import AdminCategoryBreadcrumb from "~/components/categories/AdminCategoryBreadcrumb";
+import { Container } from "~/components/container/Container";
 import { Link } from "~/components/link/Link";
 import AdminTable from "~/components/table/AdminTable";
-import { Container } from "~/components/container/Container";
 import { TableCellAction, TableHeadAction } from "~/components/table/Table";
 
 const styles = {

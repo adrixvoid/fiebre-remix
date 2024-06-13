@@ -1,20 +1,21 @@
+import { type ActionFunction, type LoaderFunction } from "@remix-run/node";
 import { useActionData, useLoaderData, useLocation } from "@remix-run/react";
-import { type LoaderFunction, type ActionFunction } from "@remix-run/node";
-import { atom, useAtom } from 'jotai'
+import { atom, useAtom } from 'jotai';
 import { ValidatedForm } from "remix-validated-form";
 
-import { loaderAdminProduct, actionAdminProduct, LoaderAdminProduct } from "~/server/controllers/products.controller";
+import useReferrer from "~/hooks/useReferrer";
+
+import { actionAdminProduct, loaderAdminProduct, LoaderAdminProduct } from "~/server/controllers/products.controller";
 import { productValidator } from "~/server/zod/products.zod";
 
-import ValidateInput from "~/components/form/ValidateInput";
-import { InputSubmit } from "~/components/form/InputSubmit";
-import Input from "~/components/form/Input";
-import { InputImageList } from "~/components/form/input-file-preview/UploadedImages";
-import { CategorySelect } from "~/components/categories/CategorySelect";
-import useReferrer from "~/hooks/useReferrer";
-import TextEditor from "~/components/form/text-editor/TextEditor";
-import InputFilePreview from "~/components/form/input-file-preview/InputFilePreview";
 import { Container } from "~/components/container/Container";
+import Input from "~/components/form/Input";
+import InputFilePreview from "~/components/form/input-file-preview/InputFilePreview";
+import { InputImageList } from "~/components/form/input-file-preview/UploadedImages";
+import { InputSubmit } from "~/components/form/InputSubmit";
+import TextEditor from "~/components/form/text-editor/TextEditor";
+import ValidateInput from "~/components/form/ValidateInput";
+import { CategorySelect } from "~/modules/categories/CategorySelect";
 
 const priceHidden = atom(false);
 const currentProductType = atom("stock");

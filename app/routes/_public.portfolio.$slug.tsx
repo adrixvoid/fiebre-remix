@@ -1,13 +1,15 @@
 import type { LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 
-import markdownService from "~/server/services/markdown.service";
-import { MarkdownPage } from "~/components/markdown/Markdown";
-import { Container } from "~/components/container/Container";
-import { Center } from "~/components/center/Center";
-import Button from "~/components/button/Button";
 import { ROUTE_PATH } from "~/constants";
+
+import markdownService from "~/server/services/markdown.service";
+
+import Button from "~/components/button/Button";
+import { Center } from "~/components/center/Center";
+import { Container } from "~/components/container/Container";
 import { Section } from "~/components/section/Section";
+import { MarkdownPage } from "~/modules/markdown/Markdown";
 
 export const loader: LoaderFunction = async ({ request }) => {
     const url = new URL(request.url);
