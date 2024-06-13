@@ -9,6 +9,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardImage, 
 import Button from "~/components/button/Button";
 import { Grid } from "~/components/grid/Grid";
 import { Container } from "~/components/container/Container";
+import { Section } from "~/components/section/Section";
 
 export const loader = async () => {
   const documents = await markdownService.readAllByType('blog');
@@ -19,7 +20,7 @@ function BlogPage() {
   const { documents } = useLoaderData<typeof loader>() as { documents: MarkdownDocument[] };
 
   return (
-    <section>
+    <Section marginBottom>
       <Container>
         <Grid>
           {documents.map((content) => (
@@ -44,7 +45,7 @@ function BlogPage() {
           ))}
         </Grid>
       </Container>
-    </section>
+    </Section>
   );
 }
 

@@ -1,5 +1,5 @@
 import { cssBundleHref } from "@remix-run/css-bundle";
-import type { LinksFunction } from "@remix-run/node";
+import type { LinksFunction, MetaFunction } from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -18,12 +18,12 @@ import tailwindStyles from "~/styles/tailwind.css";
 import Button from "./components/button/Button";
 import { Container } from "./components/container/Container";
 
-export const meta = () => [
-  {
-    title: SITE_NAME,
-    description: "Fiebre Diseño",
-  },
-];
+export const meta: MetaFunction = () => {
+  return [
+    { title: SITE_NAME },
+    { name: "Fiebre", content: "Fiebre Design Studio - Buenos Aires Argentina" },
+  ];
+};
 
 
 // import script from cdn

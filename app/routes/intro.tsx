@@ -2,13 +2,6 @@ import type { LinksFunction, LoaderFunction, MetaFunction } from "@remix-run/nod
 import styles from "~/styles/intro.css";
 import Logo from "~/components/svg/Logo";
 
-export const meta: MetaFunction = () => {
-  return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
-  ];
-};
-
 export const links: LinksFunction = () => [
   {
     rel: "stylesheet",

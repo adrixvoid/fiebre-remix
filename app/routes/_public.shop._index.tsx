@@ -10,6 +10,7 @@ import { ROUTE_PATH } from "~/constants";
 import Button from "~/components/button/Button";
 import { ProductList } from "~/components/products/Product";
 import { Container } from "~/components/container/Container";
+import { Section } from "~/components/section/Section";
 
 export const loader: LoaderFunction = async () => {
     const products = await productService.find();
@@ -19,7 +20,7 @@ export const loader: LoaderFunction = async () => {
 const Store = () => {
     const { products } = useLoaderData<{ products: Product[] }>() as { products: Product[] };
     return (
-        <section>
+        <Section marginBottom>
             <Container>
                 <ProductList>
                     {products.map((product) => (
@@ -42,7 +43,7 @@ const Store = () => {
                     ))}
                 </ProductList>
             </Container>
-        </section>
+        </Section>
     )
 }
 

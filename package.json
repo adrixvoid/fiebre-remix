@@ -8,7 +8,7 @@
     "start": "remix-serve ./build/index.js",
     "typecheck": "tsc",
     "icons": "npx @svgr/cli --out-dir app/components/svg -- public/icons",
-    "svg": "npx @svgr/cli --out-dir app/components/svg -- public/svg",
+    "svg": "npx @svgr/cli --out-dir app/components/svg -- svgr",
     "icons:watch": "npm-watch icons",
     "dev:svg": "run-s icons icons:watch",
     "dev": "remix dev",

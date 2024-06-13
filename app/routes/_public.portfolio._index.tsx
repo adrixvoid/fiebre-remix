@@ -7,6 +7,7 @@ import Button from "~/components/button/Button";
 import { ROUTE_PATH } from "~/constants";
 import { Grid } from "~/components/grid/Grid";
 import { Container } from "~/components/container/Container";
+import { Section } from "~/components/section/Section";
 
 export const loader = async () => {
   const documents = await markdownService.readAllByType('portfolio');
@@ -17,7 +18,7 @@ function PortfolioPage() {
   const { documents } = useLoaderData<typeof loader>() as { documents: MarkdownDocument[] };
 
   return (
-    <section id="portfolio">
+    <Section id="portfolio" marginBottom>
       <Container>
         <Grid>
           {documents.map((content) => (
@@ -39,7 +40,7 @@ function PortfolioPage() {
           ))}
         </Grid>
       </Container>
-    </section>
+    </Section>
   );
 }
 

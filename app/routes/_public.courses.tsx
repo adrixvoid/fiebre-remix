@@ -7,6 +7,7 @@ import { Container } from "~/components/container/Container";
 import { Flex } from "~/components/flex/Flex";
 import Input from "~/components/form/Input";
 import { Grid } from "~/components/grid/Grid";
+import { Section } from "~/components/section/Section";
 import { Skeleton } from "~/components/skeleton/Skeleton";
 
 import markdownService from "~/server/services/markdown.service";
@@ -23,7 +24,7 @@ export const loader = async () => {
 
 export default function CoursesPage() {
     return (
-        <>
+        <Section>
             <Skeleton style={{ height: "45dvh", minHeight: "500px", maxHeight: "711px" }}>
                 <Container>
                     <Center variant="all">
@@ -110,6 +111,6 @@ export default function CoursesPage() {
                     </Center>
                 </Container>
             </Skeleton>
-        </>
+        </Section>
     )
 }

@@ -173,6 +173,24 @@ dialog {
   width: 100%;
 }
 
+@media (prefers-color-scheme: dark) {
+  body {
+    background: url('/hero/hero.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
+  }
+
+  .layout {
+    background-color: hsl(var(--background) / .98);
+  }
+}
+
+/** 
+MISC
+**/
+
 .ellipsis {
   overflow: hidden;
   text-overflow: ellipsis;

@@ -14,6 +14,4 @@ export const loader = async () => {
 }
 
 
-export default function AboutPage() {
-    return <MarkdownPage key="about" />
-}
+export default MarkdownPage;

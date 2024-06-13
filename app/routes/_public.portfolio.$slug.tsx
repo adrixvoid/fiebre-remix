@@ -7,6 +7,7 @@ import { Container } from "~/components/container/Container";
 import { Center } from "~/components/center/Center";
 import Button from "~/components/button/Button";
 import { ROUTE_PATH } from "~/constants";
+import { Section } from "~/components/section/Section";
 
 export const loader: LoaderFunction = async ({ request }) => {
     const url = new URL(request.url);
@@ -21,7 +22,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 
 export default function PortfolioDetailPage() {
     return (
-        <section id="portfolio">
+        <Section id="portfolio" marginBottom>
             <MarkdownPage key="portfolio" />
             <Container key="portfolio">
                 <Center style={{ marginTop: "2rem", marginBottom: "2rem", gap: "1rem" }}>
@@ -33,6 +34,6 @@ export default function PortfolioDetailPage() {
                     </Button>
                 </Center>
             </Container>
-        </section>
+        </Section>
     )
 }

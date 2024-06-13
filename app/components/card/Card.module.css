@@ -7,6 +7,12 @@
   box-shadow: 0 2px 4px hsla(var(--shadow-color));
 }
 
+@media (prefers-color-scheme: dark) {
+  .card {
+    background-color: hsl(var(--card) / 0.8);
+  }
+}
+
 .header {
   display: flex;
   flex-direction: column;

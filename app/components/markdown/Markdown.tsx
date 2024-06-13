@@ -3,11 +3,12 @@ import type { MarkdownDocument } from "~/server/utils/front-matter";
 
 import styles from './Markdown.module.css'
 import { Container } from "../container/Container";
+import { Section } from "../section/Section";
 
 export function MarkdownPage() {
   const { content } = useLoaderData<{ content: MarkdownDocument }>() as { content: MarkdownDocument };
   return (
-    <div>
+    <Section marginBottom>
       <Container>
         <h1 className={styles.title}>{content.title}</h1>
         {/* {content.preview && (
@@ -15,7 +16,7 @@ export function MarkdownPage() {
         )} */}
       </Container>
       <div className={styles['markdown-content']} dangerouslySetInnerHTML={{ __html: content.body || '' }} />
-    </div>
+    </Section>
   )
 }
 

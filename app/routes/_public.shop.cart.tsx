@@ -4,6 +4,7 @@ import Button from "~/components/button/Button";
 import { Card, CardContent, CardPadding } from "~/components/card/Card";
 import { Container } from "~/components/container/Container";
 import { Flex } from "~/components/flex/Flex";
+import { Section } from "~/components/section/Section";
 
 // import { getCart } from "~/server/shoppingCart.server"
 // import type { Product } from "~/server/products.service"
@@ -18,7 +19,7 @@ export const loader = async () => {
 const Cart = () => {
     const { products } = useLoaderData<typeof loader>();
     return (
-        <section id="shopping-cart">
+        <Section id="shopping-cart" marginBottom>
             <Container>
                 <div style={{ marginBottom: "2.5rem" }}>
                     <h1 style={{ marginBottom: 0 }}>Your Cart</h1>
@@ -27,7 +28,7 @@ const Cart = () => {
                 <div>
                     <Card>
                         <CardPadding>
-                            <Flex justify="between">
+                            <Flex justify="between" align="center">
                                 <div style={{ width: "5rem" }}><img src="http://localhost:3004/products/91a539f7-d122-4da4-a37f-511ba5a758a1-8.jpg" /></div>
                                 <div>Ilustración básica</div>
                                 <div>1</div>
@@ -41,7 +42,7 @@ const Cart = () => {
                     <hr />
                     <Card>
                         <CardPadding>
-                            <Flex justify="between">
+                            <Flex justify="between" align="center">
                                 <div style={{ width: "5rem" }}><img src="http://localhost:3004/products/91a539f7-d122-4da4-a37f-511ba5a758a1-8.jpg" /></div>
                                 <div>Ilustración básica                                </div>
                                 <div>1</div>
@@ -66,7 +67,7 @@ const Cart = () => {
                     <Button variant="primary">Checkout</Button>
                 </Flex>
             </Container>
-        </section>
+        </Section>
     )
 }
 

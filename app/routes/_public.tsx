@@ -18,13 +18,6 @@ import { Mail } from "lucide-react";
 import { Header } from "~/components/header/Header";
 import { Flex } from "~/components/flex/Flex";
 
-export const meta: MetaFunction = () => {
-  return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
-  ];
-};
-
 export const links: LinksFunction = () => [
   {
     rel: "stylesheet",

@@ -10,6 +10,7 @@ import { parse } from '~/server/utils/marked';
 import { ProductButtonAddToCart, ProductDescription, ProductGallery, ProductGrid, ProductImagePreview, ProductPrice, ProductQuantity, ProductTags, ProductTitle } from "~/components/products/detail/ProductDetail";
 import { Container } from "~/components/container/Container";
 import { ROUTE_PATH } from "~/constants";
+import { Section } from "~/components/section/Section";
 
 const ACTIONS = {
     ADD_TO_CART: "add-to-cart"
@@ -82,7 +83,7 @@ function ProductPage() {
     const { title, description, priceInCents, tags, images, priceHidden } = product;
 
     return (
-        <section id="product-detail">
+        <Section id="product-detail" marginBottom>
             <Container>
 
                 <ProductGrid>
@@ -110,7 +111,7 @@ function ProductPage() {
                     </div>
                 </ProductGrid>
             </Container>
-        </section>
+        </Section>
     )
 }
 

@@ -13,13 +13,6 @@ import { Grid } from "~/components/grid/Grid";
 import { Flex } from "~/components/flex/Flex";
 import { Header } from "~/components/header/Header";
 
-export const meta: MetaFunction = () => {
-  return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
-  ];
-};
-
 export const links: LinksFunction = () => [
   {
     rel: "stylesheet",

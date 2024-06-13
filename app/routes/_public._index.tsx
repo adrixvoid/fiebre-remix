@@ -13,6 +13,7 @@ import { Center } from "~/components/center/Center";
 import { Container } from "~/components/container/Container";
 import Input from "~/components/form/Input";
 import { Send } from 'lucide-react';
+import { Section } from "~/components/section/Section";
 
 export const meta: MetaFunction = () => {
   return [
@@ -30,7 +31,7 @@ export default function Index() {
   const { products } = useLoaderData<typeof loader>() as { products: Product[]; }
 
   return (
-    <>
+    <Section>
       <div className="hero">
         <Skeleton height="70vh" style={{ maxHeight: 711, minHeight: 500 }}>
           <Container>
@@ -175,6 +176,6 @@ export default function Index() {
           </Center>
         </Container>
       </Skeleton>
-    </>
+    </Section>
   );
 }
