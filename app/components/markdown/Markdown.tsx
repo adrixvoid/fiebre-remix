@@ -10,9 +10,9 @@ export function MarkdownPage() {
     <div>
       <Container>
         <h1 className={styles.title}>{content.title}</h1>
-        {content.preview && (
+        {/* {content.preview && (
           <div className={styles.preview} style={{ backgroundImage: `url('${content.preview}')` }} />
-        )}
+        )} */}
       </Container>
       <div className={styles['markdown-content']} dangerouslySetInnerHTML={{ __html: content.body || '' }} />
     </div>

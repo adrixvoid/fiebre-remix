@@ -1,6 +1,6 @@
 import type { LoaderFunctionArgs, ActionFunctionArgs } from "@remix-run/node";
 import { useFetcher, useLoaderData, useRouteError } from "@remix-run/react"
-import { json } from "@remix-run/node";
+import { json, redirect } from "@remix-run/node";
 import productModel from '~/server/schema/product.schema';
 
 import type { MapImage, Product } from "~/types/global.type";
@@ -9,6 +9,11 @@ import { parse } from '~/server/utils/marked';
 
 import { ProductButtonAddToCart, ProductDescription, ProductGallery, ProductGrid, ProductImagePreview, ProductPrice, ProductQuantity, ProductTags, ProductTitle } from "~/components/products/detail/ProductDetail";
 import { Container } from "~/components/container/Container";
+import { ROUTE_PATH } from "~/constants";
+
+const ACTIONS = {
+    ADD_TO_CART: "add-to-cart"
+}
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
     try {
@@ -38,10 +43,14 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 }
 
 export async function action({ request }: ActionFunctionArgs) {
-    console.log("PRODUCT ACTION", request)
+    console.log("PRODUCT ACTION")
     let formData = await request.formData();
-    let values = Object.fromEntries(formData);
-    console.log(values)
+    let data = Object.fromEntries(formData);
+    console.log(data)
+
+    if (data.action === ACTIONS.ADD_TO_CART) {
+        return redirect(ROUTE_PATH.SHOPPING_CART);
+    }
 
     // const docs = await shoppingCartAction(request);
 
@@ -93,7 +102,7 @@ function ProductPage() {
                                 {!priceHidden && priceInCents > 0 &&
                                     <ProductQuantity />
                                 }
-                                <ProductButtonAddToCart priceHidden={priceHidden} />
+                                <ProductButtonAddToCart name="action" value={ACTIONS.ADD_TO_CART} priceHidden={priceHidden} />
                             </fetcher.Form>
                         </div>
                         {description && <ProductDescription description={description} />}

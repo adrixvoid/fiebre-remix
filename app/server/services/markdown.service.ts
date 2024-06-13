@@ -2,55 +2,33 @@ import path from 'path';
 import fs from 'fs/promises';
 
 import {
-  getPath,
-  getDocument,
   type MarkdownDocument,
   type MarkdownType,
-  readMarkdownFile
+  getPath,
+  getDocument,
+  getDocuments,
+  markdownTemplate,
+  MarkdownPost
 } from '../utils/front-matter';
 import {parse} from '../utils/marked';
-import {slugify} from '~/lib/url';
 import {sanitizeUrl} from '~/lib/sanitizeUrl';
-import {FRONT_MATTER_FOLDER} from '~/constants';
-
-export interface MarkdownPost extends MarkdownDocument {
-  type: string;
-  images?: {
-    name: string;
-    url: string;
-  }[];
-}
-
-export const template = ({
-  title,
-  categories,
-  preview,
-  body,
-  images,
-  draft
-}: MarkdownPost): string => `---
-title: ${title}
-slug: ${slugify(title)}
-categories: ${categories}
-preview: ${preview}
-draft: ${draft}
-images: ${JSON.stringify(images)}
----
-${body}
-`;
 
 const markdownService = {
-  read: async (url: string): Promise<MarkdownDocument | null> => {
-    const sanitizedPath = sanitizeUrl(url);
-    const filepath = path.join(FRONT_MATTER_FOLDER, `${sanitizedPath}.md`);
-    const markdownDocument = await readMarkdownFile(filepath);
+  readOne: async (url: string): Promise<MarkdownDocument | null> => {
+    const locationPath = sanitizeUrl(url)
+      .replace(/(^\/)|(\/$)/, '')
+      .split('/');
+    const markdownDocument = await getDocument(
+      locationPath[0],
+      `${locationPath[1]}.md`
+    );
     if (!markdownDocument) {
       return null;
     }
     markdownDocument.body = await parse(markdownDocument.body || '');
     return markdownDocument;
   },
-  readType: async (
+  readOneByType: async (
     type: MarkdownType,
     slug: string
   ): Promise<MarkdownDocument | undefined> => {
@@ -61,6 +39,10 @@ const markdownService = {
     } else {
       return undefined;
     }
+  },
+  readAllByType: async (type: string): Promise<MarkdownDocument[] | null> => {
+    const documents = await getDocuments(type);
+    return documents;
   },
   create: async (post: MarkdownPost): Promise<boolean> => {
     try {
@@ -79,7 +61,7 @@ const markdownService = {
       }
 
       // create file
-      const markdown = template(post);
+      const markdown = markdownTemplate(post);
       await fs.writeFile(path.join(directory, `${post.slug}.md`), markdown);
       return true;
     } catch (error) {

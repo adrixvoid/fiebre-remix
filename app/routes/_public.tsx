@@ -14,6 +14,9 @@ import { Grid } from "~/components/grid/Grid";
 import Button from "~/components/button/Button";
 import { Behance, Instagram, Linkedin, Pinterest } from "~/components/svg";
 import { Center } from "~/components/center/Center";
+import { Mail } from "lucide-react";
+import { Header } from "~/components/header/Header";
+import { Flex } from "~/components/flex/Flex";
 
 export const meta: MetaFunction = () => {
   return [
@@ -35,33 +38,16 @@ export const links: LinksFunction = () => [
 //   return {};
 // }
 
-export default function AdminLayout() {
+export default function PublicLayout() {
   return (
     <div className="layout">
-      <header>
-        <Container className="header-static">
-          <Link to="/" className="logo-link">
-            <span className="sr-only">Go to home-page</span>
-            <Logo aria-hidden className="logo" />
-          </Link>
-          <Nav>
-            <NavLink to="/blog">Blog</NavLink>
-            <NavLink to="/portfolio">Proyectos</NavLink>
-            <NavLink to="/courses">Cursos</NavLink>
-            <NavLink to="/shop">Shop</NavLink>
-            <NavLink to="/about">Sobre mi</NavLink>
-          </Nav>
-        </Container>
-      </header>
-      <main className="main">
-        <Outlet />
-      </main>
-      <Skeleton height="20dvh" style={{ minHeight: "152px" }}>
-        <footer className="footer">
-          <Grid>
-            <Center style={{ justifyContent: "flex-start" }}>
-              {SITE_NAME}
-            </Center>
+      <Header>
+        <Container>
+          <Flex justify="between" align="center">
+            <Link to="/" className="logo-link">
+              <span className="sr-only">Go to home-page</span>
+              <Logo aria-hidden className="logo" />
+            </Link>
             <Nav>
               <NavLink to="/blog">Blog</NavLink>
               <NavLink to="/portfolio">Proyectos</NavLink>
@@ -69,21 +55,45 @@ export default function AdminLayout() {
               <NavLink to="/shop">Shop</NavLink>
               <NavLink to="/about">Sobre mi</NavLink>
             </Nav>
-            <div style={{ display: "flex", justifyContent: "flex-end" }}>
-              <Button variant="link">
-                <Linkedin />
-              </Button>
-              <Button variant="link">
-                <Pinterest />
-              </Button>
-              <Button variant="link">
-                <Instagram />
-              </Button>
-              <Button variant="link" to="https://www.behance.net/fiebre_creativa" title="My Behance portfolio">
-                <Behance />
-              </Button>
-            </div>
-          </Grid>
+          </Flex>
+        </Container>
+      </Header>
+      <main className="main">
+        <Outlet />
+      </main>
+      <Skeleton height="20dvh" style={{ minHeight: "152px" }}>
+        <footer className="footer">
+          <Container>
+            <Grid>
+              <Center style={{ justifyContent: "flex-start" }}>
+                {SITE_NAME}
+              </Center>
+              <Nav>
+                <NavLink to="/blog">Blog</NavLink>
+                <NavLink to="/portfolio">Proyectos</NavLink>
+                <NavLink to="/courses">Cursos</NavLink>
+                <NavLink to="/shop">Shop</NavLink>
+                <NavLink to="/about">Sobre mi</NavLink>
+              </Nav>
+              <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                <Button variant="link" to="mailto:fiebredg@hotmail.com" title="Contact me fiebredg@hotmail.com" rel="noopener noreferrer">
+                  <Mail />
+                </Button>
+                <Button variant="link">
+                  <Linkedin />
+                </Button>
+                <Button variant="link">
+                  <Pinterest />
+                </Button>
+                <Button variant="link" to="https://www.instagram.com/fiebre.creativa/" title="My Instagram" rel="noopener noreferrer">
+                  <Instagram />
+                </Button>
+                <Button variant="link" to="https://www.behance.net/fiebre_creativa" title="My Behance portfolio" rel="noopener noreferrer">
+                  <Behance />
+                </Button>
+              </div>
+            </Grid>
+          </Container>
         </footer>
       </Skeleton>
     </div>

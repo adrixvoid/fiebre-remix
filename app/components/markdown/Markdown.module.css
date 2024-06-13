@@ -23,23 +23,30 @@
 }
 
 .markdown-content {
-  max-width: 60rem;
-  max-width: 48rem;
+  max-width: 85dvw;
   margin-inline: auto;
 }
 
-.markdown-content>* {
+.markdown-content>*:not(img),
+.markdown-content figcaption {
+  width: 50dvw;
+  margin-inline: auto;
+}
+
+@media screen and (screen > 780px) {
+
+  .markdown-content>*:not(img),
+  .markdown-content figcaption {
+    width: 50dvw;
+  }
+}
+
+.markdown-content>*:not(img) {
   margin-bottom: 2rem;
 }
 
-.markdown-content>*:not(img):not(figure) {
-  max-width: 48rem;
-  /* margin-left: auto;
-  margin-right: auto; */
-}
-
 .markdown-content figure {
-  margin: 0;
+  width: 100%;
 }
 
 .markdown-content p {
@@ -50,7 +57,7 @@
   width: 100%;
   display: block;
   object-fit: contain;
-  aspect-ratio: 16 / 9;
+  /* aspect-ratio: 16 / 9; */
 }
 
 .markdown-content figcaption {
@@ -59,7 +66,7 @@
 }
 
 .markdown-content blockquote {
-  margin: 2.5rem 0;
+  margin-block: 2.5rem;
   padding: 2rem 1rem;
   border-radius: var(--radius);
   background-color: hsl(var(--card));

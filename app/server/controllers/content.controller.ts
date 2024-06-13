@@ -1,26 +1,25 @@
-import {type ActionFunctionArgs, redirect} from '@remix-run/node';
+import {
+  type ActionFunctionArgs,
+  LoaderFunctionArgs,
+  redirect
+} from '@remix-run/node';
 
 import markdownService from '~/server/services/markdown.service';
-import {productService} from '~/server/services/products.service';
 import {slugify} from '~/lib/url';
 import {ASSET_PATH} from '~/constants';
 import categoryModel from '~/server/schema/category.schema';
 import {fileService} from '../services/file.service';
 import path from 'path';
+import {MarkdownDocument} from '../utils/front-matter';
+import {formValidator} from '../zod/content.zod';
 
-const prepareInsertProduct = (formData: {[k: string]: FormDataEntryValue}) => ({
-  title: formData.title as string,
-  body: formData.body as string,
-  slug: slugify((formData.slug || formData.title) as string),
-  price: formData.price as unknown as number,
-  stock: formData.stock as unknown as number,
-  priceHidden: !!formData.priceHidden,
-  tags: formData.tags as unknown as string[],
-  downloadUrl: formData.downloadUrl as string,
-  published: !formData.draft
-});
+export const PARAMS = {
+  ID: 'id'
+};
 
-const prepareMarkdownPost = (formData: {[k: string]: FormDataEntryValue}) => ({
+const prepareMarkdownInsert = (formData: {
+  [k: string]: FormDataEntryValue;
+}) => ({
   title: formData.title as string,
   body: formData.body as string,
   slug: slugify((formData.slug || formData.title) as string),
@@ -42,38 +41,47 @@ export async function contentAction({request}: ActionFunctionArgs) {
     type: ''
   };
 
-  const preview = await fileService.save(ASSET_PATH.CONTENT, formData.preview);
-  const images = await fileService.saveAll(ASSET_PATH.CONTENT, formData.images);
+  // const preview = await fileService.save(ASSET_PATH.CONTENT, formData.get('preview'));
+  // const images = await fileService.saveAll(ASSET_PATH.CONTENT, formData.get('images'));
 
-  Object.assign(insertData, {
-    preview,
-    images
-  });
+  // Object.assign(insertData, {
+  //   preview,
+  //   images
+  // });
 
-  if (fromEntries.type === 'products') {
-    Object.assign(insertData, prepareInsertProduct(fromEntries));
-    await productService.create(insertData);
-  } else {
-    Object.assign(insertData, prepareMarkdownPost(fromEntries));
-    await markdownService.create(insertData);
-  }
+  Object.assign(insertData, prepareMarkdownInsert(fromEntries));
+  await markdownService.create(insertData);
 
   return redirect('/admin/markdown/create', {status: 303});
 }
 
-export async function contentLoader() {
-  const categories = await categoryModel
-    .find({
-      parentId: null
-    })
-    .populate({
-      path: 'subcategories',
-      populate: {
-        path: 'subcategories'
-      }
-    })
-    .populate('parent')
-    .exec();
+export interface LoaderAdminContent {
+  content?: MarkdownDocument;
+}
 
-  return {loaded: true, categories};
+export async function contentLoader({
+  request,
+  params
+}: LoaderFunctionArgs): Promise<LoaderAdminContent> {
+  const url = new URL(request.url);
+  const id = params[PARAMS.ID];
+  const referrer = url.searchParams.get('referrer');
+
+  console.log('id', id);
+  console.log('referrer', referrer);
+
+  // const categories = await categoryModel
+  //   .find({
+  //     parentId: null
+  //   })
+  //   .populate({
+  //     path: 'subcategories',
+  //     populate: {
+  //       path: 'subcategories'
+  //     }
+  //   })
+  //   .populate('parent')
+  //   .exec();
+
+  return {content: undefined};
 }

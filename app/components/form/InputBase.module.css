@@ -27,7 +27,7 @@ label[for] {
   background-color: hsl(var(--input));
   border-color: hsl(var(--border));
   border-width: 1px;
-  border-radius: calc(var(--radius) - 2px);
+  border-radius: var(--radius-md);
   color: hsl(var(--foreground));
 }
 

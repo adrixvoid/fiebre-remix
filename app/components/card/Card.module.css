@@ -1,21 +1,25 @@
 .card {
   background-color: hsl(var(--card));
   color: hsl(var(--card-foreground));
-  border-width: 1px;
-  border-radius: .75rem;
-  border-style: solid;
+  border-width: 0;
+  /* border-color: color-mix(in hsl, hsl(var(--border)), transparent 70%); */
+  border-radius: var(--radius);
+  box-shadow: 0 2px 4px hsla(var(--shadow-color));
 }
 
 .header {
   display: flex;
-  padding: 1.5rem 1.5rem 0.2rem 1.5rem;
-  /* "flex-col space-y-1.5 p-6" */
+  flex-direction: column;
+  margin-top: 1.5rem;
+  padding-inline: 1.5rem;
 }
 
 .title {
+  margin: 0;
   letter-spacing: -.025em;
-  line-height: 1;
+  line-height: 1.5;
   font-weight: 600;
+  font-size: var(--text-base);
 }
 
 .description {
@@ -27,12 +31,17 @@
 
 .content {
   padding: 1.5rem;
-  padding-top: 0;
 }
 
-.image {
-  padding: 1rem;
-  border-radius: var(--radius);
+.image {}
+
+.image-cover {
+  width: 100%;
+  height: 100%;
+
+  aspect-ratio: 1 / 1;
+  background-position: center;
+  background-size: cover;
 }
 
 .footer {
@@ -40,4 +49,8 @@
   padding: 1.5rem;
   padding-top: 0;
   align-items: center;
+}
+
+.padding {
+  padding: 0.5rem;
 }

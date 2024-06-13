@@ -18,6 +18,7 @@ import AdminTable from "~/components/table/AdminTable";
 import { Container } from "~/components/container/Container";
 
 import { FolderPlus } from "lucide-react";
+import { TableCellAction } from "~/components/table/Table";
 
 const initialLocationState = {
   breadcrumb: [{
@@ -87,7 +88,7 @@ const columns = [
       }
 
       return (
-        <div className="actions">
+        <TableCellAction>
           <Button asChild variant="outline">
             <Link to={editPath}>{t('GLOBAL.EDIT')}</Link>
           </Button>
@@ -95,7 +96,7 @@ const columns = [
             <Trash2 />
             <span className="sr-only">{t('GLOBAL.DELETE')}</span>
           </Button>
-        </div>
+        </TableCellAction>
       )
     }
   }),

@@ -49,15 +49,15 @@
   "frontMatter.content.pageFolders": [
     {
       "title": "blog",
-      "path": "[[workspace]]/content/blog"
+      "path": "[[workspace]]/markdowns/blog"
     },
     {
       "title": "portfolio",
-      "path": "[[workspace]]/content/portfolio"
+      "path": "[[workspace]]/markdowns/portfolio"
     },
     {
       "title": "pages",
-      "path": "[[workspace]]/content/pages"
+      "path": "[[workspace]]/markdowns/pages"
     }
   ],
   "frontMatter.preview.host": "http://localhost:3004",

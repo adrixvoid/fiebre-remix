@@ -1,0 +1,9 @@
+.header {
+  display: flex;
+  height: 6rem;
+  align-items: center;
+}
+
+.static {
+  position: static;
+}

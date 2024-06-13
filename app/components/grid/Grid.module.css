@@ -1,6 +1,6 @@
 .grid {
   display: grid;
-  gap: 1rem;
+  gap: 2dvw;
 }
 
 @media screen and (min-width: 768px) {

@@ -5,7 +5,7 @@ import { t } from "~/i18n/translate";
 
 import Input from '~/components/form/Input';
 import { Link } from "~/components/link/Link";
-import Button from "~/components/button/Button";
+import Button, { ButtonProps } from "~/components/button/Button";
 
 import styles from './ProductDetail.module.css'
 
@@ -79,9 +79,9 @@ export function ProductQuantity() {
   )
 }
 
-export function ProductButtonAddToCart({ priceHidden }: { priceHidden?: boolean }) {
+export function ProductButtonAddToCart({ priceHidden, ...props }: ButtonProps & { priceHidden?: boolean }) {
   return (
-    <Button variant="primary" size="lg" className={styles['add-to-cart']}>
+    <Button variant="primary" size="lg" className={styles['add-to-cart']} {...props}>
       <ShoppingCart width={24} height={24} />
       {!priceHidden ? t("ADD_TO_CART") : t("INQUIRE")}
     </Button>

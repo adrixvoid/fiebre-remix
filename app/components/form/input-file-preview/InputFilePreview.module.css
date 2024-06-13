@@ -17,7 +17,7 @@
     /* grid-template-columns: minmax(10dvw, 15dvw) auto minmax(80px, 120px); */
     grid-template-columns: 10dvw 1fr auto;
     align-items: center;
-    border-top: 1px solid var(--border-color);
+    border-top: 1px solid var(--border);
     position: relative;
     gap: 1.5rem;
 }

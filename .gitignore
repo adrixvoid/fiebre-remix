@@ -7,3 +7,10 @@ node_modules
 *.bkp
 *.bkp.*
 .DS_Store
+
+/public/pages
+/public/products
+/public/portolio
+/markdowns
+/public/categories
+/blog

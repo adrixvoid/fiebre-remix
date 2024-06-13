@@ -9,7 +9,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "~/components/ui/table"
+} from "~/components/table/Table"
 
 export type ColumnMap = { [key: string]: object };
 

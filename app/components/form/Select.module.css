@@ -24,7 +24,7 @@
   background-color: color-mix(in hsl, hsl(var(--input)), transparent 90%);
   border-color: hsl(var(--border));
   border-width: 1px;
-  border-radius: calc(var(--radius) - 2px);
+  border-radius: var(--radius-md);
 }
 
 .select:focus {

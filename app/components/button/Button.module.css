@@ -5,7 +5,7 @@
     justify-content: center;
     white-space: nowrap;
 
-    border-radius: calc(var(--radius) - 2px);
+    border-radius: var(--radius-md);
     font-size: .875rem;
     line-height: 1.25rem;
     font-weight: 500;
@@ -23,7 +23,6 @@
 .button:active,
 .button:hover {
     cursor: pointer;
-    box-shadow: var(--tw-shadow-hover);
 }
 
 .button:focus-within,
@@ -46,16 +45,16 @@
 */
 
 .base {
-    border-color: color-mix(in hsl, hsl(var(--button)), hsl(var(--button)) 80%);
+    border-color: hsl(var(--button) / 0.2);
     background-color: hsl(var(--button));
     fill: hsl(var(--button-foreground));
     color: hsl(var(--button-foreground));
 }
 
 .base:hover {
-    background-color: hsl(var(--button-foreground) / .05);
-    color: hsl(var(--foreground));
-    fill: hsl(var(--foreground));
+    background-color: color-mix(in hsl increasing hue, hsl(var(--button)), hsl(var(--foreground)) 5%);
+    /* box-shadow: 0 2px 4px hsla(var(--shadow-color)); */
+    box-shadow: 0 2px 0 hsla(var(--shadow-color));
 }
 
 .primary {
@@ -65,7 +64,14 @@
 }
 
 .primary:hover {
-    background-color: hsl(var(--primary) / .8);
+    background-color: color-mix(in hwb longer hue, hsl(var(--primary)), hsl(var(--background)) 10%);
+    box-shadow: 0 2px 4px hsla(var(--shadow-color));
+}
+
+@media (prefers-color-scheme: dark) {
+    .primary:hover {
+        background-color: hsl(var(--primary) / 0.8);
+    }
 }
 
 .secondary {
@@ -76,11 +82,16 @@
 
 .secondary:hover {
     background-color: hsl(var(--secondary) / .8);
+    box-shadow: 0 2px 4px hsla(var(--shadow-color));
 }
 
 .outline {
     border-width: 1px;
     border-style: solid;
+}
+
+.outline:hover {
+    box-shadow: 0 2px 4px hsla(var(--shadow-color));
 }
 
 .outline,
@@ -119,6 +130,7 @@
     background-color: hsl(var(--button-foreground) / .05);
     color: hsl(var(--button-foreground));
     fill: hsl(var(--button-foreground));
+    box-shadow: 0 2px 4px hsla(var(--shadow-color));
 }
 
 .accent {
@@ -134,7 +146,8 @@
 }
 
 .destructive:hover {
-    background-color: hsl(var(--destructive) / .8);
+    background-color: hsl(var(--destructive) / .9);
+    box-shadow: 0 2px 4px hsla(var(--shadow-color));
 }
 
 .link {
@@ -147,7 +160,6 @@
 .link:focus-within,
 .link:hover {
     text-underline-offset: 4px;
-    text-decoration-line: underline;
 }
 
 /**

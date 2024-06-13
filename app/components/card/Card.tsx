@@ -70,6 +70,19 @@ const CardImage = React.forwardRef<
 ))
 CardContent.displayName = "CardContent"
 
+const CardImageCover = React.forwardRef<
+  HTMLImageElement,
+  React.HTMLAttributes<HTMLDivElement> & {
+    src?: string;
+    alt?: string;
+  }
+>(({ className, src, alt, style, ...props }, ref) => (
+  <div ref={ref} className={cn(styles['image-cover'], className)} style={{ backgroundImage: `url(${src})`, ...style }} {...props}>
+    <span className="sr-only">{alt}</span>
+  </div>
+))
+CardImageCover.displayName = "CardImageCover"
+
 const CardFooter = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
@@ -82,4 +95,12 @@ const CardFooter = React.forwardRef<
 ))
 CardFooter.displayName = "CardFooter"
 
-export { Card, CardHeader, CardFooter, CardImage, CardTitle, CardDescription, CardContent }
+const CardPadding = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div ref={ref} className={cn(styles.padding, className)} {...props} />
+))
+CardPadding.displayName = "CardPadding"
+
+export { Card, CardHeader, CardFooter, CardImage, CardImageCover, CardTitle, CardDescription, CardContent, CardPadding }

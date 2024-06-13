@@ -1,6 +1,7 @@
 import path from 'path';
 import fs from 'fs/promises';
 import fm from 'front-matter';
+import {slugify} from '~/lib/url';
 
 export type MarkdownType = string;
 
@@ -13,6 +14,14 @@ export type MarkdownDocument = {
   categories?: string;
   body?: string;
 };
+
+export interface MarkdownPost extends MarkdownDocument {
+  type: string;
+  images?: {
+    name: string;
+    url: string;
+  }[];
+}
 
 export type FMAttributes = {
   title: string;
@@ -98,7 +107,6 @@ export async function getPath(type: MarkdownType): Promise<string | null> {
 export const isValidMarkdownAttributes = (
   attributes: any
 ): attributes is FMAttributes => {
-  console.log('isValidMarkdownAttributes');
   return typeof attributes.title === 'string';
 };
 
@@ -139,7 +147,6 @@ export async function getDocuments(
     );
     return documents as MarkdownDocument[];
   } catch (error) {
-    console.log('getDocuments -> error', error.message);
     throw new Error(`Could not get content: ${error.message}`);
   }
 }
@@ -157,3 +164,21 @@ export async function getDocument(
   );
   return markdownDocument;
 }
+
+export const markdownTemplate = ({
+  title,
+  categories,
+  preview,
+  body,
+  images,
+  draft
+}: MarkdownPost): string => `---
+title: ${title}
+slug: ${slugify(title)}
+categories: ${categories}
+preview: ${preview}
+draft: ${draft}
+images: ${JSON.stringify(images)}
+---
+${body}
+`;

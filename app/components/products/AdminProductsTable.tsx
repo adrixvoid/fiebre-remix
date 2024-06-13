@@ -8,6 +8,7 @@ import { ROUTE_PATH_ADMIN } from "~/constants";
 import AdminTable from "~/components/table/AdminTable";
 import { Button } from "~/components/button/Button";
 import { Trash2 } from "lucide-react"
+import { TableCellAction, TableHeadAction } from "../table/Table";
 
 const styles = {
     images: {
@@ -29,7 +30,7 @@ const columns = [
     }),
     columnHelper.display({
         id: 'actions',
-        header: () => <span>{t('GLOBAL.ACTIONS')}</span>,
+        header: () => <TableHeadAction>{t('GLOBAL.ACTIONS')}</TableHeadAction>,
         cell: (props) => {
             const location = useLocation();
 
@@ -54,7 +55,7 @@ const columns = [
             }
 
             return (
-                <div className="actions">
+                <TableCellAction>
                     <Button asChild variant="outline">
                         <Link to={editPath} state={location.state}>{t('GLOBAL.EDIT')}</Link>
                     </Button>
@@ -62,7 +63,7 @@ const columns = [
                         <Trash2 />
                         <span className="sr-only">{t('GLOBAL.DELETE')}</span>
                     </Button>
-                </div>
+                </TableCellAction>
             )
         },
     }),

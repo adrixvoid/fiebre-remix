@@ -1,7 +1,7 @@
 import type { LinksFunction, LoaderFunction, MetaFunction } from "@remix-run/node";
 import { Outlet } from "@remix-run/react";
 
-import { SITE_NAME } from "~/constants";
+import { ROUTE_PATH_ADMIN, SITE_NAME } from "~/constants";
 
 import Logo from "~/components/svg/Logo";
 import { Link, NavLink } from "~/components/link/Link";
@@ -9,6 +9,9 @@ import styles from "~/styles/admin.css";
 import { Nav } from "~/components/nav/Nav";
 import { Button } from "~/components/button/Button";
 import { Container } from "~/components/container/Container";
+import { Grid } from "~/components/grid/Grid";
+import { Flex } from "~/components/flex/Flex";
+import { Header } from "~/components/header/Header";
 
 export const meta: MetaFunction = () => {
   return [
@@ -32,34 +35,25 @@ export const loader: LoaderFunction = ({ params }) => {
 export default function Admin() {
   return (
     <div className="layout">
-      <header className={"flex items-center py-3"}>
-        <div className={`container static flex gap-2`}>
-          <span className="sr-only">{SITE_NAME}</span>
-          <Link to="/admin" className="flex items-center gap-1">
-            <Logo aria-hidden className="logo" />
-            <span className="ml-1">Admin</span>
-          </Link>
-          <Nav className='flex-1 justify-end'>
-            <NavLink to="/admin/categories">Categories</NavLink>
-            <NavLink to="/admin/content/create">Content</NavLink>
-            <NavLink to="/">Exit</NavLink>
-          </Nav>
-        </div>
-      </header>
+      <Header>
+        <Container>
+          <Flex justify="between" align="center">
+            <Link to="/admin" className="flex items-center gap-1">
+              <Logo aria-hidden className="logo" />
+              <span className="sr-only">{SITE_NAME}</span>
+              <span className="ml-1">Admin</span>
+            </Link>
+            <Nav>
+              <NavLink to={ROUTE_PATH_ADMIN.CATEGORY_LIST}>Categories</NavLink>
+              <NavLink to={ROUTE_PATH_ADMIN.CONTENT_CREATE}>Content</NavLink>
+              <NavLink to="/">Web</NavLink>
+            </Nav>
+          </Flex>
+        </Container>
+      </Header>
       <main className="main">
         <Outlet />
       </main>
-      <footer className="footer">
-        <Container>
-          <div className="text-sm">@2024 - {SITE_NAME} - <a href="https://www.behance.net/fiebre_creativa" title="My Behance portfolio">https://www.behance.net/fiebre_creativa</a></div>
-          <Nav className="text-sm flex items-center align-center gap-2 pt-2">
-            <Link to="/about">Sobre mi</Link>
-            <Link to="/products">Tienda</Link>
-            <Link to="/portfolio">Portafolio</Link>
-            <Link to="/blog">Blog</Link>
-          </Nav>
-        </Container>
-      </footer>
     </div>
   );
 }

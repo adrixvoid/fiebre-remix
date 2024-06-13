@@ -18,8 +18,14 @@
   light
   primary hsl(318.52 100% 70.16%)
   border-input: hsl(0 0% 84.27%);
+  card hsl(255.75 100% 97.74%)
+  button hsl(255.75 100% 95.8%)
+  button hsl(255.75 100% 87.98%)
+  button foreground hsl(271.44 42.06% 51.36%)
+  destructive hsl(342 84.2% 60.2%)
 
   dark
+  background hsl(260 43.12% 48.52%)
   background hsl(259.44 18.61% 10.3%);
   foreground hsl(271.44 7.9% 15.7%)
   primary hsl(318 80% 79% / 1)
@@ -60,51 +66,29 @@ bkp
     --logoSVG: #ff4dd5;
     --background: hsl(0 0% 100%);
     --foreground: hsl(271.44 7.9% 15.7%);
-    --card: hsl(0 0% 100%);
+    --card: hsl(255.75 100% 97.74%);
     --card-foreground: hsl(271.44 7.9% 15.7%);
     --popover: hsl(0 0% 100%);
     --popover-foreground: hsl(271.44 7.9% 15.7%);
+    --button: hsl(255.75 100% 95.8%);
+    --button-foreground: hsl(271.44deg 78.38% 62.44%);
     --primary: hsl(318.52 100% 70.16%);
     --primary-foreground: hsl(210 20% 98%);
     --secondary: hsl(78.82 100% 60%);
     --secondary-foreground: hsl(271.44 7.9% 15.7%);
     --muted: hsl(220 14.3% 95.9%);
     --muted-foreground: hsl(220 8.9% 46.1%);
-    --accent: hsl(220 14.3% 95.9%);
-    --accent-foreground: hsl(220.9 39.3% 11%);
-    --destructive: hsl(0 84.2% 60.2%);
+    --accent: hsl(318.52 100% 70.16%);
+    --accent-foreground: hsl(0 0% 100%);
+    --destructive: hsl(342 84.2% 60.2%);
     --destructive-foreground: hsl(210 20% 98%);
     --border: hsl(220 13% 91%);
     --input: hsl(220 13% 91% / 11%);
     --ring: hsl(327.1 83.3% 57.8%);
-    --radius: 0.5rem;
+    --radius: hsl(0.5rem);
   }
 
   .dark {
-    --background: hsl(260 50.31% 9.43%);
-    --foreground: hsl(210 20% 98%);
-    --card: hsl(277.5 81.6% 4.55%);
-    --card-foreground: hsl(210 20% 98%);
-    --popover: hsl(262.27 71.4% 4.1%);
-    --popover-foreground: hsl(210 20% 98%);
-    --button: hsl(260 28.13% 25.1%);
-    --button-foreground: hsl(210 20% 98%);
-    --primary: hsl(318 80% 79%);
-    --primary-foreground: hsl(270.57 27.58% 7.1%);
-    --secondary: hsl(240.92 28.18% 19.35%);
-    --secondary-foreground: hsl(210 20% 98%);
-    --muted: hsl(240.92 28.18% 19.35%);
-    --muted-foreground: hsl(217.9 10.6% 64.9%);
-    --accent: hsl(260 41.45% 9.18%);
-    --accent-foreground: hsl(210 20% 98%);
-    --destructive: hsl(337 86% 37%);
-    --destructive-foreground: hsl(210 20% 98%);
-    --border: hsl(240.92deg 28.18% 19.35%);
-    --border: hsl(260 28.13% 25.1%);
-    --input: hsl(242 25% 19% / 18%);
-    --ring: hsl(263.4 70% 50.4%);
-
-
     --background: 224 71.4% 4.1%;
     --foreground: 210 20% 98%;
     --card: 224 71.4% 4.1%;
@@ -124,55 +108,5 @@ bkp
     --border: 215 27.9% 16.9%;
     --input: 215 27.9% 16.9%;
     --ring: 263.4 70% 50.4%;
-  }
-}
-
-@layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 224 71.4% 4.1%;
-    --card: 0 0% 100%;
-    --card-foreground: 224 71.4% 4.1%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 224 71.4% 4.1%;
-    /* --primary: 327.1 83.3% 57.8%; */
-    --primary: 318.52 100% 70.16%;
-    --primary-foreground: 220.9 39.3% 11%;
-    --secondary: 220 14.3% 95.9%;
-    --secondary-foreground: 220.9 39.3% 11%;
-    --muted: 220 14.3% 95.9%;
-    --muted-foreground: 220 8.9% 46.1%;
-    --accent: 220 14.3% 95.9%;
-    --accent-foreground: 220.9 39.3% 11%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 20% 98%;
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 327.1 83.3% 57.8%;
-    --radius: 0.5rem;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --background: 270 27.58% 7.1%;
-      --foreground: 210 20% 98%;
-      --card: 262.27 71.4% 4.1%;
-      --card-foreground: 210 20% 98%;
-      --popover: 224 71.4% 4.1%;
-      --popover-foreground: 210 20% 98%;
-      --primary: 318 80% 79%;
-      --primary-foreground: 210 20% 98%;
-      --secondary: 215 27.9% 16.9%;
-      --secondary-foreground: 210 20% 98%;
-      --muted: 215 27.9% 16.9%;
-      --muted-foreground: 217.9 10.6% 64.9%;
-      --accent: 215 27.9% 16.9%;
-      --accent-foreground: 210 20% 98%;
-      --destructive: 0 62.8% 30.6%;
-      --destructive-foreground: 210 20% 98%;
-      --border: 264.52deg 27.9% 16.9%;
-      --input: 215 27.9% 16.9%;
-      --ring: 327.4 70% 50.4%;
-    }
   }
 }

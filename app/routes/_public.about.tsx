@@ -1,10 +1,10 @@
 import { json } from "@remix-run/node";
+import { MarkdownPage } from "~/components/markdown/Markdown";
 
 import markdownService from "~/server/services/markdown.service";
-import MarkdownPage from "./_public.portfolio.$slug";
 
 export const loader = async () => {
-    const markdownResult = await markdownService.readType('pages', '2023-12-04-about');
+    const markdownResult = await markdownService.readOneByType('pages', '2023-12-04-about');
 
     if (!markdownResult) {
         return json("Not Found", { status: 404 });
@@ -14,4 +14,6 @@ export const loader = async () => {
 }
 
 
-export default MarkdownPage
+export default function AboutPage() {
+    return <MarkdownPage key="about" />
+}

@@ -2,19 +2,20 @@ import { useLoaderData } from "@remix-run/react";
 
 import { ROUTE_PATH } from "~/constants";
 
-import { getDocuments, type MarkdownDocument } from "~/server/utils/front-matter";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardImage, CardTitle } from "~/components/card/Card";
+import { type MarkdownDocument } from "~/server/utils/front-matter";
+import markdownService from "~/server/services/markdown.service";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardImage, CardPadding, CardTitle } from "~/components/card/Card";
 
 import Button from "~/components/button/Button";
 import { Grid } from "~/components/grid/Grid";
 import { Container } from "~/components/container/Container";
 
 export const loader = async () => {
-  const documents = await getDocuments('blog');
+  const documents = await markdownService.readAllByType('blog');
   return { documents }
 };
 
-function Blog() {
+function BlogPage() {
   const { documents } = useLoaderData<typeof loader>() as { documents: MarkdownDocument[] };
 
   return (
@@ -24,7 +25,9 @@ function Blog() {
           {documents.map((content) => (
             <article key={content.title}>
               <Card>
-                <CardImage src={content.preview} alt={content.title} aria-hidden />
+                <CardPadding>
+                  <CardImage src={content.preview} alt={content.title} aria-hidden />
+                </CardPadding>
                 <CardHeader>
                   <CardTitle>{content.title}</CardTitle>
                 </CardHeader>
@@ -45,4 +48,4 @@ function Blog() {
   );
 }
 
-export default Blog;
+export default BlogPage;
