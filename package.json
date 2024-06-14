@@ -44,8 +44,6 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "remix-validated-form": "^5.1.5",
-    "tailwind-merge": "^2.3.0",
-    "tailwindcss-animate": "^1.0.7",
     "zod": "^3.23.6",
     "zod-form-data": "^2.0.2",
     "zustand": "^4.4.7"
@@ -66,9 +64,11 @@
     "npm-watch": "^0.11.0",
     "postcss": "^8.4.38",
     "prettier": "3.1.0",
-    "tailwindcss": "^3.4.3",
     "typescript": "^5.1.6",
     "typescript-plugin-css-modules": "^5.1.0"
+  },
+  "overrides": {
+    "semver": "^7.5.4"
   },
   "engines": {
     "node": ">=18.0.0"

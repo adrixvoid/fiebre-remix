@@ -41,6 +41,6 @@
   "editor.formatOnSave": true,
   "editor.defaultFormatter": null,
   "editor.codeActionsOnSave": {
-    "source.organizeImports": true
+    "source.organizeImports": "explicit"
   }
 }
