@@ -7,6 +7,13 @@
   text-decoration: underline;
 }
 
+.link:focus-visible {
+  outline: 4px solid hsl(var(--ring));
+  outline-offset: 5px;
+  /* outline: 0; */
+  /* box-shadow: var(--tw-ring-shadow-4); */
+}
+
 .primary {
   color: hsl(var(--primary))
 }

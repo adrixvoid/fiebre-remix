@@ -2,7 +2,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import styles from './Flex.module.css';
 
-const cvaVariants = cva(
+const flexVariants = cva(
   styles.flex, {
   variants: {
     justify: {
@@ -10,6 +10,7 @@ const cvaVariants = cva(
       end: styles['justify-end'],
       center: styles['justify-center'],
       between: styles['justify-between'],
+      around: styles['justify-around'],
     },
     align: {
       start: styles['align-start'],
@@ -19,6 +20,10 @@ const cvaVariants = cva(
     direction: {
       row: styles.row,
       column: styles.column,
+    },
+    mobile: {
+      'direction-row': styles['mobile-row'],
+      'direction-column': styles['mobile-column']
     }
   },
   defaultVariants: {
@@ -28,10 +33,15 @@ const cvaVariants = cva(
 })
 
 export interface FlexProps extends React.HTMLAttributes<HTMLDivElement>,
-  VariantProps<typeof cvaVariants> { }
+  VariantProps<typeof flexVariants> {
+  gap?: string;
+}
 
-export function Flex({ className, justify, align, direction, ...props }: FlexProps) {
+export function Flex({ className, justify, align, direction, mobile, gap, style, ...props }: FlexProps) {
   return (
-    <div className={cvaVariants({ justify, align, direction, className })} {...props} />
+    <div className={flexVariants({ justify, align, direction, mobile, className })} {...props} style={{
+      ...style,
+      gap
+    }} />
   );
 }

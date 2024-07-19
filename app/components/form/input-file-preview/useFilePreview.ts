@@ -1,11 +1,11 @@
-import {useState, useCallback} from 'react';
 import {atom, useAtom} from 'jotai';
+import {useCallback, useState} from 'react';
 import {FilePreview} from './InputFilePreview.types';
 import {
   filterFileList,
   findRevokeObjectURL,
-  toFilePreview,
-  mergeFiles
+  mergeFiles,
+  toFilePreviewType
 } from './InputFilePreview.utils';
 
 const buffer = atom<FileList | null>(null);
@@ -41,45 +41,29 @@ function useFilePreview({multiple = false}) {
   );
 
   const createPreview = useCallback(
-    (inputElement: HTMLInputElement) => {
-      const files = inputElement.files;
+    (files: FileList | null) => {
       if (multiple) {
         if (fileBuffer && fileBuffer.length > 0) {
-          inputElement.files = mergeFiles(fileBuffer, files);
+          files = mergeFiles(fileBuffer, files);
           setFileBuffer(null);
         }
       }
 
-      const newPreview = toFilePreview(inputElement.files);
-      setPreviewList(newPreview);
+      const filePreviewList = toFilePreviewType(files);
+      setPreviewList(filePreviewList);
 
-      return newPreview;
+      return filePreviewList;
     },
     [previewList, fileBuffer]
   );
 
-  const onSaveBuffer = (
-    event:
-      | React.MouseEvent<HTMLInputElement, MouseEvent>
-      | React.KeyboardEvent<HTMLInputElement>
-  ) => {
-    setInputElement(event.target as HTMLInputElement);
-    saveBuffer((event.target as HTMLInputElement).files);
-  };
-
-  const onCreatePreview = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputElement(event.target as HTMLInputElement);
-    createPreview(event.target as HTMLInputElement);
-  };
-
   return {
+    inputElement,
     setInputElement,
     previewList,
     removePreview,
     createPreview,
-    saveBuffer,
-    onSaveBuffer,
-    onCreatePreview
+    saveBuffer
   };
 }
 

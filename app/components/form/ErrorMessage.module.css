@@ -1,0 +1,5 @@
+.error {
+  width: 100%;
+  color: hsl(var(--destructive));
+  font-size: var(--text-xs)
+}

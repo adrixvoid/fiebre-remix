@@ -5,31 +5,48 @@
     justify-content: center;
     white-space: nowrap;
 
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-2xl);
     font-size: .875rem;
     line-height: 1.25rem;
     font-weight: 500;
+    outline-color: hsl(var(--ring));
 
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
-    transition-timing-function: cubic-bezier(.4, 0, .2, 1);
-    transition-duration: .15s;
     will-change: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-duration: 200ms;
+}
+
+@keyframes fade-in-out {
+    25% {
+        box-shadow: 0 2px 0 hsl(var(--shadow-color));
+    }
+
+    50% {
+        box-shadow: 0 2px 0 transparent;
+    }
+
+    75% {
+        box-shadow: 0 2px 0 hsl(var(--shadow-color));
+    }
 }
 
 .button:has(>svg) {
     padding-block: 0;
 }
 
-.button:active,
-.button:hover {
-    cursor: pointer;
+.button:active {
+    transform: scale(1.1)
 }
 
-.button:focus-within,
+.button:hover {
+    cursor: pointer;
+    text-decoration: none !important;
+}
+
 .button:focus-visible {
-    outline: 2px solid transparent;
-    outline-offset: 2px;
-    box-shadow: var(--tw-ring-offset-shadow);
+    outline-style: solid;
+    outline-width: 2px;
+    outline-offset: -2px;
+    box-shadow: var(--tw-ring-shadow-0);
 }
 
 .button:disabled,
@@ -52,9 +69,10 @@
 }
 
 .base:hover {
-    background-color: color-mix(in hsl increasing hue, hsl(var(--button)), hsl(var(--foreground)) 5%);
-    /* box-shadow: 0 2px 4px hsla(var(--shadow-color)); */
-    box-shadow: 0 2px 0 hsla(var(--shadow-color));
+    /* background-color: color-mix(in hsl increasing hue, hsl(var(--button)), hsl(var(--foreground)) 5%); */
+    background-color: hsl(var(--button) / 80%);
+    /* box-shadow: 0 2px 4px hsl(var(--shadow-color)); */
+    box-shadow: 0 2px 0 hsl(var(--shadow-color));
 }
 
 .primary {
@@ -65,13 +83,7 @@
 
 .primary:hover {
     background-color: color-mix(in hwb longer hue, hsl(var(--primary)), hsl(var(--background)) 10%);
-    box-shadow: 0 2px 4px hsla(var(--shadow-color));
-}
-
-@media (prefers-color-scheme: dark) {
-    .primary:hover {
-        background-color: hsl(var(--primary) / 0.8);
-    }
+    box-shadow: 0 2px 4px hsl(var(--shadow-color));
 }
 
 .secondary {
@@ -82,55 +94,94 @@
 
 .secondary:hover {
     background-color: hsl(var(--secondary) / .8);
-    box-shadow: 0 2px 4px hsla(var(--shadow-color));
+    box-shadow: 0 2px 4px hsl(var(--shadow-color));
 }
 
 .outline {
+    background-color: transparent;
+    color: hsl(var(--foreground));
+    fill: hsl(var(--foreground));
     border-width: 1px;
     border-style: solid;
+    border-color: hsl(var(--foreground) / 0.8);
 }
 
 .outline:hover {
-    box-shadow: 0 2px 4px hsla(var(--shadow-color));
+    /* background-color: hsl(var(--button-foreground) / .05);*/
+    text-underline-offset: 4px;
+    color: hsl(var(--button-foreground));
+    fill: hsl(var(--button-foreground));
+    border-color: hsl(var(--button-foreground) / .8);
+    text-decoration: none;
+    box-shadow: var(--shadow-sm);
 }
 
-.outline,
-.ghost,
-.dashed,
-.link {
+.outline:focus,
+.outline:focus-within {
+    box-shadow: var(--shadow-sm), var(--tw-ring-shadow-0);
+}
+
+.dashed {
+    background-color: transparent;
+    color: hsl(var(--foreground));
+    fill: hsl(var(--foreground));
+    border-style: dashed;
+    border-width: 1px;
+}
+
+.dashed:hover {
+    background-color: hsl(var(--button-foreground) / .05);
+    color: hsl(var(--button-foreground));
+    fill: hsl(var(--button-foreground));
+}
+
+.dashed:focus,
+.dashed:focus-within {
+    box-shadow: var(--shadow-sm), var(--tw-ring-shadow-0);
+}
+
+.ghost {
+    border-color: transparent;
     background-color: transparent;
     color: hsl(var(--foreground));
     fill: hsl(var(--foreground));
 }
 
-.ghost,
+.ghost:hover {
+    border-style: dashed;
+    border-width: 1px;
+    border-color: hsl(var(--border));
+}
+
+.ghost:focus,
+.ghost:focus-within {
+    color: hsl(var(--button-foreground));
+    fill: hsl(var(--button-foreground));
+    box-shadow: var(--tw-ring-shadow-0);
+}
+
 .link {
     border-color: transparent;
+    background-color: transparent;
+    color: hsl(var(--foreground));
+    fill: hsl(var(--foreground));
+    text-decoration: none;
+    border-radius: var(--radius-2xl);
+    line-height: 1;
+    text-underline-offset: 4px;
+}
+
+.link:hover {
+    background-color: hsl(var(--button-foreground) / .05);
+    color: hsl(var(--button-foreground));
+    fill: hsl(var(--button-foreground));
 }
 
 .link:focus,
-.link:focus-within,
-.link:hover,
-.outline:focus,
-.outline:focus-within,
-.outline:hover {
-    background-color: hsl(var(--button-foreground) / .05);
+.link:focus-within {
     color: hsl(var(--button-foreground));
     fill: hsl(var(--button-foreground));
-}
-
-.dashed {
-    border-style: dashed;
-    border-width: 1px;
-}
-
-.dashed:hover,
-.dashed:focus-within,
-.dashed:hover {
-    background-color: hsl(var(--button-foreground) / .05);
-    color: hsl(var(--button-foreground));
-    fill: hsl(var(--button-foreground));
-    box-shadow: 0 2px 4px hsla(var(--shadow-color));
+    text-underline-offset: 4px;
 }
 
 .accent {
@@ -143,23 +194,12 @@
     fill: hsl(var(--destructive-foreground));
     background-color: hsl(var(--destructive));
     color: hsl(var(--destructive-foreground));
+    border-color: hsl(var(--destructive));
 }
 
 .destructive:hover {
     background-color: hsl(var(--destructive) / .9);
-    box-shadow: 0 2px 4px hsla(var(--shadow-color));
-}
-
-.link {
-    text-decoration: none;
-    border-radius: 0.35rem;
-    line-height: 1;
-}
-
-.link:hover,
-.link:focus-within,
-.link:hover {
-    text-underline-offset: 4px;
+    box-shadow: 0 2px 4px hsl(var(--shadow-color));
 }
 
 /**
@@ -168,8 +208,8 @@
 
 .small {
     gap: 0.45rem;
-    padding-left: .75rem;
-    padding-right: .75rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
     height: 2rem;
     min-width: 2rem;
     font-size: .75rem;
@@ -177,18 +217,18 @@
 }
 
 .medium {
-    padding-left: 1rem;
-    padding-right: 1rem;
-    min-width: 2.25rem;
-    height: 2.25rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    min-width: 2rem;
+    height: 2rem;
 }
 
 .large {
     gap: 0.55rem;
-    padding-left: 1.75rem;
-    padding-right: 1.75rem;
-    min-width: 2.5rem;
-    height: 2.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    min-width: 2rem;
+    height: 2.25rem;
 }
 
 
@@ -204,4 +244,15 @@
     max-height: 100%;
     max-width: 100%;
     object-fit: contain;
+}
+
+
+@media (prefers-color-scheme: dark) {
+    .primary:hover {
+        background-color: hsl(var(--primary) / 0.8);
+    }
+
+    .outline {
+        border-color: white;
+    }
 }

@@ -1,9 +1,13 @@
+import { clsx } from "clsx";
 import { ReactNode } from "react";
-import { clsx } from "clsx"
 
-import styles from './Nav.module.css'
+import styles from './Nav.module.css';
 
-export function Nav({ children, className }: { children: ReactNode, className?: string }) {
+export interface NavProps extends React.HTMLAttributes<HTMLElement> {
+  children: ReactNode, className?: string
+}
+
+export function Nav({ children, className }: NavProps) {
   return (
     <nav className={clsx(styles.nav, className)}>
       {children}

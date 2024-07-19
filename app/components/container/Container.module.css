@@ -1,19 +1,36 @@
 .container {
-  min-width: 300px;
   width: 100%;
   margin: 0 auto;
   padding: 0 2rem;
 }
 
-@media (min-width:1024px) {
+@media (min-width: 1024px) {
   .container {
     padding: 0 2.5rem;
   }
 }
 
 @media (min-width: 1280px) {
-  .container {
+  .default {
     max-width: 1280px;
+  }
+}
+
+.narrow {
+  width: 65dvw;
+  max-width: 860px;
+}
+
+@media screen and (width > 640px) {
+  .narrow {
+    /* max-width: 60dvw; */
+    max-width: 85dvw;
+  }
+}
+
+@media screen and (width > 780px) {
+  .narrow {
+    width: 50dvw;
   }
 }
 

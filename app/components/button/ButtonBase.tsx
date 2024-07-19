@@ -1,42 +1,11 @@
+import { Slot } from "@radix-ui/react-slot";
 import { forwardRef } from "react";
-import { Slot } from "@radix-ui/react-slot"
-import { cva, type VariantProps } from "class-variance-authority"
 
-import styles from "./Button.module.css";
-
-const buttonVariants = cva(
-  styles.button,
-  {
-    variants: {
-      variant: {
-        default: styles.base,
-        primary: styles.primary,
-        secondary: styles.secondary,
-        destructive: styles.destructive,
-        outline: styles.outline,
-        dashed: styles.dashed,
-        ghost: styles.ghost,
-        link: styles.link,
-      },
-      size: {
-        default: styles.medium,
-        sm: styles.small,
-        lg: styles.large,
-      },
-    },
-    // compoundVariants: [
-    //   { variant: "default", size: "default", className: styles.primaryMedium },
-    // ],
-    defaultVariants: {
-      variant: "default",
-      size: "default",
-    },
-  }
-)
+import { buttonVariants, type ButtonVariants } from "./Button.cva";
 
 export interface ButtonBaseProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-  VariantProps<typeof buttonVariants> {
+  ButtonVariants {
   asChild?: boolean
 }
 
@@ -45,8 +14,8 @@ const ButtonBase = forwardRef<HTMLButtonElement, ButtonBaseProps>(
     const Comp = asChild ? Slot : "button"
     return (
       <Comp
-        className={buttonVariants({ variant, size, className })}
         ref={ref}
+        className={buttonVariants({ variant, size, className })}
         {...props}
       />
     )
@@ -55,4 +24,4 @@ const ButtonBase = forwardRef<HTMLButtonElement, ButtonBaseProps>(
 
 ButtonBase.displayName = "ButtonBase"
 
-export { ButtonBase, buttonVariants }
+export { ButtonBase, buttonVariants };

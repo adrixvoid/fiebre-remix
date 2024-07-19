@@ -1,13 +1,14 @@
-import { cva, type VariantProps } from "class-variance-authority"
+import { cva, type VariantProps } from "class-variance-authority";
 
-import styles from './Container.module.css'
+import styles from './Container.module.css';
 
 const cvaVariants = cva(
   styles.container, {
   variants: {
     variant: {
-      default: "",
-      fluid: styles.fluid
+      default: styles.default,
+      narrow: styles.narrow,
+      fluid: styles.fluid,
     }
   },
   defaultVariants: {

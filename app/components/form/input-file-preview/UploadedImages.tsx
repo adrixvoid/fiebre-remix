@@ -1,15 +1,14 @@
-import { Slot } from "@radix-ui/react-slot"
+import cx from 'clsx';
 import { atom, useAtom } from 'jotai';
 import { Trash2 } from 'lucide-react';
-import cx from 'clsx';
 
 import { t } from '~/i18n/translate';
 import { MapImage } from "~/types/global.type";
 
+import { useEffect } from "react";
 import { Button } from '~/components/button/Button';
 import styles from "./InputFilePreview.module.css";
-import Input from "../Input";
-import { useEffect } from "react";
+import { PreviewList, PreviewListActions, PreviewListBadge, PreviewListImage, PreviewListItem } from './PreviewList';
 
 const DELETE_INPUT_NAME = 'toDelete';
 
@@ -24,18 +23,14 @@ export const showUploadAtom = atom(false);
 
 export function ImagePreview({ source, onDelete, checked = false }: ImagePreviewProps) {
   return (
-    <div className={cx(styles.item, "box paper", { [styles.imageDisabled]: checked })}>
+    <PreviewListItem disabled={checked}>
       <div>
-        <img className={cx(styles.image, {
-          [styles.imageDisabled]: checked
-        })} src={source?.url} />
+        <PreviewListImage disabled={checked} src={source?.url} />
       </div>
       <div>
-        <span className={cx(`${styles.badge} text-sm`, {
-          'line-through': checked
-        })}>{source?.fileName}</span>
+        <PreviewListBadge>{source?.fileName}</PreviewListBadge>
       </div>
-      <div>
+      <PreviewListActions>
         <Button
           aria-label="delete"
           type="button"
@@ -47,10 +42,10 @@ export function ImagePreview({ source, onDelete, checked = false }: ImagePreview
           }}
         >
           <Trash2 />
-          {checked ? "Restore" : t('GLOBAL.DELETE')}
+          {checked ? "Restore" : t('DELETE')}
         </Button>
-      </div>
-    </div>
+      </PreviewListActions>
+    </PreviewListItem>
   );
 }
 
@@ -64,8 +59,6 @@ type InputImageListProps = React.InputHTMLAttributes<HTMLInputElement> & {
 export function InputImageList({ className, source, multiple, ...rest }: InputImageListProps) {
   const [deleteSetList, setDeleteList] = useAtom(deleteSetListAtom)
   const [showUploadFile, setShowUploadFile] = useAtom(showUploadAtom)
-
-  console.log("source", source)
 
   useEffect(() => {
     if (multiple || !source) {
@@ -86,13 +79,11 @@ export function InputImageList({ className, source, multiple, ...rest }: InputIm
 
   if (source instanceof Array) {
     imageComponent = (
-      <ul>
+      <PreviewList>
         {(source as MapImage[])?.map((sourceItem) => (
-          <li key={sourceItem.fileName}>
-            <ImagePreview source={sourceItem} onDelete={handleOnDelete} checked={deleteSetList.has(sourceItem.filePath)} />
-          </li>
+          <ImagePreview key={sourceItem.fileName} source={sourceItem} onDelete={handleOnDelete} checked={deleteSetList.has(sourceItem.filePath)} />
         ))}
-      </ul>
+      </PreviewList>
     );
   } else if (source) {
     imageComponent = (<ImagePreview source={source as MapImage} checked={deleteSetList.has(source.filePath)}

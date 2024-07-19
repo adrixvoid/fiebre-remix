@@ -42,5 +42,6 @@
   "editor.defaultFormatter": null,
   "editor.codeActionsOnSave": {
     "source.organizeImports": "explicit"
-  }
+  },
+  "editor.fontSize": 12
 }

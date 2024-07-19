@@ -1,0 +1,22 @@
+.base {
+  margin-bottom: 1rem;
+}
+
+.block label {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.inline label {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}

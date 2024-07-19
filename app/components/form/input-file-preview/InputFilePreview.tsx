@@ -1,13 +1,18 @@
-import { Trash2 } from 'lucide-react';
 import cx from 'clsx';
+import { CloudUpload, Trash2 } from 'lucide-react';
 
 import { t } from '~/i18n/translate';
-import { Button } from '~/components/button/Button';
+import useFilePreview from './useFilePreview';
 
-import useFilePreview from './useFilePreview'
-import { FilePreview } from './InputFilePreview.types';
-import styles from "./InputFilePreview.module.css";
+import { Button } from '~/components/button/Button';
+import { ErrorMessage } from '../ErrorMessage';
 import ImageBlob from "./ImageBlob";
+import { FilePreview } from './InputFilePreview.types';
+import { PreviewList, PreviewListActions, PreviewListBadge, PreviewListItem } from './PreviewList';
+
+import { useRef } from 'react';
+import { Flex } from '~/components/flex/Flex';
+import styles from "./InputFilePreview.module.css";
 
 type ComponentType<T> =
     | React.JSXElementConstructor<T>
@@ -34,7 +39,8 @@ export default function InputFilePreview({
     onKeyDown,
     ...rest
 }: InputFilePreviewProps) {
-    let { previewList, removePreview, onSaveBuffer, onCreatePreview } = useFilePreview({ multiple });
+    let { inputElement, setInputElement, previewList, removePreview, saveBuffer, createPreview } = useFilePreview({ multiple });
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const injectedProps = {
         tabIndex: 0,
@@ -43,55 +49,117 @@ export default function InputFilePreview({
         multiple,
         ...rest,
         onClick: (event: React.MouseEvent<HTMLInputElement>) => {
-            onSaveBuffer(event)
+            if (!inputElement) {
+                setInputElement(event.target as HTMLInputElement);
+            }
+            saveBuffer((event.target as HTMLInputElement).files);
             onClick?.(event);
         },
         onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
-            onCreatePreview(event)
+            if (!inputElement) {
+                setInputElement(event.target as HTMLInputElement);
+            }
+            createPreview((event.target as HTMLInputElement).files);
             onChange?.(event);
         },
         onKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => {
-            onSaveBuffer(event)
+            if (!inputElement) {
+                setInputElement(event.target as HTMLInputElement);
+            }
             onKeyDown?.(event);
         },
         type: "file",
     }
 
+    const handleDragOver = (event: React.DragEvent<HTMLInputElement | HTMLLabelElement>) => {
+        event.preventDefault();
+    }
+
+    const handleDrop = (event: React.DragEvent<HTMLInputElement | HTMLLabelElement>) => {
+        event.preventDefault();
+        console.log("DROP");
+        console.log("items", event.dataTransfer.items);
+        console.log("files", event.dataTransfer.files);
+        console.log("event.target", event.target)
+
+        if (inputRef.current?.files) {
+            setInputElement(inputRef.current);
+            createPreview(event.dataTransfer.files);
+            saveBuffer(event.dataTransfer.files);
+        }
+
+        if (event.dataTransfer.items) {
+            // Use DataTransferItemList interface to access the file(s)
+            [...event.dataTransfer.items].forEach((item, i) => {
+                // If dropped items aren't files, reject them
+                if (item.kind === "file") {
+                    const file = item.getAsFile();
+                    console.log(`… file[${i}].name = ${file?.name}`);
+                }
+            });
+        } else {
+            // Use DataTransfer interface to access the file(s)
+            [...event.dataTransfer.files].forEach((file, i) => {
+                console.log(`else … file[${i}].name = ${file.name}`);
+            });
+
+            console.log("inputRef?.current", inputRef?.current)
+
+            if (inputRef?.current?.files) {
+                inputRef.current.files = event.dataTransfer.files;
+                console.log("inputRef.current.files")
+                console.log(inputRef.current.files)
+            }
+        }
+
+        if (inputRef?.current?.files) {
+            inputRef.current.files = event.dataTransfer.files;
+        }
+    }
+
     return (
         <>
             {(previewList.length > 0) &&
-                <ul className={styles.previewList}>
+                <PreviewList className={styles.previewList}>
                     {previewList.map((file: FilePreview) => (
-                        <li key={file.name} className={cx(styles.item, "box paper")}>
+                        <PreviewListItem key={file.name}>
                             {file.type.match("image") && (
                                 <span className="flex">
-                                    <ImageBlob className={styles.image} name={file.name} src={file.src} />
+                                    <ImageBlob name={file.name} src={file.src} />
                                 </span>
                             )}
                             <div>
-                                <span className={`${styles.badge} text-sm`}>{file.name}</span>
+                                <PreviewListBadge>{file.name}</PreviewListBadge>
                             </div>
-                            <Button aria-label="delete" type="button" variant="destructive" size='sm' onClick={() => removePreview(file.name)}>
-                                <Trash2 strokeWidth={1.5} />
-                                {t('GLOBAL.DELETE')}
-                            </Button>
-                        </li>
+                            <PreviewListActions>
+                                <Button aria-label="delete" type="button" variant="destructive" size='sm' onClick={() => removePreview(file.name)}>
+                                    <Trash2 strokeWidth={1.5} />
+                                    {t('DELETE')}
+                                </Button>
+                            </PreviewListActions>
+                        </PreviewListItem>
                     ))}
-                </ul>
+                </PreviewList>
             }
             <label role="button"
                 className={cx(styles.label, { "mt-2": previewList.length > 0 })}
                 htmlFor={injectedProps.id}
                 {...labelProps}
+                onDragOver={handleDragOver}
+                onDrop={handleDrop}
             >
-                <span>
-                    {label}
+                <span style={{ overflow: 'hidden' }}>
+                    <Flex direction='column' justify='center' align='center' gap="0">
+                        <CloudUpload />
+                        {label}
+                        <span className={styles.smallText}>Click here or drag and drop the file you want to upload</span>
+                    </Flex>
                     <span style={{ transform: "translateX(-100vw)", position: "absolute", left: "-100vw" }}>
-                        <input {...injectedProps} />
+                        <input ref={inputRef} {...injectedProps} />
                     </span>
                 </span>
             </label>
-            {Boolean(error) && <p className="box paper color-danger">{error}</p>}
+            <ErrorMessage name={name} error={error} />
         </>
     );
 }

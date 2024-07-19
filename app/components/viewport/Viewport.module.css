@@ -1,0 +1,15 @@
+.base {
+  display: block;
+}
+
+@media screen and (width <=640px) {
+  .mobile-hidden {
+    display: none;
+  }
+}
+
+@media screen and (width > 640px) {
+  .mobile {
+    display: none;
+  }
+}

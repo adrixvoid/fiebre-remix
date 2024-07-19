@@ -1,6 +1,6 @@
-import { cva, type VariantProps } from "class-variance-authority"
+import { cva, type VariantProps } from "class-variance-authority";
 
-import styles from './Center.module.css'
+import styles from './Center.module.css';
 
 const cvaVariants = cva(
   null, {
@@ -8,7 +8,7 @@ const cvaVariants = cva(
     variant: {
       flex: styles.flex,
       text: styles['center-text'],
-      all: [styles.flex, styles.flex]
+      all: [styles.flex, styles['center-text']]
     },
     direction: {
       row: styles.row,

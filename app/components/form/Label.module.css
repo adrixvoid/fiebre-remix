@@ -1,10 +1,8 @@
 .label {
-  /* "w-full mb-2" */
-
-  --tw-space-x-reverse: 0;
-  margin-right: calc(.25rem* var(--tw-space-x-reverse));
-  margin-left: calc(.25rem* calc(1 - var(--tw-space-x-reverse)));
-  line-height: 1;
+  --space-x-reverse: 0;
+  margin-right: calc(.25rem* var(--space-x-reverse));
+  /* margin-left: calc(.25rem* calc(1 - var(--space-x-reverse))); */
+  line-height: 1.5;
   font-size: .875rem;
   font-weight: 500;
 }

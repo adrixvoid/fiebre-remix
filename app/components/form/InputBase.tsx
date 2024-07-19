@@ -1,8 +1,10 @@
 import { cx } from "class-variance-authority";
 import { Label } from "./Label";
 
-import styles from './InputBase.module.css'
 import { forwardRef } from "react";
+import { ErrorMessage } from "./ErrorMessage";
+
+import styles from './InputBase.module.css';
 
 export interface InputBaseProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
@@ -16,7 +18,7 @@ const InputBase = forwardRef<HTMLInputElement, InputBaseProps>(
       <>
         {label && <Label id={id} name={name} {...labelProps}>{label}</Label>}
         <input ref={ref} className={cx(styles.input, className)} name={name} id={id} {...rest} />
-        {Boolean(error) && <label className={styles.error}>{error}</label>}
+        <ErrorMessage name={name} error={error} />
       </>
     )
   }
@@ -25,4 +27,5 @@ const InputBase = forwardRef<HTMLInputElement, InputBaseProps>(
 
 InputBase.displayName = "InputBase"
 
-export { InputBase }
+export { InputBase };
+

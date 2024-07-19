@@ -1,12 +1,14 @@
-import { cva, type VariantProps } from "class-variance-authority"
+import { cva, type VariantProps } from "class-variance-authority";
 
-import styles from './Header.module.css'
+import styles from './Header.module.css';
 
 const cvaVariants = cva(
   styles.header, {
   variants: {
     position: {
-      static: styles.static
+      static: styles.static,
+      sticky: styles.sticky,
+      fixed: styles.fixed
     }
   }
 })

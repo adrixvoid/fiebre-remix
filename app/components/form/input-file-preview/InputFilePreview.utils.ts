@@ -1,6 +1,6 @@
 import {FilePreview} from './InputFilePreview.types';
 
-export function toFilePreview(files: FileList | null): FilePreview[] {
+export function toFilePreviewType(files: FileList | null): FilePreview[] {
   if (!files) return [];
 
   return Array.from(files)

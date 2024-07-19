@@ -1,0 +1,25 @@
+.file {}
+
+.file:focus,
+.file:focus-visible {
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow);
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+
+.file::file-selector-button {
+  padding: .8rem 2rem;
+  background-color: hsl(var(--button));
+  color: hsl(var(--button-foreground));
+  fill: hsl(var(--button-foreground));
+  padding: .4em .4em;
+  border-radius: .2em;
+  transition: 0.5s;
+}
+
+.file:hover::file-selector-button {
+  background-color: hsl(var(--button));
+  color: hsl(var(--button-foreground));
+  fill: hsl(var(--button-foreground));
+}

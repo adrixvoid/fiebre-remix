@@ -3,10 +3,10 @@ import { RemixLinkProps } from "@remix-run/react/dist/components";
 
 import { ButtonBase, ButtonBaseProps } from "./ButtonBase";
 
-export type ButtonProps = ButtonBaseProps & { to?: never } | RemixLinkProps & { variant?: ButtonBaseProps['variant'], size?: ButtonBaseProps['size'] }
+export type ButtonProps = ButtonBaseProps & { to?: never } | RemixLinkProps & { variant?: ButtonBaseProps['variant'], size?: ButtonBaseProps['size'], asChild?: boolean }
 
-export function Button(props: ButtonProps) {
-    if (props.to) {
+export function Button({ asChild, ...props }: ButtonProps) {
+    if (props.to && !asChild) {
         return (
             <ButtonBase asChild variant={props.variant} size={props.size}>
                 <Link {...props as RemixLinkProps} />
@@ -14,7 +14,7 @@ export function Button(props: ButtonProps) {
         )
     }
 
-    return <ButtonBase {...props as ButtonBaseProps} />
+    return <ButtonBase {...props as ButtonBaseProps} asChild={asChild} />
 }
 
 export default Button

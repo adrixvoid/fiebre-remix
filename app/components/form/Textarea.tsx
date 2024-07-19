@@ -1,7 +1,9 @@
-import cx from 'clsx';
-import cva from 'class-variance-authority';
-import { Label } from './Label';
+import clsx from 'clsx';
 import { forwardRef } from 'react';
+import { Label } from './Label';
+
+import { ErrorMessage } from './ErrorMessage';
+import styles from "./TextArea.module.css";
 
 export interface TextAreaProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -16,8 +18,8 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     return (
       <>
         {label && <Label id={id} name={name} {...labelProps}>{label}</Label>}
-        <textarea ref={ref} id={id} name={name} {...rest} />
-        {Boolean(error) && <p className="box paper color-danger">{error}</p>}
+        <textarea ref={ref} id={id} name={name} className={clsx(styles.base, className)} {...rest} />
+        <ErrorMessage name={name} error={error} />
       </>
     )
   });

@@ -1,0 +1,63 @@
+.base {
+  cursor: pointer;
+  appearance: none;
+
+  width: 1cap;
+  height: 1cap;
+  padding: 0.5rem;
+
+  border-radius: var(--radius-sm);
+  border-width: 1px;
+  border-style: solid;
+
+  transition: all 0.05s ease-in-out;
+  will-change: border-color;
+}
+
+.radio {
+  border-radius: 50%;
+}
+
+.base:checked {
+  border-color: hsl(var(--accent));
+}
+
+.base:checked::after {
+  content: "";
+  display: block;
+  width: .7rem;
+  height: .7rem;
+  background-color: hsl(var(--accent));
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.checkbox:checked::after {
+  border-radius: 20%;
+}
+
+.radio:checked::after {
+  border-radius: 50%;
+}
+
+.base:disabled,
+.base:checked:disabled,
+.base:disabled:focus {
+  opacity: 0.5;
+  cursor: initial;
+  outline: none;
+}
+
+.base:focus,
+.base:focus-visible {
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow);
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.label {
+  display: inline-flex;
+  align-items: center;
+}

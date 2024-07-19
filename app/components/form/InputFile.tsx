@@ -1,4 +1,8 @@
+import { ErrorMessage } from "./ErrorMessage";
 import { Label } from "./Label";
+
+import clsx from "clsx";
+import styles from './InputFile.module.css';
 
 export interface InputFileProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
@@ -10,8 +14,8 @@ export function InputFile({ label, labelProps, id, name, error, className, ...re
   return (
     <>
       {label && <Label id={id} name={name} {...labelProps}>{label}</Label>}
-      <input type='file' id={id} {...rest} />
-      {Boolean(error) && <p className="box paper color-danger">{error}</p>}
+      <input type='file' id={id} {...rest} className={clsx(styles.file, className)} />
+      <ErrorMessage name={name} error={error} />
     </>
   )
 }
