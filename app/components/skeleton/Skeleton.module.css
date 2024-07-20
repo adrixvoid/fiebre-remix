@@ -13,6 +13,6 @@
 
 @media (prefers-color-scheme: dark) {
   .skeleton {
-    --skeleton-background-color: hsl(var(--foreground) / .5);
+    --skeleton-background-color: hsl(254.12 40.48% 11.21%);
   }
 }

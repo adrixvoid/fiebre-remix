@@ -1,7 +1,7 @@
-import * as React from "react"
+import clsx from "clsx";
+import * as React from "react";
 
 import styles from "./Card.module.css";
-import clsx from "clsx";
 
 const Card = React.forwardRef<
   HTMLDivElement,
@@ -22,7 +22,7 @@ const CardHeader = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div
+  <header
     ref={ref}
     className={clsx(styles.header, className)}
     {...props}
@@ -62,13 +62,24 @@ const CardContent = React.forwardRef<
 ))
 CardContent.displayName = "CardContent"
 
+type CardImage = React.HTMLAttributes<HTMLDivElement> & {
+  bg?: string;
+}
 const CardImage = React.forwardRef<
+  HTMLDivElement,
+  CardImage
+>(({ className, bg, style, ...props }, ref) => (
+  <div ref={ref} className={clsx(styles.image, className)} {...props} style={{ ...style, backgroundImage: `url(${bg})` }} />
+))
+CardImage.displayName = "CardImage"
+
+const Image = React.forwardRef<
   HTMLImageElement,
   React.ImgHTMLAttributes<HTMLImageElement>
 >(({ className, ...props }, ref) => (
   <img ref={ref} className={clsx(styles.image, className)} {...props} />
 ))
-CardContent.displayName = "CardContent"
+Image.displayName = "Image"
 
 const CardImageCover = React.forwardRef<
   HTMLImageElement,
@@ -87,7 +98,7 @@ const CardFooter = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div
+  <footer
     ref={ref}
     className={clsx(styles.footer, className)}
     {...props}
@@ -103,4 +114,5 @@ const CardPadding = React.forwardRef<
 ))
 CardPadding.displayName = "CardPadding"
 
-export { Card, CardHeader, CardFooter, CardImage, CardImageCover, CardTitle, CardDescription, CardContent, CardPadding }
+export { Card, CardContent, CardDescription, CardFooter, CardHeader, CardImage, CardImageCover, CardPadding, CardTitle };
+

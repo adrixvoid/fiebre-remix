@@ -9,7 +9,7 @@
 
 @media (prefers-color-scheme: dark) {
   .card {
-    background-color: hsl(var(--card) / 0.8);
+    background-color: hsl(var(--card) / 0.5);
     box-shadow: none;
   }
 }
@@ -17,16 +17,14 @@
 .header {
   display: flex;
   flex-direction: column;
-  margin-top: 1.5rem;
-  padding-inline: 1.5rem;
 }
 
 .title {
-  margin: 0;
   letter-spacing: -.025em;
   line-height: 1.5;
   font-weight: 600;
   font-size: var(--text-base);
+  min-height: 4.5cap;
 }
 
 .description {
@@ -40,7 +38,13 @@
   padding: 1.5rem;
 }
 
-.image {}
+.image {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  aspect-ratio: 1 / 1;
+}
 
 .image-cover {
   width: 100%;
@@ -53,8 +57,6 @@
 
 .footer {
   display: flex;
-  padding: 1.5rem;
-  padding-top: 0;
   align-items: center;
 }
 

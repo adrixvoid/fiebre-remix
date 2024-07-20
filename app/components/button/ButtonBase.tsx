@@ -1,6 +1,5 @@
 import { Slot } from "@radix-ui/react-slot";
 import { forwardRef } from "react";
-
 import { buttonVariants, type ButtonVariants } from "./Button.cva";
 
 export interface ButtonBaseProps
@@ -10,12 +9,12 @@ export interface ButtonBaseProps
 }
 
 const ButtonBase = forwardRef<HTMLButtonElement, ButtonBaseProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
+  ({ className, variant, size, width, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
     return (
       <Comp
         ref={ref}
-        className={buttonVariants({ variant, size, className })}
+        className={buttonVariants({ variant, size, width, className })}
         {...props}
       />
     )

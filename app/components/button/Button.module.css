@@ -1,18 +1,198 @@
 .button {
     display: inline-flex;
-    gap: 0.5rem;
     align-items: center;
     justify-content: center;
     white-space: nowrap;
+    flex-shrink: 0;
 
-    border-radius: var(--radius-2xl);
+    gap: 0.5cap;
+    padding-left: 1.4cap;
+    padding-right: 1.4cap;
+    padding-top: 0.2cap;
+    padding-bottom: 0.2cap;
+    min-height: 1.75cap;
+
+    border-radius: var(--radius-md);
+    border-style: solid;
+    border-width: 1px;
     font-size: .875rem;
-    line-height: 1.25rem;
+    line-height: 1.8;
     font-weight: 500;
     outline-color: hsl(var(--ring));
 
-    will-change: color, background-color, border-color, text-decoration-color, fill, stroke;
+    will-change: color, background-color, border-color, text-decoration-color, box-shadow, fill, stroke;
     transition-duration: 200ms;
+    transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+}
+
+a.button {
+    text-decoration: none;
+}
+
+/* .button:has(>svg) {
+    padding-block: 0.5cap;
+} */
+
+.button:hover {
+    cursor: pointer;
+    text-decoration: none !important;
+}
+
+.button:focus-visible {
+    outline-width: 2px;
+    outline-offset: -2px;
+}
+
+.button:disabled,
+.button:disabled:hover,
+.button:disabled:active,
+.button:disabled:focus-within {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+/**
+    Button Color
+*/
+
+.base {
+    border-color: hsl(var(--button));
+    background-color: hsl(var(--button));
+    fill: currentColor;
+    color: hsl(var(--button-foreground));
+}
+
+.primary {
+    border-color: hsl(var(--primary));
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+}
+
+.primary:hover {
+    background-color: hsl(var(--primary) / 0.8);
+}
+
+.outline {
+    background-color: transparent;
+    color: hsl(var(--foreground));
+    fill: currentColor;
+    border-color: hsl(var(--foreground) / 0.8);
+    text-underline-offset: 4px;
+    text-decoration: none;
+}
+
+.outline:hover {
+    fill: currentColor;
+}
+
+.dashed {
+    background-color: transparent;
+    color: hsl(var(--foreground));
+    fill: currentColor;
+    border-style: dashed;
+    border-width: 1px;
+}
+
+.dashed:focus,
+.dashed:focus-within {
+    box-shadow: var(--shadow-sm), var(--tw-ring-shadow-0);
+}
+
+.ghost {
+    border-color: transparent;
+    background-color: transparent;
+    color: hsl(var(--foreground));
+    fill: currentColor;
+}
+
+.ghost:focus,
+.ghost:focus-within {
+    color: hsl(var(--button-foreground));
+    fill: currentColor;
+    box-shadow: var(--tw-ring-shadow-0);
+}
+
+.link {
+    border-color: transparent;
+    background-color: transparent;
+    color: hsl(var(--foreground));
+    fill: currentColor;
+    text-decoration: none;
+    text-underline-offset: 4px;
+}
+
+.link:hover {
+    background-color: hsl(var(--button-foreground) / .05);
+    color: hsl(var(--button-foreground));
+    fill: currentColor;
+}
+
+.link:focus,
+.link:focus-within {
+    color: hsl(var(--button-foreground));
+    fill: currentColor;
+    text-underline-offset: 4px;
+}
+
+.accent {
+    background: hsl(var(--accent));
+    color: hsl(var(--foreground));
+    fill: currentColor;
+}
+
+.destructive {
+    fill: currentColor;
+    border-color: hsl(var(--destructive));
+    background-color: hsl(var(--destructive));
+    color: hsl(var(--destructive-foreground));
+}
+
+.destructive:hover {
+    background-color: hsl(var(--destructive) / .9);
+}
+
+/**
+    Button Sizes
+*/
+
+.small {
+    font-size: 0.85rem;
+    border-radius: var(--radius-sm);
+}
+
+.medium {
+    font-size: var(--text-md);
+    border-radius: var(--radius-md);
+}
+
+.large {
+    line-height: 2;
+    font-size: var(--text-xl);
+    border-radius: var(--radius-md);
+}
+
+
+/* Icons */
+
+.button svg {
+    margin-left: -0.1cap;
+    width: 2cap;
+    object-fit: contain;
+}
+
+.full-width {
+    width: 100%
+}
+
+
+@media (prefers-color-scheme: dark) {
+    .primary:hover {
+        background-color: hsl(var(--primary) / 0.8);
+    }
+
+    .outline {
+        border-color: white;
+    }
 }
 
 @keyframes fade-in-out {
@@ -29,230 +209,46 @@
     }
 }
 
-.button:has(>svg) {
-    padding-block: 0;
-}
-
-.button:active {
-    transform: scale(1.1)
-}
-
-.button:hover {
-    cursor: pointer;
-    text-decoration: none !important;
-}
-
-.button:focus-visible {
-    outline-style: solid;
-    outline-width: 2px;
-    outline-offset: -2px;
-    box-shadow: var(--tw-ring-shadow-0);
-}
-
-.button:disabled,
-.button:disabled:hover,
-.button:disabled:active,
-.button:disabled:focus-within {
-    pointer-events: none;
-    opacity: 0.5;
-}
-
-/**
-    Button Color
-*/
-
-.base {
-    border-color: hsl(var(--button) / 0.2);
-    background-color: hsl(var(--button));
-    fill: hsl(var(--button-foreground));
-    color: hsl(var(--button-foreground));
-}
-
-.base:hover {
-    /* background-color: color-mix(in hsl increasing hue, hsl(var(--button)), hsl(var(--foreground)) 5%); */
-    background-color: hsl(var(--button) / 80%);
-    /* box-shadow: 0 2px 4px hsl(var(--shadow-color)); */
-    box-shadow: 0 2px 0 hsl(var(--shadow-color));
-}
-
-.primary {
-    border-color: color-mix(in hsl, hsl(var(--primary)), hsl(var(--button)) 10%);
-    background-color: hsl(var(--primary));
-    color: hsl(var(--primary-foreground));
-}
-
-.primary:hover {
-    background-color: color-mix(in hwb longer hue, hsl(var(--primary)), hsl(var(--background)) 10%);
-    box-shadow: 0 2px 4px hsl(var(--shadow-color));
-}
-
-.secondary {
-    border-color: color-mix(in hsl, hsl(var(--secondary)), hsl(var(--button)) 10%);
-    background-color: hsl(var(--secondary));
-    color: hsl(var(--secondary-foreground));
-}
-
-.secondary:hover {
-    background-color: hsl(var(--secondary) / .8);
-    box-shadow: 0 2px 4px hsl(var(--shadow-color));
-}
-
-.outline {
-    background-color: transparent;
-    color: hsl(var(--foreground));
-    fill: hsl(var(--foreground));
-    border-width: 1px;
-    border-style: solid;
-    border-color: hsl(var(--foreground) / 0.8);
-}
-
-.outline:hover {
-    /* background-color: hsl(var(--button-foreground) / .05);*/
-    text-underline-offset: 4px;
-    color: hsl(var(--button-foreground));
-    fill: hsl(var(--button-foreground));
-    border-color: hsl(var(--button-foreground) / .8);
-    text-decoration: none;
-    box-shadow: var(--shadow-sm);
-}
-
-.outline:focus,
-.outline:focus-within {
-    box-shadow: var(--shadow-sm), var(--tw-ring-shadow-0);
-}
-
-.dashed {
-    background-color: transparent;
-    color: hsl(var(--foreground));
-    fill: hsl(var(--foreground));
-    border-style: dashed;
-    border-width: 1px;
-}
-
-.dashed:hover {
-    background-color: hsl(var(--button-foreground) / .05);
-    color: hsl(var(--button-foreground));
-    fill: hsl(var(--button-foreground));
-}
-
-.dashed:focus,
-.dashed:focus-within {
-    box-shadow: var(--shadow-sm), var(--tw-ring-shadow-0);
-}
-
-.ghost {
-    border-color: transparent;
-    background-color: transparent;
-    color: hsl(var(--foreground));
-    fill: hsl(var(--foreground));
-}
-
-.ghost:hover {
-    border-style: dashed;
-    border-width: 1px;
-    border-color: hsl(var(--border));
-}
-
-.ghost:focus,
-.ghost:focus-within {
-    color: hsl(var(--button-foreground));
-    fill: hsl(var(--button-foreground));
-    box-shadow: var(--tw-ring-shadow-0);
-}
-
-.link {
-    border-color: transparent;
-    background-color: transparent;
-    color: hsl(var(--foreground));
-    fill: hsl(var(--foreground));
-    text-decoration: none;
-    border-radius: var(--radius-2xl);
-    line-height: 1;
-    text-underline-offset: 4px;
-}
-
-.link:hover {
-    background-color: hsl(var(--button-foreground) / .05);
-    color: hsl(var(--button-foreground));
-    fill: hsl(var(--button-foreground));
-}
-
-.link:focus,
-.link:focus-within {
-    color: hsl(var(--button-foreground));
-    fill: hsl(var(--button-foreground));
-    text-underline-offset: 4px;
-}
-
-.accent {
-    background: hsl(var(--accent));
-    color: hsl(var(--foreground));
-    fill: hsl(var(--foreground));
-}
-
-.destructive {
-    fill: hsl(var(--destructive-foreground));
-    background-color: hsl(var(--destructive));
-    color: hsl(var(--destructive-foreground));
-    border-color: hsl(var(--destructive));
-}
-
-.destructive:hover {
-    background-color: hsl(var(--destructive) / .9);
-    box-shadow: 0 2px 4px hsl(var(--shadow-color));
-}
-
-/**
-    Button Sizes
-*/
-
-.small {
-    gap: 0.45rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    height: 2rem;
-    min-width: 2rem;
-    font-size: .75rem;
-    line-height: 1rem;
-}
-
-.medium {
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
-    min-width: 2rem;
-    height: 2rem;
-}
-
-.large {
-    gap: 0.55rem;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-    min-width: 2rem;
-    height: 2.25rem;
-}
-
-
-/* Icons */
-
-.button svg {
-    min-height: 16px;
-    min-width: 16px;
-    width: 16px;
-    height: 16px;
-    width: 1.9cap;
-    height: 1.9cap;
-    max-height: 100%;
-    max-width: 100%;
-    object-fit: contain;
-}
-
-
-@media (prefers-color-scheme: dark) {
-    .primary:hover {
-        background-color: hsl(var(--primary) / 0.8);
+@keyframes rainbow {
+    from {
+        box-shadow:
+            0 0 0 0 hsl(179, 100%, 76%),
+            0 0 0 0 hsl(306 100% 83% / 0.9),
+            0 0 0 0 hsl(76.45 100% 75.69% / 0.8),
+            0 0 0 0 hsl(var(--primary) / .6)
     }
 
-    .outline {
-        border-color: white;
+    to {
+        box-shadow:
+            0 0 0 2px hsl(179, 100%, 76%),
+            0 0 0 6px hsl(306 100% 83% / 0.9),
+            0 0 0 10px hsl(76.45 100% 75.69% / 0.8),
+            0 0 0 15px hsl(var(--primary) / .6)
+    }
+}
+
+@keyframes rainbow2 {
+    0% {
+        box-shadow:
+            0 0 0 0 hsl(179, 100%, 76%),
+            0 0 0 0 hsl(306 100% 83% / 0.9),
+            0 0 0 0 hsl(76.45 100% 75.69% / 0.8),
+            0 0 0 0 hsl(var(--primary) / .6)
+    }
+
+    10% {
+        box-shadow:
+            0 0 0 2px hsl(179, 100%, 76%),
+            0 0 0 6px hsl(306 100% 83% / 0.9),
+            0 0 0 10px hsl(76.45 100% 75.69% / 0.8),
+            0 0 0 15px hsl(var(--primary) / .6)
+    }
+
+    90% {
+        box-shadow:
+            0 0 0 0 hsl(179, 100%, 76%),
+            0 0 0 0 hsl(306 100% 83% / 0.9),
+            0 0 0 0 hsl(76.45 100% 75.69% / 0.8),
+            0 0 0 0 hsl(var(--primary) / .6)
     }
 }

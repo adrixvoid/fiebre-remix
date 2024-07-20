@@ -1,9 +1,14 @@
 import { Link } from "@remix-run/react";
 import { RemixLinkProps } from "@remix-run/react/dist/components";
 
+import { ButtonVariants } from "./Button.cva";
 import { ButtonBase, ButtonBaseProps } from "./ButtonBase";
 
-export type ButtonProps = ButtonBaseProps & { to?: never } | RemixLinkProps & { variant?: ButtonBaseProps['variant'], size?: ButtonBaseProps['size'], asChild?: boolean }
+export type ButtonOrLink = ButtonBaseProps & { to?: never } | RemixLinkProps;
+
+export type ButtonProps = ButtonOrLink & ButtonVariants & {
+    asChild?: boolean
+}
 
 export function Button({ asChild, ...props }: ButtonProps) {
     if (props.to && !asChild) {
