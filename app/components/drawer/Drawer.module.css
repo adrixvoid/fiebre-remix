@@ -1,9 +1,17 @@
 .dialog {
+  inset: 0;
+  border: 1px solid var(--border);
+  background: hsl(var(--card));
+  color: hsl(var(--foreground));
+}
+
+.dialog {
   width: 100dvw;
   height: 100dvh;
   position: fixed;
   padding: 0;
-  background-color: hsl(var(--background) / 0.5);
+  margin: 0;
+  background-color: hsl(var(--primary) / 0.5);
 }
 
 .content {
@@ -14,11 +22,11 @@
   min-width: 250px;
   height: 100dvh;
   overflow-y: auto;
-  overflow-x: hidden;
   position: absolute;
   top: 0;
   left: 0;
-  box-shadow: var(--shadow-2xl);
+  /* box-shadow: var(--shadow-2xl); */
+  box-shadow: 0 1px 1px 11px hsl(258.11deg 100% 91.28% / 51%);
   animation: slideOut 250ms;
 }
 

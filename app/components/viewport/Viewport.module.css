@@ -2,14 +2,26 @@
   display: block;
 }
 
+@media screen and (width > 640px) {
+  .mobile {
+    display: none;
+  }
+}
+
 @media screen and (width <=640px) {
   .mobile-hidden {
     display: none;
   }
 }
 
-@media screen and (width > 640px) {
-  .mobile {
+@media screen and (width <960px) {
+  .desktop {
+    display: none;
+  }
+}
+
+@media screen and (width >=960px) {
+  .desktop-hidden {
     display: none;
   }
 }

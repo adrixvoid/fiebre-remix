@@ -1,6 +1,6 @@
 import clsx from "clsx";
 
-import styles from './Section.module.css'
+import styles from './Section.module.css';
 
 export interface SectionProps extends React.HTMLAttributes<HTMLDivElement> {
   marginBottom?: boolean;
@@ -8,7 +8,7 @@ export interface SectionProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export function Section({ className, marginBottom, ...props }: SectionProps) {
   return (
-    <div className={clsx(styles.section, className, {
+    <div className={clsx(className, {
       [styles['margin-bottom']]: marginBottom
     })} {...props} />
   );

@@ -1,0 +1,46 @@
+.header {
+  height: 6rem;
+  transition: all 250ms;
+}
+
+.logo {
+  aspect-ratio: 2 / 1;
+  height: 2.5rem;
+  color: hsl(var(--primary));
+  fill: currentColor;
+  will-change: filter;
+  transition: filter 300ms;
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+
+.sticky {
+  height: 3.5rem;
+  background-color: hsl(var(--background) / 0.5);
+}
+
+.navigation a {
+  text-underline-offset: .2rem;
+  text-rendering: optimizeLegibility;
+  text-shadow: 0 0 1px white;
+}
+
+.navigation a:hover {
+  text-decoration: underline;
+}
+
+.navigation a:focus-visible {
+  outline: 4px solid hsl(var(--ring));
+  outline-offset: 5px;
+}
+
+.navigation a {
+  color: hsl(var(--foreground));
+}

@@ -1,4 +1,4 @@
-import { Trash2 } from 'lucide-react';
+import { Trash2, User } from 'lucide-react';
 
 import { Button } from "~/components/button/Button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "~/components/card/Card";
@@ -88,20 +88,6 @@ function ProductRoute() {
                     </div>
                     <hr style={{ margin: "4rem 0" }} />
                     <div className="mt-10">
-                        <h2>Buttons</h2>
-                        <h4>Button HTML</h4>
-                        <div style={{
-                            display: "flex",
-                            flexDirection: "row",
-                            alignItems: "center",
-                            gap: 20,
-                            marginTop: 20,
-                            flexWrap: "wrap"
-                        }}>
-                            <button>Button</button>
-                            <button disabled>Disabled</button>
-                        </div>
-                        <hr style={{ margin: "4rem 0" }} />
                         <h2>Button Component</h2>
                         <h5>Button Variants</h5>
                         <div style={{
@@ -114,7 +100,6 @@ function ProductRoute() {
                         }}>
                             <Button variant="default">Default</Button>
                             <Button variant="primary">Primary</Button>
-                            <Button variant="secondary">Secondary</Button>
                             <Button variant="outline">Outline</Button>
                             <Button variant="dashed">Dashed</Button>
                             <Button variant="destructive">Destructive</Button>
@@ -132,7 +117,7 @@ function ProductRoute() {
                         }}>
                             <Button disabled>Button</Button>
                             <Button disabled variant="default">Default</Button>
-                            <Button disabled variant="secondary">Secondary</Button>
+                            <Button disabled variant="primary">Primary</Button>
                             <Button disabled variant="outline">Outline</Button>
                             <Button disabled variant="dashed">Dashed</Button>
                             <Button disabled variant="destructive">Destructive</Button>
@@ -161,18 +146,29 @@ function ProductRoute() {
                             flexWrap: "wrap",
                             paddingBottom: '4rem'
                         }}>
-                            <Button aria-label="delete" size='sm' variant='destructive'>
-                                <Trash2 />
-                                Eliminar
+                            <Button aria-label="delete" size='sm'>
+                                User
                             </Button>
-                            <Button aria-label="delete" size='default' variant='destructive'>
-                                <Trash2 />
-                                Eliminar
+                            <Button aria-label="delete" size='sm'>
+                                <User />
+                                User
                             </Button>
-                            <Button aria-label="delete" size='lg' variant='destructive'>
-                                <Trash2 />
-                                Eliminar
+                            <Button aria-label="delete" size='default'>
+                                User
                             </Button>
+                            <Button aria-label="delete" size='default'>
+                                <User />
+                                User
+                            </Button>
+                            <Button aria-label="delete" size='lg'>
+                                User
+                            </Button>
+                            <Button aria-label="delete" size='lg'>
+                                <User />
+                                User
+                            </Button>
+
+                            <hr />
                             <Button aria-label="delete" size='sm' variant='destructive'>
                                 <Trash2 />
                                 <span className="sr-only">Eliminar</span>
@@ -188,7 +184,6 @@ function ProductRoute() {
 
                             <Button variant="default"><Trash2 /> Default</Button>
                             <Button variant="primary"><Trash2 /> Primary</Button>
-                            <Button variant="secondary"><Trash2 /> Secondary</Button>
                             <Button variant="outline"><Trash2 /> Outline</Button>
                             <Button variant="dashed"><Trash2 /> Dashed</Button>
                             <Button variant="destructive"><Trash2 /> Destructive</Button>
@@ -196,7 +191,6 @@ function ProductRoute() {
                             <Button variant="link"><Trash2 /> Link</Button>
                             <Button variant="default"><Trash2 /></Button>
                             <Button variant="primary"><Trash2 /></Button>
-                            <Button variant="secondary"><Trash2 /></Button>
                             <Button variant="outline"><Trash2 /></Button>
                             <Button variant="dashed"><Trash2 /></Button>
                             <Button variant="destructive"><Trash2 /></Button>

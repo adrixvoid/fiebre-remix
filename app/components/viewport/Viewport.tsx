@@ -7,7 +7,9 @@ const viewportVariants = cva(
   variants: {
     variant: {
       mobile: styles.mobile,
-      mobileHidden: styles['mobile-hidden'],
+      desktop: styles.desktop,
+      ["mobile-hidden"]: styles['mobile-hidden'],
+      ["desktop-hidden"]: styles['desktop-hidden'],
     }
   },
 })

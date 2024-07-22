@@ -6,8 +6,8 @@ import { ROUTE_PATH_ADMIN, SITE_NAME } from "~/constants";
 import { Container } from "~/components/container/Container";
 import { Flex } from "~/components/flex/Flex";
 import { Header } from "~/components/header/Header";
-import { Link, NavLink } from "~/components/link/Link";
-import { Nav } from "~/components/nav/Nav";
+import { Link } from "~/components/link/Link";
+import { Nav, NavLink } from "~/components/nav/Nav";
 import Logo from "~/components/svg/Logo";
 
 import styles from "~/styles/admin.css";

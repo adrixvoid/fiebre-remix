@@ -38,7 +38,7 @@ export default function CoursesPage() {
                     <Card style={{ maxWidth: "20rem" }}>
                         <CardHeader>
                             <Center>
-                                <Skeleton variant="radius" width="10dvw" height="10dvw" />
+                                <Skeleton variant="circle" width="10dvw" height="10dvw" />
                             </Center>
                         </CardHeader>
                         <CardContent>
@@ -69,7 +69,7 @@ export default function CoursesPage() {
                     <Card style={{ maxWidth: "20rem" }}>
                         <CardHeader>
                             <Center>
-                                <Skeleton variant="radius" width="10dvw" height="10dvw" />
+                                <Skeleton variant="circle" width="10dvw" height="10dvw" />
                             </Center>
                         </CardHeader>
                         <CardContent>

@@ -1,6 +1,6 @@
-import { cva, type VariantProps } from "class-variance-authority"
+import { cva, type VariantProps } from "class-variance-authority";
 
-import styles from './Grid.module.css'
+import styles from './Grid.module.css';
 
 const cvaVariants = cva(
   styles.grid, {

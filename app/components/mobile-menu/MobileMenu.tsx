@@ -1,50 +1,70 @@
-import { RemixNavLinkProps } from "@remix-run/react/dist/components";
 import clsx from "clsx";
-import { atom, useAtom } from "jotai";
+import { useAtom } from "jotai";
 import { Menu as MenuIcon, X } from "lucide-react";
 
-import { Nav as NavBase, NavProps } from "~/components/nav/Nav";
-import Button from "../button/Button";
-import { Drawer } from '../drawer/Drawer';
-import { NavLink } from "../link/Link";
+import { Button, ButtonProps } from "~/components/button/Button";
+import { Drawer } from '~/components/drawer/Drawer';
+import { Nav as NavBase, NavLink, NavProps } from "~/components/nav/Nav";
 
-
+import { RemixNavLinkProps } from "@remix-run/react/dist/components";
 import styles from "./MobileMenu.module.css";
+import { showModalAtom } from "./MobileMenu.state";
 
 interface MobileMenuProps {
   children: React.ReactNode;
   className?: string;
 }
 
-export const showModalAtom = atom(false);
-
-function Menu({ children, className, ...props }: MobileMenuProps) {
+export function Menu({ children, className }: MobileMenuProps) {
   const [showModal, setShowModal] = useAtom(showModalAtom);
   return (
-    <div>
-      <Button variant="ghost" size="sm" className={styles.button} onClick={() => setShowModal(!showModal)}>
-        <MenuIcon /><span className="sr-only">Menu</span>
-      </Button>
+    <div className={className}>
       <Drawer open={showModal} onClose={() => setShowModal(false)}>
-        <Button className={styles.close} variant="ghost" size="sm" onClick={() => setShowModal(!showModal)}>
-          <X /><span className="sr-only">Menu</span>
-        </Button>
         {children}
       </Drawer>
     </div>
   );
 }
 
-function Header({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
-  return <header className={clsx(styles.header, className)} {...props} />
+type ButtonDrawerProps = ButtonProps & { onClick?: (event: React.MouseEvent) => void };
+export function ButtonClose({ onClick, className, ...props }: ButtonDrawerProps) {
+  const [showModal, setShowModal] = useAtom(showModalAtom);
+
+  const handleOnClick = (event: React.MouseEvent) => {
+    setShowModal(!showModal);
+    onClick?.(event);
+  }
+
+  return (
+    <Button className={clsx(styles.close, className)} variant="ghost" size="sm" onClick={handleOnClick} {...props}>
+      <X /><span className="sr-only">Menu</span>
+    </Button>
+  )
 }
 
-function Nav({ className, ...props }: NavProps) {
+export function ButtonHamburger({ onClick, className, ...props }: ButtonDrawerProps) {
+  const [showModal, setShowModal] = useAtom(showModalAtom);
+  const handleOnClick = (event: React.MouseEvent) => {
+    setShowModal(!showModal);
+    onClick?.(event);
+  }
+  return (
+    <Button variant="ghost" className={clsx(styles.button, className)} onClick={handleOnClick} {...props}>
+      <MenuIcon /><span className="sr-only">Menu</span>
+    </Button>
+  )
+}
+
+export function Header(props: React.HTMLAttributes<HTMLDivElement>) {
+  return <header {...props} />
+}
+
+export function Nav({ className, ...props }: NavProps) {
   return <NavBase className={clsx(styles.nav, className)} {...props} />
 }
 
-function Link({ className, onClick, ...props }: RemixNavLinkProps) {
-  const [_, setShowModal] = useAtom(showModalAtom);
+export function Link({ onClick, ...props }: RemixNavLinkProps & { onClick: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void }) {
+  const [, setShowModal] = useAtom(showModalAtom);
   const handleOnClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     onClick?.(event);
     setShowModal(false)
@@ -52,11 +72,13 @@ function Link({ className, onClick, ...props }: RemixNavLinkProps) {
   return <NavLink onClick={handleOnClick} {...props} />
 }
 
-function Padding({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+export function Padding({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return <div className={clsx(styles.padding, className)} {...props} />
 }
 
 export default {
+  ButtonHamburger,
+  ButtonClose,
   Header,
   Link,
   Nav,

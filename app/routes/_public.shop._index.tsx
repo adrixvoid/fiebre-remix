@@ -7,7 +7,7 @@ import type { Product } from "~/types/global.type";
 import { productService } from "~/server/services/products.service";
 
 import Button from "~/components/button/Button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardImage, CardTitle } from "~/components/card/Card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardImageCover, CardTitle } from "~/components/card/Card";
 import { Container } from "~/components/container/Container";
 import { Section } from "~/components/section/Section";
 import { ProductList } from "~/modules/products/Product";
@@ -26,18 +26,22 @@ const Store = () => {
                     {products.map((product) => (
                         <article key={product.title}>
                             <Card>
-                                <CardImage src={product.images?.[0]?.url} alt={product.title} aria-hidden loading="lazy" />
-                                <CardHeader>
-                                    <CardTitle>{product.title}</CardTitle>
-                                </CardHeader>
-                                <CardContent className="item-description">
-                                    <CardDescription>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo sint expedita modi doloremque at quisquam, dolore corporis ea. Laboriosam sint natus neque vel dolorem expedita repellendus, in iusto iste nostrum?</CardDescription>
+                                <CardImageCover src={product.images?.[0]?.url}>
+                                    <img src={product.images?.[0]?.url} alt={product.title} aria-hidden loading="lazy" />
+                                </CardImageCover>
+                                <CardContent>
+                                    <CardHeader>
+                                        <CardTitle>{product.title}</CardTitle>
+                                    </CardHeader>
+                                    <div className="item-description">
+                                        <CardDescription>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo sint expedita modi doloremque at quisquam, dolore corporis ea. Laboriosam sint natus neque vel dolorem expedita repellendus, in iusto iste nostrum?</CardDescription>
+                                    </div>
+                                    <CardFooter>
+                                        <Button to={`${ROUTE_PATH.SHOP_DETAIL}/${product.slug}`}>
+                                            More Details
+                                        </Button>
+                                    </CardFooter>
                                 </CardContent>
-                                <CardFooter>
-                                    <Button to={`${ROUTE_PATH.SHOP_DETAIL}/${product.slug}`}>
-                                        More Details
-                                    </Button>
-                                </CardFooter>
                             </Card>
                         </article>
                     ))}

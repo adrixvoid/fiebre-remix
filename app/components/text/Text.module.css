@@ -1,0 +1,83 @@
+.base {
+  line-height: 1;
+}
+
+.primary {
+  font-family: "Morganite", "Montserrat";
+  text-transform: uppercase;
+  font-size: 6rem;
+}
+
+.secondary {
+  font-family: "Montserrat", "Open Sans", "sans-serif";
+}
+
+.default {
+  font-size: inherit;
+}
+
+.xl {
+  font-size: 2.25rem;
+  line-height: 1.5;
+}
+
+.lg {
+  font-size: 1.8rem;
+  font-size: min(max(2cqw, 1.5rem), 1.7rem);
+  font-size: 4.5cqw;
+  line-height: 1.2;
+  font-weight: 500;
+}
+
+@media (width >=640px) {
+  .lg {
+    font-size: 3cqw;
+  }
+}
+
+@media (width >=768px) {
+  .lg {
+    font-size: 1.8rem;
+  }
+}
+
+.md {
+  font-size: 1.5rem;
+  line-height: 1.5;
+}
+
+.sm {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.primary-large {
+  font-size: 10rem;
+  line-height: 152%;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.primary-medium {
+  font-size: 8rem;
+}
+
+.primary-small {
+  font-size: 6rem;
+}
+
+.left {
+  text-align: left;
+}
+
+.center {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
+}
+
+.italic {
+  font-style: italic;
+}

@@ -23,7 +23,7 @@
   letter-spacing: -.025em;
   line-height: 1.5;
   font-weight: 600;
-  font-size: var(--text-base);
+  font-size: var(--text-md);
   min-height: 4.5cap;
 }
 

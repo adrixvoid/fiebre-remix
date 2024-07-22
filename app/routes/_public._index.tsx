@@ -8,7 +8,7 @@ import { Product } from "~/types/global.type";
 import productModel from '~/server/schema/product.schema';
 
 import Button from "~/components/button/Button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardImage, CardTitle } from "~/components/card/Card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardImageCover, CardTitle } from "~/components/card/Card";
 import { Center } from "~/components/center/Center";
 import { Container } from "~/components/container/Container";
 import Input from "~/components/form/Input";
@@ -43,49 +43,49 @@ export default function Index() {
       <Container style={{ marginTop: "2.5rem" }}>
         <Grid>
           <Card>
-            <CardHeader>
-              <Center>
-                <Skeleton variant="radius" width="10dvw" height="10dvw" />
-              </Center>
-            </CardHeader>
             <CardContent>
+              <CardHeader>
+                <Center>
+                  <Skeleton variant="circle" width="10dvw" height="10dvw" />
+                </Center>
+              </CardHeader>
               <Center variant="text">
                 <CardTitle>Proyectos</CardTitle>
                 <CardDescription>Conocé mis servicios y hagamos realidad tu proyecto!</CardDescription>
               </Center>
+              <CardFooter>
+                <Center>
+                  <Button>
+                    Empecemos
+                  </Button>
+                </Center>
+              </CardFooter>
             </CardContent>
-            <CardFooter>
-              <Center>
-                <Button>
-                  Empecemos
-                </Button>
-              </Center>
-            </CardFooter>
           </Card>
           <Card>
-            <CardHeader>
-              <Center>
-                <Skeleton variant="radius" width="10dvw" height="10dvw" />
-              </Center>
-            </CardHeader>
             <CardContent>
+              <CardHeader>
+                <Center>
+                  <Skeleton variant="circle" width="10dvw" height="10dvw" />
+                </Center>
+              </CardHeader>
               <Center variant="text">
                 <CardTitle>Cursos</CardTitle>
                 <CardDescription>Plantillas que van a llevar tu negocio al siguiente nivel!</CardDescription>
               </Center>
+              <CardFooter>
+                <Center>
+                  <Button>
+                    Ver recursos
+                  </Button>
+                </Center>
+              </CardFooter>
             </CardContent>
-            <CardFooter>
-              <Center>
-                <Button>
-                  Ver recursos
-                </Button>
-              </Center>
-            </CardFooter>
           </Card>
           <Card>
             <CardHeader>
               <Center>
-                <Skeleton variant="radius" width="10dvw" height="10dvw" />
+                <Skeleton variant="circle" width="10dvw" height="10dvw" />
               </Center>
             </CardHeader>
             <CardContent>
@@ -146,18 +146,20 @@ export default function Index() {
             return (
               <article key={product.title}>
                 <Card>
-                  <CardImage src={product.images?.[0].url} alt={product.title} aria-hidden />
-                  <CardHeader>
-                    <CardTitle>{product.title}</CardTitle>
-                  </CardHeader>
+                  <CardImageCover src={product.images?.[0].url}>
+                    <img src={product.images?.[0].url} alt={product.title} aria-hidden />
+                  </CardImageCover>
                   <CardContent>
+                    <CardHeader>
+                      <CardTitle>{product.title}</CardTitle>
+                    </CardHeader>
                     <CardDescription>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nostrum ipsa assumenda fugit, magni perspiciatis aliquam, qui reprehenderit ullam at nam nobis consequatur! Eum earum dolor assumenda! Illo suscipit ea sequi.</CardDescription>
+                    <CardFooter>
+                      <Button to={`${ROUTE_PATH.SHOP_DETAIL}/${product.slug}`}>
+                        Read More...
+                      </Button>
+                    </CardFooter>
                   </CardContent>
-                  <CardFooter>
-                    <Button to={`${ROUTE_PATH.SHOP_DETAIL}/${product.slug}`}>
-                      Read More...
-                    </Button>
-                  </CardFooter>
                 </Card>
               </article>
             )

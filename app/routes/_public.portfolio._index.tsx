@@ -28,10 +28,10 @@ function PortfolioPage() {
                 <CardPadding>
                   <CardImageCover src={content.preview} alt={content.title} aria-hidden />
                 </CardPadding>
-                <CardHeader>
-                  <CardTitle>{content.title}</CardTitle>
-                </CardHeader>
                 <CardContent>
+                  <CardHeader>
+                    <CardTitle>{content.title}</CardTitle>
+                  </CardHeader>
                   <Button to={`${ROUTE_PATH.PORTFOLIO}/${content.slug}`}>
                     More...
                   </Button>

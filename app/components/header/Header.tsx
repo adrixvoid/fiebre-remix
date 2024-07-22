@@ -1,4 +1,5 @@
 import { cva, type VariantProps } from "class-variance-authority";
+import { forwardRef } from "react";
 
 import styles from './Header.module.css';
 
@@ -8,7 +9,8 @@ const cvaVariants = cva(
     position: {
       static: styles.static,
       sticky: styles.sticky,
-      fixed: styles.fixed
+      fixed: styles.fixed,
+      absolute: styles.absolute
     }
   }
 })
@@ -16,8 +18,8 @@ const cvaVariants = cva(
 export interface FlexProps extends React.HTMLAttributes<HTMLElement>,
   VariantProps<typeof cvaVariants> { }
 
-export function Header({ className, position, ...props }: FlexProps) {
+export const Header = forwardRef<HTMLElement, FlexProps>(({ className, position, ...props }, ref) => {
   return (
-    <header className={cvaVariants({ className, position })} {...props} />
+    <header ref={ref} className={cvaVariants({ className, position })} {...props} />
   );
-}
+})

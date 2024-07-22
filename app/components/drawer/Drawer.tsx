@@ -1,5 +1,5 @@
 import { cva, type VariantProps } from "class-variance-authority";
-import { forwardRef, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 import useDocument from "~/hooks/useDocument";
 import styles from './Drawer.module.css';
@@ -23,13 +23,13 @@ const drawerVariants = cva(
   // },
 })
 
-export interface DrawerProps extends React.DialogHTMLAttributes<HTMLDialogElement>,
-  VariantProps<typeof drawerVariants> {
-  open: boolean;
-  onClose: () => void
-}
+export type DrawerProps = React.DialogHTMLAttributes<HTMLDialogElement> &
+  VariantProps<typeof drawerVariants> & {
+    open: boolean;
+    onClose: (event: React.MouseEvent | React.KeyboardEvent) => void
+  }
 
-export const Drawer = forwardRef<HTMLDialogElement, DrawerProps>(({ children, className, variant, open, onClose, ...props }, ref) => {
+export const Drawer = ({ children, className, variant, open, onClose, ...props }: DrawerProps) => {
   const document = useDocument();
   const dialogRef = useRef<HTMLDialogElement>(null);
 
@@ -41,7 +41,7 @@ export const Drawer = forwardRef<HTMLDialogElement, DrawerProps>(({ children, cl
 
   const handleOnClose = (event: React.MouseEvent | React.KeyboardEvent) => {
     dialogRef.current?.close();
-    onClose();
+    onClose(event);
   }
 
   const trapFocus = (event: React.KeyboardEvent) => {
@@ -63,7 +63,7 @@ export const Drawer = forwardRef<HTMLDialogElement, DrawerProps>(({ children, cl
   }
 
   useEffect(() => {
-    const body = document?.querySelector('body');
+    let body = document?.querySelector('body');
 
     if (open && body) {
       body.style.overflow = "hidden";
@@ -74,7 +74,11 @@ export const Drawer = forwardRef<HTMLDialogElement, DrawerProps>(({ children, cl
         body.style.overflow = "";
       }
     }
-  }, [open])
+
+    return () => {
+      body = null;
+    }
+  }, [open, document])
 
   return (
     <dialog ref={dialogRef} open={open} className={drawerVariants({ variant, className })} {...props} onClose={onClose} onKeyDown={trapFocus}>
@@ -84,4 +88,4 @@ export const Drawer = forwardRef<HTMLDialogElement, DrawerProps>(({ children, cl
       </div>
     </dialog>
   );
-})
+}

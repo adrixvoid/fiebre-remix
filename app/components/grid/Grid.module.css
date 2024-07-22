@@ -1,15 +1,9 @@
 .grid {
   display: grid;
-  gap: 2dvw;
+  gap: 2vw;
 }
 
-@media screen and (min-width: 768px) {
-  .three {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 960px) {
   .two {
     grid-template-columns: 1fr 1fr;
   }

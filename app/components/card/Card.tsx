@@ -63,14 +63,15 @@ const CardContent = React.forwardRef<
 CardContent.displayName = "CardContent"
 
 type CardImage = React.HTMLAttributes<HTMLDivElement> & {
-  bg?: string;
+  src?: string;
 }
 const CardImage = React.forwardRef<
   HTMLDivElement,
   CardImage
->(({ className, bg, style, ...props }, ref) => (
-  <div ref={ref} className={clsx(styles.image, className)} {...props} style={{ ...style, backgroundImage: `url(${bg})` }} />
-))
+>(({ className, src, style, ...props }, ref) => {
+  const customStyle = { backgroundImage: `url(${src})` };
+  return <div ref={ref} className={clsx(styles.image, className)} {...props} style={{ ...style, ...customStyle }} />
+})
 CardImage.displayName = "CardImage"
 
 const Image = React.forwardRef<
