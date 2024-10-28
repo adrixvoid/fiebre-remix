@@ -1,0 +1,63 @@
+.square {
+  /* background: hsl(var(--button)); */
+  width: 6rem;
+  height: 6rem;
+  font-size: 0.8em;
+  background-color: rgb(255 255 255 / 0.5);
+}
+
+.shadow {
+  box-shadow: var(--shadow);
+}
+
+.shadow-sm {
+  box-shadow: var(--shadow-sm);
+}
+
+.shadow-md {
+  box-shadow: var(--shadow-md);
+}
+
+.shadow-lg {
+  box-shadow: var(--shadow-lg);
+}
+
+.shadow-xl {
+  box-shadow: var(--shadow-xl);
+}
+
+.shadow-2xl {
+  box-shadow: var(--shadow-2xl);
+}
+
+.ring-0 {
+  box-shadow: var(--tw-ring-shadow-0)
+}
+
+.ring-1 {
+  box-shadow: var(--tw-ring-shadow)
+}
+
+.ring-2 {
+  box-shadow: var(--tw-ring-shadow-2);
+}
+
+.ring-3 {
+  box-shadow: var(--tw-ring-shadow-3)
+}
+
+.ring-4 {
+  box-shadow: var(--tw-ring-shadow-4)
+}
+
+.ring-8 {
+  box-shadow: var(--tw-ring-shadow-8)
+}
+
+.ring-offset-2 {
+  --tw-ring-offset-width: 2px;
+}
+
+.mix {
+  box-shadow: var(--shadow-2xl), var(--tw-ring-shadow-2);
+}

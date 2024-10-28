@@ -1,6 +1,6 @@
 {
   "include": ["remix.env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "**/*.bkp.*", "./bkp/**"],
   "compilerOptions": {
     "plugins": [{"name": "typescript-plugin-css-modules"}],
     "lib": ["DOM", "DOM.Iterable", "ES2022"],

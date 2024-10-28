@@ -11,6 +11,7 @@ import { loaderAdminProductList } from "~/server/controllers/products.controller
 import Button from "~/components/button/Button";
 import { Container } from "~/components/container/Container";
 import { Link } from "~/components/link/Link";
+import { Section } from "~/components/section/Section";
 import AdminTable from "~/components/table/AdminTable";
 import { TableCellAction, TableHeadAction } from "~/components/table/Table";
 
@@ -24,7 +25,7 @@ const columnHelper = createColumnHelper<Product>()
 const columns = [
   columnHelper.accessor('images', {
     id: 'images',
-    header: () => <span>{t('GLOBAL.IMAGE')}</span>,
+    header: () => <span>{t('IMAGE')}</span>,
     cell: (props) => <img src={props.row.original.images?.[0].url} className="admin-banner-preview rounded-md" />
   }),
   columnHelper.accessor('title', {
@@ -34,7 +35,7 @@ const columns = [
   }),
   columnHelper.display({
     id: 'actions',
-    header: () => <TableHeadAction>{t('GLOBAL.ACTIONS')}</TableHeadAction>,
+    header: () => <TableHeadAction>{t('ACTIONS')}</TableHeadAction>,
     cell: (props) => {
       const slug = props.row.original.slug as string;
       const id = props.row.original._id?.toString() || "";
@@ -59,11 +60,11 @@ const columns = [
       return (
         <TableCellAction>
           <Button asChild variant="outline">
-            <Link to={editPath}>{t('GLOBAL.EDIT')}</Link>
+            <Link to={editPath}>{t('EDIT')}</Link>
           </Button>
           <Button onClick={handleOnDelete} aria-label="delete" disabled={isDisabled} variant="destructive" color="danger">
             <Trash2 />
-            <span className="sr-only">{t('GLOBAL.DELETE')}</span>
+            <span className="sr-only">{t('DELETE')}</span>
           </Button>
         </TableCellAction>
       )
@@ -86,7 +87,7 @@ export default function AdminProductList() {
   };
 
   return (
-    <section className="admin admin-categories">
+    <Section marginBottom>
       <Container>
         <h1 className="h1 text-2xl font-600 tracking-tight">{t("PRODUCT.NEW")}</h1>
         <div className="flex admin-top text-sm mt-2 py-2 justify-between items-center">
@@ -107,6 +108,6 @@ export default function AdminProductList() {
           </div>
         </div>
       </Container>
-    </section>
+    </Section>
   )
 }

@@ -1,49 +1,23 @@
 .base {
-  line-height: 1;
+  line-height: 1.52;
+}
+
+.base strong {
+  font-weight: 700;
 }
 
 .primary {
-  font-family: "Morganite", "Montserrat";
+  font-family: Morganite, Inter, Montserrat, "Open Sans", "sans-serif";
   text-transform: uppercase;
   font-size: 6rem;
 }
 
 .secondary {
-  font-family: "Montserrat", "Open Sans", "sans-serif";
+  font-family: var(--font-family);
 }
 
 .default {
   font-size: inherit;
-}
-
-.xl {
-  font-size: 2.25rem;
-  line-height: 1.5;
-}
-
-.lg {
-  font-size: 1.8rem;
-  font-size: min(max(2cqw, 1.5rem), 1.7rem);
-  font-size: 4.5cqw;
-  line-height: 1.2;
-  font-weight: 500;
-}
-
-@media (width >=640px) {
-  .lg {
-    font-size: 3cqw;
-  }
-}
-
-@media (width >=768px) {
-  .lg {
-    font-size: 1.8rem;
-  }
-}
-
-.md {
-  font-size: 1.5rem;
-  line-height: 1.5;
 }
 
 .sm {
@@ -51,9 +25,29 @@
   line-height: 1.5;
 }
 
+.md {
+  font-size: 1.5rem;
+  font-size: clamp(1.125rem, 1.25vw, 1.5rem);
+}
+
+.lg {
+  font-size: 1.8rem;
+  font-size: clamp(1.7rem, 1.75vw, 1.8rem);
+}
+
+.xl {
+  font-size: 2.25rem;
+  font-size: clamp(2rem, 2.25vw, 2.5rem);
+}
+
+
+.primary {
+  line-height: 1;
+  margin-bottom: -1.5rem;
+}
+
 .primary-large {
   font-size: 10rem;
-  line-height: 152%;
   font-weight: 700;
   text-transform: uppercase;
 }

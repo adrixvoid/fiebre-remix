@@ -156,16 +156,19 @@ a.button {
 */
 
 .small {
+    min-height: 32px;
     font-size: 0.85rem;
     border-radius: var(--radius-sm);
 }
 
 .medium {
+    min-height: 36px;
     font-size: var(--text-md);
     border-radius: var(--radius-md);
 }
 
 .large {
+    min-height: 48px;
     line-height: 2;
     font-size: var(--text-xl);
     border-radius: var(--radius-md);

@@ -1,0 +1,57 @@
+.dialog {
+  inset: 0;
+  border: 1px solid var(--border);
+  background: hsl(var(--card));
+  color: hsl(var(--foreground));
+
+  width: 100dvw;
+  height: 100dvh;
+  position: fixed;
+  padding: 0;
+  margin: 0;
+  background-color: hsl(var(--primary) / 0.5);
+}
+
+.content {
+  padding: 0;
+  background-color: hsl(var(--background));
+  width: 80dvw;
+  max-width: 500px;
+  min-width: 250px;
+  height: auto;
+  min-height: 20dvh;
+  max-height: 100dvh;
+  overflow-y: auto;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  /* box-shadow: var(--shadow-2xl); */
+  box-shadow: 0 1px 1px 11px hsl(258.11deg 100% 91.28% / 51%);
+  animation: slideOut 250ms;
+}
+
+.dialog[open] .content {
+  animation: slideIn 250ms forwards;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translate(-50%, -100dvh);
+  }
+
+  to {
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes slideOut {
+  to {
+    transform: translateY(-100dvw);
+  }
+}
+
+.backdrop {
+  width: 100%;
+  height: 100%;
+}

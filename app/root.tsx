@@ -1,19 +1,19 @@
 import { cssBundleHref } from "@remix-run/css-bundle";
 import type { LinksFunction, MetaFunction } from "@remix-run/node";
 import {
+  isRouteErrorResponse,
   Links,
   LiveReload,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
-  useRouteError,
-  isRouteErrorResponse,
   useNavigate,
+  useRouteError,
 } from "@remix-run/react";
-import { SITE_NAME } from "~/constants";
-import resetStyles from "~/styles/helpers/reset.css";
+import { SITE_DESCRIPTION, SITE_NAME } from "~/constants";
 import globalStyles from "~/styles/global.css";
+import resetStyles from "~/styles/helpers/reset.css";
 import tailwindStyles from "~/styles/tailwind.css";
 import Button from "./components/button/Button";
 import { Container } from "./components/container/Container";
@@ -21,10 +21,9 @@ import { Container } from "./components/container/Container";
 export const meta: MetaFunction = () => {
   return [
     { title: SITE_NAME },
-    { name: "Fiebre", content: "Fiebre Design Studio - Buenos Aires Argentina" },
+    { name: SITE_NAME, content: SITE_DESCRIPTION },
   ];
 };
-
 
 // import script from cdn
 export const scripts: LinksFunction = () => [

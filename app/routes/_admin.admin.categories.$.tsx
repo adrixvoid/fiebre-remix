@@ -1,10 +1,10 @@
-import { Link, useLoaderData, useLocation, useNavigation, useParams, useSubmit } from "@remix-run/react";
+import { useLoaderData, useLocation, useNavigation, useParams, useSubmit } from "@remix-run/react";
 import { CellContext, createColumnHelper } from '@tanstack/react-table';
 import { Trash2 } from "lucide-react";
 
 import { ROUTE_PATH_ADMIN } from "~/constants";
 import { t } from "~/i18n/translate";
-import { Breadcrumb, Category } from '~/types/global.type';
+import { Breadcrumb } from '~/types/global.type';
 
 import { AdminCategoryLoaderList, CATEGORY_PARAMS, loaderAdminCategoriesList } from "~/server/controllers/categories.controller";
 import { PRODUCT_PARAMS } from "~/server/controllers/products.controller";
@@ -17,6 +17,9 @@ import AdminCategoryBreadcrumb from "~/modules/categories/AdminCategoryBreadcrum
 import AdminProductsTable from "~/modules/products/AdminProductsTable";
 
 import { FolderPlus } from "lucide-react";
+import { Flex } from "~/components/flex/Flex";
+import { Link } from "~/components/link/Link";
+import { Section } from "~/components/section/Section";
 import { TableCellAction } from "~/components/table/Table";
 
 const initialLocationState = {
@@ -38,7 +41,6 @@ const columns = [
 
       return (
         <Link
-          className="underline-offset-4 hover:underline"
           to={subcategoryURL}
           state={{
             breadcrumb: [
@@ -57,8 +59,8 @@ const columns = [
   }),
   columnHelper.display({
     id: 'actions',
-    header: () => <span>{t('GLOBAL.ACTIONS')}</span>,
-    cell: (props: CellContext<Category, unknown>) => {
+    header: () => <span>{t('ACTIONS')}</span>,
+    cell: (props: CellContext<CategoryDocument, unknown>) => {
       const slug = props.row.original.slug as string;
       const id = props.row.original._id?.toString() || "";
       const name = props.row.original.name as string;
@@ -88,12 +90,12 @@ const columns = [
 
       return (
         <TableCellAction>
-          <Button asChild variant="outline">
-            <Link to={editPath}>{t('GLOBAL.EDIT')}</Link>
+          <Button to={editPath} variant="outline">
+            {t('EDIT')}
           </Button>
           <Button onClick={handleOnDelete} aria-label="delete" disabled={isDisabled} variant="destructive">
             <Trash2 />
-            <span className="sr-only">{t('GLOBAL.DELETE')}</span>
+            <span className="sr-only">{t('DELETE')}</span>
           </Button>
         </TableCellAction>
       )
@@ -119,27 +121,27 @@ function AdminCategoriesList() {
   };
 
   return (
-    <section className="admin admin-categories">
+    <Section marginBottom>
       <Container>
-        <div className="flex justify-between items-center mt-4">
+        <Flex justify='between' align='center' style={{ marginTop: "2rem" }}>
           <h1 className="h1 text-2xl font-600 tracking-tight">{category?.name && <span>{category?.name} in</span>} {t("CATEGORY.CATEGORIES")}</h1>
-        </div>
-        <div className="flex admin-top text-sm mt-2 py-2 justify-between items-center">
+        </Flex>
+        <Flex justify='between' align='center' className="admin-top text-sm mt-2 py-2">
           <div className="left">
             {breadcrumb &&
               <AdminCategoryBreadcrumb breadcrumb={breadcrumb} editPath={editPath} />}
           </div>
-          <div className="right">
-            <div className="actions flex" style={{ gap: "0.5rem" }}>
-              <Button asChild size="sm">
-                <Link to={newCategoryPath} state={location.state}><FolderPlus className="mr-2 h-4 w-4" /> {t('CATEGORY.NEW')}</Link>
+          <Flex>
+            <Flex justify='end' className="actions flex" style={{ gap: "0.5rem" }}>
+              <Button to={newCategoryPath} state={location.state} size="sm">
+                <FolderPlus className="mr-2 h-4 w-4" /> {t('CATEGORY.NEW')}
               </Button>
-              <Button asChild size="sm">
-                <Link to={pathToNewProduct} state={location.state}><FolderPlus className="mr-2 h-4 w-4" /> {t('PRODUCT.NEW')}</Link>
+              <Button to={pathToNewProduct} state={location.state} size="sm">
+                <FolderPlus className="mr-2 h-4 w-4" /> {t('PRODUCT.NEW')}
               </Button>
-            </div>
-          </div>
-        </div>
+            </Flex>
+          </Flex>
+        </Flex>
         <div className="admin-list mt-4">
           {list.length > 0
             ? <AdminTable columns={columns} data={list} caption="List of subcategories" />
@@ -150,7 +152,7 @@ function AdminCategoriesList() {
           {products.length > 0 && <AdminProductsTable data={products} />}
         </div>
       </Container>
-    </section>
+    </Section>
   )
 }
 

@@ -1,18 +1,18 @@
 import {
   ActionFunctionArgs,
+  json,
   LoaderFunctionArgs,
-  redirect,
-  json
+  redirect
 } from '@remix-run/node';
 
-import {ROUTE_PATH_ADMIN, ASSET_PATH} from '~/constants';
-import {sanitizeUrl} from '~/lib/sanitizeUrl';
+import {ASSET_PATH, ROUTE_PATH_ADMIN} from '~/constants';
 import {getBreadcrumb} from '~/lib/breadcrumb';
-import {Breadcrumb, Category, MapFile, Product} from '~/types/global.type';
+import {sanitizeUrl} from '~/lib/sanitizeUrl';
+import {Breadcrumb, MapFile, Product} from '~/types/global.type';
 
-import {categoryService} from '~/server/services/category.service';
 import categoryModel, {CategoryDocument} from '~/server/schema/category.schema';
 import productModel from '~/server/schema/product.schema';
+import {categoryService} from '~/server/services/category.service';
 import {fileService} from '~/server/services/file.service';
 
 export interface CategoryFormFields {
@@ -122,7 +122,6 @@ export async function loaderAdminCategoriesEdit({params}: LoaderFunctionArgs) {
 export async function actionAdminCategoriesList({request}: ActionFunctionArgs) {
   let formData = await request.formData();
   let entries = Object.fromEntries(formData);
-  console.log('entries', entries);
   // const docs = await shoppingCartAction(request);
   return json({ok: true});
 }

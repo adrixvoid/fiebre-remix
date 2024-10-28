@@ -1,15 +1,11 @@
-import { Form, useLoaderData, useNavigation } from "@remix-run/react";
-import { type LoaderFunction, type ActionFunction, type LinksFunction } from "@remix-run/node";
-import { Fragment } from "react";
-import { atom, useAtom } from 'jotai'
 import cx from "clsx";
+import { atom, useAtom } from 'jotai';
+import { Fragment } from "react";
 
 import { Category } from "~/types/global.type";
 
 import Button from "~/components/button/Button";
-import InputFilePreview from "~/components/form/input-file-preview/InputFilePreview";
 import { CategoriesCheckbox } from "./checkbox/CheckboxCategory";
-import { contentAction, contentLoader } from "~/server/controllers/content.controller";
 
 const modalCategory = atom(false);
 
@@ -17,7 +13,6 @@ const AdminDialogDataList = ({ categories }: { categories: Category[] }) => {
   const [isModalCategoryOpen, setModalCategoryOpen] = useAtom(modalCategory)
 
   function handleModalCategory(event: React.MouseEvent | React.KeyboardEvent) {
-    console.log("handleModalCategory", event)
     event.preventDefault();
     setModalCategoryOpen(!isModalCategoryOpen)
   }
@@ -87,7 +82,6 @@ export default AdminDialogDataList;
 //   const [isModalCategoryOpen, setModalCategoryOpen] = useAtom(modalCategory)
 
 //   function handleModalCategory(event: React.MouseEvent | React.KeyboardEvent) {
-//       console.log("handleModalCategory", event)
 //       event.preventDefault();
 //       setModalCategoryOpen(!isModalCategoryOpen)
 //   }

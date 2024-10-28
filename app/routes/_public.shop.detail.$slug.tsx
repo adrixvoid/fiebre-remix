@@ -38,24 +38,20 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 
         return { product, gallery };
     } catch (error) {
-        console.log(error);
+        console.error("SHOP-DETAIL", error.message);
         throw json({ success: false, message: "Product not Found" }, { status: 404 });
     }
 }
 
 export async function action({ request }: ActionFunctionArgs) {
-    console.log("PRODUCT ACTION")
     let formData = await request.formData();
     let data = Object.fromEntries(formData);
-    console.log(data)
 
     if (data.action === ACTIONS.ADD_TO_CART) {
         return redirect(ROUTE_PATH.SHOPPING_CART);
     }
 
     // const docs = await shoppingCartAction(request);
-
-    // console.log({ docs })
 
     // basket?.action?.addItem({
     //     id: values.id,

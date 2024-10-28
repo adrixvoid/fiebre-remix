@@ -173,7 +173,7 @@ export default function Index() {
               <h2 style={{ textAlign: "center" }}>Suscribíte para obtener descuentos únicos y plantillas gratuitas!</h2>
             </div>
             <Center direction="row" variant="flex" style={{ borderRadius: "var(--radius)", padding: "0 1rem", width: "50dvw", fontSize: "2rem", lineHeight: "2.5rem", height: "auto", backgroundColor: "color-mix(in hsl, hsl(var(--background)), transparent 5%)" }}>
-              <Input name="subscribe" placeholder="your@email.com" style={{ border: 0, padding: "1rem 0", width: "50dvw", fontSize: "2rem", lineHeight: "2.5rem", height: "auto", backgroundColor: "transparent" }} />
+              <Input name="subscribe" placeholder="your@email.com" style={{ border: 0, padding: "1rem 0", width: "50dvw", fontSize: "2rem", lineHeight: "2.5rem", height: "auto", backgroundColor: "transparent", boxShadow: "none!important" }} />
               <Button variant="primary"><Send strokeWidth={1.5} /> Subscribe!</Button>
             </Center>
           </Center>

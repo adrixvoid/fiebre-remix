@@ -56,14 +56,14 @@ export default function CoursesPage() {
                             </Center>
                         </CardContent>
                         <CardFooter>
-                            <Center>
+                            <Flex justify='around' style={{ gap: "0.5rem" }}>
                                 <Button>
                                     Empecemos
                                 </Button>
                                 <Button>
                                     Más Info
                                 </Button>
-                            </Center>
+                            </Flex>
                         </CardFooter>
                     </Card>
                     <Card style={{ maxWidth: "20rem" }}>
@@ -87,14 +87,14 @@ export default function CoursesPage() {
                             </Center>
                         </CardContent>
                         <CardFooter>
-                            <Center>
+                            <Flex justify='around' style={{ gap: "0.5rem" }}>
                                 <Button>
                                     Empecemos
                                 </Button>
                                 <Button>
                                     Más Info
                                 </Button>
-                            </Center>
+                            </Flex>
                         </CardFooter>
                     </Card>
                 </Flex>

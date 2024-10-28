@@ -83,7 +83,7 @@ bkp
     --destructive: hsl(342 84.2% 60.2%);
     --destructive-foreground: hsl(210 20% 98%);
     --border: hsl(220 13% 91%);
-    --input: hsl(220 13% 91% / 11%);
+    --input: hsl(220 13% 91%);
     --ring: hsl(327.1 83.3% 57.8%);
     --radius: hsl(0.5rem);
   }

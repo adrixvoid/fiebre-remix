@@ -1,20 +1,20 @@
 import { ShoppingCart } from "lucide-react";
-import { MapImage } from '~/types/global.type';
-import { accessibilityPrice, getFormattedPrice } from '~/i18n/money';
 import { t } from "~/i18n/translate";
+import { accessibilityPrice, formatCurrency } from '~/lib/price';
+import { MapImage } from '~/types/global.type';
 
+import Button, { ButtonProps } from "~/components/button/Button";
 import Input from '~/components/form/Input';
 import { Link } from "~/components/link/Link";
-import Button, { ButtonProps } from "~/components/button/Button";
 
-import styles from './ProductDetail.module.css'
+import styles from './ProductDetail.module.css';
 
 export function NavigationBack({ children }: { children: React.ReactNode }) {
   return (
     <nav className={styles.navigation}>
       <Link to="/products">
-        <span className="sr-only">Volver a la tienda</span>
-        <span aria-hidden>Volver</span>
+        <span className="sr-only">{t("PRODUCT.BACK_TO_STORE")}</span>
+        <span aria-hidden>{t("BACK")}</span>
       </Link>
     </nav>
   );
@@ -61,12 +61,12 @@ export function ProductPrice({ priceInCents }: { priceInCents: number }) {
       itemType="http://schema.org/Offer"
     >
       <meta itemProp="price" content="35129" />
-      <span className='sr-only'>Precio:</span>
+      <span className='sr-only'>{t("PRODUCT.PRICE")}</span>
       <span className="sr-only">{accessibilityPrice(priceInCents)}</span>
       <span aria-hidden>
-        {priceInCents === 0 ? "Gratis" : getFormattedPrice(priceInCents)}
+        {priceInCents === 0 ? "Gratis" : formatCurrency(priceInCents)}
       </span>
-      {priceInCents > 0 && <span className="sr-only">pesos argentinos</span>}
+      {priceInCents > 0 && <span className="sr-only">{t('CURRENCY.ARGENTINIAN_PESOS')}</span>}
     </p>
   );
 }
@@ -99,7 +99,7 @@ export function ProductDescription({ description }: { description: string }) {
 export function ProductTags({ tags = [] }: { tags?: string[] }) {
   return (
     <div className={styles.tags}>
-      <span>Tags</span>
+      <span>{t("PRODUCT.TAGS")}</span>
       <ul>
         {tags.map((tag) => (
           <li key={tag}>{tag}</li>

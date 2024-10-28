@@ -1,4 +1,5 @@
 export const SITE_NAME = 'F I E B R E ®';
+export const SITE_DESCRIPTION = 'Fiebre Design Studio - Buenos Aires Argentina';
 
 export const MARKDOWN_TYPE = {
   blog: 'Blog',

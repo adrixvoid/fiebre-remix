@@ -5,21 +5,21 @@ import { Breadcrumb } from "~/types/global.type";
 
 import { Link } from "~/components/link/Link";
 
+import style from './AdminCategoryBreadcrumb.module.css';
+
 function AdminCategoryBreadcrumb({ breadcrumb = [], editPath }: { breadcrumb: Breadcrumb[], editPath?: string }) {
     return (
-        <nav className="navigation-back">
-            <Link className="underline-offset-4 hover:underline" to={ROUTE_PATH_ADMIN.CATEGORY_LIST}>Categories</Link>
-            &nbsp;/&nbsp;
-            {breadcrumb?.map((b, index) => (
+        <nav className={style.base}>
+            <Link to={ROUTE_PATH_ADMIN.CATEGORY_LIST}>Categories</Link>
+            {breadcrumb?.map((b) => (
                 <Fragment key={b.path}>
-                    {index !== 0 && ' / '}
+                    <span className={style.separator}>/</span>
                     {b.isActive ? b.name : (
-                        <Link className="underline-offset-4 hover:underline" to={`${ROUTE_PATH_ADMIN.CATEGORY_LIST}/${b.path}`}>{b.name}</Link>
+                        <Link to={`${ROUTE_PATH_ADMIN.CATEGORY_LIST}/${b.path}`}>{b.name}</Link>
                     )}
                 </Fragment>
             ))}
-            {editPath && <>&nbsp;</>}
-            {editPath && <>(<Link className="text-sm underline-offset-4 hover:underline" to={editPath}>Edit</Link>)</>}
+            {editPath && <span className={style.small}>(<Link className={style.current} to={editPath}>Edit</Link>)</span>}
         </nav>
     )
 }

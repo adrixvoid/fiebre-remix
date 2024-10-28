@@ -1,3 +1,6 @@
+import enUS from './translations/en-US';
+import esAR from './translations/es-AR';
+
 interface TranslationItem {
   [key: string]: string | TranslationItem;
 }
@@ -7,58 +10,8 @@ type Translations = {
 };
 
 export const translations: Translations = {
-  'en-US': {
-    ADD_TO_CART: 'Add to cart',
-    INQUIRE: 'Inquire',
-    CATEGORY: {
-      LIST: 'List',
-      EMPTY: "There isn't any category associated",
-      CATEGORIES: 'Categories',
-      SUBCATEGORY: 'Subcategory'
-    },
-    PRODUCT: {
-      NEW: 'New Product',
-      PRODUCT: 'Product',
-      PRODUCTS: 'Products'
-    },
-    DATA: {
-      EMPTY: 'Empty'
-    },
-    GLOBAL: {
-      ACTIONS: 'Actions',
-      CREATE: 'Create',
-      DELETE: 'Delete',
-      EDIT: 'Edit',
-      EMPTY: 'Empty',
-      IMAGE: 'Image',
-      NEW: 'New'
-    }
-  },
-  'es-AR': {
-    ADD_TO_CART: 'Agregar al carrito',
-    INQUIRE: 'Consultar',
-    CATEGORY: {
-      LIST: 'Lista',
-      EMPTY: 'No hay subcategorías agregadas',
-      NEW: 'Nueva Categoría',
-      CATEGORIES: 'Categorías',
-      SUBCATEGORY: 'Subcategoría'
-    },
-    PRODUCT: {
-      NEW: 'Nuevo Producto',
-      PRODUCT: 'Producto',
-      PRODUCTS: 'Productos'
-    },
-    GLOBAL: {
-      ACTIONS: 'Acciones',
-      CREATE: 'Crear',
-      DELETE: 'Eliminar',
-      EDIT: 'Editar',
-      EMPTY: 'Vacío',
-      IMAGE: 'Imagen',
-      NEW: 'Nuevo'
-    }
-  }
+  'en-US': enUS,
+  'es-AR': esAR
 };
 
 export function t(key: string): string {

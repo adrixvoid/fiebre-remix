@@ -6,12 +6,12 @@ import {
 } from '@remix-run/node';
 import {validationError} from 'remix-validated-form';
 
-import productModel from '~/server/schema/product.schema';
+import {ASSET_PATH, ROUTE_PATH_ADMIN} from '~/constants';
 import categoryModel from '~/server/schema/category.schema';
-import {fileService} from '../services/file.service';
-import {ROUTE_PATH_ADMIN, ASSET_PATH} from '~/constants';
-import {productService} from '../services/products.service';
+import productModel from '~/server/schema/product.schema';
 import {Category, Product} from '~/types/global.type';
+import {fileService} from '../services/file.service';
+import {productService} from '../services/products.service';
 import {productValidator} from '../zod/products.zod';
 
 export const PRODUCT_PARAMS = {
@@ -44,7 +44,7 @@ export async function loaderAdminProduct({
   const categories = await categoryModel.find();
 
   const toFilterId = product?.categories?.[0] || categoryId;
-  let category = categories.find((c) => c._id.toJSON() === toFilterId);
+  let category = categories.find((c) => c._id === toFilterId);
 
   return {category, product, categories, referrer};
 }

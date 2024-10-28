@@ -8,10 +8,8 @@ export async function loader() {
 }
 
 export const action = async ({ request }: ActionFunctionArgs) => {
-    console.log("ACTION", request)
     let formData = await request.formData();
     let values = Object.fromEntries(formData);
-    console.log(values)
     // basket?.action?.addItem({
     //     id: values.id,
     //     quantity: values.quantity,

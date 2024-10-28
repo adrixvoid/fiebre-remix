@@ -12,10 +12,9 @@ export function CategorySelect(props: SelectProps) {
     console.error("categories cannot be empty");
   }
 
-  // console.log("categories", categories)
-
   return (
     <Select {...props}>
+      <option value="">...</option>
       {categories.map((category) => <option key={category._id} value={category._id}>{category.name}</option>)}
     </Select>
   )

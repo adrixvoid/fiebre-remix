@@ -4,9 +4,8 @@ import { Menu as MenuIcon, X } from "lucide-react";
 
 import { Button, ButtonProps } from "~/components/button/Button";
 import { Drawer } from '~/components/drawer/Drawer';
-import { Nav as NavBase, NavLink, NavProps } from "~/components/nav/Nav";
+import { Nav as NavBase, NavLink, type NavLinkProps, type NavProps } from "~/components/nav/Nav";
 
-import { RemixNavLinkProps } from "@remix-run/react/dist/components";
 import styles from "./MobileMenu.module.css";
 import { showModalAtom } from "./MobileMenu.state";
 
@@ -63,9 +62,11 @@ export function Nav({ className, ...props }: NavProps) {
   return <NavBase className={clsx(styles.nav, className)} {...props} />
 }
 
-export function Link({ onClick, ...props }: RemixNavLinkProps & { onClick: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void }) {
+export function Link({ onClick, ...props }: NavLinkProps & {
+  onClick: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void
+}) {
   const [, setShowModal] = useAtom(showModalAtom);
-  const handleOnClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+  const handleOnClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     onClick?.(event);
     setShowModal(false)
   }

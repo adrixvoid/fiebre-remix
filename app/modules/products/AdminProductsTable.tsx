@@ -9,6 +9,7 @@ import { Product } from "~/types/global.type";
 import { Button } from "~/components/button/Button";
 import AdminTable from "~/components/table/AdminTable";
 import { TableCellAction, TableHeadAction } from "~/components/table/Table";
+import { formatCurrency } from "~/lib/price";
 
 const styles = {
     images: {
@@ -20,7 +21,7 @@ const columnHelper = createColumnHelper<Product>()
 const columns = [
     columnHelper.accessor('images', {
         id: 'images',
-        header: () => <span>{t('GLOBAL.IMAGE')}</span>,
+        header: () => <span>{t('IMAGE')}</span>,
         cell: (props) => <img src={props.row.original.images?.[0]?.url} className="admin-banner-preview rounded-md" />
     }),
     columnHelper.accessor('title', {
@@ -28,9 +29,14 @@ const columns = [
         header: () => <span>{t('PRODUCT.PRODUCT')}</span>,
         cell: props => props.getValue()
     }),
+    columnHelper.accessor('priceInCents', {
+        id: 'price',
+        header: () => <span>{t('PRODUCT.PRICE')}</span>,
+        cell: props => formatCurrency(props.getValue())
+    }),
     columnHelper.display({
         id: 'actions',
-        header: () => <TableHeadAction>{t('GLOBAL.ACTIONS')}</TableHeadAction>,
+        header: () => <TableHeadAction>{t('ACTIONS')}</TableHeadAction>,
         cell: (props) => {
             const location = useLocation();
 
@@ -57,11 +63,11 @@ const columns = [
             return (
                 <TableCellAction>
                     <Button asChild variant="outline">
-                        <Link to={editPath} state={location.state}>{t('GLOBAL.EDIT')}</Link>
+                        <Link to={editPath} state={location.state}>{t('EDIT')}</Link>
                     </Button>
                     <Button onClick={handleOnDelete} aria-label="delete" disabled={isDisabled} variant="destructive" color="danger">
                         <Trash2 />
-                        <span className="sr-only">{t('GLOBAL.DELETE')}</span>
+                        <span className="sr-only">{t('DELETE')}</span>
                     </Button>
                 </TableCellAction>
             )

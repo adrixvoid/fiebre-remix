@@ -23,7 +23,6 @@ export const links: LinksFunction = () => [
 
 // export const loader: LoaderFunction = ({ params }) => {
 //   const lang = params.lang as string;
-//   console.log("lang", lang)
 //   return {};
 // }
 

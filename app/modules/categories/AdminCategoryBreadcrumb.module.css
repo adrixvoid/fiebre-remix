@@ -1,0 +1,19 @@
+.base {
+  font-size: var(--text-sm);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.separator {
+  padding-inline: 0.25rem;
+}
+
+.current {
+  color: hsl(var(--primary));
+}
+
+.small {
+  font-size: var(--text-xs);
+  line-height: 1;
+}

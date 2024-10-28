@@ -1,6 +1,5 @@
-import type {Product} from '~/types/global.type';
-import productModel from '../schema/product.schema';
 import {slugify} from '~/lib/url';
+import productModel from '../schema/product.schema';
 import {toObjectId} from '../utils/mongoose';
 
 export const productService = {
@@ -23,21 +22,16 @@ export const productService = {
     }
     return model;
   },
-  create: async (
-    form: Omit<Product, '_id' | 'slug' | 'tags'> & {
-      slug?: string;
-      tags?: string | string[];
-    }
-  ) => {
+  create: async (form: {[k: string]: any}) => {
     form.slug = slugify(form.slug || form.title);
 
-    if (form.tags) {
-      if (form.tags instanceof String) {
-        form.tags = [form.tags] as string[];
-      }
-    } else {
-      form.tags = [];
-    }
+    // if (form.tags) {
+    //   if (form.tags instanceof String) {
+    //     form.tags = [form.tags] as string[];
+    //   }
+    // } else {
+    //   form.tags = [];
+    // }
 
     const model = await productModel.create(form);
     if (!model) {

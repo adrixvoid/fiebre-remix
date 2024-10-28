@@ -1,17 +1,17 @@
-import path from 'path';
 import fs from 'fs/promises';
+import path from 'path';
 
+import {sanitizeUrl} from '~/lib/sanitizeUrl';
 import {
   type MarkdownDocument,
+  MarkdownPost,
   type MarkdownType,
-  getPath,
   getDocument,
   getDocuments,
-  markdownTemplate,
-  MarkdownPost
+  getPath,
+  markdownTemplate
 } from '../utils/front-matter';
 import {parse} from '../utils/marked';
-import {sanitizeUrl} from '~/lib/sanitizeUrl';
 
 const markdownService = {
   readOne: async (url: string): Promise<MarkdownDocument | null> => {
@@ -65,7 +65,7 @@ const markdownService = {
       await fs.writeFile(path.join(directory, `${post.slug}.md`), markdown);
       return true;
     } catch (error) {
-      console.log('error', error);
+      console.error(`MARKDOWN ERROR:`, error.message);
       return false;
     }
   }
@@ -89,8 +89,6 @@ export default markdownService;
 //         categories: attributes.categories,
 //         preview: attributes.preview,
 //       };
-
-//       console.log('metadata', metadata)
 
 //       return metadata;
 //   }));

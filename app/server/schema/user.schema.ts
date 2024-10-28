@@ -9,14 +9,15 @@ export const schema = new mongoose.Schema(
       required: true,
       lowercase: true
     },
+    passwordHASH: {type: Object, default: null},
+    createdAt: {type: Date, default: Date.now},
+    updatedAt: {type: Date, default: Date.now},
+    orders: [{type: mongoose.Schema.Types.ObjectId, ref: 'Order'}]
     // use bcrypt
     // const passwordHash = await bcrypt.hash(password, saltRounds)
-    passwordHASH: {type: Object, default: null},
     // cart: [
     //   {type: mongoose.Schema.Types.ObjectId, ref: 'Cart', default: {}}
     // ],
-    createdAt: {type: Date, default: Date.now},
-    updatedAt: {type: Date, default: Date.now}
   },
   {
     timestamps: true

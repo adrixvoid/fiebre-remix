@@ -4,14 +4,9 @@ import {
   redirect
 } from '@remix-run/node';
 
-import markdownService from '~/server/services/markdown.service';
 import {slugify} from '~/lib/url';
-import {ASSET_PATH} from '~/constants';
-import categoryModel from '~/server/schema/category.schema';
-import {fileService} from '../services/file.service';
-import path from 'path';
+import markdownService from '~/server/services/markdown.service';
 import {MarkdownDocument} from '../utils/front-matter';
-import {formValidator} from '../zod/content.zod';
 
 export const PARAMS = {
   ID: 'id'
@@ -66,9 +61,6 @@ export async function contentLoader({
   const url = new URL(request.url);
   const id = params[PARAMS.ID];
   const referrer = url.searchParams.get('referrer');
-
-  console.log('id', id);
-  console.log('referrer', referrer);
 
   // const categories = await categoryModel
   //   .find({

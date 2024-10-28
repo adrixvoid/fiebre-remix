@@ -1,11 +1,22 @@
+import { LinksFunction } from '@remix-run/node';
 import { Trash2, User } from 'lucide-react';
 
 import { Button } from "~/components/button/Button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "~/components/card/Card";
 import { Container } from "~/components/container/Container";
+import { Dialog, DialogCloseButton, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from '~/components/dialog/Dialog';
 import Input from "~/components/form/Input";
 import { Select } from "~/components/form/Select";
 import { Section } from "~/components/section/Section";
+
+import styles from "~/styles/ui.css";
+
+export const links: LinksFunction = () => [
+    {
+        rel: "stylesheet",
+        href: styles,
+    },
+];
 
 function ProductRoute() {
     return (
@@ -54,6 +65,45 @@ function ProductRoute() {
                                 High Contrast</div>
                         </div>
                     </div>
+                    <div className="mt-10">
+                        <h2>Shadows</h2>
+                        <div style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            alignItems: "center",
+                            gap: 20,
+                            marginTop: 20,
+                            flexWrap: "wrap"
+                        }}>
+                            <hr />
+                            <div className="square shadow">shadow</div>
+                            <div className="square shadow-sm">shadow-sm</div>
+                            <div className="square shadow-md">shadow-md</div>
+                            <div className="square shadow-lg">shadow-lg</div>
+                            <div className="square shadow-xl">shadow-xl</div>
+                            <div className="square shadow-2xl">shadow-2xl</div>
+                        </div>
+                    </div>
+                    <hr style={{ margin: "4rem 0" }} />
+                    <div className="mt-10">
+                        <h2>Rings</h2>
+                        <div style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            alignItems: "center",
+                            gap: 20,
+                            marginTop: 20,
+                            flexWrap: "wrap"
+                        }}>
+                            <div className="square ring-0">--tw-ring-0</div>
+                            <div className="square ring-1">--tw-ring-shadow</div>
+                            <div className="square ring-2">--tw-ring-shadow-2</div>
+                            <div className="square ring-3">--tw-ring-shadow-3</div>
+                            <div className="square ring-4">--tw-ring-shadow-4</div>
+                            <div className="square ring-8">--tw-ring-8</div>
+                        </div>
+                    </div>
+                    <hr style={{ margin: "4rem 0" }} />
                     <div className="mt-10">
                         <h2>Color</h2>
 
@@ -153,6 +203,9 @@ function ProductRoute() {
                                 <User />
                                 User
                             </Button>
+                            <Button aria-label="delete" size='sm'>
+                                <User />
+                            </Button>
                             <Button aria-label="delete" size='default'>
                                 User
                             </Button>
@@ -201,82 +254,6 @@ function ProductRoute() {
                     <hr style={{ margin: "4rem 0" }} />
                     <h2>Inputs</h2>
                     <div className="quantity">
-                        <label htmlFor="product-quantity">
-                            <span className="sr-only">Quantity</span>
-                            <span aria-hidden>Qty.</span>
-                        </label>
-                        <div className="flex items-center gap-4 mt-1">
-                            <label htmlFor="test">Placeholder</label>
-                            <input id="test" name="test" type="text" placeholder="Placeholder" onChange={() => { }} />
-                        </div>
-                        <div className="flex items-center gap-4 mt-1">
-                            <label htmlFor="test1">Text</label>
-                            <input id="test1" name="test1" type="text" value="Example 1" onChange={() => { }} />
-                        </div>
-                        <div className="flex items-center gap-4 mt-1">
-                            <label htmlFor="test2">Email</label>
-                            <input id="test2" name="test2" type="email" value="john@doe.com" onChange={() => { }} />
-                        </div>
-                        <div className="flex items-center gap-4 mt-1">
-                            <label htmlFor="test3">Number</label>
-                            <input id="test3" name="test3" type="number" value="1" onChange={() => { }} />
-                        </div>
-                        <div className="flex items-center gap-4 mt-1">
-                            <label htmlFor="test4">Read Only</label>
-                            <input id="test4" name="test4" type="text" value="Example 4" readOnly onChange={() => { }} />
-                        </div>
-                        <div className="flex items-center gap-4 mt-1">
-                            <label htmlFor="test5">Disabled</label>
-                            <input id="test5" name="test5" type="text" value="Disabled" disabled onChange={() => { }} />
-                        </div>
-                        <div className="flex items-center gap-4 mt-1">
-                            <label htmlFor="test6">Search</label>
-                            <input id="test6" name="test6" type="search" value="Search" aria-readonly="true" onChange={() => { }} />
-                        </div>
-                        <div className="flex items-center gap-4 mt-1">
-                            <label htmlFor="test7">Text</label>
-                            <input id="test7" name="test7" type="text" value="Example 7" aria-disabled="true" onChange={() => { }} />
-                        </div>
-                        <div className="flex items-center gap-4 mt-1">
-                            <label htmlFor="test8">Select</label>
-                            <select id="test8" name="test8">
-                                <option value="1" onChange={() => { }}>Example 1</option>
-                                <option value="2" onChange={() => { }}>Example 2</option>
-                                <option value="3" onChange={() => { }}>Example 3</option>
-                            </select>
-                        </div>
-                        <div className="flex items-center gap-4 mt-1">
-                            <label htmlFor="test9">Textarea</label>
-                            <textarea id="test9" name="test9" value="Example 1" onChange={() => { }} />
-                        </div>
-                        <div className="flex gap-4 mt-1">
-                            <label htmlFor="test10">Checkbox</label>
-                            <input id="test10" name="test10" type="checkbox" />
-                            {/* disabled */}
-                            <input id="test101" name="test101" type="checkbox" disabled />
-                            {/* checked */}
-                            <input id="test102" name="test102" type="checkbox" onChange={() => { }} checked />
-                            {/* checked disabled */}
-                            <input id="test103" name="test103" type="checkbox" onChange={() => { }} checked disabled />
-                        </div>
-                        <div className="mt-1 flex gap-4">
-                            <label htmlFor="test11">Radio</label>
-                            <input id="test11" name="test11" type="radio" value="1" onChange={() => { }} />
-                            <input id="test12" name="test11" type="radio" value="0" onChange={() => { }} />
-                            {/* disabled */}
-                            <input id="test13" name="test13" type="radio" value="1" disabled onChange={() => { }} />
-                            <input id="test14" name="test13" type="radio" value="0" disabled onChange={() => { }} />
-                            {/* checked */}
-                            <input id="test15" name="test15" type="radio" value="1" onChange={() => { }} checked />
-                        </div>
-                        <div className="mt-1 flex items-center gap-4">
-                            <label htmlFor="test12">File</label>
-                            <input id="test12" name="test12" type="file" />
-                        </div>
-                    </div>
-                    <hr style={{ margin: "4rem 0" }} />
-                    <h2>Inputs MODULES</h2>
-                    <div className="quantity">
                         <Input label="Placeholder" id="test-mdoule" name="test-mdoule" type="text" placeholder="Placeholder" />
                         <Input label="Text" id="text-module" name="text-module" type="text" value="Example 1" onChange={() => { }} />
                         <Input label="Email" id="test2-module" name="test2-module" type="email" value="john@doe.com" onChange={() => { }} />
@@ -323,20 +300,33 @@ function ProductRoute() {
                         </div>
                     </div>
                     <hr style={{ margin: "4rem 0" }} />
-                    <Card>
-                        <CardHeader>
-                            <CardTitle>Title</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <img src="hero/hero.jpg" alt="" />
-                            <CardDescription>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio hic exercitationem quis, soluta ea ipsa minus eum quos aliquam, eos ipsum quasi animi, laudantium officia totam id similique ut dolore.
-                            </CardDescription>
-                        </CardContent>
-                        <CardFooter>
-                            Foooter
-                        </CardFooter>
-                    </Card>
+                    <div style={{ maxWidth: "50mvw" }}>
+                        <Card>
+                            <CardHeader>
+                                <CardTitle>Title</CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                                <img src="hero/hero.jpg" alt="" />
+                                <CardDescription>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio hic exercitationem quis, soluta ea ipsa minus eum quos aliquam, eos ipsum quasi animi, laudantium officia totam id similique ut dolore.
+                                </CardDescription>
+                            </CardContent>
+                            <CardFooter>
+                                Foooter
+                            </CardFooter>
+                        </Card>
+                    </div>
+                    <hr style={{ margin: "4rem 0" }} />
+                    <div style={{ maxWidth: "50mvw" }}>
+                        <Dialog>
+                            <DialogTrigger>Show Modal</DialogTrigger>
+                            <DialogContent>
+                                <DialogTitle>Title</DialogTitle>
+                                <DialogDescription>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo consequuntur vero temporibus illo corrupti, consectetur minus libero perspiciatis suscipit veritatis reiciendis sint deleniti vitae numquam voluptatem ad quas dolorem? Eligendi.</DialogDescription>
+                                <DialogCloseButton>Close</DialogCloseButton>
+                            </DialogContent>
+                        </Dialog>
+                    </div>
                 </div>
             </Container>
         </Section>

@@ -15,6 +15,15 @@ export type MapFile = {
 
 export interface MapImage extends MapFile {}
 
+export type User = {
+  id: string;
+  name: string;
+  email: string;
+  createdAt: Date;
+  updatedAt: Date;
+  orders: string[];
+};
+
 export interface Category {
   _id: string;
   id?: string;
@@ -34,19 +43,40 @@ export type Product = {
   title: string;
   description?: string;
   slug: string;
+  preview?: MapImage;
+  images: MapImage[];
   price?: number;
   priceInCents: number;
   priceHidden?: boolean;
-  preview?: MapImage;
-  images: MapImage[];
   productType: 'stock' | 'downloadUrl' | 'file';
   stock?: number;
   downloadUrl?: string;
   file?: MapFile;
   categories?: string[];
   tags?: string[];
-  content?: string;
+  isAvailableForPurchase: boolean;
   published?: boolean;
   createdAt?: Date;
   updatedAt?: Date;
+  orders: string[];
+  downloadVerification: string[];
+};
+
+export type Order = {
+  id: string;
+  pricePaidInCents: number;
+  userId?: string;
+  productId?: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+export type DownloadVerification = {
+  id: string;
+  downloadTimes: number;
+  product: string;
+  productId: string;
+  expiresAt: Date;
+  createdAt: Date;
+  updatedAt: Date;
 };

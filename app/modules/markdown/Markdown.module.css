@@ -23,17 +23,28 @@
 }
 
 .markdown-content {
-  max-width: 85dvw;
   margin-inline: auto;
 }
 
 .markdown-content>*:not(img),
 .markdown-content figcaption {
-  width: 50dvw;
+  width: 65dvw;
   margin-inline: auto;
 }
 
-@media screen and (screen > 780px) {
+@media screen and (width > 640px) {
+
+  .markdown-content>*:not(img),
+  .markdown-content figcaption {
+    width: 60dvw;
+  }
+
+  .markdown-content {
+    max-width: 85dvw;
+  }
+}
+
+@media screen and (width > 780px) {
 
   .markdown-content>*:not(img),
   .markdown-content figcaption {

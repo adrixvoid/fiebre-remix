@@ -1,6 +1,7 @@
 .grid {
   display: grid;
   gap: 2vw;
+  grid-template-columns: repeat(autofill, 1fr);
 }
 
 @media screen and (min-width: 960px) {

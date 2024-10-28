@@ -5,8 +5,6 @@ interface TranslationProviderProps {
 }
 
 // export function getLocale() {
-//     console.log("navigator.languages", navigator.languages)
-//     console.log("navigator.language", navigator.language)
 //     // Verifica si el navegador admite la propiedad `navigator.languages`
 //     if (navigator.languages && navigator.languages.length > 0) {
 //         // El navegador admite múltiples idiomas, devuelve el primer idioma de la lista
@@ -26,7 +24,6 @@ export const TranslationContext = createContext({
 
 function TranslationProvider({ children }: TranslationProviderProps) {
     // const locale = getLocale();
-    // console.log("locale", locale)
     // return (
     //     <TranslationContext.Provider value={{ locale }}>
     //         {children}

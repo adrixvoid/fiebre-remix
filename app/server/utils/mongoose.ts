@@ -6,19 +6,19 @@ mongoose.connection.once('open', () => {
   console.log('MongoDB connection ready!');
 });
 
-mongoose.connection.on('error', (err) => {
-  console.error(err);
+mongoose.connection.on('error', (e) => {
+  console.error(`DB connection error: ${e}`);
 });
 
 export async function mongoConnect() {
   mongoose.connect(MONGO_URL as string).catch((e) => {
-    console.log(e);
+    console.error(`DB connect error: ${e}`);
     process.exit(1);
   });
 }
 
 export async function mongoDisconnect() {
-  await mongoose.disconnect();
+  mongoose.disconnect();
 }
 
 export const toObjectId = (str: string) => {

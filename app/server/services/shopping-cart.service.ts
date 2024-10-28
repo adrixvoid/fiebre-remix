@@ -50,6 +50,6 @@ export async function shoppingCartAction(request: Request) {
         return null;
     }
   } catch (e) {
-    console.log(e);
+    console.error('SHOPPING-CART', e.message);
   }
 }

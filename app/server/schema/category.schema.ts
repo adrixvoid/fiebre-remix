@@ -1,12 +1,12 @@
 import mongoose from 'mongoose';
+import {createPath, slugify} from '~/lib/url';
 import {Category} from '~/types/global.type';
-import {slugify, createPath} from '~/lib/url';
 
-export interface CategoryDocument extends Category {
+export type CategoryDocument = Category & {
   _id: mongoose.Document['_id'];
   parent?: CategoryDocument;
   subcategories: CategoryDocument[];
-}
+};
 
 export const schema = new mongoose.Schema<CategoryDocument>(
   {

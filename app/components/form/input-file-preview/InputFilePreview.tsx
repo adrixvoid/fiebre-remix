@@ -77,10 +77,6 @@ export default function InputFilePreview({
 
     const handleDrop = (event: React.DragEvent<HTMLInputElement | HTMLLabelElement>) => {
         event.preventDefault();
-        console.log("DROP");
-        console.log("items", event.dataTransfer.items);
-        console.log("files", event.dataTransfer.files);
-        console.log("event.target", event.target)
 
         if (inputRef.current?.files) {
             setInputElement(inputRef.current);
@@ -94,21 +90,15 @@ export default function InputFilePreview({
                 // If dropped items aren't files, reject them
                 if (item.kind === "file") {
                     const file = item.getAsFile();
-                    console.log(`… file[${i}].name = ${file?.name}`);
                 }
             });
         } else {
             // Use DataTransfer interface to access the file(s)
             [...event.dataTransfer.files].forEach((file, i) => {
-                console.log(`else … file[${i}].name = ${file.name}`);
             });
-
-            console.log("inputRef?.current", inputRef?.current)
 
             if (inputRef?.current?.files) {
                 inputRef.current.files = event.dataTransfer.files;
-                console.log("inputRef.current.files")
-                console.log(inputRef.current.files)
             }
         }
 

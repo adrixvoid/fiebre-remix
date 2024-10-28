@@ -1,29 +1,4 @@
 {
-  "[markdown]": {},
-  "cSpell.words": [
-    "Behance",
-    "Canva",
-    "clss",
-    "clsx",
-    "datetime",
-    "isbot",
-    "Linkedin",
-    "lucide",
-    "markdoc",
-    "Markdoc",
-    "Pinterest",
-    "Renderable",
-    "Subcategoría",
-    "subcategorías",
-    "svgr",
-    "tailwind",
-    "tailwindcss",
-    "tanstack",
-    "typecheck",
-    "vaporwave",
-    "virtuals",
-    "zustand"
-  ],
   "search.exclude": {
     "**/node_modules/**": true,
     "**/bower_components/**": true,
@@ -41,7 +16,60 @@
   "editor.formatOnSave": true,
   "editor.defaultFormatter": null,
   "editor.codeActionsOnSave": {
-    "source.organizeImports": "explicit"
+    "source.fixAll.eslint": "always",
+    "source.organizeImports": "always"
   },
-  "editor.fontSize": 12
+  "cSpell.words": [
+    "behance",
+    "Behance",
+    "Canva",
+    "clss",
+    "clsx",
+    "codepen",
+    "Contactame",
+    "datetime",
+    "descargables",
+    "dribbble",
+    "Dribbble",
+    "isbot",
+    "linkedin",
+    "Linkedin",
+    "lucide",
+    "markdoc",
+    "Markdoc",
+    "noopener",
+    "noreferrer",
+    "pinterest",
+    "Pinterest",
+    "Renderable",
+    "Subcategoría",
+    "subcategorías",
+    "subheadline",
+    "svgr",
+    "tailwind",
+    "tailwindcss",
+    "tanstack",
+    "typecheck",
+    "vaporwave",
+    "virtuals",
+    "youtube",
+    "zustand"
+  ],
+  "cSpell.language": "en,es",
+  // Specify paths/files to ignore.
+  "cSpell.ignorePaths": [
+    "node_modules", // this will ignore anything the node_modules directory
+    "**/node_modules", // the same for this one
+    "**/node_modules/**", // the same for this one
+    "node_modules/**", // Doesn't currently work due to how the current working directory is determined.
+    "vscode-extension", //
+    ".git", // Ignore the .git directory
+    "*.dll", // Ignore all .dll files.
+    "**/*.dll", // Ignore all .dll files
+    "**/*.env", // Ignore all .env files
+    "**/*.local", // Ignore all .local files
+    "*.local" // .local files
+  ],
+  "editor.fontSize": 12,
+  "[markdown]": {}
 }
