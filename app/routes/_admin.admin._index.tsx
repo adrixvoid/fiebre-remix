@@ -1,9 +1,9 @@
 import type { LoaderFunctionArgs } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/components/card/Card";
-import { Container } from "~/components/container/Container";
-import { Grid } from "~/components/grid/Grid";
-import { Section } from "~/components/section/Section";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/components/ui/card/Card";
+import { Container } from "~/components/ui/container/Container";
+import { Grid } from "~/components/ui/grid/Grid";
+import { Section } from "~/components/ui/section/Section";
 import { formatCurrency, formatNumber } from "~/lib/price";
 
 

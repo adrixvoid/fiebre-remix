@@ -7,14 +7,15 @@ import { Product } from "~/types/global.type";
 
 import productModel from '~/server/schema/product.schema';
 
-import Button from "~/components/button/Button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardImageCover, CardTitle } from "~/components/card/Card";
-import { Center } from "~/components/center/Center";
-import { Container } from "~/components/container/Container";
-import Input from "~/components/form/Input";
-import { Grid } from "~/components/grid/Grid";
-import { Section } from "~/components/section/Section";
-import { Skeleton } from "~/components/skeleton/Skeleton";
+import Button from "~/components/ui/button/Button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardImageCover, CardPadding, CardTitle } from "~/components/ui/card/Card";
+import { Center } from "~/components/ui/center/Center";
+import { Container } from "~/components/ui/container/Container";
+import Input from "~/components/ui/form/Input";
+import { Grid } from "~/components/ui/grid/Grid";
+import { Section } from "~/components/ui/section/Section";
+import { Skeleton } from "~/components/ui/skeleton/Skeleton";
+import { Text } from "~/components/ui/text/Text";
 
 export const meta: MetaFunction = () => {
   return [
@@ -43,44 +44,44 @@ export default function Index() {
       <Container style={{ marginTop: "2.5rem" }}>
         <Grid>
           <Card>
+            <CardHeader>
+              <Center>
+                <Skeleton variant="circle" width="10dvw" height="10dvw" />
+              </Center>
+            </CardHeader>
             <CardContent>
-              <CardHeader>
-                <Center>
-                  <Skeleton variant="circle" width="10dvw" height="10dvw" />
-                </Center>
-              </CardHeader>
               <Center variant="text">
                 <CardTitle>Proyectos</CardTitle>
                 <CardDescription>Conocé mis servicios y hagamos realidad tu proyecto!</CardDescription>
               </Center>
-              <CardFooter>
-                <Center>
-                  <Button>
-                    Empecemos
-                  </Button>
-                </Center>
-              </CardFooter>
             </CardContent>
+            <CardFooter>
+              <Center>
+                <Button>
+                  Empecemos
+                </Button>
+              </Center>
+            </CardFooter>
           </Card>
           <Card>
+            <CardHeader>
+              <Center>
+                <Skeleton variant="circle" width="10dvw" height="10dvw" />
+              </Center>
+            </CardHeader>
             <CardContent>
-              <CardHeader>
-                <Center>
-                  <Skeleton variant="circle" width="10dvw" height="10dvw" />
-                </Center>
-              </CardHeader>
               <Center variant="text">
                 <CardTitle>Cursos</CardTitle>
                 <CardDescription>Plantillas que van a llevar tu negocio al siguiente nivel!</CardDescription>
               </Center>
-              <CardFooter>
-                <Center>
-                  <Button>
-                    Ver recursos
-                  </Button>
-                </Center>
-              </CardFooter>
             </CardContent>
+            <CardFooter>
+              <Center>
+                <Button>
+                  Ver recursos
+                </Button>
+              </Center>
+            </CardFooter>
           </Card>
           <Card>
             <CardHeader>
@@ -144,37 +145,37 @@ export default function Index() {
         <Grid>
           {products && products.map(product => {
             return (
-              <article key={product.title}>
-                <Card>
+              <Card as="article" key={product.title}>
+                <CardPadding>
                   <CardImageCover src={product.images?.[0].url}>
                     <img src={product.images?.[0].url} alt={product.title} aria-hidden />
                   </CardImageCover>
-                  <CardContent>
-                    <CardHeader>
-                      <CardTitle>{product.title}</CardTitle>
-                    </CardHeader>
-                    <CardDescription>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nostrum ipsa assumenda fugit, magni perspiciatis aliquam, qui reprehenderit ullam at nam nobis consequatur! Eum earum dolor assumenda! Illo suscipit ea sequi.</CardDescription>
-                    <CardFooter>
-                      <Button to={`${ROUTE_PATH.SHOP_DETAIL}/${product.slug}`}>
-                        Read More...
-                      </Button>
-                    </CardFooter>
-                  </CardContent>
-                </Card>
-              </article>
+                </CardPadding>
+                <CardHeader>
+                  <CardTitle>{product.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nostrum ipsa assumenda fugit, magni perspiciatis aliquam, qui reprehenderit ullam at nam nobis consequatur! Eum earum dolor assumenda! Illo suscipit ea sequi.</CardDescription>
+                </CardContent>
+                <CardFooter>
+                  <Button to={`${ROUTE_PATH.SHOP_DETAIL}/${product.slug}`}>
+                    Read More...
+                  </Button>
+                </CardFooter>
+              </Card>
             )
           })}
         </Grid>
       </Container>
-      <Skeleton height="30dvh" style={{ marginTop: "2.5rem", minHeight: "500px" }}>
+      <Skeleton height="30dvh" style={{ marginTop: "2.5rem", minHeight: "200px" }}>
         <Container>
           <Center direction="column" variant="all">
-            <div style={{ maxWidth: "40dvw" }}>
-              <h2 style={{ textAlign: "center" }}>Suscribíte para obtener descuentos únicos y plantillas gratuitas!</h2>
-            </div>
+            <Center variant="text" style={{ maxWidth: "700px" }}>
+              <Text variant="muted">Suscribite para obtener descuentos únicos y plantillas gratuitas!</Text>
+            </Center>
             <Center direction="row" variant="flex" style={{ borderRadius: "var(--radius)", padding: "0 1rem", width: "50dvw", fontSize: "2rem", lineHeight: "2.5rem", height: "auto", backgroundColor: "color-mix(in hsl, hsl(var(--background)), transparent 5%)" }}>
-              <Input name="subscribe" placeholder="your@email.com" style={{ border: 0, padding: "1rem 0", width: "50dvw", fontSize: "2rem", lineHeight: "2.5rem", height: "auto", backgroundColor: "transparent", boxShadow: "none!important" }} />
-              <Button variant="primary"><Send strokeWidth={1.5} /> Subscribe!</Button>
+              <Input name="subscribe" placeholder="your@email.com" style={{ border: 0, padding: "1rem 0", width: "50dvw", fontSize: "1.2rem", lineHeight: "1.5rem", height: "auto", backgroundColor: "transparent", boxShadow: "none!important" }} />
+              <Button><Send strokeWidth={1.5} /> Suscribirme</Button>
             </Center>
           </Center>
         </Container>

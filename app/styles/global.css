@@ -31,7 +31,7 @@
   --text-xl: 1.25rem;
   --text-2xl: 1.5rem;
 
-  --font-family: "Montserrat", "Lato";
+  --font-family: Inter, "Montserrat", Avenir, Helvetica, Arial, sans-serif;
 
   --shadow-color: 258.11 100% 91.28%;
 
@@ -96,11 +96,14 @@
   border-color: hsl(var(--border));
 }
 
+html {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
 body {
   line-height: 1.6;
   font-family: var(--font-family);
-  background-color: hsl(var(--background));
-  color: hsl(var(--foreground));
   overflow-x: auto;
   scrollbar-gutter: stable;
 }

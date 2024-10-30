@@ -6,11 +6,11 @@ import type { Product } from "~/types/global.type";
 
 import { productService } from "~/server/services/products.service";
 
-import Button from "~/components/button/Button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardImageCover, CardTitle } from "~/components/card/Card";
-import { Container } from "~/components/container/Container";
-import { Section } from "~/components/section/Section";
-import { ProductList } from "~/modules/products/Product";
+import { ProductList } from "~/components/products/Product";
+import Button from "~/components/ui/button/Button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardImageCover, CardTitle } from "~/components/ui/card/Card";
+import { Container } from "~/components/ui/container/Container";
+import { Section } from "~/components/ui/section/Section";
 
 export const loader: LoaderFunction = async () => {
     const products = await productService.find();
@@ -24,26 +24,22 @@ const Store = () => {
             <Container>
                 <ProductList>
                     {products.map((product) => (
-                        <article key={product.title}>
-                            <Card>
-                                <CardImageCover src={product.images?.[0]?.url}>
-                                    <img src={product.images?.[0]?.url} alt={product.title} aria-hidden loading="lazy" />
-                                </CardImageCover>
-                                <CardContent>
-                                    <CardHeader>
-                                        <CardTitle>{product.title}</CardTitle>
-                                    </CardHeader>
-                                    <div className="item-description">
-                                        <CardDescription>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo sint expedita modi doloremque at quisquam, dolore corporis ea. Laboriosam sint natus neque vel dolorem expedita repellendus, in iusto iste nostrum?</CardDescription>
-                                    </div>
-                                    <CardFooter>
-                                        <Button to={`${ROUTE_PATH.SHOP_DETAIL}/${product.slug}`}>
-                                            More Details
-                                        </Button>
-                                    </CardFooter>
-                                </CardContent>
-                            </Card>
-                        </article>
+                        <Card as="article" key={product.title}>
+                            <CardImageCover src={product.images?.[0]?.url}>
+                                <img src={product.images?.[0]?.url} alt={product.title} aria-hidden loading="lazy" />
+                            </CardImageCover>
+                            <CardHeader>
+                                <CardTitle>{product.title}</CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                                <CardDescription>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo sint expedita modi doloremque at quisquam, dolore corporis ea. Laboriosam sint natus neque vel dolorem expedita repellendus, in iusto iste nostrum?</CardDescription>
+                            </CardContent>
+                            <CardFooter>
+                                <Button to={`${ROUTE_PATH.SHOP_DETAIL}/${product.slug}`}>
+                                    More Details
+                                </Button>
+                            </CardFooter>
+                        </Card>
                     ))}
                 </ProductList>
             </Container>

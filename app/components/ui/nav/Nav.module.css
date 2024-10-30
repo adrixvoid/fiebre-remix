@@ -1,0 +1,11 @@
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.active {
+  color: hsl(var(--primary));
+  font-weight: bolder;
+  text-decoration: underline;
+}

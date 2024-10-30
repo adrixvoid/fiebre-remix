@@ -1,14 +1,14 @@
 import type { LinksFunction, LoaderFunction } from "@remix-run/node";
 import { Outlet } from "@remix-run/react";
 
-import { ROUTE_PATH_ADMIN, SITE_NAME } from "~/constants";
+import { ROUTE_PATH_ADMIN, SITE_TITLE } from "~/constants";
 
-import { Container } from "~/components/container/Container";
-import { Flex } from "~/components/flex/Flex";
-import { Header } from "~/components/header/Header";
-import { Link } from "~/components/link/Link";
-import { Nav, NavLink } from "~/components/nav/Nav";
 import Logo from "~/components/svg/Logo";
+import { Container } from "~/components/ui/container/Container";
+import { Flex } from "~/components/ui/flex/Flex";
+import { Header } from "~/components/ui/header/Header";
+import { Link } from "~/components/ui/link/Link";
+import { Nav, NavLink } from "~/components/ui/nav/Nav";
 
 import styles from "~/styles/admin.css";
 
@@ -32,7 +32,7 @@ export default function Admin() {
           <Flex justify="between" align="center">
             <Link to="/admin" className="flex items-center gap-1">
               <Logo aria-hidden className="logo" />
-              <span className="sr-only">{SITE_NAME}</span>
+              <span className="sr-only">{SITE_TITLE}</span>
               <span className="ml-1">Admin</span>
             </Link>
             <Nav>

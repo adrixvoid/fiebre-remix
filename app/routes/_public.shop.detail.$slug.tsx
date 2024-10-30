@@ -8,9 +8,9 @@ import type { MapImage, Product } from "~/types/global.type";
 import productModel from '~/server/schema/product.schema';
 import { parse } from '~/server/utils/marked';
 
-import { Container } from "~/components/container/Container";
-import { Section } from "~/components/section/Section";
-import { ProductButtonAddToCart, ProductDescription, ProductGallery, ProductGrid, ProductImagePreview, ProductPrice, ProductQuantity, ProductTags, ProductTitle } from "~/modules/products/detail/ProductDetail";
+import { ProductButtonAddToCart, ProductDescription, ProductGallery, ProductGrid, ProductImagePreview, ProductPrice, ProductQuantity, ProductTags, ProductTitle } from "~/components/products/detail/ProductDetail";
+import { Container } from "~/components/ui/container/Container";
+import { Section } from "~/components/ui/section/Section";
 
 const ACTIONS = {
     ADD_TO_CART: "add-to-cart"

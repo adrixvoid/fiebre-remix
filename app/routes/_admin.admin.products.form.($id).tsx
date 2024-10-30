@@ -3,23 +3,23 @@ import { useActionData, useLoaderData, useLocation } from "@remix-run/react";
 import { atom, useAtom } from 'jotai';
 import { useIsSubmitting, ValidatedForm } from "remix-validated-form";
 
+import { CategorySelect } from "~/components/categories/CategorySelect";
 import useReferrer from "~/hooks/useReferrer";
 import { t } from "~/i18n/translate";
-import { CategorySelect } from "~/modules/categories/CategorySelect";
 import { actionAdminProduct, loaderAdminProduct, LoaderAdminProduct } from "~/server/controllers/products.controller";
 import { productValidator } from "~/server/zod/products.zod";
 
-import { Container } from "~/components/container/Container";
-import { Fieldset } from "~/components/form/Fieldset";
-import { FormBlock } from "~/components/form/FormBlock";
-import Input from "~/components/form/Input";
-import InputFilePreview from "~/components/form/input-file-preview/InputFilePreview";
-import { InputImageList } from "~/components/form/input-file-preview/UploadedImages";
-import { InputPrice } from "~/components/form/InputPrice";
-import { InputSubmit } from "~/components/form/InputSubmit";
-import TextEditor from "~/components/form/text-editor/TextEditor";
-import ValidateInput from "~/components/form/ValidateInput";
-import { Section } from "~/components/section/Section";
+import { Container } from "~/components/ui/container/Container";
+import { Fieldset } from "~/components/ui/form/Fieldset";
+import { FormBlock } from "~/components/ui/form/FormBlock";
+import Input from "~/components/ui/form/Input";
+import InputFilePreview from "~/components/ui/form/input-file-preview/InputFilePreview";
+import { InputImageList } from "~/components/ui/form/input-file-preview/UploadedImages";
+import { InputPrice } from "~/components/ui/form/InputPrice";
+import { InputSubmit } from "~/components/ui/form/InputSubmit";
+import TextEditor from "~/components/ui/form/text-editor/TextEditor";
+import ValidateInput from "~/components/ui/form/ValidateInput";
+import { Section } from "~/components/ui/section/Section";
 
 const priceHidden = atom(false);
 const currentProductType = atom("stock");

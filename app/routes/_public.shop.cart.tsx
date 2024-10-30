@@ -1,10 +1,10 @@
 import { useLoaderData } from "@remix-run/react";
 
-import Button from "~/components/button/Button";
-import { Card, CardPadding } from "~/components/card/Card";
-import { Container } from "~/components/container/Container";
-import { Flex } from "~/components/flex/Flex";
-import { Section } from "~/components/section/Section";
+import Button from "~/components/ui/button/Button";
+import { Card, CardPadding } from "~/components/ui/card/Card";
+import { Container } from "~/components/ui/container/Container";
+import { Flex } from "~/components/ui/flex/Flex";
+import { Section } from "~/components/ui/section/Section";
 
 // import { getCart } from "~/server/shoppingCart.server"
 // import type { Product } from "~/server/products.service"

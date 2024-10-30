@@ -10,17 +10,17 @@ import { AdminCategoryLoaderList, CATEGORY_PARAMS, loaderAdminCategoriesList } f
 import { PRODUCT_PARAMS } from "~/server/controllers/products.controller";
 import { CategoryDocument } from "~/server/schema/category.schema";
 
-import { Button } from "~/components/button/Button";
-import { Container } from "~/components/container/Container";
-import AdminTable from "~/components/table/AdminTable";
-import AdminCategoryBreadcrumb from "~/modules/categories/AdminCategoryBreadcrumb";
-import AdminProductsTable from "~/modules/products/AdminProductsTable";
+import AdminCategoryBreadcrumb from "~/components/categories/AdminCategoryBreadcrumb";
+import AdminProductsTable from "~/components/products/AdminProductsTable";
+import { Button } from "~/components/ui/button/Button";
+import { Container } from "~/components/ui/container/Container";
+import AdminTable from "~/components/ui/table/AdminTable";
 
 import { FolderPlus } from "lucide-react";
-import { Flex } from "~/components/flex/Flex";
-import { Link } from "~/components/link/Link";
-import { Section } from "~/components/section/Section";
-import { TableCellAction } from "~/components/table/Table";
+import { Flex } from "~/components/ui/flex/Flex";
+import { Link } from "~/components/ui/link/Link";
+import { Section } from "~/components/ui/section/Section";
+import { TableCellAction } from "~/components/ui/table/Table";
 
 const initialLocationState = {
   breadcrumb: [{

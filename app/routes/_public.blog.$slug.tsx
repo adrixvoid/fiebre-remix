@@ -3,7 +3,7 @@ import { json } from "@remix-run/node";
 
 import markdownService from "~/server/services/markdown.service";
 
-import { MarkdownPage } from "~/modules/markdown/Markdown";
+import { MarkdownPage } from "~/components/markdown/Markdown";
 
 export const loader: LoaderFunction = async ({ params }) => {
     try {

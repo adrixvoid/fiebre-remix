@@ -1,0 +1,257 @@
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    flex-shrink: 0;
+
+    gap: 0.5cap;
+    padding-left: 1.4cap;
+    padding-right: 1.4cap;
+    padding-top: 0.2cap;
+    padding-bottom: 0.2cap;
+    min-height: 1.75cap;
+
+    border-radius: var(--radius-md);
+    border-style: solid;
+    border-width: 1px;
+    font-size: .875rem;
+    line-height: 1.8;
+    font-weight: 500;
+    outline-color: hsl(var(--ring));
+
+    will-change: color, background-color, border-color, text-decoration-color, box-shadow, fill, stroke;
+    transition-duration: 200ms;
+    transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+}
+
+a.button {
+    text-decoration: none;
+}
+
+/* .button:has(>svg) {
+    padding-block: 0.5cap;
+} */
+
+.button:hover {
+    text-decoration: none !important;
+}
+
+.button:focus-visible {
+    outline-width: 2px;
+    outline-offset: -2px;
+}
+
+.button:disabled,
+.button:disabled:hover,
+.button:disabled:active,
+.button:disabled:focus-within {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+/**
+    Button Color
+*/
+
+.base {
+    border-color: hsl(var(--button));
+    background-color: hsl(var(--button));
+    fill: currentColor;
+    color: hsl(var(--button-foreground));
+}
+
+.base:hover {
+    background-color: color-mix(in hsl shorter hue, hsl(var(--button)), white 20%);
+}
+
+.primary {
+    border-color: hsl(var(--primary));
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+}
+
+.primary:hover {
+    background-color: hsl(var(--primary) / 0.8);
+}
+
+.outline {
+    background-color: transparent;
+    color: hsl(var(--foreground));
+    fill: currentColor;
+    border-color: hsl(var(--foreground) / 0.8);
+    text-underline-offset: 4px;
+    text-decoration: none;
+}
+
+.outline:hover {
+    fill: currentColor;
+}
+
+.dashed {
+    background-color: transparent;
+    color: hsl(var(--foreground));
+    fill: currentColor;
+    border-style: dashed;
+    border-width: 1px;
+}
+
+.dashed:focus,
+.dashed:focus-within {
+    box-shadow: var(--shadow-sm), var(--tw-ring-shadow-0);
+}
+
+.ghost {
+    border-color: transparent;
+    background-color: transparent;
+    color: hsl(var(--foreground));
+    fill: currentColor;
+}
+
+.ghost:focus,
+.ghost:focus-within {
+    color: hsl(var(--button-foreground));
+    fill: currentColor;
+    box-shadow: var(--tw-ring-shadow-0);
+}
+
+.link {
+    border-color: transparent;
+    background-color: transparent;
+    color: hsl(var(--foreground));
+    fill: currentColor;
+    text-decoration: none;
+    text-underline-offset: 4px;
+}
+
+.link:hover {
+    background-color: hsl(var(--button-foreground) / .05);
+    color: hsl(var(--button-foreground));
+    fill: currentColor;
+}
+
+.link:focus,
+.link:focus-within {
+    color: hsl(var(--button-foreground));
+    fill: currentColor;
+    text-underline-offset: 4px;
+}
+
+.accent {
+    background: hsl(var(--accent));
+    color: hsl(var(--foreground));
+    fill: currentColor;
+}
+
+.destructive {
+    fill: currentColor;
+    border-color: hsl(var(--destructive));
+    background-color: hsl(var(--destructive));
+    color: hsl(var(--destructive-foreground));
+}
+
+.destructive:hover {
+    background-color: hsl(var(--destructive) / .9);
+}
+
+/**
+    Button Sizes
+*/
+
+.small {
+    min-height: 32px;
+    font-size: 0.85rem;
+}
+
+.medium {
+    min-height: 36px;
+    font-size: var(--text-md);
+}
+
+.large {
+    min-height: 48px;
+    line-height: 2;
+    font-size: var(--text-xl);
+}
+
+
+/* Icons */
+
+.button svg {
+    margin-left: -0.1cap;
+    width: 2cap;
+    object-fit: contain;
+}
+
+.full-width {
+    width: 100%
+}
+
+
+@media (prefers-color-scheme: dark) {
+    .primary:hover {
+        background-color: hsl(var(--primary) / 0.8);
+    }
+
+    .outline {
+        border-color: white;
+    }
+}
+
+@keyframes fade-in-out {
+    25% {
+        box-shadow: 0 2px 0 hsl(var(--shadow-color));
+    }
+
+    50% {
+        box-shadow: 0 2px 0 transparent;
+    }
+
+    75% {
+        box-shadow: 0 2px 0 hsl(var(--shadow-color));
+    }
+}
+
+@keyframes rainbow {
+    from {
+        box-shadow:
+            0 0 0 0 hsl(179, 100%, 76%),
+            0 0 0 0 hsl(306 100% 83% / 0.9),
+            0 0 0 0 hsl(76.45 100% 75.69% / 0.8),
+            0 0 0 0 hsl(var(--primary) / .6)
+    }
+
+    to {
+        box-shadow:
+            0 0 0 2px hsl(179, 100%, 76%),
+            0 0 0 6px hsl(306 100% 83% / 0.9),
+            0 0 0 10px hsl(76.45 100% 75.69% / 0.8),
+            0 0 0 15px hsl(var(--primary) / .6)
+    }
+}
+
+@keyframes rainbow2 {
+    0% {
+        box-shadow:
+            0 0 0 0 hsl(179, 100%, 76%),
+            0 0 0 0 hsl(306 100% 83% / 0.9),
+            0 0 0 0 hsl(76.45 100% 75.69% / 0.8),
+            0 0 0 0 hsl(var(--primary) / .6)
+    }
+
+    10% {
+        box-shadow:
+            0 0 0 2px hsl(179, 100%, 76%),
+            0 0 0 6px hsl(306 100% 83% / 0.9),
+            0 0 0 10px hsl(76.45 100% 75.69% / 0.8),
+            0 0 0 15px hsl(var(--primary) / .6)
+    }
+
+    90% {
+        box-shadow:
+            0 0 0 0 hsl(179, 100%, 76%),
+            0 0 0 0 hsl(306 100% 83% / 0.9),
+            0 0 0 0 hsl(76.45 100% 75.69% / 0.8),
+            0 0 0 0 hsl(var(--primary) / .6)
+    }
+}

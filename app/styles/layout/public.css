@@ -1,9 +1,0 @@
-.logo-link {
-  display: inline-flex;
-  align-items: center;
-}
-
-.logo path {
-  image-rendering: smooth;
-  fill: hsl(var(--primary));
-}

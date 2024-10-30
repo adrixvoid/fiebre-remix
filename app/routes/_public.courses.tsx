@@ -3,14 +3,14 @@ import { Send } from "lucide-react";
 
 import markdownService from "~/server/services/markdown.service";
 
-import Button from "~/components/button/Button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "~/components/card/Card";
-import { Center } from "~/components/center/Center";
-import { Container } from "~/components/container/Container";
-import { Flex } from "~/components/flex/Flex";
-import Input from "~/components/form/Input";
-import { Section } from "~/components/section/Section";
-import { Skeleton } from "~/components/skeleton/Skeleton";
+import Button from "~/components/ui/button/Button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "~/components/ui/card/Card";
+import { Center } from "~/components/ui/center/Center";
+import { Container } from "~/components/ui/container/Container";
+import { Flex } from "~/components/ui/flex/Flex";
+import Input from "~/components/ui/form/Input";
+import { Section } from "~/components/ui/section/Section";
+import { Skeleton } from "~/components/ui/skeleton/Skeleton";
 
 
 export const loader = async () => {

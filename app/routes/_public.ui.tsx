@@ -1,13 +1,13 @@
 import { LinksFunction } from '@remix-run/node';
 import { Trash2, User } from 'lucide-react';
 
-import { Button } from "~/components/button/Button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "~/components/card/Card";
-import { Container } from "~/components/container/Container";
-import { Dialog, DialogCloseButton, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from '~/components/dialog/Dialog';
-import Input from "~/components/form/Input";
-import { Select } from "~/components/form/Select";
-import { Section } from "~/components/section/Section";
+import { Button } from "~/components/ui/button/Button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "~/components/ui/card/Card";
+import { Container } from "~/components/ui/container/Container";
+import { Dialog, DialogCloseButton, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from '~/components/ui/dialog/Dialog';
+import Input from "~/components/ui/form/Input";
+import { Select } from "~/components/ui/form/Select";
+import { Section } from "~/components/ui/section/Section";
 
 import styles from "~/styles/ui.css";
 

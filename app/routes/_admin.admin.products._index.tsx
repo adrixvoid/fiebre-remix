@@ -8,12 +8,12 @@ import { Product } from '~/types/global.type';
 
 import { loaderAdminProductList } from "~/server/controllers/products.controller";
 
-import Button from "~/components/button/Button";
-import { Container } from "~/components/container/Container";
-import { Link } from "~/components/link/Link";
-import { Section } from "~/components/section/Section";
-import AdminTable from "~/components/table/AdminTable";
-import { TableCellAction, TableHeadAction } from "~/components/table/Table";
+import Button from "~/components/ui/button/Button";
+import { Container } from "~/components/ui/container/Container";
+import { Link } from "~/components/ui/link/Link";
+import { Section } from "~/components/ui/section/Section";
+import AdminTable from "~/components/ui/table/AdminTable";
+import { TableCellAction, TableHeadAction } from "~/components/ui/table/Table";
 
 const styles = {
   images: {

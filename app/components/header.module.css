@@ -1,0 +1,47 @@
+.header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  transition: all 250ms;
+  height: 6rem;
+  z-index: 1;
+}
+
+.header[data-sticky="on"] {
+  height: 3.5rem;
+  background-color: hsl(var(--background) / 0.5);
+  z-index: 1;
+}
+
+.logo {
+  color: white;
+  fill: white;
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+.navigation a {
+  text-underline-offset: 0.2rem;
+  text-rendering: optimizeLegibility;
+}
+
+.navigation a:hover {
+  text-decoration: underline;
+}
+
+.navigation a:focus-visible {
+  outline: 4px solid hsl(var(--ring));
+  outline-offset: 5px;
+}
+
+.drawerStateOn {
+  position: static;
+  z-index: 999999;
+  color: white;
+}

@@ -3,11 +3,11 @@ import { useLoaderData } from "@remix-run/react";
 import markdownService from "~/server/services/markdown.service";
 import { MarkdownDocument } from "~/server/utils/front-matter";
 
-import Button from "~/components/button/Button";
-import { Card, CardContent, CardHeader, CardImageCover, CardPadding, CardTitle } from "~/components/card/Card";
-import { Container } from "~/components/container/Container";
-import { Grid } from "~/components/grid/Grid";
-import { Section } from "~/components/section/Section";
+import Button from "~/components/ui/button/Button";
+import { Card, CardFooter, CardHeader, CardImageCover, CardPadding, CardTitle } from "~/components/ui/card/Card";
+import { Container } from "~/components/ui/container/Container";
+import { Grid } from "~/components/ui/grid/Grid";
+import { Section } from "~/components/ui/section/Section";
 import { ROUTE_PATH } from "~/constants";
 
 export const loader = async () => {
@@ -28,14 +28,15 @@ function PortfolioPage() {
                 <CardPadding>
                   <CardImageCover src={content.preview} alt={content.title} aria-hidden />
                 </CardPadding>
-                <CardContent>
-                  <CardHeader>
-                    <CardTitle>{content.title}</CardTitle>
-                  </CardHeader>
+                <CardHeader>
+                  <CardTitle>{content.title}</CardTitle>
+                </CardHeader>
+                <CardPadding></CardPadding>
+                <CardFooter>
                   <Button to={`${ROUTE_PATH.PORTFOLIO}/${content.slug}`}>
                     More...
                   </Button>
-                </CardContent>
+                </CardFooter>
               </Card>
             </article>
           ))}

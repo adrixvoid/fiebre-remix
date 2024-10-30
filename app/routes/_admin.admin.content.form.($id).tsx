@@ -8,17 +8,17 @@ import useReferrer from "~/hooks/useReferrer";
 import { contentAction, contentLoader } from "~/server/controllers/content.controller";
 import { formValidator } from "~/server/zod/content.zod";
 
-import Button from "~/components/button/Button";
-import { Container } from "~/components/container/Container";
-import { Fieldset } from "~/components/form/Fieldset";
-import { FormBlock } from "~/components/form/FormBlock";
-import Input from "~/components/form/Input";
-import InputFilePreview from "~/components/form/input-file-preview/InputFilePreview";
-import InputImageList from "~/components/form/input-file-preview/UploadedImages";
-import { Select } from "~/components/form/Select";
-import TextEditor from "~/components/form/text-editor/TextEditor";
-import ValidateInput from "~/components/form/ValidateInput";
-import { Section } from "~/components/section/Section";
+import Button from "~/components/ui/button/Button";
+import { Container } from "~/components/ui/container/Container";
+import { Fieldset } from "~/components/ui/form/Fieldset";
+import { FormBlock } from "~/components/ui/form/FormBlock";
+import Input from "~/components/ui/form/Input";
+import InputFilePreview from "~/components/ui/form/input-file-preview/InputFilePreview";
+import InputImageList from "~/components/ui/form/input-file-preview/UploadedImages";
+import { Select } from "~/components/ui/form/Select";
+import TextEditor from "~/components/ui/form/text-editor/TextEditor";
+import ValidateInput from "~/components/ui/form/ValidateInput";
+import { Section } from "~/components/ui/section/Section";
 
 
 export const loader: LoaderFunction = contentLoader;

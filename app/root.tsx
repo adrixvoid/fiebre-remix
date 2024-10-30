@@ -2,26 +2,25 @@ import { cssBundleHref } from "@remix-run/css-bundle";
 import type { LinksFunction, MetaFunction } from "@remix-run/node";
 import {
   isRouteErrorResponse,
-  Links,
   LiveReload,
-  Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
   useNavigate,
-  useRouteError,
+  useRouteError
 } from "@remix-run/react";
-import { SITE_DESCRIPTION, SITE_NAME } from "~/constants";
+import Button from "~/components/ui/button/Button";
+import { Container } from "~/components/ui/container/Container";
+import { SITE_DESCRIPTION, SITE_TITLE } from "~/constants";
 import globalStyles from "~/styles/global.css";
 import resetStyles from "~/styles/helpers/reset.css";
 import tailwindStyles from "~/styles/tailwind.css";
-import Button from "./components/button/Button";
-import { Container } from "./components/container/Container";
+import { BaseHead } from "./components/BaseHead";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: SITE_NAME },
-    { name: SITE_NAME, content: SITE_DESCRIPTION },
+    { title: SITE_TITLE },
+    { name: SITE_TITLE, content: SITE_DESCRIPTION },
   ];
 };
 
@@ -57,14 +56,9 @@ export default function App() {
   return (
     <html lang="en">
       <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <Meta />
-        <Links />
+        <BaseHead />
       </head>
       <body>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" media="all" />
-        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,200;0,300;0,400;0,700;0,900;1,400;1,700;1,900&display=swap" rel="stylesheet"></link>
         <Outlet />
         <ScrollRestoration />
         <Scripts />
@@ -79,7 +73,7 @@ export function ErrorBoundary() {
   const navigate = useNavigate()
   const goBack = () => navigate(-1)
 
-  let errorTitle = "Ok... 0__x We could not load the page"
+  let errorTitle = ">__< We could not load the page"
   let errorDetail = null
 
   if (isRouteErrorResponse(error)) {
@@ -100,11 +94,9 @@ export function ErrorBoundary() {
     <html>
       <head>
         <title>Oh no!</title>
-        <Meta />
-        <Links />
+        <BaseHead />
       </head>
       <body>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" media="all" />
         <div className="layout">
           <main className="main">
             <Container>

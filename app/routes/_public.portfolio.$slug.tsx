@@ -5,11 +5,11 @@ import { ROUTE_PATH } from "~/constants";
 
 import markdownService from "~/server/services/markdown.service";
 
-import Button from "~/components/button/Button";
-import { Center } from "~/components/center/Center";
-import { Container } from "~/components/container/Container";
-import { Section } from "~/components/section/Section";
-import { MarkdownPage } from "~/modules/markdown/Markdown";
+import { MarkdownPage } from "~/components/markdown/Markdown";
+import Button from "~/components/ui/button/Button";
+import { Center } from "~/components/ui/center/Center";
+import { Container } from "~/components/ui/container/Container";
+import { Section } from "~/components/ui/section/Section";
 
 export const loader: LoaderFunction = async ({ request }) => {
     const url = new URL(request.url);

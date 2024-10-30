@@ -1,0 +1,59 @@
+.header {
+  height: 6rem;
+  transition: all 250ms;
+}
+
+.spacer {
+  height: 6rem;
+  display: block;
+}
+
+.logo {
+  aspect-ratio: 2 / 1;
+  height: 2.5rem;
+  color: hsl(var(--primary));
+  will-change: filter;
+  transition: filter 300ms;
+}
+
+.logo-link {
+  display: inline-flex;
+  align-items: center;
+}
+
+.logo path {
+  image-rendering: smooth;
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+
+.sticky {
+  height: 3.5rem;
+  background-color: hsl(var(--background) / 0.95);
+}
+
+.navigation a {
+  text-underline-offset: .2rem;
+  text-rendering: optimizeLegibility;
+  text-shadow: 0 0 1px white;
+}
+
+.navigation a:hover {
+  text-decoration: underline;
+}
+
+.navigation a:focus-visible {
+  outline: 4px solid hsl(var(--ring));
+  outline-offset: 5px;
+}
+
+.navigation a {
+  color: hsl(var(--foreground));
+}
