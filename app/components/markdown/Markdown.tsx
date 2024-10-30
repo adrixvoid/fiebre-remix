@@ -1,5 +1,5 @@
 import { isRouteErrorResponse, useLoaderData, useRouteError } from "@remix-run/react";
-import type { MarkdownDocument } from "~/server/utils/front-matter";
+import type { MarkdownDocument } from "~/server/lib/front-matter";
 
 import { Container } from "~/components/ui/container/Container";
 import { Section } from "~/components/ui/section/Section";

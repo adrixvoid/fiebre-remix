@@ -4,7 +4,7 @@ import { Trash2 } from "lucide-react";
 
 import { ROUTE_PATH_ADMIN } from "~/constants";
 import { t } from "~/i18n/translate";
-import { Breadcrumb } from '~/types/global.type';
+import { Breadcrumb } from '~/types/breadcrumb';
 
 import { AdminCategoryLoaderList, CATEGORY_PARAMS, loaderAdminCategoriesList } from "~/server/controllers/categories.controller";
 import { PRODUCT_PARAMS } from "~/server/controllers/products.controller";

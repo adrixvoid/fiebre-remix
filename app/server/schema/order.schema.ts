@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import {Order} from '~/types/global.type';
+import {Order} from '~/types/order';
 
 const Schema = mongoose.Schema;
 

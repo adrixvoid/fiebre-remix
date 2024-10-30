@@ -2,7 +2,7 @@ import cx from "clsx";
 import { atom, useAtom } from 'jotai';
 import { Fragment } from "react";
 
-import { Category } from "~/types/global.type";
+import { Category } from "~/types/category";
 
 import Button from "~/components/ui/button/Button";
 import { CategoriesCheckbox } from "./checkbox/CheckboxCategory";

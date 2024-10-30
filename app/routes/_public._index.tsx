@@ -3,7 +3,7 @@ import { useLoaderData } from "@remix-run/react";
 import { Send } from 'lucide-react';
 
 import { ROUTE_PATH } from "~/constants";
-import { Product } from "~/types/global.type";
+import { Product } from "~/types/product";
 
 import productModel from '~/server/schema/product.schema';
 

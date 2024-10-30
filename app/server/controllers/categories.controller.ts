@@ -8,7 +8,9 @@ import {
 import {ASSET_PATH, ROUTE_PATH_ADMIN} from '~/constants';
 import {getBreadcrumb} from '~/lib/breadcrumb';
 import {sanitizeUrl} from '~/lib/sanitizeUrl';
-import {Breadcrumb, MapFile, Product} from '~/types/global.type';
+import {type Breadcrumb} from '~/types/breadcrumb';
+import {type MapFile} from '~/types/file';
+import type {Product} from '~/types/product';
 
 import categoryModel, {CategoryDocument} from '~/server/schema/category.schema';
 import productModel from '~/server/schema/product.schema';
@@ -57,7 +59,7 @@ export async function loaderAdminCategoriesList({
     parentId: null
   });
 
-  const products = await productModel.find({
+  const products: Product[] = await productModel.find({
     categories: []
   });
   // const products = await productModel.find({$where:'this.categories.length>0'});
@@ -77,7 +79,7 @@ export async function getSubcategory(
     (d: CategoryDocument) => d.path === sanitizeUrl(path)
   );
 
-  const products = await productModel.find({
+  const products: Product[] = await productModel.find({
     categories: {$in: [category?._id]}
   });
   // .where('likes').in(['vaporizing', 'talking']);

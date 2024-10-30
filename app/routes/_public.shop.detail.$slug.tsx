@@ -3,10 +3,11 @@ import { json, redirect } from "@remix-run/node";
 import { useFetcher, useLoaderData } from "@remix-run/react";
 
 import { ROUTE_PATH } from "~/constants";
-import type { MapImage, Product } from "~/types/global.type";
+import type { MapImage } from "~/types/file";
+import type { Product } from "~/types/product";
 
+import { parse } from '~/lib/marked';
 import productModel from '~/server/schema/product.schema';
-import { parse } from '~/server/utils/marked';
 
 import { ProductButtonAddToCart, ProductDescription, ProductGallery, ProductGrid, ProductImagePreview, ProductPrice, ProductQuantity, ProductTags, ProductTitle } from "~/components/products/detail/ProductDetail";
 import { Container } from "~/components/ui/container/Container";
@@ -29,12 +30,12 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
             throw new Error('Product not found');
         }
 
-        const gallery: MapImage[] = product && product.images ? [...product.images] : [];
+        const gallery: MapImage[] = product && product.images ? [...product.images as Product['images']] : [];
         if (gallery.length > 1) {
             gallery.shift()
         }
 
-        product.description = await parse(product.description || '');
+        product.description = await parse(product.description as Product['description'] || '');
 
         return { product, gallery };
     } catch (error) {

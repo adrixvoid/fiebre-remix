@@ -1,10 +1,10 @@
+import {
+  unstable_createFileUploadHandler,
+  unstable_parseMultipartFormData
+} from '@remix-run/node';
 import fs from 'fs/promises';
 import path from 'path';
-import {
-  unstable_parseMultipartFormData,
-  unstable_createFileUploadHandler
-} from '@remix-run/node';
-import {createName} from '../utils/upload';
+import {createName} from '~/server/lib/upload';
 
 export const fileService = {
   save: async (directory: string, file: File) => {

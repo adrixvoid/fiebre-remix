@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import {createPath, slugify} from '~/lib/url';
-import {Category} from '~/types/global.type';
+import {Category} from '~/types/category';
 
 export type CategoryDocument = Category & {
   _id: mongoose.Document['_id'];

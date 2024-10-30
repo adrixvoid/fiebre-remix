@@ -1,6 +1,6 @@
 import { useLoaderData } from "@remix-run/react";
 
-import { Category } from "~/types/global.type";
+import { Category } from "~/types/category";
 
 import { Select, SelectProps } from "~/components/ui/form/Select";
 

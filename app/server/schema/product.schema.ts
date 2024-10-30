@@ -1,8 +1,12 @@
 import mongoose from 'mongoose';
 import {slugify} from '~/lib/url';
-import {Product} from '~/types/global.type';
+import {Product} from '~/types/product';
 
 const Schema = mongoose.Schema;
+
+export type ProductDocument = Product & {
+  _id: mongoose.Document['_id'];
+};
 
 export const schema = new Schema<Product>(
   {

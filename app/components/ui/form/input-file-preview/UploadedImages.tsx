@@ -3,7 +3,7 @@ import { atom, useAtom } from 'jotai';
 import { Trash2 } from 'lucide-react';
 
 import { t } from '~/i18n/translate';
-import { MapImage } from "~/types/global.type";
+import { MapImage } from "~/types/file";
 
 import { useEffect } from "react";
 import { Button } from '~/components/ui/button/Button';

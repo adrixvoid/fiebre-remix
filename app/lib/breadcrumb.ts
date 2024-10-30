@@ -1,4 +1,4 @@
-import {Breadcrumb} from '~/types/global.type';
+import {Breadcrumb} from '~/types/breadcrumb';
 
 export function toPathObject(slugs: string[]) {
   const temp = [...slugs];

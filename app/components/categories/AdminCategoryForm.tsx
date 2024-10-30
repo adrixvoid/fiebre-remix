@@ -4,7 +4,7 @@ import { ValidatedForm } from "remix-validated-form";
 
 import { AdminCategoryActionForm, CATEGORY_PARAMS } from "~/server/controllers/categories.controller";
 import { productValidator } from "~/server/zod/category.zod";
-import { Category } from "~/types/global.type";
+import { Category } from "~/types/category";
 
 import Button from "~/components/ui/button/Button";
 import { Container } from "~/components/ui/container/Container";

@@ -2,7 +2,7 @@ import type { LoaderFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 
 import { ROUTE_PATH } from "~/constants";
-import type { Product } from "~/types/global.type";
+import type { Product } from "~/types/product";
 
 import { productService } from "~/server/services/products.service";
 

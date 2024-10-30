@@ -1,8 +1,7 @@
-import fs from 'fs/promises';
 import {NodeOnDiskFile} from '@remix-run/node';
 import path from 'path';
 import {ASSET_PATH} from '~/constants';
-import {MapFile} from '~/types/global.type';
+import {MapFile} from '~/types/file';
 
 export type AssetPathKey = keyof typeof ASSET_PATH;
 export type FileType = 'image' | 'video' | 'audio' | 'files' | string;

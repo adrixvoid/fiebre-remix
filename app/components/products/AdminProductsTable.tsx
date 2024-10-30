@@ -4,7 +4,7 @@ import { Trash2 } from "lucide-react";
 
 import { ROUTE_PATH_ADMIN } from "~/constants";
 import { t } from "~/i18n/translate";
-import { Product } from "~/types/global.type";
+import { Product } from "~/types/product";
 
 import { Button } from "~/components/ui/button/Button";
 import AdminTable from "~/components/ui/table/AdminTable";

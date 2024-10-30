@@ -1,9 +1,7 @@
-import {FilterQuery} from 'mongoose';
-import {toObjectId} from '~/server/utils/mongoose';
-import {CategoryDocument} from '~/server/schema/category.schema';
-import type {Category} from '~/types/global.type';
-import {sanitizeUrl} from '~/lib/sanitizeUrl';
 import {createPath, slugify} from '~/lib/url';
+import {toObjectId} from '~/server/lib/mongoose';
+import {CategoryDocument} from '~/server/schema/category.schema';
+import type {Category} from '~/types/category';
 import categoryModel from '../schema/category.schema';
 
 async function updateSubcategoriesPath(

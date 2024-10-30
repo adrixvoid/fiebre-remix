@@ -2,8 +2,8 @@ import { useLoaderData } from "@remix-run/react";
 
 import { ROUTE_PATH } from "~/constants";
 
+import { type MarkdownDocument } from "~/server/lib/front-matter";
 import markdownService from "~/server/services/markdown.service";
-import { type MarkdownDocument } from "~/server/utils/front-matter";
 
 import Button from "~/components/ui/button/Button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardImageCover, CardPadding, CardTitle } from "~/components/ui/card/Card";

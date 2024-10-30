@@ -1,7 +1,7 @@
 import { Fragment } from "react/jsx-runtime";
 
 import { ROUTE_PATH_ADMIN } from "~/constants";
-import { Breadcrumb } from "~/types/global.type";
+import { Breadcrumb } from "~/types/breadcrumb";
 
 import { Link } from "~/components/ui/link/Link";
 

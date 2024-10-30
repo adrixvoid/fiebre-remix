@@ -1,5 +1,5 @@
 import {useLoaderData, useLocation} from '@remix-run/react';
-import {Breadcrumb} from '~/types/global.type';
+import {Breadcrumb} from '~/types/breadcrumb';
 
 type LocationState = {
   breadcrumb?: Breadcrumb[] | [];

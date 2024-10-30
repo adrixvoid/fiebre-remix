@@ -5,8 +5,8 @@ import {
 } from '@remix-run/node';
 
 import {slugify} from '~/lib/url';
+import {MarkdownDocument} from '~/server/lib/front-matter';
 import markdownService from '~/server/services/markdown.service';
-import {MarkdownDocument} from '../utils/front-matter';
 
 export const PARAMS = {
   ID: 'id'

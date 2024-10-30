@@ -1,6 +1,6 @@
 import {slugify} from '~/lib/url';
+import {toObjectId} from '~/server/lib/mongoose';
 import productModel from '../schema/product.schema';
-import {toObjectId} from '../utils/mongoose';
 
 export const productService = {
   find: async () => {

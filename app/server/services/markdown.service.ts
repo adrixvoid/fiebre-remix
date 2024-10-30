@@ -1,6 +1,7 @@
 import fs from 'fs/promises';
 import path from 'path';
 
+import {parse} from '~/lib/marked';
 import {sanitizeUrl} from '~/lib/sanitizeUrl';
 import {
   type MarkdownDocument,
@@ -10,8 +11,7 @@ import {
   getDocuments,
   getPath,
   markdownTemplate
-} from '../utils/front-matter';
-import {parse} from '../utils/marked';
+} from '~/server/lib/front-matter';
 
 const markdownService = {
   readOne: async (url: string): Promise<MarkdownDocument | null> => {

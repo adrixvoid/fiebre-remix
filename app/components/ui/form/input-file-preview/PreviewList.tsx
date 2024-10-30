@@ -1,6 +1,6 @@
 import clsx from "clsx";
 
-import { MapImage } from "~/types/global.type";
+import { MapImage } from "~/types/file";
 
 import styles from './PreviewList.module.css';
 
