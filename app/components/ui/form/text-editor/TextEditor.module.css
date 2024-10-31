@@ -6,11 +6,10 @@
 }
 
 .button-group {
-  max-width: 70dvw;
   display: flex;
   background-color: hsl(var(--button));
 }
 
 .wrapper {
-  max-width: 70dvw;
+  position: relative;
 }

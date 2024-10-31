@@ -3,15 +3,10 @@ label[for] {
 }
 
 .input {
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
-  transition-timing-function: cubic-bezier(.4, 0, .2, 1);
-  transition-duration: .15s;
-
   display: flex;
 
   width: 100%;
   height: 2.25rem;
-  max-width: 70dvw;
 
   font-size: .875rem;
   line-height: 1.25rem;
@@ -27,6 +22,12 @@ label[for] {
   border-style: solid;
   border-radius: var(--radius-md);
   color: hsl(var(--foreground));
+}
+
+.transition {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+  transition-duration: .15s;
 }
 
 .input:focus,

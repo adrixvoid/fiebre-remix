@@ -7,6 +7,7 @@ import { Container } from "~/components/ui/container/Container";
 import { Dialog, DialogCloseButton, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from '~/components/ui/dialog/Dialog';
 import Input from "~/components/ui/form/Input";
 import { Select } from "~/components/ui/form/Select";
+import TextArea from '~/components/ui/form/TextArea';
 import { Section } from "~/components/ui/section/Section";
 
 import styles from "~/styles/ui.css";
@@ -272,7 +273,7 @@ function ProductRoute() {
                         </div>
                         <div className="flex items-center gap-4 mt-1">
                             <label htmlFor="test9-2">Textarea</label>
-                            <textarea id="test9-2" name="test9-2" value="Example 1" onChange={() => { }} />
+                            <TextArea id="test9-2" name="test9-2" value="Example 1" onChange={() => { }} />
                         </div>
                         <div className="flex gap-4 mt-1">
                             <label htmlFor="test10">Checkbox</label>

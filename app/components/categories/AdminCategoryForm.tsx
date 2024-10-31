@@ -15,6 +15,7 @@ import { InputImageList, showUploadAtom } from "~/components/ui/form/input-file-
 import { Select } from "~/components/ui/form/Select";
 import ValidateInput from "~/components/ui/form/ValidateInput";
 import { Section } from "~/components/ui/section/Section";
+import { FormBlock } from "../ui/form/FormBlock";
 
 function getErrorText(errorMessage: string) {
     if (errorMessage.includes("duplicate key")) {
@@ -52,26 +53,32 @@ export default function AdminCategoryForm() {
                         </div>
                     )}
                     <Fieldset>
-                        <Select id="parentId" name="parentId" label="Parent Category" defaultValue={category?.parentId || selectedParentCategory?._id || undefined}>
-                            <option value="">No parent category</option>
-                            {filteredCategories.map((parentCategory) => (
-                                <option key={parentCategory._id} value={parentCategory._id}>
-                                    {parentCategory.name}
-                                </option>
-                            ))}
-                        </Select>
+                        <FormBlock>
+                            <Select id="parentId" name="parentId" label="Parent Category" defaultValue={category?.parentId || selectedParentCategory?._id || undefined}>
+                                <option value="">No parent category</option>
+                                {filteredCategories.map((parentCategory) => (
+                                    <option key={parentCategory._id} value={parentCategory._id}>
+                                        {parentCategory.name}
+                                    </option>
+                                ))}
+                            </Select>
+                        </FormBlock>
 
-                        <ValidateInput name="name">
-                            <Input id="name" name="name" label="Category name" placeholder="Street Art" defaultValue={category?.name} />
-                        </ValidateInput>
-                        {actionData?.error?.fields?.name ? (
-                            <em>{actionData?.error.fields.name}</em>
-                        ) : null}
+                        <FormBlock>
+                            <ValidateInput name="name">
+                                <Input id="name" name="name" label="Category name" placeholder="Street Art" defaultValue={category?.name} />
+                            </ValidateInput>
+                            {actionData?.error?.fields?.name ? (
+                                <em>{actionData?.error.fields.name}</em>
+                            ) : null}
+                        </FormBlock>
                     </Fieldset>
 
                     <Fieldset>
-                        <InputImageList source={category?.image} />
-                        {showUploadFile && (<InputFilePreview id="image" name="image" label="Select image" className='mb-2' />)}
+                        <FormBlock>
+                            <InputImageList source={category?.image} />
+                            {showUploadFile && (<InputFilePreview id="image" name="image" label="Select image" className='mb-2' />)}
+                        </FormBlock>
                     </Fieldset>
 
                     <Fieldset>

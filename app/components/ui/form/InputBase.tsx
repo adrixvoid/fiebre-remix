@@ -17,7 +17,7 @@ const InputBase = forwardRef<HTMLInputElement, InputBaseProps>(
     return (
       <>
         {label && <Label id={id} name={name} {...labelProps}>{label}</Label>}
-        <input ref={ref} className={cx(styles.input, className)} name={name} id={id} {...rest} />
+        <input ref={ref} className={cx(styles.input, styles.transition, className)} name={name} id={id} {...rest} />
         <ErrorMessage name={name} error={error} />
       </>
     )

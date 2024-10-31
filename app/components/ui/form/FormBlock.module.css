@@ -20,3 +20,13 @@
   align-items: center;
   gap: 0.3rem;
 }
+
+.fullWidth {
+  max-width: 100%;
+}
+
+@media (min-width: 780px) {
+  .fixedWidth {
+    max-width: 50rem;
+  }
+}

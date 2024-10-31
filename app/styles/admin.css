@@ -1,28 +1,9 @@
-/* fieldset,
-input:not([type="checkbox"]):not([type="radio"]),
-textarea,
-select,
-legend {
-  display: block;
-  width: 100%;
-} */
-
 fieldset label {
   display: inline-block;
 }
 
-/* input[type="file"] {
-  margin-top: 10px;
-}
-
-fieldset label+input,
-fieldset label+select,
-fieldset label+textarea {
-  margin-top: 0.3rem;
-} */
-
 .admin-banner-preview {
   max-height: 10dvh;
   width: auto;
-  max-width: 100dvw;
+  max-width: 5rem;
 }

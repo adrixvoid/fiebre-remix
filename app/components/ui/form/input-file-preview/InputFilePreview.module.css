@@ -10,7 +10,8 @@
     background-color: hsl(var(--input) / 18%);
     border: 1px dashed hsl(var(--border));
 
-    display: block;
+    display: flex;
+    justify-content: center;
     padding: 2rem 1rem;
 
     transition: background-color .1s ease-in-out;

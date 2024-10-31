@@ -41,16 +41,18 @@ export default function UploadContent() {
                     encType="multipart/form-data"
                 >
                     <Fieldset>
-                        <label htmlFor="type">
-                            Content Type
-                        </label>
-                        <Select id="type" name="type">
-                            {Object.keys(MARKDOWN_TYPE).map((key) => (
-                                <option key={key} value={key}>
-                                    {MARKDOWN_TYPE[key as keyof typeof MARKDOWN_TYPE]}
-                                </option>
-                            ))}
-                        </Select>
+                        <FormBlock>
+                            <label htmlFor="type">
+                                Content Type
+                            </label>
+                            <Select id="type" name="type">
+                                {Object.keys(MARKDOWN_TYPE).map((key) => (
+                                    <option key={key} value={key}>
+                                        {MARKDOWN_TYPE[key as keyof typeof MARKDOWN_TYPE]}
+                                    </option>
+                                ))}
+                            </Select>
+                        </FormBlock>
                     </Fieldset>
                     <hr />
                     <Fieldset>
@@ -59,31 +61,38 @@ export default function UploadContent() {
                                 <Input label="Title" id="title" name="title" placeholder="Noche de Reyes" />
                             </ValidateInput>
                         </FormBlock>
-
-                        <TextEditor label='Description' id="description" name="description" rows={5} defaultValue={content?.description} />
+                        <FormBlock>
+                            <TextEditor label='Description' id="description" name="description" rows={5} defaultValue={content?.description} />
+                        </FormBlock>
                     </Fieldset>
                     <hr />
                     <Fieldset>
                         <FormBlock>
                             <Input type="text" label='Tags' key="tags" id="tags" name="tags" placeholder="illustration, sunset, beer" defaultValue={content?.tags} />
                         </FormBlock>
-                        <Input type="text" label='Slug' key="slug" id="slug" name="slug" placeholder="my-custom-slug-for-SEO" defaultValue={content?.slug} />
+                        <FormBlock>
+                            <Input type="text" label='Slug' key="slug" id="slug" name="slug" placeholder="my-custom-slug-for-SEO" defaultValue={content?.slug} />
+                        </FormBlock>
                     </Fieldset>
                     <hr />
                     <Fieldset>
                         <div className="mt-6">
-                            <ValidateInput name='toDelete' className='mb-2'>
-                                <InputImageList source={content?.preview} />
-                            </ValidateInput>
-                            <ValidateInput type="file" name="preview" label="Preview" className='mb-2'>
-                                <InputFilePreview id="preview" name="preview" label='Add preview' />
-                            </ValidateInput>
+                            <FormBlock>
+                                <ValidateInput name='toDelete' className='mb-2'>
+                                    <InputImageList source={content?.preview} />
+                                </ValidateInput>
+                            </FormBlock>
+                            <FormBlock>
+                                <ValidateInput type="file" name="preview" label="Preview" className='mb-2'>
+                                    <InputFilePreview id="preview" name="preview" label='Add preview' />
+                                </ValidateInput>
+                            </FormBlock>
                         </div>
                     </Fieldset>
                     <hr />
                     <Fieldset className="mt-4">
-                        <Input label="Save as markdown file" id="markdown" name="markdown" type="checkbox" defaultChecked={true} className="mr-2" />
                         <FormBlock>
+                            <Input label="Save as markdown file" id="markdown" name="markdown" type="checkbox" defaultChecked={true} className="mr-2" />
                             <Input type="checkbox" label="Save as draft" id="draft" name="draft" defaultChecked={true} />
                         </FormBlock>
                     </Fieldset>

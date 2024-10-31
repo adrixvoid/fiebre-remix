@@ -1,14 +1,11 @@
 import { type ActionFunction, type LoaderFunction } from "@remix-run/node";
 import { useActionData, useLoaderData, useLocation } from "@remix-run/react";
 import { atom, useAtom } from 'jotai';
-import { useIsSubmitting, ValidatedForm } from "remix-validated-form";
 
-import { CategorySelect } from "~/components/categories/CategorySelect";
-import useReferrer from "~/hooks/useReferrer";
-import { t } from "~/i18n/translate";
-import { actionAdminProduct, loaderAdminProduct, LoaderAdminProduct } from "~/server/controllers/products.controller";
+import { ValidatedForm } from "remix-validated-form";
 import { productValidator } from "~/server/zod/products.zod";
 
+import { CategorySelect } from "~/components/categories/CategorySelect";
 import { Container } from "~/components/ui/container/Container";
 import { Fieldset } from "~/components/ui/form/Fieldset";
 import { FormBlock } from "~/components/ui/form/FormBlock";
@@ -16,10 +13,15 @@ import Input from "~/components/ui/form/Input";
 import InputFilePreview from "~/components/ui/form/input-file-preview/InputFilePreview";
 import { InputImageList } from "~/components/ui/form/input-file-preview/UploadedImages";
 import { InputPrice } from "~/components/ui/form/InputPrice";
-import { InputSubmit } from "~/components/ui/form/InputSubmit";
+import { InputSubmitValidator } from "~/components/ui/form/InputSubmit";
 import TextEditor from "~/components/ui/form/text-editor/TextEditor";
 import ValidateInput from "~/components/ui/form/ValidateInput";
 import { Section } from "~/components/ui/section/Section";
+
+import { actionAdminProduct, loaderAdminProduct, LoaderAdminProduct } from "~/server/controllers/products.controller";
+
+import useReferrer from "~/hooks/useReferrer";
+import { t } from "~/i18n/translate";
 
 const priceHidden = atom(false);
 const currentProductType = atom("stock");
@@ -29,7 +31,6 @@ export const action: ActionFunction = actionAdminProduct;
 
 export default function AdminProductForm() {
   const { category, product } = useLoaderData<typeof loader>() as LoaderAdminProduct;
-  const isSubmitting = useIsSubmitting();
   const referrer = useReferrer();
   const error = useActionData<typeof action>()
   const location = useLocation();
@@ -65,12 +66,14 @@ export default function AdminProductForm() {
           </Fieldset>
           <hr />
           <Fieldset>
-            <ValidateInput name='toDelete' className='mb-2'>
-              <InputImageList source={product?.images} multiple={true} />
-            </ValidateInput>
-            <ValidateInput type="file" name="images" label="Images" className='mb-2' multiple={true} accept="images/*">
-              <InputFilePreview />
-            </ValidateInput>
+            <FormBlock>
+              <ValidateInput name='toDelete' className='mb-2'>
+                <InputImageList source={product?.images} multiple={true} />
+              </ValidateInput>
+              <ValidateInput type="file" name="images" label="Images" className='mb-2' multiple={true} accept="images/*">
+                <InputFilePreview />
+              </ValidateInput>
+            </FormBlock>
             {error?.images && <p className="box paper color-danger">{error.images}</p>}
           </Fieldset>
           <hr />
@@ -147,7 +150,7 @@ export default function AdminProductForm() {
             <input type="hidden" name="state" value={JSON.stringify(location.state) || ""} />
             <input type="hidden" name="referrer" value={referrer} />
             <input type="hidden" id="id" name="id" value={product?._id} />
-            <InputSubmit label="Save" isSubmitting={isSubmitting} />
+            <InputSubmitValidator label="Save" />
           </Fieldset>
         </ValidatedForm>
       </Container>

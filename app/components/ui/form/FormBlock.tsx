@@ -9,9 +9,14 @@ const formBlockVariants = cva(
       block: styles.block,
       inline: styles.inline,
     },
+    width: {
+      fixed: styles.fixedWidth,
+      full: styles.fullWidth
+    }
   },
   defaultVariants: {
-    variant: "block"
+    variant: "block",
+    width: "fixed"
   },
 })
 
