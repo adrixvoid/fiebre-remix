@@ -1,4 +1,5 @@
 import { ShoppingCart } from "lucide-react";
+
 import { t } from "~/i18n/translate";
 import { accessibilityPrice, formatCurrency } from '~/lib/price';
 import { MapImage } from '~/types/file';
@@ -6,6 +7,7 @@ import { MapImage } from '~/types/file';
 import Button, { ButtonProps } from "~/components/ui/button/Button";
 import Input from '~/components/ui/form/Input';
 import { Link } from "~/components/ui/link/Link";
+import { Title } from "~/components/ui/text/Text";
 
 import styles from './ProductDetail.module.css';
 
@@ -48,7 +50,7 @@ export function ProductGallery({ images }: { images: MapImage[] }) {
 
 export function ProductTitle({ title }: { title: string }) {
   return (
-    <h1 className={styles.title} itemProp="name">{title}</h1>
+    <Title size="xl" className={styles.title} itemProp="name">{title}</Title>
   );
 }
 
@@ -81,7 +83,7 @@ export function ProductQuantity() {
 
 export function ProductButtonAddToCart({ priceHidden, ...props }: ButtonProps & { priceHidden?: boolean }) {
   return (
-    <Button variant="primary" size="lg" className={styles['add-to-cart']} {...props}>
+    <Button variant="primary" size="lg" className={styles['add-to-cart']} fullWidth {...props}>
       <ShoppingCart width={24} height={24} />
       {!priceHidden ? t("ADD_TO_CART") : t("INQUIRE")}
     </Button>

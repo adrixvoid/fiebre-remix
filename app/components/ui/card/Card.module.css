@@ -11,8 +11,7 @@
 }
 
 .shadow {
-  box-shadow:
-    3px 3px 0 3px hsl(266, 54%, 51%);
+  box-shadow: var(--shadow-sm);
 }
 
 .header {

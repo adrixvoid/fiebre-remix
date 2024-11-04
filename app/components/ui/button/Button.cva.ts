@@ -21,9 +21,6 @@ export const buttonVariants = cva(styles.button, {
       md: styles.medium,
       sm: styles.small,
       lg: styles.large
-    },
-    width: {
-      ['full-width']: styles['full-width']
     }
   },
   // compoundVariants: [

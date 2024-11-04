@@ -1,5 +1,6 @@
 {
   "search.exclude": {
+    "**/bkp/**": true,
     "**/node_modules/**": true,
     "**/bower_components/**": true,
     "**/dist/**": true,
@@ -45,6 +46,8 @@
     "Subcategoría",
     "subcategorías",
     "subheadline",
+    "Substack",
+    "Substacks",
     "svgr",
     "tailwind",
     "tailwindcss",

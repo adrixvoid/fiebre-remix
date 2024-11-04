@@ -145,7 +145,7 @@ export default function Index() {
         <Grid>
           {products && products.map(product => {
             return (
-              <Card as="article" key={product.title}>
+              <Card as="article" key={product.title} shadow>
                 <CardPadding>
                   <CardImageCover src={product.images?.[0].url}>
                     <img src={product.images?.[0].url} alt={product.title} aria-hidden />

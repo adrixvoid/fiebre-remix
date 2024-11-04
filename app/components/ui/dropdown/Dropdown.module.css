@@ -1,0 +1,75 @@
+.dropdownContainer {
+  position: relative;
+  display: inline-block;
+}
+
+.trigger {
+  /* border-width: 1px;
+  border-style: solid;
+  border-color: hsl(var(--button));
+  background-color: hsl(var(--button));
+  fill: currentColor;
+  color: hsl(var(--button-foreground));
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px; */
+  line-height: 1.5rem;
+}
+
+/* .trigger:hover {
+  background-color: color-mix(in hsl shorter hue, hsl(var(--button)), white 20%);
+} */
+
+.trigger:focus {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+.content {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  background-color: hsl(var(--background));
+  border-color: hsl(var(--border-color));
+  border-radius: 4px;
+  box-shadow: 0 4px 6px -1px hsl(var(--shadow-color));
+  min-width: 100%;
+  z-index: 1000;
+  opacity: 0;
+  transform: translateY(-8px);
+  visibility: hidden;
+  transition: all 0.2s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+  .content {
+    --shadow-color: 259, 100%, 5%;
+  }
+}
+
+.content[data-open="true"] {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+}
+
+.item {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+  outline: none;
+}
+
+.item:hover,
+.item:focus {
+  background-color: hsl(var(--button-foreground) / .05);
+  /* background: #f8fafc; */
+}
+
+.item[data-highlighted="true"] {
+  background-color: hsl(var(--button-foreground) / .05);
+}

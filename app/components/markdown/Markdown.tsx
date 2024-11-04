@@ -4,6 +4,7 @@ import type { MarkdownDocument } from "~/server/lib/front-matter";
 import { Container } from "~/components/ui/container/Container";
 import { Section } from "~/components/ui/section/Section";
 
+import { Title } from "../ui/text/Text";
 import styles from "./Markdown.module.css";
 
 export function MarkdownPage() {
@@ -11,7 +12,7 @@ export function MarkdownPage() {
   return (
     <Section marginBottom>
       <Container>
-        <h1 className={styles.title}>{content.title}</h1>
+        <Title size="xl" className={styles.title}>{content.title}</Title>
         {/* {content.preview && (
           <div className={styles.preview} style={{ backgroundImage: `url('${content.preview}')` }} />
         )} */}

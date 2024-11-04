@@ -1,13 +1,9 @@
 .square {
   /* background: hsl(var(--button)); */
-  width: 6rem;
-  height: 6rem;
+  width: 15%;
+  aspect-ratio: 1 /1;
   font-size: 0.8em;
   background-color: rgb(255 255 255 / 0.5);
-}
-
-.shadow {
-  box-shadow: var(--shadow);
 }
 
 .shadow-sm {
@@ -26,8 +22,8 @@
   box-shadow: var(--shadow-xl);
 }
 
-.shadow-2xl {
-  box-shadow: var(--shadow-2xl);
+.shadow-inner {
+  box-shadow: var(--shadow-inner);
 }
 
 .ring-0 {
@@ -59,5 +55,5 @@
 }
 
 .mix {
-  box-shadow: var(--shadow-2xl), var(--tw-ring-shadow-2);
+  box-shadow: var(--shadow-xl), var(--tw-ring-shadow-2);
 }

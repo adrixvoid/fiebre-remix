@@ -2,13 +2,20 @@ import { LinksFunction } from '@remix-run/node';
 import { Trash2, User } from 'lucide-react';
 
 import { Button } from "~/components/ui/button/Button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "~/components/ui/card/Card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardImageCover, CardPadding, CardTitle } from "~/components/ui/card/Card";
+import { Center } from '~/components/ui/center/Center';
 import { Container } from "~/components/ui/container/Container";
 import { Dialog, DialogCloseButton, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from '~/components/ui/dialog/Dialog';
+import { Drawer, DrawerCloseButton, DrawerContent, DrawerTrigger } from '~/components/ui/drawer/Drawer';
+import { Dropdown } from '~/components/ui/dropdown/Dropdown';
+import { Fieldset } from '~/components/ui/form/Fieldset';
+import { FormBlock } from '~/components/ui/form/FormBlock';
 import Input from "~/components/ui/form/Input";
 import { Select } from "~/components/ui/form/Select";
 import TextArea from '~/components/ui/form/TextArea';
+import { Link } from '~/components/ui/link/Link';
 import { Section } from "~/components/ui/section/Section";
+import { Text, Title } from '~/components/ui/text/Text';
 
 import styles from "~/styles/ui.css";
 
@@ -31,12 +38,12 @@ function ProductRoute() {
                 </nav>
                 <div>
                     <div className="mt-10">
-                        <h1>Flower Power - Kit de dibujos</h1>
-                        <h2>Flower Power - Kit de dibujos</h2>
-                        <h3>Flower Power - Kit de dibujos</h3>
-                        <h4>Flower Power - Kit de dibujos</h4>
-                        <h5>Flower Power - Kit de dibujos</h5>
-                        <h6>Flower Power - Kit de dibujos</h6>
+                        <h1>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores</h1>
+                        <h2>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores</h2>
+                        <h3>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores</h3>
+                        <h4>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores</h4>
+                        <h5>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores</h5>
+                        <h6>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores</h6>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia quo omnis
                             dolore tempore maxime minima illum blanditiis dolores quod nostrum officiis magni est non aut distinctio quisquam, saepe tenetur nisi!
                         </p>
@@ -45,6 +52,14 @@ function ProductRoute() {
                             dolore tempore maxime minima illum blanditiis dolores quod nostrum officiis magni est non aut distinctio quisquam, saepe tenetur nisi!
                         </p>
                         <a href="#">Ver formas de pago</a>
+                    </div>
+                    <div className="mt-10">
+                        <Title size="xl">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores</Title>
+                        <Title size="lg">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores</Title>
+                        <Title size="md">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores</Title>
+                        <Title size="sm">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores</Title>
+                        <Text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda, aliquam ducimus perspiciatis, quos eius voluptate, consequatur aspernatur ipsa provident excepturi maxime praesentium iure? Dicta commodi culpa illum sunt ratione. Fuga?</Text>
+                        <Link href="#">Lorem ipsum</Link>
                     </div>
                     <div className="mt-10">
                         <h2>Contrast</h2>
@@ -77,12 +92,11 @@ function ProductRoute() {
                             flexWrap: "wrap"
                         }}>
                             <hr />
-                            <div className="square shadow">shadow</div>
-                            <div className="square shadow-sm">shadow-sm</div>
-                            <div className="square shadow-md">shadow-md</div>
-                            <div className="square shadow-lg">shadow-lg</div>
-                            <div className="square shadow-xl">shadow-xl</div>
-                            <div className="square shadow-2xl">shadow-2xl</div>
+                            <Center variant="all" className="square shadow-sm"><Title>shadow-sm</Title></Center>
+                            <Center variant="all" className="square shadow-md"><Title>shadow-md</Title></Center>
+                            <Center variant="all" className="square shadow-lg"><Title>shadow-lg</Title></Center>
+                            <Center variant="all" className="square shadow-xl"><Title>shadow-xl</Title></Center>
+                            <Center variant="all" className="square shadow-inner"><Title>shadow-inner</Title></Center>
                         </div>
                     </div>
                     <hr style={{ margin: "4rem 0" }} />
@@ -114,27 +128,27 @@ function ProductRoute() {
                             marginTop: 20,
                             gridTemplateColumns: "1fr 1fr 1fr 1fr",
                         }}>
-                            <div><div style={{ width: '32px', height: '32px', boxShadow: '0px 1px 5px #eaeaea', backgroundColor: "hsl(var(--background))" }}></div>--background</div>
-                            <div><div style={{ width: '32px', height: '32px', boxShadow: '0px 1px 5px #eaeaea', backgroundColor: "hsl(var(--foreground))" }}></div>--foreground</div>
-                            <div><div style={{ width: '32px', height: '32px', boxShadow: '0px 1px 5px #eaeaea', backgroundColor: "hsl(var(--card))" }}></div>--card</div>
-                            <div><div style={{ width: '32px', height: '32px', boxShadow: '0px 1px 5px #eaeaea', backgroundColor: "hsl(var(--card--foreground))" }}></div>--card--foreground</div>
-                            <div><div style={{ width: '32px', height: '32px', boxShadow: '0px 1px 5px #eaeaea', backgroundColor: "hsl(var(--popover))" }}></div>--popover</div>
-                            <div><div style={{ width: '32px', height: '32px', boxShadow: '0px 1px 5px #eaeaea', backgroundColor: "hsl(var(--popover--foreground))" }}></div>--popover--foreground</div>
-                            <div><div style={{ width: '32px', height: '32px', boxShadow: '0px 1px 5px #eaeaea', backgroundColor: "hsl(var(--button))" }}></div>--button</div>
-                            <div><div style={{ width: '32px', height: '32px', boxShadow: '0px 1px 5px #eaeaea', backgroundColor: "hsl(var(--button--foreground))" }}></div>--button--foreground</div>
-                            <div><div style={{ width: '32px', height: '32px', boxShadow: '0px 1px 5px #eaeaea', backgroundColor: "hsl(var(--primary))" }}></div>--primary</div>
-                            <div><div style={{ width: '32px', height: '32px', boxShadow: '0px 1px 5px #eaeaea', backgroundColor: "hsl(var(--primary--foreground))" }}></div>--primary--foreground</div>
-                            <div><div style={{ width: '32px', height: '32px', boxShadow: '0px 1px 5px #eaeaea', backgroundColor: "hsl(var(--secondary))" }}></div>--secondary</div>
-                            <div><div style={{ width: '32px', height: '32px', boxShadow: '0px 1px 5px #eaeaea', backgroundColor: "hsl(var(--secondary--foreground))" }}></div>--secondary--foreground</div>
-                            <div><div style={{ width: '32px', height: '32px', boxShadow: '0px 1px 5px #eaeaea', backgroundColor: "hsl(var(--muted))" }}></div>--muted</div>
-                            <div><div style={{ width: '32px', height: '32px', boxShadow: '0px 1px 5px #eaeaea', backgroundColor: "hsl(var(--muted--foreground))" }}></div>--muted--foreground</div>
-                            <div><div style={{ width: '32px', height: '32px', boxShadow: '0px 1px 5px #eaeaea', backgroundColor: "hsl(var(--accent))" }}></div>--accent</div>
-                            <div><div style={{ width: '32px', height: '32px', boxShadow: '0px 1px 5px #eaeaea', backgroundColor: "hsl(var(--accent--foreground))" }}></div>--accent--foreground</div>
-                            <div><div style={{ width: '32px', height: '32px', boxShadow: '0px 1px 5px #eaeaea', backgroundColor: "hsl(var(--destructive))" }}></div>--destructive</div>
-                            <div><div style={{ width: '32px', height: '32px', boxShadow: '0px 1px 5px #eaeaea', backgroundColor: "hsl(var(--destructive--foreground))" }}></div>--destructive--foreground</div>
-                            <div><div style={{ width: '32px', height: '32px', boxShadow: '0px 1px 5px #eaeaea', backgroundColor: "hsl(var(--border))" }}></div>--border</div>
-                            <div><div style={{ width: '32px', height: '32px', boxShadow: '0px 1px 5px #eaeaea', backgroundColor: "hsl(var(--input))" }}></div>--input</div>
-                            <div><div style={{ width: '32px', height: '32px', boxShadow: '0px 1px 5px #eaeaea', backgroundColor: "hsl(var(--ring))" }}></div>--ring</div>
+                            <div><div style={{ width: '32px', height: '32px', border: "1px solid hsl(var(--foreground) / 0.2)", backgroundColor: "hsl(var(--background))" }}></div>--background</div>
+                            <div><div style={{ width: '32px', height: '32px', border: "1px solid hsl(var(--foreground) / 0.2)", backgroundColor: "hsl(var(--foreground))" }}></div>--foreground</div>
+                            <div><div style={{ width: '32px', height: '32px', border: "1px solid hsl(var(--foreground) / 0.2)", backgroundColor: "hsl(var(--card))" }}></div>--card</div>
+                            <div><div style={{ width: '32px', height: '32px', border: "1px solid hsl(var(--foreground) / 0.2)", backgroundColor: "hsl(var(--card-foreground))" }}></div>--card-foreground</div>
+                            <div><div style={{ width: '32px', height: '32px', border: "1px solid hsl(var(--foreground) / 0.2)", backgroundColor: "hsl(var(--popover))" }}></div>--popover</div>
+                            <div><div style={{ width: '32px', height: '32px', border: "1px solid hsl(var(--foreground) / 0.2)", backgroundColor: "hsl(var(--popover-foreground))" }}></div>--popover-foreground</div>
+                            <div><div style={{ width: '32px', height: '32px', border: "1px solid hsl(var(--foreground) / 0.2)", backgroundColor: "hsl(var(--button))" }}></div>--button</div>
+                            <div><div style={{ width: '32px', height: '32px', border: "1px solid hsl(var(--foreground) / 0.2)", backgroundColor: "hsl(var(--button-foreground))" }}></div>--button-foreground</div>
+                            <div><div style={{ width: '32px', height: '32px', border: "1px solid hsl(var(--foreground) / 0.2)", backgroundColor: "hsl(var(--primary))" }}></div>--primary</div>
+                            <div><div style={{ width: '32px', height: '32px', border: "1px solid hsl(var(--foreground) / 0.2)", backgroundColor: "hsl(var(--primary-foreground))" }}></div>--primary-foreground</div>
+                            <div><div style={{ width: '32px', height: '32px', border: "1px solid hsl(var(--foreground) / 0.2)", backgroundColor: "hsl(var(--secondary))" }}></div>--secondary</div>
+                            <div><div style={{ width: '32px', height: '32px', border: "1px solid hsl(var(--foreground) / 0.2)", backgroundColor: "hsl(var(--secondary-foreground))" }}></div>--secondary-foreground</div>
+                            <div><div style={{ width: '32px', height: '32px', border: "1px solid hsl(var(--foreground) / 0.2)", backgroundColor: "hsl(var(--muted))" }}></div>--muted</div>
+                            <div><div style={{ width: '32px', height: '32px', border: "1px solid hsl(var(--foreground) / 0.2)", backgroundColor: "hsl(var(--muted-foreground))" }}></div>--muted-foreground</div>
+                            <div><div style={{ width: '32px', height: '32px', border: "1px solid hsl(var(--foreground) / 0.2)", backgroundColor: "hsl(var(--accent))" }}></div>--accent</div>
+                            <div><div style={{ width: '32px', height: '32px', border: "1px solid hsl(var(--foreground) / 0.2)", backgroundColor: "hsl(var(--accent-foreground))" }}></div>--accent-foreground</div>
+                            <div><div style={{ width: '32px', height: '32px', border: "1px solid hsl(var(--foreground) / 0.2)", backgroundColor: "hsl(var(--destructive))" }}></div>--destructive</div>
+                            <div><div style={{ width: '32px', height: '32px', border: "1px solid hsl(var(--foreground) / 0.2)", backgroundColor: "hsl(var(--destructive-foreground))" }}></div>--destructive-foreground</div>
+                            <div><div style={{ width: '32px', height: '32px', border: "1px solid hsl(var(--foreground) / 0.2)", backgroundColor: "hsl(var(--border))" }}></div>--border</div>
+                            <div><div style={{ width: '32px', height: '32px', border: "1px solid hsl(var(--foreground) / 0.2)", backgroundColor: "hsl(var(--input))" }}></div>--input</div>
+                            <div><div style={{ width: '32px', height: '32px', border: "1px solid hsl(var(--foreground) / 0.2)", backgroundColor: "hsl(var(--ring))" }}></div>--ring</div>
                         </div>
                     </div>
                     <hr style={{ margin: "4rem 0" }} />
@@ -276,14 +290,20 @@ function ProductRoute() {
                             <TextArea id="test9-2" name="test9-2" value="Example 1" onChange={() => { }} />
                         </div>
                         <div className="flex gap-4 mt-1">
-                            <label htmlFor="test10">Checkbox</label>
-                            <input id="test10" name="test10" type="checkbox" />
+                            <Fieldset className="mt-4">
+                                <legend>Checkbox</legend>
+                                <FormBlock>
+                                    <Input type="checkbox" label="Checkbox" id="markdown" name="markdown" defaultChecked={false} />
+                                    <Input type="checkbox" label="Save as draft" id="draft" name="draft" defaultChecked={true} />
+                                </FormBlock>
+                            </Fieldset>
+                            <Input id="test10" name="test10" type="checkbox" />
                             {/* disabled */}
-                            <input id="test101" name="test101" type="checkbox" disabled />
+                            <Input id="test101" name="test101" type="checkbox" disabled />
                             {/* checked */}
-                            <input id="test102" name="test102" type="checkbox" onChange={() => { }} checked />
+                            <Input id="test102" name="test102" type="checkbox" onChange={() => { }} checked />
                             {/* checked disabled */}
-                            <input id="test103" name="test103" type="checkbox" onChange={() => { }} checked disabled />
+                            <Input id="test103" name="test103" type="checkbox" onChange={() => { }} checked disabled />
                         </div>
                         <div className="mt-1 flex gap-4">
                             <label htmlFor="test11">Radio</label>
@@ -301,13 +321,17 @@ function ProductRoute() {
                         </div>
                     </div>
                     <hr style={{ margin: "4rem 0" }} />
-                    <div style={{ maxWidth: "50mvw" }}>
+                    <div style={{ maxWidth: "500px" }}>
                         <Card>
+                            <CardPadding>
+                                <CardImageCover src="hero/hero.jpg">
+                                    <img src="hero/hero.jpg" alt="" />
+                                </CardImageCover>
+                            </CardPadding>
                             <CardHeader>
                                 <CardTitle>Title</CardTitle>
                             </CardHeader>
                             <CardContent>
-                                <img src="hero/hero.jpg" alt="" />
                                 <CardDescription>
                                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio hic exercitationem quis, soluta ea ipsa minus eum quos aliquam, eos ipsum quasi animi, laudantium officia totam id similique ut dolore.
                                 </CardDescription>
@@ -319,14 +343,53 @@ function ProductRoute() {
                     </div>
                     <hr style={{ margin: "4rem 0" }} />
                     <div style={{ maxWidth: "50mvw" }}>
+                        <h3>Modals</h3>
                         <Dialog>
-                            <DialogTrigger>Show Modal</DialogTrigger>
+                            <DialogTrigger>Show Dialog</DialogTrigger>
                             <DialogContent>
                                 <DialogTitle>Title</DialogTitle>
                                 <DialogDescription>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo consequuntur vero temporibus illo corrupti, consectetur minus libero perspiciatis suscipit veritatis reiciendis sint deleniti vitae numquam voluptatem ad quas dolorem? Eligendi.</DialogDescription>
                                 <DialogCloseButton>Close</DialogCloseButton>
                             </DialogContent>
                         </Dialog>
+                    </div>
+                    <hr style={{ margin: "4rem 0" }} />
+                    <div className="p-8">
+                        <h3>Drawer</h3>
+                        <Drawer>
+                            <DrawerTrigger>
+                                Open Drawer
+                            </DrawerTrigger>
+                            <DrawerContent open={true} onClose={() => { }}>
+                                <Text style={{ padding: "2rem" }}>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda ratione quam quo amet sed facilis doloribus, incidunt maiores! Id amet modi expedita ad dolores? Non obcaecati suscipit deserunt ipsa sit.
+                                </Text>
+                                <div style={{ padding: "2rem" }}>
+                                    <DrawerCloseButton>Close</DrawerCloseButton>
+                                </div>
+                            </DrawerContent>
+                        </Drawer>
+                    </div>
+                    <hr style={{ margin: "4rem 0" }} />
+                    <div className="p-8">
+                        <h3>Dropdowns</h3>
+                        <Dropdown
+                            trigger="Select Option"
+                            items={[
+                                {
+                                    label: 'Edit',
+                                    onClick: () => console.log('Edit clicked'),
+                                },
+                                {
+                                    label: 'Duplicate',
+                                    onClick: () => console.log('Duplicate clicked'),
+                                },
+                                {
+                                    label: 'Delete',
+                                    onClick: () => console.log('Delete clicked'),
+                                },
+                            ]}
+                        />
                     </div>
                 </div>
             </Container>

@@ -21,7 +21,7 @@
     outline-color: hsl(var(--ring));
 
     will-change: color, background-color, border-color, text-decoration-color, box-shadow, fill, stroke;
-    transition-duration: 200ms;
+    transition-duration: 100ms;
     transition-timing-function: cubic-bezier(.4, 0, .2, 1);
 }
 
@@ -38,8 +38,8 @@ a.button {
 }
 
 .button:focus-visible {
-    outline-width: 2px;
-    outline-offset: -2px;
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
 }
 
 .button:disabled,
@@ -79,7 +79,7 @@ a.button {
     background-color: transparent;
     color: hsl(var(--foreground));
     fill: currentColor;
-    border-color: hsl(var(--foreground) / 0.8);
+    border-color: hsl(var(--foreground) / 0.4);
     text-underline-offset: 4px;
     text-decoration: none;
 }
@@ -113,6 +113,10 @@ a.button {
     color: hsl(var(--button-foreground));
     fill: currentColor;
     box-shadow: var(--tw-ring-shadow-0);
+}
+
+.ghost {
+    background-color: transparent;
 }
 
 .link {
@@ -183,7 +187,7 @@ a.button {
     object-fit: contain;
 }
 
-.full-width {
+.fullWidth {
     width: 100%
 }
 

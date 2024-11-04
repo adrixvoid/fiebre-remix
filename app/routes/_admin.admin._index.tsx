@@ -1,11 +1,12 @@
 import type { LoaderFunctionArgs } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/components/ui/card/Card";
+
+import { DashboardCard } from "~/components/dashboard/dashboard-card";
 import { Container } from "~/components/ui/container/Container";
 import { Grid } from "~/components/ui/grid/Grid";
 import { Section } from "~/components/ui/section/Section";
-import { formatCurrency, formatNumber } from "~/lib/price";
 
+import { formatCurrency, formatNumber } from "~/lib/price";
 
 async function getSalesData() {
   // const data = await prisma.order.aggregate({
@@ -76,26 +77,6 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
   ])
 
   return { salesData, userData, productData };
-}
-
-type DashboardCardProps = {
-  title: string
-  subtitle: string
-  body: string
-}
-
-export function DashboardCard({ title, subtitle, body }: DashboardCardProps) {
-  return (
-    <Card>
-      <CardHeader>
-        <CardTitle>{title}</CardTitle>
-        <CardDescription>{subtitle}</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <p>{body}</p>
-      </CardContent>
-    </Card>
-  );
 }
 
 export default function Admin() {
