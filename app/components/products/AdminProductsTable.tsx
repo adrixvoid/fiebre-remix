@@ -1,6 +1,6 @@
-import { Link, useLocation, useNavigation, useParams, useSubmit } from "@remix-run/react";
+import { useLocation, useNavigation, useParams, useSubmit } from "@remix-run/react";
 import { createColumnHelper } from '@tanstack/react-table';
-import { Trash2 } from "lucide-react";
+import { EllipsisVertical, Pencil, Trash2 } from "lucide-react";
 
 import { ROUTE_PATH_ADMIN } from "~/constants";
 import { t } from "~/i18n/translate";
@@ -10,6 +10,7 @@ import { Button } from "~/components/ui/button/Button";
 import AdminTable from "~/components/ui/table/AdminTable";
 import { TableCellAction, TableHeadAction } from "~/components/ui/table/Table";
 import { formatCurrency } from "~/lib/price";
+import { Dropdown, DropdownContent, DropdownTrigger } from "../ui/dropdown/Dropdown";
 
 const styles = {
     images: {
@@ -62,13 +63,27 @@ const columns = [
 
             return (
                 <TableCellAction>
-                    <Button asChild variant="outline">
-                        <Link to={editPath} state={location.state}>{t('EDIT')}</Link>
-                    </Button>
-                    <Button onClick={handleOnDelete} aria-label="delete" disabled={isDisabled} variant="destructive" color="danger">
-                        <Trash2 />
-                        <span className="sr-only">{t('DELETE')}</span>
-                    </Button>
+                    <Dropdown>
+                        <DropdownTrigger asChild>
+                            <Button variant="ghost" size="sm">
+                                <EllipsisVertical />
+                            </Button>
+                        </DropdownTrigger>
+                        <DropdownContent items={[
+                            {
+                                to: editPath,
+                                state: location.state,
+                                label: <><Pencil size={16} /> {t('EDIT')}</>,
+                                onClick: () => console.log('Edit clicked')
+                            },
+                            {
+                                divider: true,
+                                label: <><Trash2 size="16" /> {t('DELETE')}</>,
+                                onClick: () => console.log('Delete clicked'),
+                                variant: 'destructive'
+                            },
+                        ]} />
+                    </Dropdown>
                 </TableCellAction>
             )
         },

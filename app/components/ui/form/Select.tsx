@@ -16,9 +16,9 @@ export interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElemen
 export function Select({ label, labelProps, id, name, error, className, ...rest }: SelectProps) {
   return (
     <>
-      {label && <Label id={id} name={name} {...labelProps}>{label}</Label>}
+      {label && <Label id={id || name} name={name} {...labelProps}>{label}</Label>}
       <div className={styles["select-wrapper"]}>
-        <select id={id} name={name} className={clsx(styles.select, className)} {...rest} />
+        <select id={id || name} name={name} className={clsx(styles.select, className)} {...rest} />
         <ChevronDown className={styles.icon} />
       </div>
       <ErrorMessage name={name} error={error} />

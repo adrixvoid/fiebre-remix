@@ -5,18 +5,14 @@
     white-space: nowrap;
     flex-shrink: 0;
 
-    gap: 0.5cap;
-    padding-left: 1.4cap;
-    padding-right: 1.4cap;
-    padding-top: 0.2cap;
-    padding-bottom: 0.2cap;
-    min-height: 1.75cap;
+    gap: 0.5em;
+    padding-left: 1.4em;
+    padding-right: 1.4em;
+    line-height: 1.8;
 
     border-radius: var(--radius-md);
     border-style: solid;
     border-width: 1px;
-    font-size: .875rem;
-    line-height: 1.8;
     font-weight: 500;
     outline-color: hsl(var(--ring));
 
@@ -98,7 +94,7 @@ a.button {
 
 .dashed:focus,
 .dashed:focus-within {
-    box-shadow: var(--shadow-sm), var(--tw-ring-shadow-0);
+    /* box-shadow: var(--shadow-sm), var(--tw-ring-shadow-0); */
 }
 
 .ghost {
@@ -112,7 +108,7 @@ a.button {
 .ghost:focus-within {
     color: hsl(var(--button-foreground));
     fill: currentColor;
-    box-shadow: var(--tw-ring-shadow-0);
+    /* box-shadow: var(--tw-ring-shadow-0); */
 }
 
 .ghost {
@@ -165,11 +161,14 @@ a.button {
 .small {
     min-height: 32px;
     font-size: 0.85rem;
+    font-size: .875rem;
+    font-size: var(--text-sm);
 }
 
 .medium {
     min-height: 36px;
     font-size: var(--text-md);
+    line-height: 2;
 }
 
 .large {
@@ -183,8 +182,6 @@ a.button {
 
 .button svg {
     margin-left: -0.1cap;
-    width: 2cap;
-    object-fit: contain;
 }
 
 .fullWidth {

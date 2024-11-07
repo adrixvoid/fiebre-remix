@@ -20,6 +20,6 @@ export type Product = {
   published?: boolean;
   createdAt?: Date;
   updatedAt?: Date;
-  orders: string[];
-  downloadVerification: string[];
+  orders?: string[];
+  downloadVerification?: string[];
 };

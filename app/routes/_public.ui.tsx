@@ -1,5 +1,5 @@
 import { LinksFunction } from '@remix-run/node';
-import { Trash2, User } from 'lucide-react';
+import { EllipsisVertical, Pencil, Trash, Trash2, User } from 'lucide-react';
 
 import { Button } from "~/components/ui/button/Button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardImageCover, CardPadding, CardTitle } from "~/components/ui/card/Card";
@@ -7,7 +7,7 @@ import { Center } from '~/components/ui/center/Center';
 import { Container } from "~/components/ui/container/Container";
 import { Dialog, DialogCloseButton, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from '~/components/ui/dialog/Dialog';
 import { Drawer, DrawerCloseButton, DrawerContent, DrawerTrigger } from '~/components/ui/drawer/Drawer';
-import { Dropdown } from '~/components/ui/dropdown/Dropdown';
+import { Dropdown, DropdownContent, DropdownTrigger } from '~/components/ui/dropdown/Dropdown';
 import { Fieldset } from '~/components/ui/form/Fieldset';
 import { FormBlock } from '~/components/ui/form/FormBlock';
 import Input from "~/components/ui/form/Input";
@@ -238,15 +238,15 @@ function ProductRoute() {
 
                             <hr />
                             <Button aria-label="delete" size='sm' variant='destructive'>
-                                <Trash2 />
+                                <Trash />
                                 <span className="sr-only">Eliminar</span>
                             </Button>
                             <Button aria-label="delete" size='default' variant='destructive'>
-                                <Trash2 />
+                                <Trash />
                                 <span className="sr-only">Eliminar</span>
                             </Button>
                             <Button aria-label="delete" size='lg' variant='destructive'>
-                                <Trash2 />
+                                <Trash />
                                 <span className="sr-only">Eliminar</span>
                             </Button>
 
@@ -373,23 +373,41 @@ function ProductRoute() {
                     <hr style={{ margin: "4rem 0" }} />
                     <div className="p-8">
                         <h3>Dropdowns</h3>
-                        <Dropdown
-                            trigger="Select Option"
-                            items={[
+                        <Dropdown>
+                            <DropdownTrigger>
+                                Select Option
+                            </DropdownTrigger>
+                            <DropdownContent items={[
                                 {
-                                    label: 'Edit',
-                                    onClick: () => console.log('Edit clicked'),
+                                    label: <><Pencil size={16} /> Edit</>,
+                                    onClick: () => console.log('Edit clicked')
                                 },
                                 {
                                     label: 'Duplicate',
                                     onClick: () => console.log('Duplicate clicked'),
                                 },
                                 {
-                                    label: 'Delete',
+                                    divider: true,
+                                    label: <><Trash2 size={16} /> Delete</>,
                                     onClick: () => console.log('Delete clicked'),
+                                    variant: 'destructive'
                                 },
-                            ]}
-                        />
+                            ]} />
+                        </Dropdown>
+                        <div style={{ margin: "2rem 0" }}>
+                            <Dropdown>
+                                <DropdownTrigger asChild>
+                                    <Button variant="outline">
+                                        <EllipsisVertical />
+                                    </Button>
+                                </DropdownTrigger>
+                                <DropdownContent>
+                                    <Center style={{ width: "200px", height: "200px" }} variant="all">
+                                        Custom Content
+                                    </Center>
+                                </DropdownContent>
+                            </Dropdown>
+                        </div>
                     </div>
                 </div>
             </Container>

@@ -36,9 +36,9 @@ export default function AdminTable<TData>({ columns, data, caption, columnClassN
   const table = useReactTable({ columns, data, getCoreRowModel: getCoreRowModel(), defaultColumn })
 
   return (
-    <div className='rounded-md border'>
+    <div>
       <Table>
-        {caption && <TableCaption className='border-t p-1'>{caption}</TableCaption>}
+        {caption && <TableCaption>{caption}</TableCaption>}
         <TableHeader>
           {table.getHeaderGroups().map(headerGroup => (
             <TableRow key={headerGroup.id}>

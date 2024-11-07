@@ -26,6 +26,7 @@ export const ROUTE_PATH = {
   SHOP: '/shop',
   SHOP_DETAIL: '/shop/detail',
   SHOPPING_CART: '/shop/cart',
+  SHOPPING_PAYMENT: '/shop/payment',
   NOT_FOUND: '/404'
 };
 

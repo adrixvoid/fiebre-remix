@@ -33,7 +33,7 @@ export default function Admin() {
             <Link to="/admin" className="flex items-center gap-1">
               <Logo aria-hidden className="logo" />
               <span className="sr-only">{SITE_TITLE}</span>
-              <span className="ml-1">Admin</span>
+              <sup className="ml-1">Admin</sup>
             </Link>
             <Nav>
               <NavLink to={ROUTE_PATH_ADMIN.CATEGORY_LIST}>Categories</NavLink>

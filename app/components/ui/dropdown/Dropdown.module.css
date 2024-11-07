@@ -23,8 +23,8 @@
 } */
 
 .trigger:focus {
-  outline: 2px solid hsl(var(--ring));
-  outline-offset: 2px;
+  /* outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px; */
 }
 
 .content {
@@ -33,21 +33,28 @@
   left: 0;
   background-color: hsl(var(--background));
   border-color: hsl(var(--border-color));
-  border-radius: 4px;
+  border-radius: .5rem;
   box-shadow: 0 4px 6px -1px hsl(var(--shadow-color));
-  min-width: 100%;
+  min-width: clamp(10rem, 100%, 15rem);
   z-index: 1000;
   opacity: 0;
   transform: translateY(-8px);
   visibility: hidden;
   transition: all 0.2s ease;
+  padding: 0.5rem;
 }
 
+.contentOverflow {
+  left: unset;
+  right: 0;
+}
+
+/* 
 @media (prefers-color-scheme: dark) {
   .content {
     --shadow-color: 259, 100%, 5%;
   }
-}
+} */
 
 .content[data-open="true"] {
   opacity: 1;
@@ -55,21 +62,31 @@
   visibility: visible;
 }
 
-.item {
-  cursor: pointer;
+.items {
   display: flex;
-  align-items: center;
-  gap: 1rem;
-  text-decoration: none;
-  outline: none;
+  flex-direction: column;
+  gap: .5rem;
 }
 
+/* 
+.item {}
 .item:hover,
 .item:focus {
   background-color: hsl(var(--button-foreground) / .05);
-  /* background: #f8fafc; */
+} */
+
+.withHover:hover,
+.withHover[data-highlighted="true"] {
+  background-color: hsl(var(--button-foreground) / .05);
 }
 
-.item[data-highlighted="true"] {
-  background-color: hsl(var(--button-foreground) / .05);
+.button {
+  cursor: pointer;
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: left;
+  text-decoration: none;
+  outline: none;
 }

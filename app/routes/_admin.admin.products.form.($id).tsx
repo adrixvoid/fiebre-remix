@@ -48,16 +48,13 @@ export default function AdminProductForm() {
         >
           <Fieldset>
             <FormBlock>
-              <ValidateInput name="categoryId">
-                <CategorySelect defaultValue={category?._id} label="Category" placeholder="Select a category" />
-              </ValidateInput>
-            </FormBlock>
-          </Fieldset>
-          <hr />
-          <Fieldset>
-            <FormBlock>
               <ValidateInput name="title">
                 <Input type="text" label="Title" id="title" name="title" placeholder="Noche de Reyes" required defaultValue={product?.title} />
+              </ValidateInput>
+            </FormBlock>
+            <FormBlock>
+              <ValidateInput name="categoryId">
+                <CategorySelect defaultValue={category?._id} label="Category" placeholder="Select a category" />
               </ValidateInput>
             </FormBlock>
             <FormBlock>

@@ -18,7 +18,7 @@ export interface InputPriceProps extends InputBaseProps {
 export const priceAtom = atom<number | undefined>(undefined);
 
 const InputPrice = forwardRef<HTMLInputElement, InputPriceProps>(
-  ({ label, labelProps, id, name, error, className, onChange, ...rest }, ref) => {
+  ({ label, labelProps, id, name, error, className, onChange, defaultValue, ...rest }, ref) => {
     const [priceInCents, setPriceInCents] = useAtom(priceAtom);
 
     function handleOnChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -35,7 +35,7 @@ const InputPrice = forwardRef<HTMLInputElement, InputPriceProps>(
           name={name}
           id={id}
           {...rest}
-          value={priceInCents || Number(rest.defaultValue)}
+          value={priceInCents || Number(defaultValue)}
           onChange={handleOnChange}
         />
         <label htmlFor={name} className={stylesPrice.text}>{formatCurrency((priceInCents || Number(rest.defaultValue) || 0) / 100)}</label>
