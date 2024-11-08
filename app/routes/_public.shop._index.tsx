@@ -24,12 +24,12 @@ const Store = () => {
             <Container>
                 <ProductList>
                     {products.map((product) => (
-                        <Card as="article" key={product.title}>
+                        <Card as="article" key={product.name}>
                             <CardImageCover src={product.images?.[0]?.url}>
-                                <img src={product.images?.[0]?.url} alt={product.title} aria-hidden loading="lazy" />
+                                <img src={product.images?.[0]?.url} alt={product.name} aria-hidden loading="lazy" />
                             </CardImageCover>
                             <CardHeader>
-                                <CardTitle>{product.title}</CardTitle>
+                                <CardTitle>{product.name}</CardTitle>
                             </CardHeader>
                             <CardContent>
                                 <CardDescription>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo sint expedita modi doloremque at quisquam, dolore corporis ea. Laboriosam sint natus neque vel dolorem expedita repellendus, in iusto iste nostrum?</CardDescription>

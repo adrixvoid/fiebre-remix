@@ -49,7 +49,7 @@ type DrawerContextValue = DrawerProps & {
   close?(): void;
 };
 
-const DrawerContext = createContext<DrawerContextValue>({
+export const DrawerContext = createContext<DrawerContextValue>({
   toggleDrawer: () => { },
   close: () => { },
   blockDrawer: false
@@ -136,9 +136,10 @@ export const DrawerContent = ({ children, className }: DrawerProps) => {
  * -----------------------------------------------------------------------------------------------*/
 
 export type DrawerTriggerProps = PropsWithChildren<{
-  asChild?: boolean;
   open?: boolean;
-}>
+} & ({
+  asChild?: boolean;
+} | ButtonProps)>
 
 export const DrawerTrigger = ({ asChild, ...props }: DrawerTriggerProps) => {
   const { open, contentId, triggerRef, drawerRef, toggleDrawer } = useContext(DrawerContext);

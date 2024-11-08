@@ -1,89 +1,27 @@
 import clsx from "clsx";
-import { useAtom } from "jotai";
-import { Menu as MenuIcon, X } from "lucide-react";
 
-import { Button, ButtonProps } from "~/components/ui/button/Button";
-import { Drawer } from '~/components/ui/drawer/Drawer';
-import { Nav as NavBase, NavLink, type NavLinkProps, type NavProps } from "~/components/ui/nav/Nav";
+import { Drawer, DrawerCloseButton, DrawerContent } from '~/components/ui/drawer/Drawer';
+import { Nav as NavBase, type NavProps } from "~/components/ui/nav/Nav";
 
 import styles from "./MobileMenu.module.css";
-import { showModalAtom } from "./MobileMenu.state";
 
-interface MobileMenuProps {
-  children: React.ReactNode;
-  className?: string;
-}
-
-export function Menu({ children, className }: MobileMenuProps) {
-  const [showModal, setShowModal] = useAtom(showModalAtom);
-  return (
-    <div className={className}>
-      <Drawer open={showModal} onClose={() => setShowModal(false)}>
-        {children}
-      </Drawer>
-    </div>
-  );
-}
-
-type ButtonDrawerProps = ButtonProps & { onClick?: (event: React.MouseEvent) => void };
-export function ButtonClose({ onClick, className, ...props }: ButtonDrawerProps) {
-  const [showModal, setShowModal] = useAtom(showModalAtom);
-
-  const handleOnClick = (event: React.MouseEvent) => {
-    setShowModal(!showModal);
-    onClick?.(event);
-  }
-
-  return (
-    <Button className={clsx(styles.close, className)} variant="ghost" size="sm" onClick={handleOnClick} {...props}>
-      <X /><span className="sr-only">Menu</span>
-    </Button>
-  )
-}
-
-export function ButtonHamburger({ onClick, className, ...props }: ButtonDrawerProps) {
-  const [showModal, setShowModal] = useAtom(showModalAtom);
-  const handleOnClick = (event: React.MouseEvent) => {
-    setShowModal(!showModal);
-    onClick?.(event);
-  }
-  return (
-    <Button variant="ghost" className={clsx(styles.button, className)} onClick={handleOnClick} {...props}>
-      <MenuIcon /><span className="sr-only">Menu</span>
-    </Button>
-  )
-}
-
-export function Header(props: React.HTMLAttributes<HTMLDivElement>) {
+export function MobileHeader(props: React.HTMLAttributes<HTMLDivElement>) {
   return <header {...props} />
 }
 
-export function Nav({ className, ...props }: NavProps) {
+export function MobileNav({ className, ...props }: NavProps) {
   return <NavBase className={clsx(styles.nav, className)} {...props} />
 }
 
-export function Link({ onClick, ...props }: NavLinkProps & {
-  onClick: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void
-}) {
-  const [, setShowModal] = useAtom(showModalAtom);
-  const handleOnClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    onClick?.(event);
-    setShowModal(false)
-  }
-  return <NavLink onClick={handleOnClick} {...props} />
-}
-
-export function Padding({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+export function MobilePadding({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return <div className={clsx(styles.padding, className)} {...props} />
 }
 
 export default {
-  ButtonHamburger,
-  ButtonClose,
-  Header,
-  Link,
-  Nav,
-  Menu,
-  Padding
+  ButtonClose: DrawerCloseButton,
+  Header: MobileHeader,
+  Nav: MobileNav,
+  Padding: MobilePadding,
+  Menu: DrawerContent,
+  Provider: Drawer
 };
-

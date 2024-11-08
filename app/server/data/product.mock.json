@@ -13,7 +13,7 @@
     },
     "images": [],
     "tags": [""],
-    "published": false
+    "active": true
   },
   {
     "id": "2",
@@ -29,7 +29,7 @@
     },
     "images": [],
     "tags": [""],
-    "published": true
+    "active": true
   },
   {
     "id": "3",
@@ -71,7 +71,7 @@
       }
     ],
     "tags": ["gratis"],
-    "published": true
+    "active": true
   },
   {
     "id": "4",
@@ -119,7 +119,7 @@
       }
     ],
     "tags": ["plantillas", "instagram", "pink kit"],
-    "published": true
+    "active": true
   },
   {
     "id": "5",
@@ -173,7 +173,7 @@
       }
     ],
     "tags": ["plantillas", "vaporwave"],
-    "published": true
+    "active": true
   },
   {
     "id": "6",
@@ -227,6 +227,6 @@
       }
     ],
     "tags": [""],
-    "published": true
+    "active": true
   }
 ]

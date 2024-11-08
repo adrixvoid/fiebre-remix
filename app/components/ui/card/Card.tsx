@@ -6,13 +6,15 @@ import styles from "./Card.module.css";
 
 type CardProp = React.HTMLAttributes<HTMLDivElement> & {
   as?: 'article' | 'div',
-  shadow?: boolean
+  shadow?: boolean;
+  background?: boolean;
+  border?: boolean;
 }
 
 const Card = React.forwardRef<
   HTMLDivElement,
   CardProp
->(({ as = 'div', shadow, className, ...props }, ref) => {
+>(({ as = 'div', shadow, background, border, className, ...props }, ref) => {
   const Comp = as
   return (
     <Comp
@@ -21,7 +23,9 @@ const Card = React.forwardRef<
         styles.card,
         className,
         {
-          [styles.shadow]: shadow
+          [styles.shadow]: shadow,
+          [styles.background]: background,
+          [styles.border]: border,
         }
       )}
       {...props}

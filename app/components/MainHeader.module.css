@@ -16,6 +16,13 @@
   transition: filter 300ms;
 }
 
+@media (prefers-color-scheme: dark) {
+  .logo {
+    color: hsl(var(--foreground));
+    fill: hsl(var(--foreground));
+  }
+}
+
 .logo-link {
   display: inline-flex;
   align-items: center;
@@ -56,4 +63,10 @@
 
 .navigation a {
   color: hsl(var(--foreground));
+}
+
+.close {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
 }

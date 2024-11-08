@@ -21,7 +21,7 @@ function PortfolioPage() {
   return (
     <Section id="portfolio" marginBottom>
       <Container>
-        <Grid>
+        <Grid columns={4}>
           {documents.map((content) => (
             <article key={content.title}>
               <Card>

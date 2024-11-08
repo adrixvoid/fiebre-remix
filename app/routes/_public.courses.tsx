@@ -4,7 +4,7 @@ import { Send } from "lucide-react";
 import markdownService from "~/server/services/markdown.service";
 
 import Button from "~/components/ui/button/Button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "~/components/ui/card/Card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardPadding, CardTitle } from "~/components/ui/card/Card";
 import { Center } from "~/components/ui/center/Center";
 import { Container } from "~/components/ui/container/Container";
 import { Flex } from "~/components/ui/flex/Flex";
@@ -42,8 +42,12 @@ export default function CoursesPage() {
                             </Center>
                         </CardHeader>
                         <CardContent>
+                            <CardPadding>
+                                <Center variant="text">
+                                    <CardTitle>Diseño gráfico para e-commerce</CardTitle>
+                                </Center>
+                            </CardPadding>
                             <Center variant="text">
-                                <CardTitle>Diseño gráfico para e-commerce</CardTitle>
                                 <CardDescription>En este curso vas a aprender a diseñar tu página web y tus redes sociales a través de los fundamos del diseño gráfico.</CardDescription>
                             </Center>
                             <hr />
@@ -73,8 +77,12 @@ export default function CoursesPage() {
                             </Center>
                         </CardHeader>
                         <CardContent>
+                            <CardPadding>
+                                <Center variant="text">
+                                    <CardTitle>Diseño gráfico para e-commerce</CardTitle>
+                                </Center>
+                            </CardPadding>
                             <Center variant="text">
-                                <CardTitle>Diseño gráfico para e-commerce</CardTitle>
                                 <CardDescription>En este curso vas a aprender a diseñar tu página web y tus redes sociales a través de los fundamos del diseño gráfico.</CardDescription>
                             </Center>
                             <hr />

@@ -28,8 +28,8 @@
   --text-sm: .875rem;
   --text-md: 1rem;
   --text-lg: 1.125rem;
-  --text-xl: 1.25rem;
-  --text-2xl: 1.5rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 1.8rem;
 
   --font-family: Inter, "Montserrat", Avenir, Helvetica, Arial, sans-serif;
 
@@ -81,8 +81,9 @@
 
     --fieldset-bg: var(--medium-contrast);
 
-    --shadow-color: hsl(264, 100%, 24%);
-    --shadow-color: 264.11 100% 24%;
+    /* --shadow-color: hsl(264, 100%, 24%); */
+    /* --shadow-color: 264.11 100% 24%; */
+    --shadow-color: 264.11 100% 13.86%;
   }
 }
 
@@ -101,6 +102,8 @@ html {
 }
 
 body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
   line-height: 1.6;
   font-family: var(--font-family);
   overflow-x: auto;

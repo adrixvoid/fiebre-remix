@@ -106,7 +106,7 @@ export default function Index() {
         </Grid>
       </Container>
       <Container style={{ marginTop: "2.5rem" }}>
-        <Grid columns="two">
+        <Grid columns={2}>
           <Skeleton width="100%" height={535} />
           <CardContent>
             <CardTitle>Curso de diseño gráfico para  emprendedoras</CardTitle>
@@ -142,17 +142,17 @@ export default function Index() {
         </Center>
       </Container>
       <Container style={{ marginTop: "2.5rem" }}>
-        <Grid>
+        <Grid columns={4}>
           {products && products.map(product => {
             return (
-              <Card as="article" key={product.title} shadow>
+              <Card as="article" key={product.name} border>
                 <CardPadding>
                   <CardImageCover src={product.images?.[0].url}>
-                    <img src={product.images?.[0].url} alt={product.title} aria-hidden />
+                    <img src={product.images?.[0].url} alt={product.name} aria-hidden />
                   </CardImageCover>
                 </CardPadding>
                 <CardHeader>
-                  <CardTitle>{product.title}</CardTitle>
+                  <CardTitle>{product.name}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <CardDescription>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nostrum ipsa assumenda fugit, magni perspiciatis aliquam, qui reprehenderit ullam at nam nobis consequatur! Eum earum dolor assumenda! Illo suscipit ea sequi.</CardDescription>

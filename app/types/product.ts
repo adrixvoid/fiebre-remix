@@ -2,7 +2,7 @@ import {MapFile, MapImage} from './file';
 
 export type Product = {
   _id: string;
-  title: string;
+  name: string;
   description?: string;
   slug: string;
   preview?: MapImage;
@@ -16,8 +16,7 @@ export type Product = {
   file?: MapFile;
   categories?: string[];
   tags?: string[];
-  isAvailableForPurchase: boolean;
-  published?: boolean;
+  active: boolean;
   createdAt?: Date;
   updatedAt?: Date;
   orders?: string[];

@@ -10,7 +10,7 @@ export type ProductDocument = Product & {
 
 export const schema = new Schema<Product>(
   {
-    title: {type: String, required: true},
+    name: {type: String, required: true},
     description: String,
     slug: {type: String, required: true},
     preview: Object,
@@ -28,8 +28,7 @@ export const schema = new Schema<Product>(
     file: String,
     categories: [{type: mongoose.Schema.Types.ObjectId, ref: 'Category'}],
     tags: {type: [String], default: []},
-    isAvailableForPurchase: {type: Boolean, default: true},
-    published: {type: Boolean, default: false},
+    active: {type: Boolean, default: true},
     createdAt: {type: Date, default: Date.now},
     updatedAt: {type: Date, default: Date.now}
   },
@@ -50,7 +49,7 @@ schema.pre('save', {document: true}, async function (next) {
   this.updatedAt = new Date();
 
   if (this.isNew) {
-    this.slug = slugify(this.slug || this.title);
+    this.slug = slugify(this.slug || this.name);
   }
 
   next();

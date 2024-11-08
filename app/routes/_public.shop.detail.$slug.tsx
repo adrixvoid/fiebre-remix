@@ -77,7 +77,7 @@ export async function action({ request }: ActionFunctionArgs) {
 function ProductPage() {
     const fetcher = useFetcher({ key: "add-to-bag" });
     const { product, gallery } = useLoaderData<typeof loader>() as { product: Product, gallery: MapImage[] };
-    const { title, description, priceInCents, tags, images, priceHidden } = product;
+    const { name, description, priceInCents, tags, images, priceHidden } = product;
 
     return (
         <Section id="product-detail" marginBottom>
@@ -89,7 +89,7 @@ function ProductPage() {
                         <ProductGallery images={gallery} />
                     </div>
                     <div>
-                        <ProductTitle title={title} />
+                        <ProductTitle title={name} />
                         {!priceHidden && <ProductPrice priceInCents={priceInCents} />}
                         {!priceHidden && priceInCents > 0 &&
                             <div className="payment-options">

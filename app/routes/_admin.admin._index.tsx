@@ -49,10 +49,10 @@ async function getUserData() {
 async function getProductData() {
   // const [activeCount, inactiveCount] = await Promise.all([
   //   prisma.product.count({
-  //     where: { isAvailableForPurchase: true }
+  //     where: { active: true }
   //   }),
   //   prisma.product.count({
-  //     where: { isAvailableForPurchase: false }
+  //     where: { active: false }
   //   })
   // ])
 

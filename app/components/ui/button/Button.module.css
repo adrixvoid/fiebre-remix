@@ -6,8 +6,8 @@
     flex-shrink: 0;
 
     gap: 0.5em;
-    padding-left: 1.4em;
-    padding-right: 1.4em;
+    padding-left: .5rem;
+    padding-right: .5rem;
     line-height: 1.8;
 
     border-radius: var(--radius-md);

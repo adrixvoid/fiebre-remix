@@ -11,61 +11,72 @@ import { showModalAtom } from "~/components/ui/mobile-menu/MobileMenu.state";
 import { Nav, NavLink } from "~/components/ui/nav/Nav";
 import { Viewport } from "~/components/ui/viewport/Viewport";
 
+import { MenuIcon, X } from "lucide-react";
+import { navigationLinks } from "~/constants";
 import useStickyHeader from "~/hooks/useStickyHeader";
 import styles from './MainHeader.module.css';
+import { Drawer, DrawerCloseButton, DrawerContent, DrawerTrigger } from "./ui/drawer/Drawer";
 
 function MainHeader() {
   const [, setShowModal] = useAtom(showModalAtom);
   const { headerRef, isSticky } = useStickyHeader()
 
   return (
-    <>
+    <Drawer>
       <div className={styles.spacer} />
       <Header ref={headerRef} className={clsx(styles.header, { [styles.sticky]: isSticky })} position="fixed" style={{ zIndex: 1 }}>
         <Container>
-          <Viewport variant='mobile'>
-            <Flex style={{ gap: '1rem' }} justify="between" align="center">
-              <Link to="/" className="logo-link" title="Home Page">
-                <Logo aria-hidden className={styles.logo} />
-              </Link>
-              <MobileMenu.ButtonHamburger />
-            </Flex>
-            <MobileMenu.Menu>
-              <MobileMenu.Header>
-                <MobileMenu.ButtonClose />
-                <MobileMenu.Padding>
-                  <Link to="/" className="logo-link" title="Home Page">
-                    <span className="sr-only">Go to home-page</span>
-                    <Logo aria-hidden className={styles.logo} />
-                  </Link>
-                </MobileMenu.Padding>
-              </MobileMenu.Header>
-              <MobileMenu.Nav>
-                <MobileMenu.Link onClick={() => setShowModal(false)} to="/blog">Blog</MobileMenu.Link>
-                <MobileMenu.Link onClick={() => setShowModal(false)} to="/portfolio">Proyectos</MobileMenu.Link>
-                <MobileMenu.Link onClick={() => setShowModal(false)} to="/courses">Cursos</MobileMenu.Link>
-                <MobileMenu.Link onClick={() => setShowModal(false)} to="/shop">Shop</MobileMenu.Link>
-                <MobileMenu.Link onClick={() => setShowModal(false)} to="/about">Sobre mi</MobileMenu.Link>
-              </MobileMenu.Nav>
-            </MobileMenu.Menu>
-          </Viewport>
           <Viewport variant='mobile-hidden'>
             <Flex justify="between" align="center">
               <Link to="/" className="logo-link" title="Home Page">
+                <span className="sr-only">Go to home-page</span>
                 <Logo aria-hidden className={styles.logo} />
               </Link>
               <Nav className={styles.navigation}>
-                <NavLink to="/blog">Blog</NavLink>
-                <NavLink to="/portfolio">Proyectos</NavLink>
-                <NavLink to="/courses">Cursos</NavLink>
-                <NavLink to="/shop">Shop</NavLink>
-                <NavLink to="/about">Sobre mi</NavLink>
+                {
+                  navigationLinks.map(({ label, href }) => (
+                    <NavLink key={label} to={href}>{label}</NavLink>
+                  ))
+                }
               </Nav>
+            </Flex>
+          </Viewport>
+          <Viewport variant='mobile'>
+            <Flex style={{ gap: '1rem' }} justify="between" align="center">
+              <Link to="/" className="logo-link" title="Home Page">
+                <span className="sr-only">Go to home-page</span>
+                <Logo aria-hidden className={styles.logo} />
+              </Link>
+              <DrawerTrigger variant="ghost" size='sm'>
+                <MenuIcon /><span className="sr-only">Menu</span>
+              </DrawerTrigger>
             </Flex>
           </Viewport>
         </Container>
       </Header>
-    </>
+      <DrawerContent>
+        <header>
+          <DrawerCloseButton className={styles.close} variant="ghost" size="sm">
+            <X /><span className="sr-only">Menu</span>
+          </DrawerCloseButton>
+          <MobileMenu.Padding>
+            <Link to="/" className="logo-link" title="Home Page">
+              <span className="sr-only">Go to home-page</span>
+              <Logo aria-hidden className={styles.logo} />
+            </Link>
+          </MobileMenu.Padding>
+        </header>
+        <MobileMenu.Nav>
+          {
+            navigationLinks.map(({ label, href }) => (
+              <DrawerCloseButton asChild key={label} size='sm'>
+                <NavLink to={href}>{label}</NavLink>
+              </DrawerCloseButton>
+            ))
+          }
+        </MobileMenu.Nav>
+      </DrawerContent>
+    </Drawer>
   )
 }
 

@@ -23,8 +23,8 @@ const columns = [
         header: () => <span>{t('IMAGE')}</span>,
         cell: (props) => <img src={props.row.original.images?.[0]?.url} style={{ maxWidth: 75 }} />
     }),
-    columnHelper.accessor('title', {
-        id: 'title',
+    columnHelper.accessor('name', {
+        id: 'name',
         header: () => <span>{t('PRODUCT.PRODUCT')}</span>,
         cell: props => props.getValue()
     }),
@@ -41,7 +41,7 @@ const columns = [
 
             const slug = props.row.original.slug as string;
             const id = props.row.original._id?.toString() || "";
-            const name = props.row.original.title as string;
+            const name = props.row.original.name as string;
 
             const editPath = `${ROUTE_PATH.SHOPPING_PAYMENT}/${id}?referrer=${location.pathname}`;
             const deletePath = `${ROUTE_PATH.SHOPPING_PAYMENT}/${id}?referrer=${location.pathname}`;
@@ -81,7 +81,7 @@ export const loader = async () => {
     const dataJSON: Product[] = [
         {
             "_id": "66810804670c15f1cc7449eb",
-            "title": "The insta pink kit (plantillas insta)",
+            "name": "The insta pink kit (plantillas insta)",
             "description": "Estas plantillas son ideales para vos si sos emprendedora y ofreces un\r\nservicio intangible ya que los diseños están pensados para que puedas\r\ncompartir información directamente desde tu conocimiento a través de\r\nfrases y textos, y en menor medida imágenes o fotos. \r\n\r\n\r\nSi ofreces productos, te recomiendo estas plantillas: Vaporwave\r\n\r\n\r\n\r\n\r\n\r\nQUÉ INCLUYE PINK KIT\r\n\r\n💖 15 posts de instagram editables en Canva\r\n💖 15 stories de instagram editables en Canva\r\n💖 Todos los recursos gráficos (fondos, imágenes, iconos)\r\n💖 Mini guía de diseño\r\n\r\n\r\nQUÉ VAS A PODER HACER CON ESTAS PLANTILLAS\r\n✨ Inspirar a tu audiencia con frases inspiracionales\r\n✨ Dar comunicados importantes sobre lo que ofreces\r\n✨ Resolver tus posts en dos minutos eligiendo la plantillas\r\n✨ Crear diseños nuevos conservando siempre la misma línea estética\r\n\r\n\r\nCÓMO SE USA\r\n\r\n👉 Una vez realizada la compra automáticamente vas a poder descargar\r\nun archivo PDF interactivo\r\n👉 Clickeá en los botones del PDF para ir a las plantillas editables\r\n👉 Divertite creando!\r\n\r\n\r\n\r\n\r\n\r\nSi tenés alguna pregunta no dudes en consultarme por instagram a @fiebrediseno\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nGracias! 🌴",
             "slug": "the-insta-pink-kit-(plantillas-insta)",
             "images": [
@@ -142,15 +142,14 @@ export const loader = async () => {
             "file": undefined,
             "categories": [],
             "tags": ["kit"],
-            "isAvailableForPurchase": true,
-            "published": false,
+            "active": true,
             "createdAt": new Date("2024-06-30T07:23:48.913Z"),
             "updatedAt": new Date("2024-10-31T00:20:17.902Z"),
             "stock": 0
         },
         {
             "_id": "668109d6670c15f1cc7449ef",
-            "title": "Vaporwave instagram templates",
+            "name": "Vaporwave instagram templates",
             "description": "If you want to call attention of your followers this trendy style is for you! There're a lot of resources of vaporwave aesthetic like the windows 95 UI or the dolphins and palm trees in combination with a nostalgic and vibrant color palette.\r\n\r\nThe most important thing is the social media strategy that you can create from promotion to engagement by editing the texts however you want. You can also use all the graphic resources and the design guide to create your own stylish designs!\r\n\r\n\r\n\r\nWHAT YOU'LL GET\r\n\r\n💖 Link to 20 posts editable on canva\r\n\r\n💖 Link to 20 stories editable on canva\r\n\r\n💖 Link to graphic elements and design manual (canva)\r\n\r\n💖 Backgrounds, images and icons in png format\r\n\r\n\r\n\r\n\r\nWHAT YOU CAN DO WITH THESE TEMPLATES\r\n\r\n✨ Promotion your brand\r\n\r\n✨ Interact with your followers\r\n\r\n✨ Engage your target audiences\r\n\r\n\r\n\r\n\r\nHOW TO USE IT\r\n\r\n👉 Download the PDF file\r\n\r\n👉 Click over the buttons to go to canva templates\r\n\r\n👉 Download png images in your cellphone to use it in your stories\r\n\r\n👉 Enjoy!\r\n\r\n\r\n\r\n\r\nIf you have any questions regarding my products, please do not hesitate to write me anytime on instagram @fiebrediseno\r\n\r\n",
             "slug": "vaporwave-instagram-templates",
             "images": [
@@ -211,8 +210,7 @@ export const loader = async () => {
             "file": undefined,
             "categories": [],
             "tags": ["templates"],
-            "isAvailableForPurchase": true,
-            "published": false,
+            "active": true,
             "createdAt": new Date("2024-06-30T07:31:34.418Z"),
             "updatedAt": new Date("2024-06-30T07:31:34.418Z")
         }];

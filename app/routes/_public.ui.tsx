@@ -8,6 +8,7 @@ import { Container } from "~/components/ui/container/Container";
 import { Dialog, DialogCloseButton, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from '~/components/ui/dialog/Dialog';
 import { Drawer, DrawerCloseButton, DrawerContent, DrawerTrigger } from '~/components/ui/drawer/Drawer';
 import { Dropdown, DropdownContent, DropdownTrigger } from '~/components/ui/dropdown/Dropdown';
+import { Flex } from '~/components/ui/flex/Flex';
 import { Fieldset } from '~/components/ui/form/Fieldset';
 import { FormBlock } from '~/components/ui/form/FormBlock';
 import Input from "~/components/ui/form/Input";
@@ -321,7 +322,8 @@ function ProductRoute() {
                         </div>
                     </div>
                     <hr style={{ margin: "4rem 0" }} />
-                    <div style={{ maxWidth: "500px" }}>
+                    <h1>Cards</h1>
+                    <Flex>
                         <Card>
                             <CardPadding>
                                 <CardImageCover src="hero/hero.jpg">
@@ -329,7 +331,7 @@ function ProductRoute() {
                                 </CardImageCover>
                             </CardPadding>
                             <CardHeader>
-                                <CardTitle>Title</CardTitle>
+                                <CardTitle>Default</CardTitle>
                             </CardHeader>
                             <CardContent>
                                 <CardDescription>
@@ -340,7 +342,61 @@ function ProductRoute() {
                                 Foooter
                             </CardFooter>
                         </Card>
-                    </div>
+                        <Card border>
+                            <CardPadding>
+                                <CardImageCover src="hero/hero.jpg">
+                                    <img src="hero/hero.jpg" alt="" />
+                                </CardImageCover>
+                            </CardPadding>
+                            <CardHeader>
+                                <CardTitle>Border</CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                                <CardDescription>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio hic exercitationem quis, soluta ea ipsa minus eum quos aliquam, eos ipsum quasi animi, laudantium officia totam id similique ut dolore.
+                                </CardDescription>
+                            </CardContent>
+                            <CardFooter>
+                                Foooter
+                            </CardFooter>
+                        </Card>
+                        <Card background>
+                            <CardPadding>
+                                <CardImageCover src="hero/hero.jpg">
+                                    <img src="hero/hero.jpg" alt="" />
+                                </CardImageCover>
+                            </CardPadding>
+                            <CardHeader>
+                                <CardTitle>Background</CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                                <CardDescription>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio hic exercitationem quis, soluta ea ipsa minus eum quos aliquam, eos ipsum quasi animi, laudantium officia totam id similique ut dolore.
+                                </CardDescription>
+                            </CardContent>
+                            <CardFooter>
+                                Foooter
+                            </CardFooter>
+                        </Card>
+                        <Card shadow>
+                            <CardPadding>
+                                <CardImageCover src="hero/hero.jpg">
+                                    <img src="hero/hero.jpg" alt="" />
+                                </CardImageCover>
+                            </CardPadding>
+                            <CardHeader>
+                                <CardTitle>Shadow</CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                                <CardDescription>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio hic exercitationem quis, soluta ea ipsa minus eum quos aliquam, eos ipsum quasi animi, laudantium officia totam id similique ut dolore.
+                                </CardDescription>
+                            </CardContent>
+                            <CardFooter>
+                                Foooter
+                            </CardFooter>
+                        </Card>
+                    </Flex>
                     <hr style={{ margin: "4rem 0" }} />
                     <div style={{ maxWidth: "50mvw" }}>
                         <h3>Modals</h3>

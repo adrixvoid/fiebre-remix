@@ -9,7 +9,7 @@ export interface Category {
   path: string;
   parentId?: string;
   subcategories: Category[];
-  published?: boolean;
+  active?: boolean;
   createdAt?: Date;
   updatedAt?: Date;
 }

@@ -1,6 +1,26 @@
 .grid {
   display: grid;
-  gap: 1.5rem;
+  gap: 1rem;
+}
+
+@media screen and (min-width: 480px) {
+  .three {
+    grid-template-columns: 1fr;
+  }
+
+  .four {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (min-width: 760px) {
+  .three {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .four {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }
 
 @media screen and (min-width: 960px) {
@@ -10,6 +30,10 @@
 
   .three {
     grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .four {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 
   .masonry {

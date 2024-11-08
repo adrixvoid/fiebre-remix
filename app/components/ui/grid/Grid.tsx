@@ -6,13 +6,14 @@ const cvaVariants = cva(
   styles.grid, {
   variants: {
     columns: {
-      default: styles.three,
-      two: styles.two,
+      3: styles.three,
+      2: styles.two,
+      4: styles.four,
       masonry: [styles.masonry]
     }
   },
   defaultVariants: {
-    columns: "default",
+    columns: 3,
   },
 })
 

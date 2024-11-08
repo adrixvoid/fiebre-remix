@@ -42,10 +42,13 @@ export const ROUTE_PATH_ADMIN = {
 
 /** Main menu items */
 export const navigationLinks: {label: string; href: string}[] = [
-  {label: 'Servicios', href: '/#services'},
-  {label: 'Sobre mi', href: '/#about'},
-  {label: 'Recursos', href: '/#resources'},
-  {label: 'Portfolio', href: '/portfolio'}
+  {label: 'Sobre mi', href: '/about'},
+  {label: 'Proyectos', href: '/portfolio'},
+  {label: 'Shop', href: '/shop'},
+  {label: 'Blog', href: '/blog'},
+  {label: 'Courses', href: '/courses'}
+  // {label: 'Servicios', href: '/#services'},
+  // {label: 'Recursos', href: '/resources'},
 ];
 
 /** Icon links to social media — edit these with links to your profiles! */

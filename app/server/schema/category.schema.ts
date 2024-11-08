@@ -20,7 +20,7 @@ export const schema = new mongoose.Schema<CategoryDocument>(
       default: null
     },
     subcategories: [{type: mongoose.Schema.Types.ObjectId, ref: 'Category'}],
-    published: {type: Boolean, default: false},
+    active: {type: Boolean, default: true},
     createdAt: {type: Date, default: Date.now},
     updatedAt: {type: Date, default: Date.now}
   },

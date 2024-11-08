@@ -28,8 +28,8 @@ const columns = [
     header: () => <span>{t('IMAGE')}</span>,
     cell: (props) => <img src={props.row.original.images?.[0].url} className="admin-banner-preview rounded-md" />
   }),
-  columnHelper.accessor('title', {
-    id: 'title',
+  columnHelper.accessor('name', {
+    id: 'name',
     header: () => <span>{t('PRODUCT.PRODUCT')}</span>,
     cell: props => props.getValue()
   }),
@@ -39,7 +39,7 @@ const columns = [
     cell: (props) => {
       const slug = props.row.original.slug as string;
       const id = props.row.original._id?.toString() || "";
-      const name = props.row.original.title as string;
+      const name = props.row.original.name as string;
 
       const editPath = `${ROUTE_PATH_ADMIN.PRODUCT_FORM}/${id}`;
       const deletePath = `${ROUTE_PATH_ADMIN.PRODUCT_LIST}/${id}`;

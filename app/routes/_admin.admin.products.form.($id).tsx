@@ -49,7 +49,7 @@ export default function AdminProductForm() {
           <Fieldset>
             <FormBlock>
               <ValidateInput name="title">
-                <Input type="text" label="Title" id="title" name="title" placeholder="Noche de Reyes" required defaultValue={product?.title} />
+                <Input type="text" label="Title" id="title" name="title" placeholder="Noche de Reyes" required defaultValue={product?.name} />
               </ValidateInput>
             </FormBlock>
             <FormBlock>
@@ -78,7 +78,7 @@ export default function AdminProductForm() {
             <FormBlock>
               <legend>{t('PRODUCT.PRICE')}</legend>
               <ValidateInput name="priceHidden">
-                <Input type="checkbox" id="priceHidden" name="priceHidden" label="Don't show" labelProps={{ className: "flex items-center mb-1" }} defaultChecked={false} onChange={() => setPriceHidden(!isPriceHidden)} defaultValue={product?.title} />
+                <Input type="checkbox" id="priceHidden" name="priceHidden" label="Don't show" labelProps={{ className: "flex items-center mb-1" }} defaultChecked={false} onChange={() => setPriceHidden(!isPriceHidden)} defaultValue={product?.name} />
               </ValidateInput>
             </FormBlock>
 

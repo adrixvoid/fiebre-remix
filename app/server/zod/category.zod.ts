@@ -1,5 +1,5 @@
-import {z} from 'zod';
 import {withZod} from '@remix-validated-form/with-zod';
+import {z} from 'zod';
 import {zfd} from 'zod-form-data';
 
 const MAX_FILE_SIZE = 1024 * 1024 * 5;
@@ -21,7 +21,7 @@ export const validation = z.object({
   name: z.string().min(1),
   image: imageSchema.optional(),
   parentId: z.string().optional(),
-  published: zfd.checkbox(),
+  active: zfd.checkbox(),
   categoryId: z.string().optional(),
   referrer: z.string().optional()
 });
