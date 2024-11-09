@@ -165,7 +165,7 @@ function ProductRoute() {
                             marginTop: 20,
                             flexWrap: "wrap"
                         }}>
-                            <Button variant="default">Default</Button>
+                            <Button>Default</Button>
                             <Button variant="primary">Primary</Button>
                             <Button variant="outline">Outline</Button>
                             <Button variant="dashed">Dashed</Button>
@@ -183,7 +183,7 @@ function ProductRoute() {
                             flexWrap: "wrap"
                         }}>
                             <Button disabled>Button</Button>
-                            <Button disabled variant="default">Default</Button>
+                            <Button disabled>Default</Button>
                             <Button disabled variant="primary">Primary</Button>
                             <Button disabled variant="outline">Outline</Button>
                             <Button disabled variant="dashed">Dashed</Button>
@@ -223,10 +223,10 @@ function ProductRoute() {
                             <Button aria-label="delete" size='sm'>
                                 <User />
                             </Button>
-                            <Button aria-label="delete" size='default'>
+                            <Button aria-label="delete">
                                 User
                             </Button>
-                            <Button aria-label="delete" size='default'>
+                            <Button aria-label="delete">
                                 <User />
                                 User
                             </Button>
@@ -243,7 +243,7 @@ function ProductRoute() {
                                 <Trash />
                                 <span className="sr-only">Eliminar</span>
                             </Button>
-                            <Button aria-label="delete" size='default' variant='destructive'>
+                            <Button aria-label="delete" variant='destructive'>
                                 <Trash />
                                 <span className="sr-only">Eliminar</span>
                             </Button>
@@ -252,14 +252,14 @@ function ProductRoute() {
                                 <span className="sr-only">Eliminar</span>
                             </Button>
 
-                            <Button variant="default"><Trash2 /> Default</Button>
+                            <Button><Trash2 /> Default</Button>
                             <Button variant="primary"><Trash2 /> Primary</Button>
                             <Button variant="outline"><Trash2 /> Outline</Button>
                             <Button variant="dashed"><Trash2 /> Dashed</Button>
                             <Button variant="destructive"><Trash2 /> Destructive</Button>
                             <Button variant="ghost"><Trash2 /> Ghost</Button>
                             <Button variant="link"><Trash2 /> Link</Button>
-                            <Button variant="default"><Trash2 /></Button>
+                            <Button><Trash2 /></Button>
                             <Button variant="primary"><Trash2 /></Button>
                             <Button variant="outline"><Trash2 /></Button>
                             <Button variant="dashed"><Trash2 /></Button>
@@ -401,18 +401,28 @@ function ProductRoute() {
                     </Flex>
                     <hr style={{ margin: "4rem 0" }} />
                     <div style={{ maxWidth: "50mvw" }}>
-                        <h3>Modals</h3>
-                        <Dialog>
-                            <DialogTrigger>Show Dialog</DialogTrigger>
-                            <DialogContent>
-                                <DialogTitle>Title</DialogTitle>
-                                <DialogDescription>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo consequuntur vero temporibus illo corrupti, consectetur minus libero perspiciatis suscipit veritatis reiciendis sint deleniti vitae numquam voluptatem ad quas dolorem? Eligendi.</DialogDescription>
-                                <DialogCloseButton>Close</DialogCloseButton>
-                            </DialogContent>
-                        </Dialog>
+                        <h3>Dialog</h3>
+                        <Flex gap='2rem'>
+                            <Dialog>
+                                <DialogTrigger>Dialog</DialogTrigger>
+                                <DialogContent>
+                                    <DialogTitle>Title</DialogTitle>
+                                    <DialogDescription>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo consequuntur vero temporibus illo corrupti, consectetur minus libero perspiciatis suscipit veritatis reiciendis sint deleniti vitae numquam voluptatem ad quas dolorem? Eligendi.</DialogDescription>
+                                    <DialogCloseButton>Close</DialogCloseButton>
+                                </DialogContent>
+                            </Dialog>
+                            <Dialog blockDialog>
+                                <DialogTrigger>Dialog blocking window</DialogTrigger>
+                                <DialogContent>
+                                    <DialogTitle>Title</DialogTitle>
+                                    <DialogDescription>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo consequuntur vero temporibus illo corrupti, consectetur minus libero perspiciatis suscipit veritatis reiciendis sint deleniti vitae numquam voluptatem ad quas dolorem? Eligendi.</DialogDescription>
+                                    <DialogCloseButton>Close</DialogCloseButton>
+                                </DialogContent>
+                            </Dialog>
+                        </Flex>
                     </div>
                     <hr style={{ margin: "4rem 0" }} />
-                    <div className="p-8">
+                    <div>
                         <h3>Drawer</h3>
                         <Drawer>
                             <DrawerTrigger>
@@ -429,7 +439,7 @@ function ProductRoute() {
                         </Drawer>
                     </div>
                     <hr style={{ margin: "4rem 0" }} />
-                    <div className="p-8">
+                    <div>
                         <h3>Dropdowns</h3>
                         <Dropdown>
                             <DropdownTrigger>
@@ -460,13 +470,16 @@ function ProductRoute() {
                                     </Button>
                                 </DropdownTrigger>
                                 <DropdownContent>
-                                    <Center style={{ width: "200px", height: "200px" }} variant="all">
-                                        Custom Content
-                                    </Center>
+                                    <div style={{ padding: 20 }}>
+                                        <Title size='xl'>Custom Content</Title>
+                                        <a href="http://www.google.com">External Link</a>
+                                        <Text>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi repudiandae consequatur nostrum omnis fugit aspernatur placeat consequuntur, adipisci delectus ullam dolores quos rem sunt voluptate minus quidem enim facere architecto!</Text>
+                                    </div>
                                 </DropdownContent>
                             </Dropdown>
                         </div>
                         <div style={{ margin: "2rem 0" }}>
+                            <h3>Toggle</h3>
                             <Toggle
                                 label="Notifications"
                                 onChange={(checked) => console.log(checked)}

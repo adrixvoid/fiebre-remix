@@ -53,7 +53,6 @@ type DialogContextValue = DialogProps & {
   contentId?: string;
   titleId?: string;
   descriptionId?: string;
-  dialogClassName?: string;
   toggleDialog?(): void;
   close?(): void;
 };
@@ -64,26 +63,40 @@ const DialogContext = createContext<DialogContextValue>({
   blockDialog: false
 });
 
-export const Dialog = ({ onStateChange = () => { }, blockDialog, onClose, children, className, ...props }: DialogProps) => {
+export const Dialog = ({ onStateChange = () => { }, blockDialog, onClose, children, ...props }: DialogProps) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const { hideScroll, showScroll } = useOverflow({ ref: dialogRef as React.RefObject<HTMLDialogElement> });
+
+  const handleKeyDown = (event: KeyboardEvent) => {
+    if (!dialogRef.current?.open) return;
+
+    switch (event.key) {
+      case 'Escape':
+        event.preventDefault();
+        close();
+        break;
+    }
+  };
+
+  const open = () => {
+    dialogRef.current?.show();
+    if (blockDialog) {
+      hideScroll()
+    } else {
+      document.addEventListener('keydown', handleKeyDown);
+    }
+    onStateChange({ open: true });
+  }
 
   const close = () => {
     dialogRef.current?.close();
     if (blockDialog) {
       showScroll()
     }
+    document.removeEventListener('keydown', handleKeyDown);
     onStateChange({ open: false });
     onClose?.();
-  }
-
-  const open = () => {
-    dialogRef.current?.show();
-    if (blockDialog) {
-      hideScroll()
-    }
-    onStateChange({ open: true });
   }
 
   const handleToggleButton = () => {
@@ -101,7 +114,6 @@ export const Dialog = ({ onStateChange = () => { }, blockDialog, onClose, childr
         dialogRef,
         toggleDialog: handleToggleButton,
         close,
-        dialogClassName: className,
         blockDialog,
         ...props
       }}
@@ -118,7 +130,7 @@ Dialog.displayName = "Dialog";
  * -----------------------------------------------------------------------------------------------*/
 
 export const DialogContent = ({ children, className }: DialogProps) => {
-  const { dialogRef, onKeyDown, close, toggleDialog, blockDialog, dialogClassName, triggerRef, variant, ...props } = useContext(DialogContext);
+  const { dialogRef, onKeyDown, close, toggleDialog, blockDialog, triggerRef, variant, ...props } = useContext(DialogContext);
   const { trapFocus } = useFocus({ ref: dialogRef as React.RefObject<HTMLDialogElement> })
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDialogElement>) => {
@@ -130,7 +142,7 @@ export const DialogContent = ({ children, className }: DialogProps) => {
     <dialog
       {...props}
       ref={dialogRef}
-      className={clsx(dialogClassName, dialogVariants({ variant }))}
+      className={clsx(className, { [styles.blockDialog]: blockDialog }, dialogVariants({ variant }))}
       onKeyDown={handleKeyDown}
       aria-labelledby="dialog_title"
       aria-describedby="dialog_description"
@@ -138,7 +150,7 @@ export const DialogContent = ({ children, className }: DialogProps) => {
       {!blockDialog &&
         <div className={styles.backdrop} onClick={close}></div>
       }
-      <div className={clsx(styles.content, className)} autoFocus>
+      <div className={clsx(styles.content)} autoFocus>
         {children}
       </div>
     </dialog>

@@ -1,84 +1,87 @@
 import { Slot } from '@radix-ui/react-slot';
 import clsx from 'clsx';
 import { ChevronDown } from 'lucide-react';
-import { createContext, PropsWithChildren, useCallback, useContext, useEffect, useRef, useState } from 'react';
-import useWindow from '~/hooks/useWindow';
+import { createContext, forwardRef, KeyboardEvent as ReactKeyboardEvent, useCallback, useContext, useEffect, useRef, useState } from 'react';
+import { useFocus } from '~/hooks/useFocus';
+import { useWindowOverflow } from '~/hooks/useWindowOverflow';
 import Button, { ButtonProps } from '../button/Button';
 import { ButtonBase } from '../button/ButtonBase';
 import styles from './Dropdown.module.css';
 
-function useWindowOverflow(ref: React.RefObject<HTMLDivElement>) {
-  const [windowOverflow, setWindowOverflow] = useState(false);
-  const window = useWindow();
-
-  useEffect(() => {
-    const calculateOverflow = () => {
-      let coords = ref.current?.getBoundingClientRect() || { right: 0 };
-      return (window?.innerWidth || 0) < coords.right
-    }
-
-    setWindowOverflow(calculateOverflow());
-  }, [])
-
-  return {
-    windowOverflow
-  }
+type DropdownProps = React.DialogHTMLAttributes<HTMLDivElement> & {
+  onStateChange?({ }: { open: boolean }): void;
 }
 
-type DropdownContextValues = {
+type DropdownContextValues = DropdownProps & {
   triggerRef?: React.RefObject<HTMLButtonElement>;
   containerRef?: React.RefObject<HTMLDivElement>;
+  dialogRef?: React.RefObject<HTMLDivElement>;
   itemsRef?: React.MutableRefObject<(HTMLButtonElement | null)[]>
 
-
   isOpen: boolean;
-  toggle(): void;
-  close(): void;
-  open(): void;
 
-  setHighlightedIndex: React.Dispatch<React.SetStateAction<number>>;
-  highlightedIndex: number;
+  toggleDialog(): void;
+  closeDialog(): void;
+  openDialog(): void;
 };
 
 export const DropdownContext = createContext<DropdownContextValues>({
+  closeDialog: () => { },
+  openDialog: () => { },
+  toggleDialog: () => { },
   isOpen: false,
-  highlightedIndex: 0,
-  setHighlightedIndex: () => { },
-  close: () => { },
-  open: () => { },
-  toggle: () => { }
 });
 
-function DefaultTrigger({ children, ...props }: ButtonProps) {
+
+const DefaultTrigger = forwardRef<HTMLButtonElement, ButtonProps>(({ children, ...props }, ref) => {
   const { isOpen } = useContext(DropdownContext);
-  return (<ButtonBase {...props}>
-    {children}
-    <ChevronDown
-      size={16}
-      style={{
-        transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-        transition: 'transform 0.2s ease',
-      }}
-    />
-  </ButtonBase>
+  return (
+    <ButtonBase ref={ref} {...props}>
+      {children}
+      <ChevronDown
+        size={16}
+        style={{
+          transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+          transition: 'transform 0.2s ease',
+        }}
+      />
+    </ButtonBase>
   )
-};
+});
 
 type DropdownTriggerProps = ButtonProps & {
   asChild?: boolean;
 }
 
-export function DropdownTrigger({ asChild, ...props }: DropdownTriggerProps) {
-  const { isOpen, triggerRef, toggle } = useContext(DropdownContext);
+export function DropdownTrigger({ asChild, onKeyDown, ...props }: DropdownTriggerProps) {
+  const { isOpen, triggerRef, toggleDialog, closeDialog } = useContext(DropdownContext);
   const Comp = asChild ? Slot : DefaultTrigger;
+
+  function getState() {
+    return isOpen ? 'open' : 'closed';
+  }
+
+  const handleKeyDown = (event: ReactKeyboardEvent<HTMLButtonElement>) => {
+    switch (event.code) {
+      case 'Space':
+      case 'Spacebar':
+        event.preventDefault();
+        toggleDialog();
+        onKeyDown?.(event);
+        break;
+    }
+  };
 
   return (
     <Comp
       ref={triggerRef}
-      className={styles.trigger}
-      onClick={toggle}
-      aria-haspopup="true"
+      onClick={toggleDialog}
+      aria-haspopup="dialog"
       aria-expanded={isOpen}
+      data-state={getState()}
+      onKeyDown={(event: any) => {
+        handleKeyDown(event as ReactKeyboardEvent<HTMLButtonElement>);
+      }}
       {...props}
     />
   )
@@ -95,64 +98,7 @@ interface DropdownItemsProps {
 }
 
 export function DropdownItems({ items }: DropdownItemsProps) {
-  const { isOpen, itemsRef, setHighlightedIndex, highlightedIndex, close } = useContext(DropdownContext);
-
-  const handleKeyDown = useCallback(
-    (event: KeyboardEvent) => {
-      if (!isOpen) return;
-
-      switch (event.key) {
-        case 'ArrowDown':
-          event.preventDefault();
-          setHighlightedIndex((prev) =>
-            prev < items.length - 1 ? prev + 1 : prev
-          );
-          break;
-        case 'ArrowUp':
-          event.preventDefault();
-          setHighlightedIndex((prev) => (prev > 0 ? prev - 1 : prev));
-          break;
-        case 'Tab':
-          event.preventDefault();
-          setHighlightedIndex((prev) =>
-            prev < items.length - 1 ? prev + 1 : -1
-          );
-          if (highlightedIndex === items.length - 1) {
-            close();
-          }
-          break;
-        case 'Escape':
-          event.preventDefault();
-          close();
-          break;
-        case 'Enter':
-        case ' ':
-          event.preventDefault();
-          if (highlightedIndex !== -1) {
-            items[highlightedIndex].onClick?.();
-            close();
-          }
-          break;
-      }
-    },
-    [isOpen, items, highlightedIndex, close]
-  );
-
-  useEffect(() => {
-    if (isOpen) {
-      document.addEventListener('keydown', handleKeyDown);
-    }
-
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [handleKeyDown, close, isOpen]);
-
-  useEffect(() => {
-    if (highlightedIndex !== -1) {
-      itemsRef?.current[highlightedIndex]?.focus();
-    }
-  }, [highlightedIndex]);
+  const { itemsRef, isOpen, closeDialog } = useContext(DropdownContext);
 
   return (
     <div className={styles.items}>
@@ -166,10 +112,8 @@ export function DropdownItems({ items }: DropdownItemsProps) {
             })}
             onClick={() => {
               onClick?.();
-              close();
+              closeDialog();
             }}
-            // onMouseEnter={() => setHighlightedIndex?.(index)}
-            data-highlighted={highlightedIndex === index}
             role="menuitem"
             tabIndex={isOpen ? 0 : -1}
             variant={variant || "ghost"}
@@ -185,68 +129,80 @@ export function DropdownItems({ items }: DropdownItemsProps) {
   )
 }
 
-interface DropdownContentProps extends React.PropsWithChildren {
+type DropdownContentProps = React.DialogHTMLAttributes<HTMLDivElement> & {
   items?: DropdownItem[];
 }
 
-export function DropdownContent({ items, children }: DropdownContentProps) {
-  const { isOpen } = useContext(DropdownContext);
-  const contentRef = useRef<HTMLDivElement>(null);
-  const { windowOverflow } = useWindowOverflow(contentRef);
+export function DropdownContent({ items, children, onKeyDown, ...props }: DropdownContentProps) {
+  const { dialogRef, isOpen } = useContext(DropdownContext);
+  const { trapFocus } = useFocus({ ref: dialogRef as React.RefObject<HTMLDivElement> })
+  const { isOverflow, calculateOverflow } = useWindowOverflow({ ref: dialogRef as React.RefObject<HTMLDivElement> });
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    trapFocus(event);
+    onKeyDown?.(event)
+  }
+
+  useEffect(() => {
+    if (isOpen) {
+      calculateOverflow();
+    }
+  }, [isOpen])
 
   return (
     <div
-      ref={contentRef}
+      rel='dialog'
+      ref={dialogRef}
       className={clsx(styles.content, {
-        [styles.contentOverflow]: windowOverflow
+        [styles.contentOverflow]: isOverflow
       })}
+      onKeyDown={handleKeyDown}
       data-open={isOpen}
+      {...props}
     >
       {items ? <DropdownItems items={items} /> : children}
     </div>
   );
 }
 
-interface DropdownProps extends PropsWithChildren { }
-
-export function Dropdown({ children, ...props }: DropdownProps) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [highlightedIndex, setHighlightedIndex] = useState<number>(-1);
+export function Dropdown({ onStateChange = () => { }, children, ...props }: DropdownProps) {
+  const [isOpen, setIsOpen] = useState(props.open || false);
   const containerRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
   const itemsRef = useRef<(HTMLButtonElement | null)[]>([]);
 
-  const close = useCallback(() => {
-    setIsOpen(false);
-    setHighlightedIndex(-1);
+  const closeDialog = useCallback(() => {
+    // dialogRef.current?.close();
     triggerRef.current?.focus();
+    setIsOpen(false)
+    onStateChange({ open: false });
   }, []);
 
-  const open = useCallback(() => {
-    setIsOpen(true);
-  }, [])
+  const openDialog = () => {
+    // dialogRef.current?.show();
+    setIsOpen(true)
+    onStateChange({ open: true });
+  }
 
-  const handleToggle = () => {
+  const toggleDialog = () => {
     if (isOpen) {
-      close();
+      closeDialog();
     } else {
-      open();
+      openDialog();
     }
   }
 
-  const handleKeyDown = useCallback(
-    (event: KeyboardEvent) => {
-      if (!isOpen) return;
+  const handleKeyDown = (event: KeyboardEvent) => {
+    if (!isOpen) return;
 
-      switch (event.key) {
-        case 'Escape':
-          event.preventDefault();
-          close();
-          break;
-      }
-    },
-    [isOpen, close]
-  );
+    switch (event.key) {
+      case 'Escape':
+        event.preventDefault();
+        closeDialog();
+        break;
+    }
+  };
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -254,7 +210,7 @@ export function Dropdown({ children, ...props }: DropdownProps) {
         containerRef?.current &&
         !containerRef.current.contains(event.target as Node)
       ) {
-        close();
+        closeDialog();
       }
     };
 
@@ -267,25 +223,25 @@ export function Dropdown({ children, ...props }: DropdownProps) {
       document.removeEventListener('keydown', handleKeyDown);
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [close, isOpen]);
+  }, [closeDialog, isOpen]);
 
   return (
     <DropdownContext.Provider
       value={{
         triggerRef,
         containerRef,
+        dialogRef,
         itemsRef,
+        toggleDialog,
+        closeDialog,
+        openDialog,
         isOpen,
-        toggle: handleToggle,
-        close,
-        open,
-        setHighlightedIndex,
-        highlightedIndex
+        ...props
       }}
     >
       <div className={styles.dropdownContainer} ref={containerRef}>
         {children}
       </div>
-    </DropdownContext.Provider>
+    </DropdownContext.Provider >
   );
 }

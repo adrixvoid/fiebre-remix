@@ -29,7 +29,7 @@ export type DrawerProps = React.DialogHTMLAttributes<HTMLDialogElement> &
 
 type DrawerContextValue = DrawerProps & {
   triggerRef?: React.RefObject<HTMLButtonElement>;
-  drawerRef?: React.RefObject<HTMLDialogElement>;
+  dialogRef?: React.RefObject<HTMLDialogElement>;
   contentId?: string;
   titleId?: string;
   descriptionId?: string;
@@ -45,13 +45,13 @@ export const DrawerContext = createContext<DrawerContextValue>({
 });
 
 export const Drawer = ({ children, className, variant, onStateChange, blockDrawer, onClose, ...props }: DrawerProps) => {
-  const drawerRef = useRef<HTMLDialogElement>(null);
+  const dialogRef = useRef<HTMLDialogElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
-  const { hideScroll, showScroll } = useOverflow({ ref: drawerRef as React.RefObject<HTMLDialogElement> });
+  const { hideScroll, showScroll } = useOverflow({ ref: dialogRef as React.RefObject<HTMLDialogElement> });
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
-      if (!drawerRef.current?.open) return;
+      if (!dialogRef.current?.open) return;
       switch (event.key) {
         case 'Escape':
           event.preventDefault();
@@ -63,7 +63,7 @@ export const Drawer = ({ children, className, variant, onStateChange, blockDrawe
   );
 
   const close = () => {
-    drawerRef.current?.close();
+    dialogRef.current?.close();
     if (blockDrawer) {
       showScroll()
     }
@@ -74,7 +74,7 @@ export const Drawer = ({ children, className, variant, onStateChange, blockDrawe
   }
 
   const open = () => {
-    drawerRef.current?.show();
+    dialogRef.current?.show();
     if (blockDrawer) {
       hideScroll()
     }
@@ -83,7 +83,7 @@ export const Drawer = ({ children, className, variant, onStateChange, blockDrawe
   }
 
   const handleToggleButton = () => {
-    if (drawerRef.current?.open) {
+    if (dialogRef.current?.open) {
       close();
     } else {
       open();
@@ -94,7 +94,7 @@ export const Drawer = ({ children, className, variant, onStateChange, blockDrawe
     <DrawerContext.Provider
       value={{
         triggerRef,
-        drawerRef,
+        dialogRef,
         toggleDrawer: handleToggleButton,
         close,
         drawerClassName: className,
@@ -111,8 +111,8 @@ export const Drawer = ({ children, className, variant, onStateChange, blockDrawe
  * -----------------------------------------------------------------------------------------------*/
 
 export const DrawerContent = ({ children, className }: DrawerProps) => {
-  const { drawerRef, onKeyDown, close, drawerClassName, triggerRef, variant, toggleDrawer, ...props } = useContext(DrawerContext);
-  const { trapFocus } = useFocus({ ref: drawerRef as React.RefObject<HTMLDialogElement> })
+  const { dialogRef, onKeyDown, close, drawerClassName, triggerRef, variant, toggleDrawer, ...props } = useContext(DrawerContext);
+  const { trapFocus } = useFocus({ ref: dialogRef as React.RefObject<HTMLDialogElement> })
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDialogElement>) => {
     trapFocus(event);
@@ -121,12 +121,12 @@ export const DrawerContent = ({ children, className }: DrawerProps) => {
 
   return (
     <dialog
-      {...props}
-      ref={drawerRef}
+      ref={dialogRef}
       className={clsx(drawerClassName, drawerVariants({ variant }))}
       onKeyDown={handleKeyDown}
       aria-labelledby="drawer_title"
       aria-describedby="drawer_description"
+      {...props}
     >
       <div className={styles.backdrop} onClick={close}></div>
       <div className={clsx(styles.content, className)} autoFocus>
@@ -140,18 +140,16 @@ export const DrawerContent = ({ children, className }: DrawerProps) => {
  * Trigger
  * -----------------------------------------------------------------------------------------------*/
 
-export type DrawerTriggerProps = PropsWithChildren<{
-  open?: boolean;
-} & ({
+export type DrawerTriggerProps = PropsWithChildren<{} & ({
   asChild?: boolean;
 } | ButtonProps)>
 
 export const DrawerTrigger = ({ asChild, ...props }: DrawerTriggerProps) => {
-  const { open, contentId, triggerRef, drawerRef, toggleDrawer } = useContext(DrawerContext);
+  const { contentId, triggerRef, dialogRef, toggleDrawer } = useContext(DrawerContext);
   const Comp = asChild ? Slot : Button
 
   function getState() {
-    return drawerRef?.current?.open ? 'open' : 'closed';
+    return dialogRef?.current?.open ? 'open' : 'closed';
   }
 
   return (
@@ -159,7 +157,7 @@ export const DrawerTrigger = ({ asChild, ...props }: DrawerTriggerProps) => {
       ref={triggerRef}
       type="button"
       aria-haspopup="dialog"
-      aria-expanded={open}
+      aria-expanded={dialogRef?.current?.open}
       aria-controls={contentId}
       data-state={getState()}
       onClick={toggleDrawer}

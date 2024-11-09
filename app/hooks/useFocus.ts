@@ -26,7 +26,7 @@
 //   };
 // };
 
-export function useFocus({ref}: {ref: React.RefObject<HTMLDialogElement>}) {
+export function useFocus({ref}: {ref: React.RefObject<HTMLElement>}) {
   const elements = ref.current?.querySelectorAll(
     'a, button, input, textarea, select, details, [tabindex]:not([tabindex="-1"])'
   );
