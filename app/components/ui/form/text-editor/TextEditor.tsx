@@ -196,11 +196,11 @@ export function TextEditor({ id, name, label, labelProps, children, className, a
       {label && <Label id={id} name={name} {...labelProps}>{label}</Label>}
       <div className={styles.wrapper}>
         <div className={styles["button-group"]}>
-          <Button variant="ghost" size="sm" onClick={(event) => addMarkdownStyle(event, "bold")}><Bold /><span className="sr-only">Bold</span></Button>
-          <Button variant="ghost" size="sm" onClick={(event) => addMarkdownStyle(event, 'italic')}><Italic /></Button>
-          <Button variant="ghost" size="sm" onClick={(event) => addMarkdownStyle(event, 'title')}><Heading /><span className="sr-only">Title</span></Button>
-          <Button variant="ghost" size="sm" onClick={(event) => addMarkdownStyle(event, 'paragraph')}><Text /><span className="sr-only">Paragraph</span></Button>
-          <Button variant="ghost" size="sm" onClick={(event) => addMarkdownStyle(event, 'list')}><List /><span className="sr-only">List</span></Button>
+          <Button variant="ghost" size="xs" onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => addMarkdownStyle(event, "bold")}><Bold size={16} /><span className="sr-only">Bold</span></Button>
+          <Button variant="ghost" size="xs" onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => addMarkdownStyle(event, 'italic')}><Italic size={16} /></Button>
+          <Button variant="ghost" size="xs" onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => addMarkdownStyle(event, 'title')}><Heading size={16} /><span className="sr-only">Title</span></Button>
+          <Button variant="ghost" size="xs" onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => addMarkdownStyle(event, 'paragraph')}><Text size={16} /><span className="sr-only">Paragraph</span></Button>
+          <Button variant="ghost" size="xs" onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => addMarkdownStyle(event, 'list')}><List size={16} /><span className="sr-only">List</span></Button>
         </div>
         <TextArea ref={textareaRef} id={id} name={name} className={cx(styles.base, className)} {...rest} onKeyDown={handleKeyDown} />
       </div>

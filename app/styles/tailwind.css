@@ -56,7 +56,9 @@
       --popover: 262.27 71.4% 4.1%;
       --popover-foreground: 210 20% 98%;
       --button: 306, 100%, 83%;
+      --button: 266.33 75.36% 68.04%;
       --button-foreground: 266.22, 54.22%, 51.18%;
+      --button-foreground: 210 20% 98%;
       --primary: 314.16 100% 65.1%;
       --primary-foreground: 0 0 100%;
       --secondary: 240.92 28.18% 19.35%;
@@ -69,7 +71,7 @@
       --destructive-foreground: 210 20% 98%;
       --border: 240.92 28.18% 19.35%;
       --border: 260 28.13% 25.1%;
-      /* --border: 265.71 64.44% 30.36%; */
+      --border: 266 36% 56%;
       --input: 265.38 61.02% 15.6%;
       --ring: 263.4 70% 50.4%;
     }

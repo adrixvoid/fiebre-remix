@@ -6,10 +6,9 @@ label[for] {
   display: flex;
 
   width: 100%;
-  height: 2.25rem;
 
   font-size: .875rem;
-  line-height: 1.25rem;
+  line-height: 1.8em;
 
   padding-top: .25rem;
   padding-bottom: .25rem;
@@ -32,7 +31,7 @@ label[for] {
 
 .input:focus,
 .input:focus-visible {
-  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow);
+  box-shadow: var(--tw-ring-offset-shadow), var(--ring-1);
   outline: 2px solid transparent;
   outline-offset: 2px;
 }

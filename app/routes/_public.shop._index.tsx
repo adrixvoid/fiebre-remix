@@ -6,10 +6,10 @@ import type { Product } from "~/types/product";
 
 import { productService } from "~/server/services/products.service";
 
-import { ProductList } from "~/components/products/Product";
 import Button from "~/components/ui/button/Button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardImageCover, CardTitle } from "~/components/ui/card/Card";
 import { Container } from "~/components/ui/container/Container";
+import { Grid } from "~/components/ui/grid/Grid";
 import { Section } from "~/components/ui/section/Section";
 
 export const loader: LoaderFunction = async () => {
@@ -22,7 +22,7 @@ const Store = () => {
     return (
         <Section marginBottom>
             <Container>
-                <ProductList>
+                <Grid columns={4}>
                     {products.map((product) => (
                         <Card as="article" key={product.name}>
                             <CardImageCover src={product.images?.[0]?.url}>
@@ -41,7 +41,7 @@ const Store = () => {
                             </CardFooter>
                         </Card>
                     ))}
-                </ProductList>
+                </Grid>
             </Container>
         </Section>
     )

@@ -9,7 +9,7 @@ import { Product } from "~/types/product";
 import { Button } from "~/components/ui/button/Button";
 import AdminTable from "~/components/ui/table/AdminTable";
 import { TableCellAction, TableHeadAction } from "~/components/ui/table/Table";
-import { formatCurrency } from "~/lib/price";
+import { formatCurrency } from "~/lib/currency";
 import { Dropdown, DropdownContent, DropdownTrigger } from "../ui/dropdown/Dropdown";
 
 const styles = {

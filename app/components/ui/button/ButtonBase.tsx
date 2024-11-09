@@ -9,7 +9,7 @@ import styles from './Button.module.css';
 export const buttonVariants = cva(styles.button, {
   variants: {
     variant: {
-      default: styles.base,
+      base: styles.base,
       primary: styles.primary,
       destructive: styles.destructive,
       outline: styles.outline,
@@ -18,9 +18,9 @@ export const buttonVariants = cva(styles.button, {
       link: styles.link
     },
     size: {
-      default: styles.medium,
-      md: styles.medium,
+      xs: styles.xsmall,
       sm: styles.small,
+      md: styles.medium,
       lg: styles.large
     }
   },
@@ -28,8 +28,8 @@ export const buttonVariants = cva(styles.button, {
   //   { variant: "default", size: "default", className: styles.primaryMedium },
   // ],
   defaultVariants: {
-    variant: 'default',
-    size: 'default'
+    variant: 'base',
+    size: 'md'
   }
 });
 

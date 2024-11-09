@@ -22,7 +22,10 @@ export default {
   IMAGE: 'Imagen',
   INQUIRE: 'Consultar',
   NEW: 'Nuevo',
+  LIST: 'Lista',
   PRODUCT: {
+    AVAILABLE_FOR_PURCHASE: 'Disponible',
+    LIST: 'Listar Productos',
     NEW: 'Nuevo Producto',
     PRODUCT: 'Producto',
     PRODUCTS: 'Productos',

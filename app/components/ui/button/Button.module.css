@@ -51,6 +51,7 @@ a.button {
 */
 
 .base {
+    --mixed-color: color-mix(in hsl shorter hue, hsl(var(--button)), black 10%);
     border-color: hsl(var(--button));
     background-color: hsl(var(--button));
     fill: currentColor;
@@ -94,7 +95,7 @@ a.button {
 
 .dashed:focus,
 .dashed:focus-within {
-    /* box-shadow: var(--shadow-sm), var(--tw-ring-shadow-0); */
+    /* box-shadow: var(--shadow-sm), var(--ring-1-0); */
 }
 
 .ghost {
@@ -108,7 +109,7 @@ a.button {
 .ghost:focus-within {
     color: hsl(var(--button-foreground));
     fill: currentColor;
-    /* box-shadow: var(--tw-ring-shadow-0); */
+    /* box-shadow: var(--ring-1-0); */
 }
 
 .ghost {
@@ -157,6 +158,11 @@ a.button {
 /**
     Button Sizes
 */
+
+.xsmall {
+    min-height: 28px;
+    font-size: var(--text-xs);
+}
 
 .small {
     min-height: 32px;

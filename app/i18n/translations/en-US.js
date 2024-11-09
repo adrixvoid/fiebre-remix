@@ -21,8 +21,11 @@ export default {
   EMPTY: 'Empty',
   IMAGE: 'Image',
   INQUIRE: 'Inquire',
+  LIST: 'List',
   NEW: 'New',
   PRODUCT: {
+    AVAILABLE_FOR_PURCHASE: 'Available',
+    LIST: 'List Products',
     NEW: 'New Product',
     PRODUCT: 'Product',
     PRODUCTS: 'Products',

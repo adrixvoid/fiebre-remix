@@ -1,5 +1,5 @@
 import { cva, type VariantProps } from "class-variance-authority";
-import { createContext, PropsWithChildren, useContext, useRef } from "react";
+import { createContext, PropsWithChildren, useCallback, useContext, useRef } from "react";
 
 import { Slot } from "@radix-ui/react-slot";
 import clsx from "clsx";
@@ -12,19 +12,8 @@ const drawerVariants = cva(
   styles.drawer, {
   variants: {
     variant: {
-      // flex: styles.flex,
-      // text: styles['center-text'],
-      // all: [styles.flex, styles.flex]
     },
-    // direction: {
-    //   row: styles.row,
-    //   column: styles.column,
-    // }
   },
-  // defaultVariants: {
-  //   variant: "flex",
-  //   direction: "row",
-  // },
 })
 
 type DrawerState = {
@@ -60,12 +49,27 @@ export const Drawer = ({ children, className, variant, onStateChange, blockDrawe
   const triggerRef = useRef<HTMLButtonElement>(null);
   const { hideScroll, showScroll } = useOverflow({ ref: drawerRef as React.RefObject<HTMLDialogElement> });
 
+  const handleKeyDown = useCallback(
+    (event: KeyboardEvent) => {
+      if (!drawerRef.current?.open) return;
+      switch (event.key) {
+        case 'Escape':
+          event.preventDefault();
+          close();
+          break;
+      }
+    },
+    []
+  );
+
   const close = () => {
     drawerRef.current?.close();
     if (blockDrawer) {
       showScroll()
     }
+    document.removeEventListener('keydown', handleKeyDown);
     onStateChange?.({ open: false });
+    triggerRef.current?.focus();
     onClose?.();
   }
 
@@ -74,6 +78,7 @@ export const Drawer = ({ children, className, variant, onStateChange, blockDrawe
     if (blockDrawer) {
       hideScroll()
     }
+    document.addEventListener('keydown', handleKeyDown);
     onStateChange?.({ open: true });
   }
 

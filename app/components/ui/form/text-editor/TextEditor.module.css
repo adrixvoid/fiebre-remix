@@ -1,8 +1,27 @@
+.wrapper {
+  border-radius: var(--radius);
+  border: 1px solid hsl(var(--border));
+  overflow: hidden;
+}
+
+.wrapper:focus-within {
+  position: relative;
+  outline: 2px solid hsl(var(--ring));
+}
+
 .base {
+  border: 0;
   width: 100%;
   min-height: 4rem;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+.base:focus,
+.base:focus-within {
+  outline: 0;
+  border: 0;
+  box-shadow: unset;
 }
 
 .button-group {

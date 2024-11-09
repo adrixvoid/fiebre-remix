@@ -27,27 +27,27 @@
 }
 
 .ring-0 {
-  box-shadow: var(--tw-ring-shadow-0)
+  box-shadow: var(--ring-1-0)
 }
 
 .ring-1 {
-  box-shadow: var(--tw-ring-shadow)
+  box-shadow: var(--ring-1)
 }
 
 .ring-2 {
-  box-shadow: var(--tw-ring-shadow-2);
+  box-shadow: var(--ring-2);
 }
 
 .ring-3 {
-  box-shadow: var(--tw-ring-shadow-3)
+  box-shadow: var(--ring-3)
 }
 
 .ring-4 {
-  box-shadow: var(--tw-ring-shadow-4)
+  box-shadow: var(--ring-4)
 }
 
 .ring-8 {
-  box-shadow: var(--tw-ring-shadow-8)
+  box-shadow: var(--ring-8)
 }
 
 .ring-offset-2 {
@@ -55,5 +55,5 @@
 }
 
 .mix {
-  box-shadow: var(--shadow-xl), var(--tw-ring-shadow-2);
+  box-shadow: var(--shadow-xl), var(--ring-2);
 }

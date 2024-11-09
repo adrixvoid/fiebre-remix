@@ -1,6 +1,6 @@
 import { useLoaderData, useNavigation, useParams, useSubmit } from "@remix-run/react";
 import { createColumnHelper } from '@tanstack/react-table';
-import { Trash2 } from "lucide-react";
+import { FilePlus2, Trash2 } from "lucide-react";
 
 import { ROUTE_PATH_ADMIN } from "~/constants";
 import { t } from "~/i18n/translate";
@@ -14,6 +14,8 @@ import { Link } from "~/components/ui/link/Link";
 import { Section } from "~/components/ui/section/Section";
 import AdminTable from "~/components/ui/table/AdminTable";
 import { TableCellAction, TableHeadAction } from "~/components/ui/table/Table";
+import { Toggle } from "~/components/ui/toggle/Toggle";
+import { formatCurrency } from "~/lib/currency";
 
 const styles = {
   images: {
@@ -32,6 +34,16 @@ const columns = [
     id: 'name',
     header: () => <span>{t('PRODUCT.PRODUCT')}</span>,
     cell: props => props.getValue()
+  }),
+  columnHelper.accessor('priceInCents', {
+    id: 'priceInCents',
+    header: () => <span>{t('PRODUCT.PRICE')}</span>,
+    cell: props => formatCurrency(props.getValue() || 0)
+  }),
+  columnHelper.accessor('active', {
+    id: 'active',
+    header: () => <span>{t('PRODUCT.AVAILABLE_FOR_PURCHASE')}</span>,
+    cell: props => <Toggle defaultChecked={props.getValue()} onChange={(checked) => console.log(checked)} size='sm' />
   }),
   columnHelper.display({
     id: 'actions',
@@ -89,12 +101,12 @@ export default function AdminProductList() {
   return (
     <Section marginBottom>
       <Container>
-        <h1 className="h1 text-2xl font-600 tracking-tight">{t("PRODUCT.NEW")}</h1>
+        <h1 className="h1 text-2xl font-600 tracking-tight">{t("PRODUCT.LIST")}</h1>
         <div className="flex admin-top text-sm mt-2 py-2 justify-between items-center">
           <div className="justify-end">
             <div className="actions flex" style={{ gap: "0.5rem" }}>
               <Button asChild size="sm">
-                <Link to={pathToNewProduct}>{t('PRODUCT.NEW')}</Link>
+                <Link to={pathToNewProduct}><FilePlus2 size={16} />{t('PRODUCT.NEW')}</Link>
               </Button>
             </div>
           </div>

@@ -1,6 +1,6 @@
 import { useLoaderData, useLocation, useNavigation, useParams, useSubmit } from "@remix-run/react";
 import { CellContext, createColumnHelper } from '@tanstack/react-table';
-import { Trash2 } from "lucide-react";
+import { FilePlus2, Trash2 } from "lucide-react";
 
 import { ROUTE_PATH_ADMIN } from "~/constants";
 import { t } from "~/i18n/translate";
@@ -134,10 +134,10 @@ function AdminCategoriesList() {
           <Flex>
             <Flex justify='end' className="actions flex" style={{ gap: "0.5rem" }}>
               <Button to={newCategoryPath} state={location.state} size="sm">
-                <FolderPlus className="mr-2 h-4 w-4" /> {t('CATEGORY.NEW')}
+                <FolderPlus size={16} /> {t('CATEGORY.NEW')}
               </Button>
               <Button to={pathToNewProduct} state={location.state} size="sm">
-                <FolderPlus className="mr-2 h-4 w-4" /> {t('PRODUCT.NEW')}
+                <FilePlus2 size={16} /> {t('PRODUCT.NEW')}
               </Button>
             </Flex>
           </Flex>

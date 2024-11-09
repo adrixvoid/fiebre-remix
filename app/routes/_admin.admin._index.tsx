@@ -1,69 +1,51 @@
 import type { LoaderFunctionArgs } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 
+import { formatCurrency, formatNumber } from "~/lib/currency";
+import prisma from "~/server/lib/prisma";
+
 import { DashboardCard } from "~/components/dashboard/dashboard-card";
 import { Container } from "~/components/ui/container/Container";
 import { Grid } from "~/components/ui/grid/Grid";
 import { Section } from "~/components/ui/section/Section";
 
-import { formatCurrency, formatNumber } from "~/lib/price";
-
 async function getSalesData() {
-  // const data = await prisma.order.aggregate({
-  //   _sum: { pricePaidInCents: true },
-  //   _count: true
-  // })
-
-  // return {
-  //   amount: (data._sum.pricePaidInCents || 0) / 100,
-  //   numberOfSales: data._count
-  // }
+  const orders = await prisma.order.aggregate({
+    _sum: { pricePaidInCents: true },
+    _count: true
+  })
 
   return {
-    amount: 0,
-    numberOfSales: 0
+    amount: (orders._sum.pricePaidInCents || 0) / 100,
+    numberOfSales: orders._count || 0
   }
 }
 
 async function getUserData() {
-  // const [userCount, orderData] = await Promise.all([
-  //   prisma.user.count(),
-  //   prisma.order.aggregate({
-  //     _sum: { pricePaidInCents: true }
-  //   })
-  // ])
-
-  // return {
-  //   userCount,
-  //   averageValuePerUser: userCount === 0
-  //     ? 0
-  //     : (orderData._sum.pricePaidInCents || 0) / userCount / 100
-  // }
+  const [userCount, orderData] = await Promise.all([
+    prisma.user.count(),
+    prisma.order.aggregate({
+      _sum: { pricePaidInCents: true }
+    })
+  ])
 
   return {
-    userCount: 0,
-    averageValuePerUser: 0
+    userCount,
+    averageValuePerUser: userCount === 0
+      ? 0
+      : (orderData._sum.pricePaidInCents || 0) / userCount / 100
   }
 }
 
 async function getProductData() {
-  // const [activeCount, inactiveCount] = await Promise.all([
-  //   prisma.product.count({
-  //     where: { active: true }
-  //   }),
-  //   prisma.product.count({
-  //     where: { active: false }
-  //   })
-  // ])
-
-  // return {
-  //   activeCount,
-  //   inactiveCount
-  // }
+  const [activeCount, inactiveCount] = await Promise.all([
+    prisma.product.count({ where: { active: true } }),
+    prisma.product.count({ where: { active: false } })
+  ])
 
   return {
-    activeCount: 0,
-    inactiveCount: 0
+    activeCount,
+    inactiveCount
   }
 }
 
@@ -82,13 +64,13 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 export default function Admin() {
   const { salesData, userData, productData } = useLoaderData<typeof loader>()
   return (
-    <Section marginBottom>
+    <Section style={{ marginTop: "1rem" }}>
       <Container>
         <div>
-          <Grid>
-            <DashboardCard title="Sales" subtitle={formatNumber(salesData.numberOfSales)} body={formatCurrency(salesData.amount)} />
-            <DashboardCard title="Customers" subtitle={formatNumber(userData.averageValuePerUser)} body={formatCurrency(userData.userCount)} />
-            <DashboardCard title="Active Products" subtitle={`${formatNumber(productData.inactiveCount)} Inactive`} body={formatCurrency(productData.activeCount)} />
+          <Grid columns={3}>
+            <DashboardCard title="Sales" subtitle={`${formatNumber(salesData.numberOfSales)} Orders`} body={<p>{formatCurrency(salesData.amount)}</p>} />
+            <DashboardCard title="Customers" subtitle={`${formatNumber(userData.averageValuePerUser)} Average Value`} body={<p>{userData.userCount}</p>} />
+            <DashboardCard title="Active Products" subtitle={`${formatNumber(productData.inactiveCount)} Inactive`} body={<p>{productData.activeCount}</p>} />
           </Grid>
         </div>
       </Container>

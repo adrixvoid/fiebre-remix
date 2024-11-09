@@ -3,18 +3,18 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/com
 export type DashboardCardProps = {
   title: string
   subtitle: string
-  body: string
+  body: React.ReactNode
 }
 
 export function DashboardCard({ title, subtitle, body }: DashboardCardProps) {
   return (
-    <Card>
+    <Card border shadow>
       <CardHeader>
         <CardTitle>{title}</CardTitle>
         <CardDescription>{subtitle}</CardDescription>
       </CardHeader>
       <CardContent>
-        <p>{body}</p>
+        {body}
       </CardContent>
     </Card>
   );

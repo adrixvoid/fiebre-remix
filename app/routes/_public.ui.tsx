@@ -17,6 +17,7 @@ import TextArea from '~/components/ui/form/TextArea';
 import { Link } from '~/components/ui/link/Link';
 import { Section } from "~/components/ui/section/Section";
 import { Text, Title } from '~/components/ui/text/Text';
+import { Toggle } from '~/components/ui/toggle/Toggle';
 
 import styles from "~/styles/ui.css";
 
@@ -111,12 +112,12 @@ function ProductRoute() {
                             marginTop: 20,
                             flexWrap: "wrap"
                         }}>
-                            <div className="square ring-0">--tw-ring-0</div>
-                            <div className="square ring-1">--tw-ring-shadow</div>
-                            <div className="square ring-2">--tw-ring-shadow-2</div>
-                            <div className="square ring-3">--tw-ring-shadow-3</div>
-                            <div className="square ring-4">--tw-ring-shadow-4</div>
-                            <div className="square ring-8">--tw-ring-8</div>
+                            <div className="square ring-0">--ring-0</div>
+                            <div className="square ring-1">--ring-1</div>
+                            <div className="square ring-2">--ring-2</div>
+                            <div className="square ring-3">--ring-3</div>
+                            <div className="square ring-4">--ring-4</div>
+                            <div className="square ring-8">--ring-8</div>
                         </div>
                     </div>
                     <hr style={{ margin: "4rem 0" }} />
@@ -307,18 +308,19 @@ function ProductRoute() {
                             <Input id="test103" name="test103" type="checkbox" onChange={() => { }} checked disabled />
                         </div>
                         <div className="mt-1 flex gap-4">
-                            <label htmlFor="test11">Radio</label>
-                            <input id="test11" name="test11" type="radio" value="1" onChange={() => { }} />
-                            <input id="test12" name="test11" type="radio" value="0" onChange={() => { }} />
+                            <Title>Radio</Title>
+                            <Input label="base" name="test-base" type="radio" value="1" onChange={() => { }} />
+                            <Input label="value default 0" name="test-base" type="radio" value="0" onChange={() => { }} />
+                            <Input label="checked" name="test-base" type="radio" value="2" onChange={() => { }} />
                             {/* disabled */}
-                            <input id="test13" name="test13" type="radio" value="1" disabled onChange={() => { }} />
-                            <input id="test14" name="test13" type="radio" value="0" disabled onChange={() => { }} />
+                            <Input label="disabled value 1" id="test14" name="test-disabled" type="radio" value="1" onChange={() => { }} disabled />
+                            <Input label="disabled value 0" id="test15" name="test-disabled" type="radio" value="0" onChange={() => { }} disabled />
+                            <Input label="disabled checked" id="test16" name="test-disabled" type="radio" value="0" onChange={() => { }} disabled checked />
                             {/* checked */}
-                            <input id="test15" name="test15" type="radio" value="1" onChange={() => { }} checked />
                         </div>
                         <div className="mt-1 flex items-center gap-4">
-                            <label htmlFor="test12">File</label>
-                            <input id="test12" name="test12" type="file" />
+                            <label htmlFor="test22">File</label>
+                            <Input id="test22" name="test22" type="file" />
                         </div>
                     </div>
                     <hr style={{ margin: "4rem 0" }} />
@@ -463,6 +465,12 @@ function ProductRoute() {
                                     </Center>
                                 </DropdownContent>
                             </Dropdown>
+                        </div>
+                        <div style={{ margin: "2rem 0" }}>
+                            <Toggle
+                                label="Notifications"
+                                onChange={(checked) => console.log(checked)}
+                            />
                         </div>
                     </div>
                 </div>

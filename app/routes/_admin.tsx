@@ -27,7 +27,8 @@ export const loader: LoaderFunction = ({ params }) => {
 export default function Admin() {
   return (
     <div className="layout">
-      <Header>
+      <div className="spacer" />
+      <Header className="header">
         <Container>
           <Flex justify="between" align="center">
             <Link to="/admin" className="flex items-center gap-1">
@@ -36,6 +37,7 @@ export default function Admin() {
               <sup className="ml-1">Admin</sup>
             </Link>
             <Nav>
+              <NavLink to={ROUTE_PATH_ADMIN.PRODUCT_LIST}>Products</NavLink>
               <NavLink to={ROUTE_PATH_ADMIN.CATEGORY_LIST}>Categories</NavLink>
               <NavLink to={ROUTE_PATH_ADMIN.CONTENT_CREATE}>Content</NavLink>
               <NavLink to="/">Web</NavLink>

@@ -1,8 +1,8 @@
 export type Order = {
   id: string;
-  pricePaidInCents: number;
   userId?: string;
   productId?: string;
+  pricePaidInCents: number;
   createdAt: Date;
   updatedAt: Date;
 };

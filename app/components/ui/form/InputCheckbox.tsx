@@ -14,7 +14,7 @@ export interface InputCheckboxProps extends React.InputHTMLAttributes<HTMLInputE
 export function InputCheckbox({ label, labelProps, id, name, type, error, className, ...rest }: InputCheckboxProps) {
   return (
     <>
-      <Label className={styles.label} id={id} name={name} {...labelProps}>
+      <Label name={name} {...labelProps} className={clsx(styles.label, labelProps?.className)} type="checkbox">
         <input className={clsx(
           className,
           styles.base, {
@@ -23,7 +23,6 @@ export function InputCheckbox({ label, labelProps, id, name, type, error, classN
         })}
           type={type || "checkbox"}
           name={name}
-          id={id ? id : name}
           {...rest}
         />
         {label}

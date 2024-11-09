@@ -2,6 +2,8 @@
   color: hsl(var(--foreground));
   background-color: hsl(var(--input) / 0.8);
   height: auto;
+  min-height: 4rem;
+  line-height: 1.25em;
 
   border-width: 1px;
   border-style: solid;
@@ -10,5 +12,4 @@
 
   padding: 0.2rem 0.4rem;
   width: 100%;
-  min-height: 4rem;
 }

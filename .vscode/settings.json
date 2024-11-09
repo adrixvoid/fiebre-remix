@@ -74,5 +74,6 @@
     "*.local" // .local files
   ],
   "editor.fontSize": 12,
-  "[markdown]": {}
+  "[markdown]": {},
+  "cSpell.ignoreWords": ["xsmall"]
 }

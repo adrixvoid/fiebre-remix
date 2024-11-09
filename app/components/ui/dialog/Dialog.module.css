@@ -11,6 +11,8 @@
   margin: 0;
   animation: vanish 100ms;
   background-color: transparent;
+  border: 0;
+  z-index: 1;
 }
 
 .dialog[open] {

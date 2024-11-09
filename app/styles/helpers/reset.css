@@ -45,6 +45,7 @@ textarea {
 
 textarea {
     field-sizing: content;
+    font-family: inherit;
 }
 
 ul,

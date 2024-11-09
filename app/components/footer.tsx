@@ -23,10 +23,6 @@ export function Footer() {
                 <NavLink key={link.href} to={link.href}>{link.label}</NavLink>
               ))
             }
-            <NavLink to="/blog">Blog</NavLink>
-            <NavLink to="/courses">Cursos</NavLink>
-            <NavLink to="/shop">Shop</NavLink>
-            <NavLink to="/about">Sobre mi</NavLink>
           </Nav>
           <div className={styles.social}>
             {

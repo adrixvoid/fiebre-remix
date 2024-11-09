@@ -2,7 +2,7 @@
 
 .file:focus,
 .file:focus-visible {
-  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow);
+  box-shadow: var(--tw-ring-offset-shadow), var(--ring-1);
   outline: 2px solid transparent;
   outline-offset: 2px;
 }

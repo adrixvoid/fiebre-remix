@@ -1,6 +1,6 @@
 export type DownloadVerification = {
   id: string;
-  downloadTimes: number;
+  downloadedTimes: number;
   product: string;
   productId: string;
   expiresAt: Date;

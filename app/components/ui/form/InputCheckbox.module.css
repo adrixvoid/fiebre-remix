@@ -8,6 +8,7 @@
 
   border-radius: var(--radius-sm);
   border-width: 1px;
+  box-shadow: 0 0 0 1px hsl(var(--border));
   border-style: solid;
 
   transition: all 0.05s ease-in-out;
@@ -25,8 +26,8 @@
 .base:checked::after {
   content: "";
   display: block;
-  width: .7rem;
-  height: .7rem;
+  width: .65em;
+  height: .6em;
   background-color: hsl(var(--accent));
   position: relative;
   top: 50%;
@@ -35,7 +36,7 @@
 }
 
 .checkbox:checked::after {
-  border-radius: 20%;
+  border-radius: .05em;
 }
 
 .radio:checked::after {
@@ -50,9 +51,8 @@
   outline: none;
 }
 
-.base:focus,
 .base:focus-visible {
-  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow);
+  box-shadow: var(--tw-ring-offset-shadow), var(--ring-1);
   outline: 2px solid transparent;
   outline-offset: 2px;
 }
@@ -60,4 +60,8 @@
 .label {
   display: inline-flex;
   align-items: center;
+  user-select: none;
+  line-height: 2em;
+  cursor: pointer;
+  gap: .25em;
 }

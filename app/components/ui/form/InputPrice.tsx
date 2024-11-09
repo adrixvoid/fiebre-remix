@@ -2,7 +2,7 @@ import { cx } from "class-variance-authority";
 import { atom, useAtom } from 'jotai';
 import { forwardRef } from "react";
 
-import { formatCurrency } from "~/lib/price";
+import { formatCurrency } from "~/lib/currency";
 import { ErrorMessage } from "./ErrorMessage";
 import { InputBaseProps } from "./InputBase";
 import styles from './InputBase.module.css';

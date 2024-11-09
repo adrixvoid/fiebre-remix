@@ -1,7 +1,7 @@
 import { ShoppingCart } from "lucide-react";
 
 import { t } from "~/i18n/translate";
-import { accessibilityPrice, formatCurrency } from '~/lib/price';
+import { accessibilityPrice, formatCurrency } from '~/lib/currency';
 import { MapImage } from '~/types/file';
 
 import Button, { ButtonProps } from "~/components/ui/button/Button";

@@ -1,18 +1,17 @@
-import { cva, type VariantProps } from "class-variance-authority"
 
-import styles from './Label.module.css'
-
-const labelVariants = cva(styles.label)
+import clsx from "clsx";
+import styles from './Label.module.css';
 
 export interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
   name?: string;
+  type?: "checkbox"
 }
 
-function Label({ id, name, className, ...rest }: LabelProps & VariantProps<typeof labelVariants>) {
+function Label({ id, name, className, type, ...rest }: LabelProps) {
   return (
     <label
-      className={labelVariants({ className })}
-      htmlFor={String(id ? id : name)}
+      className={clsx(className, styles.label)}
+      htmlFor={type !== "checkbox" ? String(id ? id : name) : undefined}
       {...rest}
     />
   )
@@ -20,4 +19,5 @@ function Label({ id, name, className, ...rest }: LabelProps & VariantProps<typeo
 
 Label.displayName = "Label"
 
-export { Label }
+export { Label };
+

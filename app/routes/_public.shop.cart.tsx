@@ -10,7 +10,7 @@ import { Section } from "~/components/ui/section/Section";
 import { Table, TableBody, TableCaption, TableCell, TableCellAction, TableHead, TableHeadAction, TableHeader, TableRow } from "~/components/ui/table/Table";
 import { ROUTE_PATH } from "~/constants";
 import { t } from "~/i18n/translate";
-import { formatCurrency } from "~/lib/price";
+import { formatCurrency } from "~/lib/currency";
 import { Product } from "~/types/product";
 
 // import { getCart } from "~/server/shoppingCart.server"

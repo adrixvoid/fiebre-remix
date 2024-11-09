@@ -92,9 +92,9 @@ export default function AdminProductForm() {
           <Fieldset>
             <legend>{t('PRODUCT.PRODUCT_TYPE')}</legend>
             <FormBlock variant="inline">
-              <Input type="radio" id="productType[stock]" name="productType" label="Physical Stock" value="stock" onChange={() => setProductType("stock")} labelProps={{ className: "flex items-center mb-1" }} checked={productType === "stock"} />
-              <Input type="radio" id="productType[downloadUrl]" name="productType" label="External URL" value="downloadUrl" onChange={() => setProductType("downloadUrl")} labelProps={{ className: "flex items-center mb-1" }} checked={productType === "downloadUrl"} />
-              <Input type="radio" id="productType[file]" name="productType" label="Download File" value="file" onChange={() => setProductType("file")} labelProps={{ className: "flex items-center mb-1" }} checked={productType === "file"} />
+              <Input type="radio" id="productType[stock]" name="productType" label="Physical Stock" value="stock" onChange={() => setProductType("stock")} checked={productType === "stock"} />
+              <Input type="radio" id="productType[downloadUrl]" name="productType" label="External URL" value="downloadUrl" onChange={() => setProductType("downloadUrl")} checked={productType === "downloadUrl"} />
+              <Input type="radio" id="productType[file]" name="productType" label="Download File" value="file" onChange={() => setProductType("file")} checked={productType === "file"} />
             </FormBlock>
             <FormBlock>
               {productType === "stock" && (
@@ -137,9 +137,7 @@ export default function AdminProductForm() {
           <hr />
           <Fieldset>
             <div className="inline-block">
-              <ValidateInput name="draft">
-                <Input type="checkbox" label="Save as draft" id="draft" name="draft" defaultChecked={true} />
-              </ValidateInput>
+              <Input type="checkbox" label="Save as draft" id="draft" name="draft" defaultChecked={true} />
             </div>
           </Fieldset>
 
