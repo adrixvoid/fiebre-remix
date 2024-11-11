@@ -33,14 +33,15 @@ const titleVariants = cva(
   styles.title, {
   variants: {
     variant: {
-      default: styles.titleDefault,
       primary: styles.titlePrimary
     },
     size: {
+      xxl: styles.titleXXLarge,
       xl: styles.titleXLarge,
       lg: styles.titleLarge,
       md: styles.titleMedium,
-      sm: styles.titleSmall
+      sm: styles.titleSmall,
+      xs: styles.titleXSmall
     },
     align: {
       left: styles.left,
@@ -60,7 +61,7 @@ const titleVariants = cva(
     { variant: "primary", size: "sm", className: styles.titlePrimarySmall },
   ],
   defaultVariants: {
-    variant: "default"
+    size: "md"
   },
 })
 

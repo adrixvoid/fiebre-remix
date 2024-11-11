@@ -38,7 +38,7 @@ const InputPrice = forwardRef<HTMLInputElement, InputPriceProps>(
           value={priceInCents || Number(defaultValue)}
           onChange={handleOnChange}
         />
-        <label htmlFor={name} className={stylesPrice.text}>{formatCurrency((priceInCents || Number(rest.defaultValue) || 0) / 100)}</label>
+        <label htmlFor={name} className={stylesPrice.text}>{formatCurrency((priceInCents || Number(defaultValue) || 0) / 100)}</label>
         <ErrorMessage name={name} error={error} />
       </>
     )

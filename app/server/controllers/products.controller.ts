@@ -28,7 +28,7 @@ export interface LoaderAdminProduct {
   referrer?: string | null;
 }
 
-export async function loaderAdminProduct({
+export async function loaderAdminProductForm({
   request,
   params
 }: LoaderFunctionArgs): Promise<LoaderAdminProduct> {
@@ -58,7 +58,7 @@ export async function loaderAdminProductList({params}: LoaderFunctionArgs) {
 
 // ----- actions
 
-export async function actionAdminProduct({request}: ActionFunctionArgs) {
+export async function actionAdminProductForm({request}: ActionFunctionArgs) {
   const formData = await request.formData();
   const validation = await productSchemaValidator.validate(formData);
 

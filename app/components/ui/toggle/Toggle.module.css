@@ -2,23 +2,24 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  font-size: 10px;
 }
 
 .toggle {
+  --toggle-width: 4em;
   --thumb-width: 1em;
+  width: var(--toggle-width);
+  min-height: 2em;
+  border-radius: 1em;
   position: relative;
-  width: 4em;
-  height: 1em;
   background-color: transparent;
   border-width: 1px;
   box-shadow: 0 0 0 1px hsl(var(--border));
   border-style: solid;
   border-color: hsl(var(--border));
-  border-radius: 2rem;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
   display: block;
-  min-height: calc(var(--thumb-width) * 2);
   padding-block: 0;
 }
 
@@ -57,4 +58,20 @@
 .label {
   color: currentColor;
   user-select: none;
+}
+
+.xs {
+  font-size: 1em;
+}
+
+.sm {
+  font-size: 1.25em;
+}
+
+.md {
+  font-size: 1.5em;
+}
+
+.lg {
+  font-size: 1.75em;
 }

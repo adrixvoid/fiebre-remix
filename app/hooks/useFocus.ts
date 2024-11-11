@@ -30,6 +30,7 @@ export function useFocus({ref}: {ref: React.RefObject<HTMLElement>}) {
   const elements = ref.current?.querySelectorAll(
     'a, button, input, textarea, select, details, [tabindex]:not([tabindex="-1"])'
   );
+  const length = elements?.length;
   const firstElement = elements?.[0];
   const lastElement = elements?.[elements.length - 1];
 
@@ -49,6 +50,8 @@ export function useFocus({ref}: {ref: React.RefObject<HTMLElement>}) {
         // TAB and SHIFT are pressed simultaneously
         event.preventDefault();
         (lastElement as HTMLElement).focus();
+      } else if (length === 1) {
+        event.preventDefault();
       }
     }
   };

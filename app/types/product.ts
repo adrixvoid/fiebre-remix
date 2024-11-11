@@ -8,7 +8,7 @@ export enum ProductType {
 }
 
 export type Product = {
-  _id: string;
+  id: string;
   name: string;
   description?: string;
   priceHidden?: boolean;

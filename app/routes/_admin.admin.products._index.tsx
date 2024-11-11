@@ -45,7 +45,7 @@ const columns = [
     id: 'published',
     header: () => <span>{t('PRODUCT.AVAILABLE_FOR_PURCHASE')}</span>,
     cell: props => {
-      return <Toggle defaultChecked={props.getValue()} onChange={(checked) => console.log(checked)} size='sm' />
+      return <Toggle defaultChecked={props.getValue()} onChange={(checked) => console.log(checked)} size='xs' />
     }
   }),
   columnHelper.display({

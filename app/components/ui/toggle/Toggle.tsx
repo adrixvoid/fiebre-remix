@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { useState } from 'react';
 import { ButtonBase, ButtonBaseProps } from '../button/ButtonBase';
 import styles from './Toggle.module.css';
@@ -8,7 +9,7 @@ type ToggleProps = ButtonBaseProps & {
   onChange?: (checked: boolean) => void;
 }
 
-export function Toggle({ label, defaultChecked = false, onChange, ...props }: ToggleProps) {
+export function Toggle({ label, defaultChecked = false, onChange, size, ...props }: ToggleProps) {
   const [checked, setChecked] = useState(defaultChecked);
 
   const handleToggle = () => {
@@ -24,8 +25,9 @@ export function Toggle({ label, defaultChecked = false, onChange, ...props }: To
         role="switch"
         aria-checked={checked}
         data-state={checked ? 'checked' : 'unchecked'}
-        className={styles.toggle}
+        className={clsx(styles.toggle, styles[size || 'md'])}
         onClick={handleToggle}
+        size={size}
         {...props}
       >
         <span className={styles.thumb} />

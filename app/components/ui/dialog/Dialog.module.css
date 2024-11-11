@@ -20,7 +20,7 @@
   /* animation: slideIn 250ms forwards; */
 }
 
-.dialog.blockDialog {
+.blockDialog {
   background-color: hsl(var(--background) / 0.8);
 }
 

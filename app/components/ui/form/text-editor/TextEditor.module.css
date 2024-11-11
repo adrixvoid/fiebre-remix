@@ -26,7 +26,13 @@
 
 .button-group {
   display: flex;
-  background-color: hsl(var(--button));
+  gap: 0.5rem;
+  border-bottom: 1px solid hsl(var(--border));
+  padding: 0.1rem;
+}
+
+.button-group button:hover {
+  background-color: hsl(var(--button) / 0.5);
 }
 
 .wrapper {

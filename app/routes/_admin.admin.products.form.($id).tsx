@@ -18,7 +18,7 @@ import TextEditor from "~/components/ui/form/text-editor/TextEditor";
 import ValidateInput from "~/components/ui/form/ValidateInput";
 import { Section } from "~/components/ui/section/Section";
 
-import { actionAdminProduct, loaderAdminProduct, LoaderAdminProduct } from "~/server/controllers/products.controller";
+import { actionAdminProductForm, LoaderAdminProduct, loaderAdminProductForm } from "~/server/controllers/products.controller";
 
 import { Title } from "~/components/ui/text/Text";
 import useReferrer from "~/hooks/useReferrer";
@@ -28,8 +28,8 @@ import { ProductType } from "~/types/product";
 const priceHidden = atom(false);
 const currentProductType = atom("stock");
 
-export const loader: LoaderFunction = loaderAdminProduct;
-export const action: ActionFunction = actionAdminProduct;
+export const loader: LoaderFunction = loaderAdminProductForm;
+export const action: ActionFunction = actionAdminProductForm;
 
 export default function AdminProductForm() {
   const { category, product } = useLoaderData<typeof loader>() as LoaderAdminProduct;
@@ -42,7 +42,7 @@ export default function AdminProductForm() {
   return (
     <Section marginBottom>
       <Container>
-        <Title>{Boolean(product) ? "Edit Product" : "New Product"}</Title>
+        <Title as='h1' size='lg'>{Boolean(product) ? "Edit Product" : "New Product"}</Title>
         <ValidatedForm
           validator={productSchemaValidator}
           method="post"
@@ -146,7 +146,7 @@ export default function AdminProductForm() {
           <Fieldset>
             <input type="hidden" name="state" value={JSON.stringify(location.state) || ""} />
             <input type="hidden" name="referrer" value={referrer} />
-            <input type="hidden" id="id" name="id" value={product?._id} />
+            <input type="hidden" id="id" name="id" value={product?.id} />
             <InputSubmitValidator label="Save" />
           </Fieldset>
         </ValidatedForm>

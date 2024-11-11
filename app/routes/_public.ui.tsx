@@ -1,9 +1,10 @@
 import { LinksFunction } from '@remix-run/node';
-import { EllipsisVertical, Pencil, Trash, Trash2, User } from 'lucide-react';
+import { EllipsisVertical, Music, Pencil, Ticket, Trash2, User } from 'lucide-react';
 
 import { Button } from "~/components/ui/button/Button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardImageCover, CardPadding, CardTitle } from "~/components/ui/card/Card";
 import { Center } from '~/components/ui/center/Center';
+import { Chip } from '~/components/ui/chip/Chip';
 import { Container } from "~/components/ui/container/Container";
 import { Dialog, DialogCloseButton, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from '~/components/ui/dialog/Dialog';
 import { Drawer, DrawerCloseButton, DrawerContent, DrawerTrigger } from '~/components/ui/drawer/Drawer';
@@ -38,31 +39,41 @@ function ProductRoute() {
                         <span aria-hidden>Volver</span>
                     </a>
                 </nav>
+                <hr style={{ margin: "4rem 0" }} />
                 <div>
                     <div className="mt-10">
-                        <h1>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores</h1>
-                        <h2>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores</h2>
-                        <h3>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores</h3>
-                        <h4>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores</h4>
-                        <h5>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores</h5>
-                        <h6>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores</h6>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia quo omnis
-                            dolore tempore maxime minima illum blanditiis dolores quod nostrum officiis magni est non aut distinctio quisquam, saepe tenetur nisi!
-                        </p>
+                        <h2>Title</h2>
+                        <Title size="xxl">Hagamos que la magia suceda</Title>
+                        <Text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda, aliquam ducimus perspiciatis, quos eius voluptate, consequatur aspernatur ipsa provident excepturi maxime praesentium iure? Dicta commodi culpa illum sunt ratione. Fuga?</Text>
+                        <Title size="xl">Hagamos que la magia suceda</Title>
+                        <Text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda, aliquam ducimus perspiciatis, quos eius voluptate, consequatur aspernatur ipsa provident excepturi maxime praesentium iure? Dicta commodi culpa illum sunt ratione. Fuga?</Text>
+                        <Title size="lg">Hagamos que la magia suceda</Title>
+                        <Text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda, aliquam ducimus perspiciatis, quos eius voluptate, consequatur aspernatur ipsa provident excepturi maxime praesentium iure? Dicta commodi culpa illum sunt ratione. Fuga?</Text>
+                        <Title size="md">Hagamos que la magia suceda</Title>
+                        <Text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda, aliquam ducimus perspiciatis, quos eius voluptate, consequatur aspernatur ipsa provident excepturi maxime praesentium iure? Dicta commodi culpa illum sunt ratione. Fuga?</Text>
+                        <Title size="sm">Hagamos que la magia suceda</Title>
+                        <Text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda, aliquam ducimus perspiciatis, quos eius voluptate, consequatur aspernatur ipsa provident excepturi maxime praesentium iure? Dicta commodi culpa illum sunt ratione. Fuga?</Text>
+                        <Title size="xs">Hagamos que la magia suceda</Title>
+                        <Text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda, aliquam ducimus perspiciatis, quos eius voluptate, consequatur aspernatur ipsa provident excepturi maxime praesentium iure? Dicta commodi culpa illum sunt ratione. Fuga?</Text>
+                    </div>
+                    <div className="mt-10">
+                        <p>Officia quo omnis  dolore tempore maxime minima illum blanditiis dolores quod nostrum officiis magni est non aut distinctio quisquam, saepe tenetur nisi!</p>
                         <p>
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia quo omnis
                             dolore tempore maxime minima illum blanditiis dolores quod nostrum officiis magni est non aut distinctio quisquam, saepe tenetur nisi!
                         </p>
-                        <a href="#">Ver formas de pago</a>
                     </div>
+                    <hr style={{ margin: "4rem 0" }} />
                     <div className="mt-10">
-                        <Title size="xl">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores</Title>
-                        <Title size="lg">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores</Title>
-                        <Title size="md">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores</Title>
-                        <Title size="sm">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores</Title>
-                        <Text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda, aliquam ducimus perspiciatis, quos eius voluptate, consequatur aspernatur ipsa provident excepturi maxime praesentium iure? Dicta commodi culpa illum sunt ratione. Fuga?</Text>
-                        <Link href="#">Lorem ipsum</Link>
+                        <h2>Links</h2>
+                        <Flex>
+                            <Link href="#">Click here!</Link>
+                        </Flex>
+                        <Flex>
+                            <a href="#">Ver formas de pago</a>
+                        </Flex>
                     </div>
+                    <hr style={{ margin: "4rem 0" }} />
                     <div className="mt-10">
                         <h2>Contrast</h2>
 
@@ -83,6 +94,7 @@ function ProductRoute() {
                                 High Contrast</div>
                         </div>
                     </div>
+                    <hr style={{ margin: "4rem 0" }} />
                     <div className="mt-10">
                         <h2>Shadows</h2>
                         <div style={{
@@ -93,12 +105,11 @@ function ProductRoute() {
                             marginTop: 20,
                             flexWrap: "wrap"
                         }}>
-                            <hr />
-                            <Center variant="all" className="square shadow-sm"><Title>shadow-sm</Title></Center>
-                            <Center variant="all" className="square shadow-md"><Title>shadow-md</Title></Center>
-                            <Center variant="all" className="square shadow-lg"><Title>shadow-lg</Title></Center>
-                            <Center variant="all" className="square shadow-xl"><Title>shadow-xl</Title></Center>
-                            <Center variant="all" className="square shadow-inner"><Title>shadow-inner</Title></Center>
+                            <Center variant="all" className="square shadow-sm"><Text>shadow-sm</Text></Center>
+                            <Center variant="all" className="square shadow-md"><Text>shadow-md</Text></Center>
+                            <Center variant="all" className="square shadow-lg"><Text>shadow-lg</Text></Center>
+                            <Center variant="all" className="square shadow-xl"><Text>shadow-xl</Text></Center>
+                            <Center variant="all" className="square shadow-inner"><Text>shadow-inner</Text></Center>
                         </div>
                     </div>
                     <hr style={{ margin: "4rem 0" }} />
@@ -156,7 +167,8 @@ function ProductRoute() {
                     <hr style={{ margin: "4rem 0" }} />
                     <div className="mt-10">
                         <h2>Button Component</h2>
-                        <h5>Button Variants</h5>
+                        <div style={{ margin: "4rem 0" }} />
+                        <h3>Button Variants</h3>
                         <div style={{
                             display: "flex",
                             flexDirection: "row",
@@ -173,7 +185,8 @@ function ProductRoute() {
                             <Button variant="ghost">Ghost</Button>
                             <Button variant="link">Link</Button>
                         </div>
-                        <h5>Button Variant Disabled</h5>
+                        <div style={{ margin: "2rem 0" }} />
+                        <h3>Button Variant Disabled</h3>
                         <div style={{
                             display: "flex",
                             flexDirection: "row",
@@ -191,67 +204,62 @@ function ProductRoute() {
                             <Button disabled variant="ghost">Ghost</Button>
                             <Button disabled variant="link">Link</Button>
                         </div>
-                        <h5>Button Size</h5>
-                        <div style={{
-                            display: "flex",
-                            flexDirection: "row",
-                            alignItems: "center",
-                            gap: 20,
-                            marginTop: 20,
-                            flexWrap: "wrap"
-                        }}>
+                        <div style={{ margin: "2rem 0" }} />
+                        <h3>Button Size</h3>
+                        <Flex align='center'>
                             <Button size="sm">Small</Button>
                             <Button>Default</Button>
                             <Button size="lg">Large</Button>
-                        </div>
-                        <h5>Button Icon</h5>
-                        <div style={{
-                            display: "flex",
-                            flexDirection: "row",
-                            alignItems: "center",
-                            gap: 20,
-                            flexWrap: "wrap",
-                            paddingBottom: '4rem'
-                        }}>
-                            <Button aria-label="delete" size='sm'>
-                                User
-                            </Button>
-                            <Button aria-label="delete" size='sm'>
+                            <Button aria-label="Example button icon" size='sm'>
                                 <User />
-                                User
-                            </Button>
-                            <Button aria-label="delete" size='sm'>
-                                <User />
-                            </Button>
-                            <Button aria-label="delete">
-                                User
-                            </Button>
-                            <Button aria-label="delete">
-                                <User />
-                                User
-                            </Button>
-                            <Button aria-label="delete" size='lg'>
-                                User
-                            </Button>
-                            <Button aria-label="delete" size='lg'>
-                                <User />
-                                User
-                            </Button>
-
-                            <hr />
-                            <Button aria-label="delete" size='sm' variant='destructive'>
-                                <Trash />
                                 <span className="sr-only">Eliminar</span>
                             </Button>
-                            <Button aria-label="delete" variant='destructive'>
-                                <Trash />
+                            <Button aria-label="Example button icon">
+                                <User />
                                 <span className="sr-only">Eliminar</span>
                             </Button>
-                            <Button aria-label="delete" size='lg' variant='destructive'>
-                                <Trash />
+                            <Button aria-label="Example button icon" size='lg'>
+                                <User />
                                 <span className="sr-only">Eliminar</span>
                             </Button>
-
+                        </Flex>
+                        <div style={{ margin: "2rem 0" }} />
+                        <h3>Button comparison</h3>
+                        <Flex align='center'>
+                            <Button aria-label="example" size='sm'>
+                                User
+                            </Button>
+                            <Button aria-label="example" size='sm'>
+                                <User />
+                            </Button>
+                            <Button aria-label="example" size='sm'>
+                                <User />
+                                User
+                            </Button>
+                            <Button aria-label="example">
+                                User
+                            </Button>
+                            <Button aria-label="example">
+                                <User />
+                            </Button>
+                            <Button aria-label="example">
+                                <User />
+                                User
+                            </Button>
+                            <Button aria-label="example" size='lg'>
+                                User
+                            </Button>
+                            <Button aria-label="example" size='lg'>
+                                <User />
+                            </Button>
+                            <Button aria-label="example" size='lg'>
+                                <User />
+                                User
+                            </Button>
+                        </Flex>
+                        <div style={{ margin: "2rem 0" }} />
+                        <h3>More...</h3>
+                        <Flex align='center' style={{ flexWrap: 'wrap' }}>
                             <Button><Trash2 /> Default</Button>
                             <Button variant="primary"><Trash2 /> Primary</Button>
                             <Button variant="outline"><Trash2 /> Outline</Button>
@@ -266,7 +274,7 @@ function ProductRoute() {
                             <Button variant="destructive"><Trash2 /></Button>
                             <Button variant="ghost"><Trash2 /></Button>
                             <Button variant="link"><Trash2 /></Button>
-                        </div>
+                        </Flex>
                     </div>
                     <hr style={{ margin: "4rem 0" }} />
                     <h2>Inputs</h2>
@@ -291,36 +299,46 @@ function ProductRoute() {
                             <label htmlFor="test9-2">Textarea</label>
                             <TextArea id="test9-2" name="test9-2" value="Example 1" onChange={() => { }} />
                         </div>
+                        <div style={{ margin: "4rem 0" }} />
                         <div className="flex gap-4 mt-1">
+                            <h2>Checkbox</h2>
                             <Fieldset className="mt-4">
-                                <legend>Checkbox</legend>
+                                <legend>legend of checkboxes</legend>
                                 <FormBlock>
                                     <Input type="checkbox" label="Checkbox" id="markdown" name="markdown" defaultChecked={false} />
                                     <Input type="checkbox" label="Save as draft" id="draft" name="draft" defaultChecked={true} />
                                 </FormBlock>
                             </Fieldset>
-                            <Input id="test10" name="test10" type="checkbox" />
-                            {/* disabled */}
-                            <Input id="test101" name="test101" type="checkbox" disabled />
-                            {/* checked */}
-                            <Input id="test102" name="test102" type="checkbox" onChange={() => { }} checked />
-                            {/* checked disabled */}
-                            <Input id="test103" name="test103" type="checkbox" onChange={() => { }} checked disabled />
+                            <Flex>
+                                <FormBlock>
+                                    <Input id="test10" name="test10" type="checkbox" label='default' />
+                                    {/* disabled */}
+                                    <Input id="test101" name="test101" type="checkbox" label='disabled' disabled />
+                                    {/* checked */}
+                                    <Input id="test102" name="test102" type="checkbox" label='selected' onChange={() => { }} checked />
+                                    {/* checked disabled */}
+                                    <Input id="test103" name="test103" type="checkbox" label='selected disabled' onChange={() => { }} checked disabled />
+                                </FormBlock>
+                            </Flex>
                         </div>
+                        <div style={{ margin: "4rem 0" }} />
                         <div className="mt-1 flex gap-4">
-                            <Title>Radio</Title>
-                            <Input label="base" name="test-base" type="radio" value="1" onChange={() => { }} />
-                            <Input label="value default 0" name="test-base" type="radio" value="0" onChange={() => { }} />
-                            <Input label="checked" name="test-base" type="radio" value="2" onChange={() => { }} />
-                            {/* disabled */}
-                            <Input label="disabled value 1" id="test14" name="test-disabled" type="radio" value="1" onChange={() => { }} disabled />
-                            <Input label="disabled value 0" id="test15" name="test-disabled" type="radio" value="0" onChange={() => { }} disabled />
-                            <Input label="disabled checked" id="test16" name="test-disabled" type="radio" value="0" onChange={() => { }} disabled checked />
-                            {/* checked */}
+                            <h2>Radio</h2>
+                            <FormBlock>
+                                <Input label="base" name="test-base" type="radio" value="1" onChange={() => { }} />
+                                <Input label="value default 0" name="test-base" type="radio" value="0" onChange={() => { }} />
+                                <Input label="checked" name="test-base" type="radio" value="2" onChange={() => { }} />
+                                {/* disabled */}
+                                <Input label="disabled value 1" id="test14" name="test-disabled" type="radio" value="1" onChange={() => { }} disabled />
+                                <Input label="disabled value 0" id="test15" name="test-disabled" type="radio" value="0" onChange={() => { }} disabled />
+                                <Input label="disabled checked" id="test16" name="test-disabled" type="radio" value="0" onChange={() => { }} disabled checked />
+                                {/* checked */}
+                            </FormBlock>
                         </div>
+                        <hr style={{ margin: "4rem 0" }} />
                         <div className="mt-1 flex items-center gap-4">
-                            <label htmlFor="test22">File</label>
-                            <Input id="test22" name="test22" type="file" />
+                            <h2>File</h2>
+                            <Input label="Select one file" id="test22" name="test22" type="file" />
                         </div>
                     </div>
                     <hr style={{ margin: "4rem 0" }} />
@@ -421,7 +439,7 @@ function ProductRoute() {
                             </Dialog>
                         </Flex>
                     </div>
-                    <hr style={{ margin: "4rem 0" }} />
+                    <div style={{ margin: "4rem 0" }} />
                     <div>
                         <h3>Drawer</h3>
                         <Drawer>
@@ -478,12 +496,41 @@ function ProductRoute() {
                                 </DropdownContent>
                             </Dropdown>
                         </div>
+                        <hr style={{ margin: "4rem 0" }} />
                         <div style={{ margin: "2rem 0" }}>
                             <h3>Toggle</h3>
-                            <Toggle
-                                label="Notifications"
-                                onChange={(checked) => console.log(checked)}
-                            />
+                            <Flex>
+                                <Toggle
+                                    label="xs"
+                                    onChange={(checked) => console.log(checked)}
+                                    size='xs'
+                                />
+                                <Toggle
+                                    label="sm"
+                                    onChange={(checked) => console.log(checked)}
+                                    size='sm'
+                                />
+                                <Toggle
+                                    label="md"
+                                    onChange={(checked) => console.log(checked)}
+                                    size='md'
+                                />
+                                <Toggle
+                                    label="lg"
+                                    onChange={(checked) => console.log(checked)}
+                                    size='lg'
+                                />
+                            </Flex>
+                        </div>
+                        <div style={{ margin: "2rem 0" }}>
+                            <h3>Chip</h3>
+                            <Flex>
+                                <Chip variant='outlined'>Art</Chip>
+                                <Chip><Music /> Music</Chip>
+                                <Chip>Shows <Ticket size={20} /></Chip>
+                                <Chip onDismiss={() => console.log("dismiss")}>Dacing</Chip>
+                                <Chip variant='outlined' onDismiss={() => console.log("dismiss")}>Outlined</Chip>
+                            </Flex>
                         </div>
                     </div>
                 </div>
