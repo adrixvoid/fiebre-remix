@@ -13,7 +13,7 @@
     },
     "images": [],
     "tags": [""],
-    "active": true
+    "published": true
   },
   {
     "id": "2",
@@ -29,13 +29,13 @@
     },
     "images": [],
     "tags": [""],
-    "active": true
+    "published": true
   },
   {
     "id": "3",
     "title": "Planners 2023 - GRATIS!",
     "slug": "planners-2023-gratis",
-    "downloadUrl": "https://drive.google.com/drive/folders/17OxvIYMHkWNcaFRUjPFdi3bWOoXK2Cxs",
+    "externalUrl": "https://drive.google.com/drive/folders/17OxvIYMHkWNcaFRUjPFdi3bWOoXK2Cxs",
     "price": 0,
     "priceHidden": false,
     "preview": {
@@ -71,13 +71,13 @@
       }
     ],
     "tags": ["gratis"],
-    "active": true
+    "published": true
   },
   {
     "id": "4",
     "title": "Pink Kit - Plantillas para redes",
     "slug": "pink-kit-plantillas-para-redes",
-    "downloadUrl": "",
+    "externalUrl": "",
     "price": 3600,
     "priceHidden": false,
     "preview": {
@@ -119,13 +119,13 @@
       }
     ],
     "tags": ["plantillas", "instagram", "pink kit"],
-    "active": true
+    "published": true
   },
   {
     "id": "5",
     "title": "Vaporwave - Plantillas para redes",
     "slug": "vaporwave-plantillas-para-redes",
-    "downloadUrl": "",
+    "externalUrl": "",
     "price": 4000,
     "priceHidden": false,
     "preview": {
@@ -173,13 +173,13 @@
       }
     ],
     "tags": ["plantillas", "vaporwave"],
-    "active": true
+    "published": true
   },
   {
     "id": "6",
     "title": "Flower Power - Kit de dibujos",
     "slug": "flower-power-kit-de-dibujos",
-    "downloadUrl": "",
+    "externalUrl": "",
     "price": 3600,
     "priceHidden": false,
     "preview": {
@@ -227,6 +227,6 @@
       }
     ],
     "tags": [""],
-    "active": true
+    "published": true
   }
 ]

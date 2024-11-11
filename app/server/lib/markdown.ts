@@ -13,7 +13,7 @@ import {
   markdownTemplate
 } from '~/server/lib/front-matter';
 
-const markdownService = {
+const markdown = {
   readOne: async (url: string): Promise<MarkdownDocument | null> => {
     const locationPath = sanitizeUrl(url)
       .replace(/(^\/)|(\/$)/, '')
@@ -71,7 +71,7 @@ const markdownService = {
   }
 };
 
-export default markdownService;
+export default markdown;
 
 // export const getCategories = async (): Promise<Post[]> => {
 //   const fileNames = await fs.readdir(postPath);

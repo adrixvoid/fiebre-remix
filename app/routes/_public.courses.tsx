@@ -1,7 +1,7 @@
 import { json } from "@remix-run/node";
 import { Send } from "lucide-react";
 
-import markdownService from "~/server/services/markdown.service";
+import markdownService from "~/server/lib/markdown";
 
 import Button from "~/components/ui/button/Button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardPadding, CardTitle } from "~/components/ui/card/Card";

@@ -4,7 +4,7 @@ import { useLoaderData } from "@remix-run/react";
 import { ROUTE_PATH } from "~/constants";
 import type { Product } from "~/types/product";
 
-import { productService } from "~/server/services/products.service";
+import { productService } from "~/server/mongoose/products.model";
 
 import Button from "~/components/ui/button/Button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardImageCover, CardTitle } from "~/components/ui/card/Card";

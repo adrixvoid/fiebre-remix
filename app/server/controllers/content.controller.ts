@@ -6,7 +6,7 @@ import {
 
 import {slugify} from '~/lib/url';
 import {MarkdownDocument} from '~/server/lib/front-matter';
-import markdownService from '~/server/services/markdown.service';
+import markdownService from '~/server/lib/markdown';
 
 export const PARAMS = {
   ID: 'id'

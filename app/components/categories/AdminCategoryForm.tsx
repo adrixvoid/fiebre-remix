@@ -3,7 +3,7 @@ import { useAtom } from "jotai";
 import { ValidatedForm } from "remix-validated-form";
 
 import { AdminCategoryActionForm, CATEGORY_PARAMS } from "~/server/controllers/categories.controller";
-import { productValidator } from "~/server/zod/category.zod";
+import { categorySchemaValidator } from "~/server/zod/category.zod";
 import { Category } from "~/types/category";
 
 import Button from "~/components/ui/button/Button";
@@ -46,7 +46,7 @@ export default function AdminCategoryForm() {
                         <a href="#" onClick={() => history.back()}>Volver</a>
                     </Button>
                 </nav>
-                <ValidatedForm validator={productValidator} method="post" encType="multipart/form-data">
+                <ValidatedForm validator={categorySchemaValidator} method="post" encType="multipart/form-data">
                     {actionData?.error?.message && (
                         <div className="box paper message mt-1 bg-danger">
                             {getErrorText(actionData?.error?.message)}

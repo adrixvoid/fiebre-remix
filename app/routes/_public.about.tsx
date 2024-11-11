@@ -1,7 +1,7 @@
 import { json } from "@remix-run/node";
 import { MarkdownPage } from "~/components/markdown/Markdown";
 
-import markdownService from "~/server/services/markdown.service";
+import markdownService from "~/server/lib/markdown";
 
 export const loader = async () => {
     const markdownResult = await markdownService.readOneByType('pages', '2023-12-04-about');

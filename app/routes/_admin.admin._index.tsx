@@ -39,8 +39,8 @@ async function getUserData() {
 
 async function getProductData() {
   const [activeCount, inactiveCount] = await Promise.all([
-    prisma.product.count({ where: { active: true } }),
-    prisma.product.count({ where: { active: false } })
+    prisma.product.count({ where: { published: true } }),
+    prisma.product.count({ where: { published: false } })
   ])
 
   return {

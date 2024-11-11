@@ -10,18 +10,35 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Category {
+  id            String     @id @default(uuid())
+  name          String
+  image         String?
+  slug          String
+  path          String
+  parentId      String?
+  active        Boolean
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  parent        Category?  @relation("CategoryToSubcategory", fields: [parentId], references: [id], onDelete: Cascade)
+  subcategories Category[] @relation("CategoryToSubcategory")
+}
+
 model Product {
   id                    String                 @id @default(uuid())
   name                  String
-  slug                  String
   description           String?                @map("body")
-  preview               String? // Json
-  images                String                 @default("[]") // Json
-  downloadUrl           String? // filePath
-  tags                  String                 @default("[]") // Json
-  price                 Int                    @default(0)
   priceHidden           Boolean                @default(false)
-  active                Boolean                @default(true)
+  priceInCents          Int                    @default(0)
+  images                String                 @default("[]") // Json
+  primaryImage          Int                    @default(0)
+  tags                  String                 @default("[]") // Json
+  published             Boolean                @default(false)
+  slug                  String
+  productType           String // 'stock' | 'externalUrl' | 'file'
+  stock                 Int                    @default(0)
+  externalUrl           String?
+  localFile             String? // filePath
   createdAt             DateTime               @default(now())
   updatedAt             DateTime               @updatedAt
   orders                Order[]

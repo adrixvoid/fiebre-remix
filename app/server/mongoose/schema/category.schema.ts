@@ -3,7 +3,7 @@ import {createPath, slugify} from '~/lib/url';
 import {Category} from '~/types/category';
 
 export type CategoryDocument = Category & {
-  _id: mongoose.Document['_id'];
+  _id: mongoose.Schema.Types.ObjectId;
   parent?: CategoryDocument;
   subcategories: CategoryDocument[];
 };

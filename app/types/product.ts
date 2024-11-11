@@ -1,24 +1,33 @@
 import {MapFile, MapImage} from './file';
 
+// export type ProductType = 's
+export enum ProductType {
+  stock = 'stock',
+  externalUrl = 'externalUrl',
+  file = 'file'
+}
+
 export type Product = {
   _id: string;
   name: string;
   description?: string;
-  slug: string;
-  preview?: MapImage;
-  images: MapImage[];
-  price?: number;
-  priceInCents: number;
   priceHidden?: boolean;
-  productType: 'stock' | 'downloadUrl' | 'file';
-  stock?: number;
-  downloadUrl?: string;
-  file?: MapFile;
-  categories?: string[];
+  priceInCents: number;
+  images: MapImage[];
+  primaryImage: number;
   tags?: string[];
-  active: boolean;
+  published: boolean;
+  slug: string;
+
+  productType: keyof typeof ProductType;
+  stock: number;
+  externalUrl?: string;
+  localFile?: MapFile;
+
+  categoryId: string;
+  downloadVerification?: string[];
+  orders?: string[];
+
   createdAt?: Date;
   updatedAt?: Date;
-  orders?: string[];
-  downloadVerification?: string[];
 };

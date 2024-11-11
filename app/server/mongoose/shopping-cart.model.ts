@@ -1,4 +1,4 @@
-import shoppingCartModel from '../schema/shopping-cart.schema';
+import shoppingCartModel from '~/server/mongoose/schema/shopping-cart.schema';
 
 export const shoppingCartService = {
   update: async (form: {[k: string]: FormDataEntryValue}) => {

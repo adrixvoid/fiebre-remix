@@ -1,8 +1,9 @@
 import {createPath, slugify} from '~/lib/url';
 import {toObjectId} from '~/server/lib/mongoose';
-import {CategoryDocument} from '~/server/schema/category.schema';
+import categoryModel, {
+  CategoryDocument
+} from '~/server/mongoose/schema/category.schema';
 import type {Category} from '~/types/category';
-import categoryModel from '../schema/category.schema';
 
 async function updateSubcategoriesPath(
   newPath: string,

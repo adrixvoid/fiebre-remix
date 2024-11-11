@@ -5,10 +5,10 @@ export const InputSubmit = ({
   isSubmitting,
   label = "Submit",
 }: {
-  isSubmitting: boolean;
+  isSubmitting?: boolean;
   label?: string;
 }) => {
-  return <Button color="primary" type="submit" disabled={isSubmitting}>{isSubmitting ? "Submitting..." : label}</Button>;
+  return <Button asChild disabled={isSubmitting} variant='primary'><input type="submit" value={isSubmitting ? "Submitting..." : label} /></Button>;
 };
 
 export const InputSubmitValidator = ({

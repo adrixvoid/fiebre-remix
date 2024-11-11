@@ -8,7 +8,7 @@ import { Breadcrumb } from '~/types/breadcrumb';
 
 import { AdminCategoryLoaderList, CATEGORY_PARAMS, loaderAdminCategoriesList } from "~/server/controllers/categories.controller";
 import { PRODUCT_PARAMS } from "~/server/controllers/products.controller";
-import { CategoryDocument } from "~/server/schema/category.schema";
+import { CategoryDocument } from "~/server/mongoose/schema/category.schema";
 
 import AdminCategoryBreadcrumb from "~/components/categories/AdminCategoryBreadcrumb";
 import AdminProductsTable from "~/components/products/AdminProductsTable";

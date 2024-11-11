@@ -88,3 +88,5 @@ export async function deprecated_uploadFilesAction(
     return null;
   }
 }
+
+export default fileService;

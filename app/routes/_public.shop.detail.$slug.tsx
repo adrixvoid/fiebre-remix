@@ -7,7 +7,7 @@ import type { MapImage } from "~/types/file";
 import type { Product } from "~/types/product";
 
 import { parse } from '~/lib/marked';
-import productModel from '~/server/schema/product.schema';
+import productModel from '~/server/mongoose/schema/product.schema';
 
 import { ProductButtonAddToCart, ProductDescription, ProductGallery, ProductGrid, ProductImagePreview, ProductPrice, ProductQuantity, ProductTags, ProductTitle } from "~/components/products/detail/ProductDetail";
 import { Container } from "~/components/ui/container/Container";
@@ -82,12 +82,13 @@ function ProductPage() {
     return (
         <Section id="product-detail" marginBottom>
             <Container>
-
                 <ProductGrid>
-                    <div>
-                        <ProductImagePreview src={images?.[0].url} />
-                        <ProductGallery images={gallery} />
-                    </div>
+                    {images?.[0] &&
+                        <div>
+                            <ProductImagePreview src={images?.[0].url} />
+                            <ProductGallery images={gallery} />
+                        </div>
+                    }
                     <div>
                         <ProductTitle title={name} />
                         {!priceHidden && <ProductPrice priceInCents={priceInCents} />}

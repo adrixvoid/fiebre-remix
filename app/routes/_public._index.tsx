@@ -5,7 +5,7 @@ import { Send } from 'lucide-react';
 import { ROUTE_PATH } from "~/constants";
 import { Product } from "~/types/product";
 
-import productModel from '~/server/schema/product.schema';
+import productModel from '~/server/mongoose/schema/product.schema';
 
 import Button from "~/components/ui/button/Button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardImageCover, CardPadding, CardTitle } from "~/components/ui/card/Card";
@@ -146,11 +146,13 @@ export default function Index() {
           {products && products.map(product => {
             return (
               <Card as="article" key={product.name} border>
-                <CardPadding>
-                  <CardImageCover src={product.images?.[0].url}>
-                    <img src={product.images?.[0].url} alt={product.name} aria-hidden />
-                  </CardImageCover>
-                </CardPadding>
+                {product.images?.[0] &&
+                  <CardPadding>
+                    <CardImageCover src={product.images?.[0].url}>
+                      <img src={product.images?.[0].url} alt={product.name} aria-hidden />
+                    </CardImageCover>
+                  </CardPadding>
+                }
                 <CardHeader>
                   <CardTitle>{product.name}</CardTitle>
                 </CardHeader>

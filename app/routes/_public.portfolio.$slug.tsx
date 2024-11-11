@@ -3,7 +3,7 @@ import { json } from "@remix-run/node";
 
 import { ROUTE_PATH } from "~/constants";
 
-import markdownService from "~/server/services/markdown.service";
+import markdownService from "~/server/lib/markdown";
 
 import { MarkdownPage } from "~/components/markdown/Markdown";
 import Button from "~/components/ui/button/Button";

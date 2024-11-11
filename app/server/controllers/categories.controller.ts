@@ -12,10 +12,12 @@ import {type Breadcrumb} from '~/types/breadcrumb';
 import {type MapFile} from '~/types/file';
 import type {Product} from '~/types/product';
 
-import categoryModel, {CategoryDocument} from '~/server/schema/category.schema';
-import productModel from '~/server/schema/product.schema';
-import {categoryService} from '~/server/services/category.service';
-import {fileService} from '~/server/services/file.service';
+import {fileService} from '~/server/lib/file';
+import {categoryService} from '~/server/mongoose/category.model';
+import categoryModel, {
+  CategoryDocument
+} from '~/server/mongoose/schema/category.schema';
+import productModel from '~/server/mongoose/schema/product.schema';
 
 export interface CategoryFormFields {
   name?: string;

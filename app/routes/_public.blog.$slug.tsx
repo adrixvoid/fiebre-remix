@@ -1,7 +1,7 @@
 import type { LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 
-import markdownService from "~/server/services/markdown.service";
+import markdownService from "~/server/lib/markdown";
 
 import { MarkdownPage } from "~/components/markdown/Markdown";
 

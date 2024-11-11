@@ -16,14 +16,14 @@ const imageSchema = z
     'Only .jpg, .jpeg, .png and .webp formats are supported.'
   );
 
-export const validation = z.object({
-  id: z.string(),
-  name: z.string().min(1),
-  image: imageSchema.optional(),
-  parentId: z.string().optional(),
-  active: zfd.checkbox(),
-  categoryId: z.string().optional(),
-  referrer: z.string().optional()
-});
-
-export const productValidator = withZod(validation);
+export const categorySchemaValidator = withZod(
+  z.object({
+    id: z.string(),
+    name: z.string().min(1),
+    image: imageSchema.optional(),
+    parentId: z.string().optional(),
+    active: zfd.checkbox(),
+    categoryId: z.string().optional(),
+    referrer: z.string().optional()
+  })
+);

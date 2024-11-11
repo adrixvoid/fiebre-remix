@@ -134,18 +134,18 @@ export const loader = async () => {
                     "directory": "public/products"
                 }
             ],
-            "price": 0,
+            "primaryImage": 0,
             "priceInCents": 1500,
             "priceHidden": false,
             "productType": "stock",
-            "downloadUrl": "https://docs.google.com/forms/d/e/1FAIpQLSdpWD0uKQKe4U9yUbbWSEFl7ee3FdxeGaoQuGmnIztCZDA2rw/viewform",
-            "file": undefined,
-            "categories": [],
+            "stock": 0,
+            "externalUrl": "https://docs.google.com/forms/d/e/1FAIpQLSdpWD0uKQKe4U9yUbbWSEFl7ee3FdxeGaoQuGmnIztCZDA2rw/viewform",
+            "localFile": undefined,
+            "categoryId": undefined,
             "tags": ["kit"],
-            "active": true,
+            "published": true,
             "createdAt": new Date("2024-06-30T07:23:48.913Z"),
             "updatedAt": new Date("2024-10-31T00:20:17.902Z"),
-            "stock": 0
         },
         {
             "_id": "668109d6670c15f1cc7449ef",
@@ -202,15 +202,16 @@ export const loader = async () => {
                     "directory": "public/products"
                 }
             ],
-            "price": 0,
+            "primaryImage": 0,
             "priceInCents": 1500,
             "priceHidden": false,
-            "productType": "downloadUrl",
-            "downloadUrl": "https://docs.google.com/forms/d/e/1FAIpQLSdpWD0uKQKe4U9yUbbWSEFl7ee3FdxeGaoQuGmnIztCZDA2rw/viewform",
-            "file": undefined,
-            "categories": [],
+            "productType": "externalUrl",
+            "stock": 0,
+            "externalUrl": "https://docs.google.com/forms/d/e/1FAIpQLSdpWD0uKQKe4U9yUbbWSEFl7ee3FdxeGaoQuGmnIztCZDA2rw/viewform",
+            "localFile": undefined,
+            "categoryId": undefined,
             "tags": ["templates"],
-            "active": true,
+            "published": true,
             "createdAt": new Date("2024-06-30T07:31:34.418Z"),
             "updatedAt": new Date("2024-06-30T07:31:34.418Z")
         }];

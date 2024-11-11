@@ -1,6 +1,6 @@
-import { useField } from "remix-validated-form";
-import { Slot } from "@radix-ui/react-slot"
+import { Slot } from "@radix-ui/react-slot";
 import clsx from 'clsx';
+import { useField } from "remix-validated-form";
 
 import Input, { InputProps } from "./Input";
 

@@ -7,13 +7,13 @@ import {
 import {validationError} from 'remix-validated-form';
 
 import {ASSET_PATH, ROUTE_PATH_ADMIN} from '~/constants';
-import categoryModel from '~/server/schema/category.schema';
-import productModel from '~/server/schema/product.schema';
+import categoryModel from '~/server/mongoose/schema/category.schema';
+import productModel from '~/server/mongoose/schema/product.schema';
 import {Category} from '~/types/category';
 import {Product} from '~/types/product';
-import {fileService} from '../services/file.service';
-import {productService} from '../services/products.service';
-import {productValidator} from '../zod/products.zod';
+import {fileService} from '../lib/file';
+import {productService} from '../mongoose/products.model';
+import {productSchemaValidator} from '../zod/products.zod';
 
 export const PRODUCT_PARAMS = {
   PRODUCT_ID: 'id',
@@ -34,18 +34,19 @@ export async function loaderAdminProduct({
 }: LoaderFunctionArgs): Promise<LoaderAdminProduct> {
   const url = new URL(request.url);
   const productId = params[PRODUCT_PARAMS.PRODUCT_ID];
-  const categoryId = url.searchParams.get(PRODUCT_PARAMS.CATEGORY_ID);
+  let categoryId = url.searchParams.get(PRODUCT_PARAMS.CATEGORY_ID);
   const referrer = url.searchParams.get('referrer');
 
   let product = null;
+
   if (Boolean(productId)) {
     product = await productModel.findOne({_id: productId});
+    categoryId = product?.categoryId?.toString() || categoryId;
   }
 
   const categories = await categoryModel.find();
 
-  const toFilterId = product?.categories?.[0] || categoryId;
-  let category = categories.find((c) => c._id === toFilterId);
+  let category = categories.find((c) => c._id.toString() === categoryId);
 
   return {category, product, categories, referrer};
 }
@@ -59,15 +60,16 @@ export async function loaderAdminProductList({params}: LoaderFunctionArgs) {
 
 export async function actionAdminProduct({request}: ActionFunctionArgs) {
   const formData = await request.formData();
-  const validation = await productValidator.validate(formData);
+  const validation = await productSchemaValidator.validate(formData);
 
   if (validation.error) {
     return validationError(validation.error);
   }
 
-  let {referrer, toDelete, id, categoryId, ...data} = validation.data;
+  let {referrer, toDelete, id, ...data} = validation.data;
 
   let original = null;
+
   if (id) {
     original = await productModel.findById(id);
   }
@@ -83,16 +85,11 @@ export async function actionAdminProduct({request}: ActionFunctionArgs) {
   images = images.filter((img) => !toDelete.includes(img.filePath));
 
   let file = null;
-  if (data.file) {
-    file = await fileService.save(ASSET_PATH.PRODUCTS_PRIVATE, data.file);
+  if (data.localFile) {
+    file = await fileService.save(ASSET_PATH.PRODUCTS_PRIVATE, data.localFile);
   }
 
-  let categories: Product['categories'] = [];
-  if (categoryId) {
-    categories = [categoryId];
-  }
-
-  const toSave = Object.assign(data, {categories}, {images}, {file});
+  const toSave = Object.assign(data, {images}, {file});
 
   if (id) {
     await productService.update(toSave, id);
@@ -104,6 +101,17 @@ export async function actionAdminProduct({request}: ActionFunctionArgs) {
 
   return redirect(referrer || ROUTE_PATH_ADMIN.PRODUCT_LIST);
 }
+
+// export async function actionAdminProduct({request}: ActionFunctionArgs) {
+//   const formData = await request.formData();
+//   const validation = await productSchemaValidator.validate(formData);
+// const result = adminProductCreateSchema.safeParse(
+//   Object.fromEntries(formData)
+// );
+// if (!result.success) {
+//   return result.error.formErrors.fieldErrors;
+// }
+// }
 
 export async function actionAdminProductDelete({request}: ActionFunctionArgs) {
   let formData = await request.formData();
@@ -119,14 +127,3 @@ export async function actionAdminProductDelete({request}: ActionFunctionArgs) {
 
   return json({ok: true, category: deleted});
 }
-
-// export async function actionAdminProduct({request}: ActionFunctionArgs) {
-//   const formData = await request.formData();
-//   const validation = await productValidator.validate(formData);
-// const result = adminProductCreateSchema.safeParse(
-//   Object.fromEntries(formData)
-// );
-// if (!result.success) {
-//   return result.error.formErrors.fieldErrors;
-// }
-// }

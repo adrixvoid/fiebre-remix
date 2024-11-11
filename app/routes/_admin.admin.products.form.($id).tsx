@@ -3,7 +3,7 @@ import { useActionData, useLoaderData, useLocation } from "@remix-run/react";
 import { atom, useAtom } from 'jotai';
 
 import { ValidatedForm } from "remix-validated-form";
-import { productValidator } from "~/server/zod/products.zod";
+import { productSchemaValidator } from "~/server/zod/products.zod";
 
 import { CategorySelect } from "~/components/categories/CategorySelect";
 import { Container } from "~/components/ui/container/Container";
@@ -20,8 +20,10 @@ import { Section } from "~/components/ui/section/Section";
 
 import { actionAdminProduct, loaderAdminProduct, LoaderAdminProduct } from "~/server/controllers/products.controller";
 
+import { Title } from "~/components/ui/text/Text";
 import useReferrer from "~/hooks/useReferrer";
 import { t } from "~/i18n/translate";
+import { ProductType } from "~/types/product";
 
 const priceHidden = atom(false);
 const currentProductType = atom("stock");
@@ -40,16 +42,16 @@ export default function AdminProductForm() {
   return (
     <Section marginBottom>
       <Container>
-        <h1 className="h1 text-2xl font-600 tracking-tight">{Boolean(product) ? "Edit Product" : "New Product"}</h1>
+        <Title>{Boolean(product) ? "Edit Product" : "New Product"}</Title>
         <ValidatedForm
-          validator={productValidator}
+          validator={productSchemaValidator}
           method="post"
           encType="multipart/form-data"
         >
           <Fieldset>
             <FormBlock>
-              <ValidateInput name="title">
-                <Input type="text" label="Title" id="title" name="title" placeholder="Noche de Reyes" required defaultValue={product?.name} />
+              <ValidateInput name="name">
+                <Input type="text" label="Product Name" id="name" name="name" placeholder="My wonderful product!" required defaultValue={product?.name} />
               </ValidateInput>
             </FormBlock>
             <FormBlock>
@@ -92,27 +94,27 @@ export default function AdminProductForm() {
           <Fieldset>
             <legend>{t('PRODUCT.PRODUCT_TYPE')}</legend>
             <FormBlock variant="inline">
-              <Input type="radio" id="productType[stock]" name="productType" label="Physical Stock" value="stock" onChange={() => setProductType("stock")} checked={productType === "stock"} />
-              <Input type="radio" id="productType[downloadUrl]" name="productType" label="External URL" value="downloadUrl" onChange={() => setProductType("downloadUrl")} checked={productType === "downloadUrl"} />
-              <Input type="radio" id="productType[file]" name="productType" label="Download File" value="file" onChange={() => setProductType("file")} checked={productType === "file"} />
+              <Input type="radio" id={`productType[${ProductType.stock}]`} name="productType" label="Physical Stock" value="stock" onChange={() => setProductType(ProductType.stock)} checked={productType === ProductType.stock} />
+              <Input type="radio" id={`productType[${ProductType.externalUrl}]`} name="productType" label="External URL" value="externalUrl" onChange={() => setProductType(ProductType.externalUrl)} checked={productType === ProductType.externalUrl} />
+              <Input type="radio" id={`productType[${ProductType.file}]`} name="productType" label="Download File" value="file" onChange={() => setProductType(ProductType.file)} checked={productType === ProductType.file} />
             </FormBlock>
             <FormBlock>
-              {productType === "stock" && (
+              {productType === ProductType.stock && (
                 <ValidateInput name="stock">
-                  <Input type="text" key="stock" id="stock" name="stock" label='Stock' placeholder="0" defaultValue={product?.stock} />
+                  <Input type="text" key="stock" id="stock" name={ProductType.stock} label='Stock' placeholder="0" defaultValue={product?.stock} />
                 </ValidateInput>
               )}
-              {productType === "downloadUrl" && (
-                <ValidateInput name="downloadUrl">
-                  <Input type="text" key="downloadUrl" id="downloadUrl" name="downloadUrl" label='Download URL' placeholder="https://fiebrediseno.empretienda.com.ar/plantillas-para-redes/flower-power-kit-de-dibujos" defaultValue={product?.downloadUrl} />
+              {productType === ProductType.externalUrl && (
+                <ValidateInput name={ProductType.externalUrl}>
+                  <Input type="text" key="externalUrl" id="externalUrl" name={ProductType.externalUrl} label='Download URL' placeholder="https://fiebrediseno.empretienda.com.ar/plantillas-para-redes/flower-power-kit-de-dibujos" defaultValue={product?.externalUrl} />
                 </ValidateInput>
               )}
-              {productType === "file" && (
+              {productType === ProductType.file && (
                 <>
-                  <ValidateInput name="file">
-                    <Input type="file" label="File" id="file" name="file" />
+                  <ValidateInput name={ProductType.file}>
+                    <Input type="file" label="File" id="file" name={ProductType.file} />
                   </ValidateInput>
-                  <p className='mb-2'>{product?.file?.url}</p>
+                  <p className='mb-2'>{product?.localFile?.url}</p>
                 </>
               )}
             </FormBlock>
@@ -137,7 +139,7 @@ export default function AdminProductForm() {
           <hr />
           <Fieldset>
             <div className="inline-block">
-              <Input type="checkbox" label="Save as draft" id="draft" name="draft" defaultChecked={true} />
+              <Input type="checkbox" label="published product" id="published" name="published" defaultChecked={product?.published} />
             </div>
           </Fieldset>
 

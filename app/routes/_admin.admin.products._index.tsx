@@ -12,6 +12,7 @@ import Button from "~/components/ui/button/Button";
 import { Container } from "~/components/ui/container/Container";
 import { Link } from "~/components/ui/link/Link";
 import { Section } from "~/components/ui/section/Section";
+import { Skeleton } from "~/components/ui/skeleton/Skeleton";
 import AdminTable from "~/components/ui/table/AdminTable";
 import { TableCellAction, TableHeadAction } from "~/components/ui/table/Table";
 import { Toggle } from "~/components/ui/toggle/Toggle";
@@ -28,7 +29,7 @@ const columns = [
   columnHelper.accessor('images', {
     id: 'images',
     header: () => <span>{t('IMAGE')}</span>,
-    cell: (props) => <img src={props.row.original.images?.[0].url} className="admin-banner-preview rounded-md" />
+    cell: (props) => props.row.original.images?.[0] ? <img src={props.row.original.images?.[0].url} className="admin-banner-preview rounded-md" /> : <Skeleton>No image</Skeleton>
   }),
   columnHelper.accessor('name', {
     id: 'name',
@@ -40,10 +41,12 @@ const columns = [
     header: () => <span>{t('PRODUCT.PRICE')}</span>,
     cell: props => formatCurrency(props.getValue() || 0)
   }),
-  columnHelper.accessor('active', {
-    id: 'active',
+  columnHelper.accessor('published', {
+    id: 'published',
     header: () => <span>{t('PRODUCT.AVAILABLE_FOR_PURCHASE')}</span>,
-    cell: props => <Toggle defaultChecked={props.getValue()} onChange={(checked) => console.log(checked)} size='sm' />
+    cell: props => {
+      return <Toggle defaultChecked={props.getValue()} onChange={(checked) => console.log(checked)} size='sm' />
+    }
   }),
   columnHelper.display({
     id: 'actions',
