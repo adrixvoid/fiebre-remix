@@ -36,7 +36,7 @@ export const ProductSchema = z.object({
   ]),
   stock: z.coerce.number().int().optional(),
   externalUrl: z.string().url().optional(),
-  localFile: z.instanceof(File).optional(),
+  storedFile: z.instanceof(File).optional(),
 
   categoryId: z.string()
 });
@@ -79,7 +79,7 @@ export const productSchemaValidator = withZod(
     .refine(
       (data) =>
         data.productType === ProductType.file
-          ? Boolean(data?.localFile?.size)
+          ? Boolean(data?.storedFile?.size)
           : true,
       {
         message: 'File Required',

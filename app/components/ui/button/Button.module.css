@@ -6,8 +6,8 @@
     flex-shrink: 0;
 
     gap: 0.5em;
-    padding-left: .5em;
-    padding-right: .5em;
+    padding-left: .8em;
+    padding-right: .8em;
     line-height: 1.8;
 
     border-style: solid;
@@ -32,12 +32,8 @@ a.button {
     text-decoration: none !important;
 }
 
-.button:active {
-    animation: fade-in-out 500ms forwards;
-}
-
 .button:focus-visible {
-    outline: 2px solid hsl(var(--ring));
+    outline: 4px solid hsl(var(--ring));
     outline-offset: 2px;
 }
 
@@ -51,10 +47,9 @@ a.button {
 
 .button svg {
     max-width: 1.5cap;
-    margin-left: 0.5cap;
 }
 
-.button:hover svg {
+.button:active svg {
     scale: 1.05;
 }
 
@@ -75,6 +70,10 @@ a.button {
     background-color: color-mix(in hsl shorter hue, hsl(var(--button)), white 20%);
 }
 
+.base:active {
+    background-color: color-mix(in hsl shorter hue, hsl(var(--button)), black 2%);
+}
+
 .primary {
     border-color: hsl(var(--primary));
     background-color: hsl(var(--primary));
@@ -85,17 +84,41 @@ a.button {
     background-color: hsl(var(--primary) / 0.8);
 }
 
+.primary:active {
+    background-color: color-mix(in hsl shorter hue, hsl(var(--primary)), black 4%);
+}
+
 .outline {
     background-color: transparent;
-    color: hsl(var(--foreground));
+    color: hsl(var(--foreground) / 0.8);
     fill: currentColor;
-    border-color: hsl(var(--foreground) / 0.4);
+    border-color: hsl(var(--foreground) / 0.2);
     text-underline-offset: 4px;
     text-decoration: none;
 }
 
 .outline:hover {
+    color: hsl(var(--foreground));
+    border-color: hsl(var(--foreground) / 0.5);
+}
+
+.outline:active {
+    border-color: hsl(var(--button-foreground));
+    color: hsl(var(--button-foreground));
     fill: currentColor;
+}
+
+@media (prefers-color-scheme: dark) {
+    .outline {
+        border-color: hsl(var(--foreground));
+        color: hsl(var(--foreground));
+        opacity: 0.8;
+    }
+
+    .outline:hover {
+        opacity: 1;
+        fill: currentColor;
+    }
 }
 
 .dashed {
@@ -118,15 +141,10 @@ a.button {
     fill: currentColor;
 }
 
-.ghost:focus,
-.ghost:focus-within {
+.ghost:active {
     color: hsl(var(--button-foreground));
     fill: currentColor;
     /* box-shadow: var(--ring-0); */
-}
-
-.ghost {
-    background-color: transparent;
 }
 
 .link {
@@ -160,12 +178,16 @@ a.button {
 .destructive {
     fill: currentColor;
     border-color: hsl(var(--destructive));
-    background-color: hsl(var(--destructive));
+    background-color: hsl(var(--destructive) / 0.95);
     color: hsl(var(--destructive-foreground));
 }
 
 .destructive:hover {
-    background-color: hsl(var(--destructive) / .9);
+    background-color: hsl(var(--destructive) / .85);
+}
+
+.destructive:active {
+    background-color: hsl(var(--destructive));
 }
 
 /**
@@ -216,24 +238,6 @@ a.button {
 @media (prefers-color-scheme: dark) {
     .primary:hover {
         background-color: hsl(var(--primary) / 0.8);
-    }
-
-    .outline {
-        border-color: white;
-    }
-}
-
-@keyframes fade-in-out {
-    25% {
-        box-shadow: 0 2px 0 hsl(var(--shadow-color));
-    }
-
-    50% {
-        box-shadow: 0 2px 0 transparent;
-    }
-
-    75% {
-        box-shadow: 0 2px 0 hsl(var(--shadow-color));
     }
 }
 

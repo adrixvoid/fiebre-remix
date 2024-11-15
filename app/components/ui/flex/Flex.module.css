@@ -1,8 +1,14 @@
 .flex {
   display: flex;
-  flex-wrap: wrap;
   width: 100%;
   gap: 1rem;
+  flex-wrap: wrap;
+}
+
+@media (min-width: 768px) {
+  .flex {
+    flex-wrap: nowrap;
+  }
 }
 
 .align-start {
@@ -50,7 +56,11 @@
 }
 
 .wrap {
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+}
+
+.noWrap {
+  flex-wrap: nowrap;
 }
 
 

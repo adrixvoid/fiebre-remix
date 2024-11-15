@@ -23,6 +23,7 @@
 
 .markdown-content {
   margin-inline: auto;
+  color: hsl(var(--high-contrast));
 }
 
 .markdown-content>*:not(img),
@@ -52,7 +53,7 @@
 }
 
 .markdown-content>*:not(img) {
-  margin-bottom: 2rem;
+  margin-block: 2rem;
 }
 
 .markdown-content figure {

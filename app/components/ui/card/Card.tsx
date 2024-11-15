@@ -46,15 +46,13 @@ const CardHeader = React.forwardRef<
 ))
 CardHeader.displayName = "CardHeader"
 
-const CardTitle = React.forwardRef<
-  HTMLParagraphElement,
-  TitleProps
->(({ className, ...props }, ref) => (
+const CardTitle = ({ className, ...props }: TitleProps) => (
   <Title
     className={clsx(styles.title, className)}
     {...props}
   />
-))
+)
+
 CardTitle.displayName = "CardTitle"
 
 const CardDescription = (({ className, ...props }: TextProps) => (
@@ -115,9 +113,10 @@ const CardImageCover = React.forwardRef<
     src?: string;
     alt?: string;
   }
->(({ className, src, alt, style, ...props }, ref) => (
+>(({ className, src, alt, style, children, ...props }, ref) => (
   <div ref={ref} className={clsx(styles['image-cover'], className)} style={{ backgroundImage: `url(${src})`, ...style }} {...props}>
     <span className="sr-only">{alt}</span>
+    {children}
   </div>
 ))
 CardImageCover.displayName = "CardImageCover"

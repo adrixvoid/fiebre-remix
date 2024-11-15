@@ -1,0 +1,80 @@
+.item {
+  aspect-ratio: 1 / 1;
+  box-sizing: border-box;
+  position: relative;
+  animation: scaleUp 250ms;
+  width: 100%;
+}
+
+.card {
+  overflow: hidden;
+}
+
+@media (width >=768px) {
+  .image {
+    aspect-ratio: 1 / 1;
+  }
+}
+
+.footer {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  bottom: 0;
+  background-color: hsl(var(--background) / 90%);
+  text-align: center;
+  opacity: 0;
+}
+
+.title {
+  text-align: center;
+  width: 100%;
+  font-size: 2cqw;
+}
+
+
+@keyframes scaleUp {
+  from {
+    transform: scale(0);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes scaleDown {
+  from {
+    display: block;
+    transform: scale(1);
+  }
+
+  to {
+    display: none;
+    transform: scale(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(100dvh);
+  }
+}
+
+@keyframes fade {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+}

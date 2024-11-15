@@ -1,42 +1,37 @@
 import { useLoaderData } from "@remix-run/react";
 
-import { MarkdownDocument } from "~/server/lib/front-matter";
 import markdownService from "~/server/lib/markdown";
 
-import Button from "~/components/ui/button/Button";
-import { Card, CardFooter, CardHeader, CardImageCover, CardPadding, CardTitle } from "~/components/ui/card/Card";
+import { Card, CardContent, CardImageCover, CardTitle } from "~/components/ui/card/Card";
 import { Container } from "~/components/ui/container/Container";
 import { Grid } from "~/components/ui/grid/Grid";
+import { Link } from "~/components/ui/link/Link";
 import { Section } from "~/components/ui/section/Section";
 import { ROUTE_PATH } from "~/constants";
+import { Portfolio } from "~/types/portfolio";
 
 export const loader = async () => {
-  const documents = await markdownService.readAllByType('portfolio');
+  const documents = await markdownService.readAllByType<Portfolio>('portfolio');
   return { documents }
 };
 
 function PortfolioPage() {
-  const { documents } = useLoaderData<typeof loader>() as { documents: MarkdownDocument[] };
+  const { documents } = useLoaderData<typeof loader>() as { documents: Portfolio[] };
 
   return (
     <Section id="portfolio" marginBottom>
       <Container>
-        <Grid columns={4}>
+        <Grid columns="4" style={{ gap: 4 }}>
           {documents.map((content) => (
             <article key={content.title}>
-              <Card>
-                <CardPadding>
-                  <CardImageCover src={content.preview} alt={content.title} aria-hidden />
-                </CardPadding>
-                <CardHeader>
-                  <CardTitle>{content.title}</CardTitle>
-                </CardHeader>
-                <CardPadding></CardPadding>
-                <CardFooter>
-                  <Button to={`${ROUTE_PATH.PORTFOLIO}/${content.slug}`}>
-                    More...
-                  </Button>
-                </CardFooter>
+              <Card style={{ overflow: "hidden", borderRadius: 'none' }}>
+                <CardImageCover src={content.preview} alt={content.title} aria-hidden style={{ position: 'relative', overflow: "hidden", }}>
+                  <CardContent style={{ position: 'absolute', width: "100%", bottom: 0, overflow: "hidden" }}>
+                    <Link to={`${ROUTE_PATH.PORTFOLIO}/${content.slug}`}>
+                      <CardTitle size='xs' style={{ color: 'hsl(var(--high-contrast))' }} >{content.title}</CardTitle>
+                    </Link>
+                  </CardContent>
+                </CardImageCover>
               </Card>
             </article>
           ))}

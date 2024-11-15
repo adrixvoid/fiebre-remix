@@ -1,0 +1,51 @@
+body {
+  background-image: url('/assets/nebulosa.svg');
+  background-position: center;
+  background-repeat: repeat;
+}
+
+.grid {
+  margin-top: 4rem;
+}
+
+.grid .article {
+  transition: opacity 250ms ease-in;
+}
+
+.grid:hover .article:not(:hover) {
+  opacity: 0.8;
+}
+
+.filter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.filter a {
+  display: inline-block;
+  margin-bottom: 0;
+}
+
+.filter span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.filter span:first-child {
+  display: none;
+}
+
+.filter span img {
+  min-height: 1cap;
+  aspect-ratio: 1 / 1;
+  display: inline;
+  translate: 0 -0.2em;
+}
+
+.filter a.active {
+  color: hsl(var(--primary));
+}

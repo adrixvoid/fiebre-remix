@@ -26,7 +26,8 @@ const flexVariants = cva(
       'direction-column': styles['mobile-column']
     },
     wrap: {
-      wrap: styles.wrap
+      wrap: styles.wrap,
+      no: styles.noWrap
     }
   },
   defaultVariants: {

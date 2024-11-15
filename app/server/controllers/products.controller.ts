@@ -7,12 +7,13 @@ import {
 import {validationError} from 'remix-validated-form';
 
 import {ASSET_PATH, ROUTE_PATH_ADMIN} from '~/constants';
+import {slugify} from '~/lib/url';
 import categoryModel from '~/server/mongoose/schema/category.schema';
 import productModel from '~/server/mongoose/schema/product.schema';
+import {productService} from '~/server/services/products.service';
 import {Category} from '~/types/category';
 import {Product} from '~/types/product';
 import {fileService} from '../lib/file';
-import {productService} from '../mongoose/products.model';
 import {productSchemaValidator} from '../zod/products.zod';
 
 export const PRODUCT_PARAMS = {
@@ -68,13 +69,14 @@ export async function actionAdminProductForm({request}: ActionFunctionArgs) {
 
   let {referrer, toDelete, id, ...data} = validation.data;
 
-  let original = null;
+  let dataFromDB = null;
 
   if (id) {
-    original = await productModel.findById(id);
+    dataFromDB = await productModel.findById(id);
   }
 
-  let images = original && Boolean(original?.images) ? original.images : [];
+  let images =
+    dataFromDB && Boolean(dataFromDB?.images) ? dataFromDB.images : [];
   if (data.images) {
     const newImages = await fileService.saveAll(
       ASSET_PATH.PRODUCTS,
@@ -85,11 +87,20 @@ export async function actionAdminProductForm({request}: ActionFunctionArgs) {
   images = images.filter((img) => !toDelete.includes(img.filePath));
 
   let file = null;
-  if (data.localFile) {
-    file = await fileService.save(ASSET_PATH.PRODUCTS_PRIVATE, data.localFile);
+  if (data.storedFile) {
+    file = await fileService.save(ASSET_PATH.PRODUCTS_PRIVATE, data.storedFile);
   }
 
-  const toSave = Object.assign(data, {images}, {file});
+  const tags = data.tags && typeof data.tags === 'string' ? [data.tags] : [];
+
+  const toSave = Object.assign(data, {
+    slug: slugify(data.slug || data.name),
+    primaryImage: 0,
+    tags,
+    stock: data.stock || 0,
+    storedFile: file,
+    images
+  });
 
   if (id) {
     await productService.update(toSave, id);

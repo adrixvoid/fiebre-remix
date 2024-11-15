@@ -3,7 +3,7 @@
   margin: 0 auto;
   padding: 0 2rem;
   position: relative;
-  max-width: 1440px;
+  max-width: clamp(100%, 1440px, 100vw);
 }
 
 @media (min-width: 1024px) {

@@ -27,6 +27,7 @@
     --border: 286.67 13.25% 88.99%;
     --input: 0 0% 99%;
     --ring: 274.73 78.73% 55.11%;
+    --ring: 274.73 100% 63.73%;
     --radius: 0.5rem;
 
     --accent-bg: var(--color-brand);
@@ -92,21 +93,22 @@
       --color-success: 120, 71%, 43%;
       --color-warning: 58, 92%, 50%;
 
-      --high-contrast: 269, 100%, 38%;
-      --medium-contrast: 260, 32%, 20%;
-      --low-contrast: 260, 28%, 25%;
+      --high-contrast: 265 100% 94%;
+      --medium-contrast: 264 29% 37%;
+      --low-contrast: 265.38, 44.24%, 22.49%;
 
       --shadow-color: 264.11 100% 24%;
       --shadow-color: 264.11 100% 13.86%;
 
-      --color-info-background: 201, 96%, 32%;
-      --color-info-foreground: 204, 94%, 94%;
-      --color-warning-background: 32, 81%, 29%;
-      --color-warning-foreground: 48, 96%, 89%;
+      --color-info-background: 0deg 0% 11.58%;
+      --color-info-background: 0deg 0% 8.04%;
+      --color-info-foreground: 179.19deg 100% 50%;
+      --color-warning-background: 0deg 0% 8.04%;
+      --color-warning-foreground: 62.88deg 100% 50%;
       --color-danger-background: 0, 74%, 42%;
       --color-danger-foreground: 0, 96%, 89%;
-      --color-success-background: 163.87, 47.76%, 26.27%;
-      --color-success-foreground: 142, 76%, 87%;
+      --color-success-background: 0deg 0% 8.24%;
+      --color-success-foreground: 142deg 100% 50%;
       --color-light-background: 215, 28%, 17%;
       --color-light-foreground: 220, 14%, 96%;
       --color-dark-background: 220, 14%, 96%;

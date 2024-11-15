@@ -324,7 +324,7 @@ function ProductRoute() {
                         </Flex>
                         <div style={{ margin: "2rem 0" }} />
                         <h3>Radius</h3>
-                        <Flex align='center' style={{ margin: "2rem 0", flexWrap: 'wrap' }}>
+                        <Flex align='center' style={{ margin: "2rem 0" }}>
                             <Button variant="outline" radius='sm'><ShoppingCart /> Button Radius sm</Button>
                             <Button variant="outline" radius='md'><ShoppingCart /> Button Radius md</Button>
                             <Button variant="outline" radius='lg'><ShoppingCart /> Button Radius lg</Button>
@@ -596,7 +596,7 @@ function ProductRoute() {
                         </div>
                         <div style={{ margin: "2rem 0" }}>
                             <h3>Chip</h3>
-                            <Flex align='center' wrap="wrap">
+                            <Flex align='center'>
                                 <Chip variant='outlined'>Art</Chip>
                                 <Chip onDismiss={() => console.log("dismiss")} variant='outlined'><Music size={16} /> Art</Chip>
                                 <Chip><Music size={16} /> Music</Chip>

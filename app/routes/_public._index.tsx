@@ -34,12 +34,15 @@ export default function Index() {
 
   return (
     <Section>
+      <div className="background-gradients">
+
+      </div>
       <div className="hero">
-        <Skeleton height="70vh" style={{ maxHeight: 711, minHeight: 500 }}>
+        <Center variant="all" style={{ height: "70vh", maxHeight: 711, minHeight: 500 }}>
           <Container>
             <h1>Hagamos que la magia suceda!</h1>
           </Container>
-        </Skeleton>
+        </Center>
       </div>
       <Container style={{ marginTop: "2.5rem" }}>
         <Grid>

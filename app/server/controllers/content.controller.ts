@@ -24,7 +24,7 @@ const prepareMarkdownInsert = (formData: {
 });
 
 export async function contentAction({request}: ActionFunctionArgs) {
-  const clonedRequest = request.clone();
+  // const clonedRequest = request.clone();
   const formData = await request.formData();
   const fromEntries = Object.fromEntries(formData);
   const insertData = {
@@ -45,9 +45,14 @@ export async function contentAction({request}: ActionFunctionArgs) {
   // });
 
   Object.assign(insertData, prepareMarkdownInsert(fromEntries));
-  await markdownService.create(insertData);
+  const success = await markdownService.create(insertData);
 
-  return redirect('/admin/markdown/create', {status: 303});
+  if (success) {
+    redirect('/admin/markdown/create', {status: 303});
+  } else {
+    console.error(insertData);
+    throw new Error('Could not create the content');
+  }
 }
 
 export interface LoaderAdminContent {

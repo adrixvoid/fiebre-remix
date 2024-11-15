@@ -1,31 +1,14 @@
-import path from 'path';
-import fs from 'fs/promises';
 import fm from 'front-matter';
+import fs from 'fs/promises';
+import path from 'path';
 import {slugify} from '~/lib/url';
 
 export type MarkdownType = string;
 
 export type MarkdownDocument = {
-  slug: string;
   title: string;
-  draft?: boolean;
-  tags?: string[];
-  preview?: string;
-  categories?: string;
-  body?: string;
-};
-
-export interface MarkdownPost extends MarkdownDocument {
-  type: string;
-  images?: {
-    name: string;
-    url: string;
-  }[];
-}
-
-export type FMAttributes = {
-  title: string;
-  categories: string;
+  slug?: string;
+  body: string;
 };
 
 export type FMConfigPageFolders = {
@@ -106,32 +89,27 @@ export async function getPath(type: MarkdownType): Promise<string | null> {
 
 export const isValidMarkdownAttributes = (
   attributes: any
-): attributes is FMAttributes => {
+): attributes is MarkdownDocument => {
   return typeof attributes.title === 'string';
 };
 
-export async function readMarkdownFile(
-  path: string
-): Promise<MarkdownDocument> {
+export async function readMarkdownFile<T>(path: string) {
   const file = await fs.readFile(path, 'utf-8');
-  const {attributes, body} = fm<MarkdownDocument>(file.toString());
+  let {attributes, body} = fm<T>(file.toString());
 
   if (!isValidMarkdownAttributes(attributes)) {
     throw new Error('Invalid attributes');
   }
 
+  attributes.slug = attributes.slug || slugify(attributes.title);
+
   return {
-    slug: path.replace('.md', '').split('/').pop() || path.replace('.md', ''),
-    title: attributes.title,
-    categories: attributes.categories,
-    preview: attributes.preview,
+    ...attributes,
     body: body || ''
   };
 }
 
-export async function getDocuments(
-  type: MarkdownType
-): Promise<MarkdownDocument[]> {
+export async function getDocumentsByType<T>(type: MarkdownType): Promise<T[]> {
   try {
     const route = await getPath(type);
 
@@ -141,11 +119,11 @@ export async function getDocuments(
     const documents = await Promise.all(
       fileNames
         .map(async (fileName) => {
-          return await readMarkdownFile(path.join(route, fileName));
+          return await readMarkdownFile<T>(path.join(route, fileName));
         })
         .filter(Boolean)
     );
-    return documents as MarkdownDocument[];
+    return documents;
   } catch (error) {
     throw new Error(`Could not get content: ${error.message}`);
   }
@@ -165,20 +143,21 @@ export async function getDocument(
   return markdownDocument;
 }
 
-export const markdownTemplate = ({
-  title,
-  categories,
-  preview,
+export function markdownTemplate<T extends Record<string, any>>({
   body,
-  images,
-  draft
-}: MarkdownPost): string => `---
-title: ${title}
-slug: ${slugify(title)}
-categories: ${categories}
-preview: ${preview}
-draft: ${draft}
-images: ${JSON.stringify(images)}
----
-${body}
-`;
+  ...attributes
+}: T & MarkdownDocument): string {
+  let markdown = '---\n';
+
+  // Iterate over attributes and generate front matter
+  for (const [key, value] of Object.entries(attributes)) {
+    if (typeof value === 'object') {
+      markdown += `${key}: ${JSON.stringify(value)}\n`; // Serialize objects/arrays
+    } else {
+      markdown += `${key}: ${value}\n`;
+    }
+  }
+
+  markdown += `---\n\n${body}`;
+  return markdown;
+}

@@ -28,7 +28,7 @@ export const schema = new Schema<ProductDocument>(
     },
     stock: {type: Number, default: 0},
     externalUrl: String,
-    localFile: String,
+    storedFile: String,
 
     categoryId: {type: mongoose.Schema.Types.ObjectId, ref: 'Category'},
     createdAt: {type: Date, default: Date.now},

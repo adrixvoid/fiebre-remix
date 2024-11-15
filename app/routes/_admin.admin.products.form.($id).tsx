@@ -115,7 +115,7 @@ export default function AdminProductForm() {
                   <ValidateInput name={ProductType.file}>
                     <Input type="file" label="File" id="file" name={ProductType.file} />
                   </ValidateInput>
-                  <p className='mb-2'>{product?.localFile?.url}</p>
+                  <p className='mb-2'>{product?.storedFile?.url}</p>
                 </>
               )}
             </FormBlock>

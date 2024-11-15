@@ -13,11 +13,11 @@ import {type MapFile} from '~/types/file';
 import type {Product} from '~/types/product';
 
 import {fileService} from '~/server/lib/file';
-import {categoryService} from '~/server/mongoose/category.model';
 import categoryModel, {
   CategoryDocument
 } from '~/server/mongoose/schema/category.schema';
 import productModel from '~/server/mongoose/schema/product.schema';
+import {categoryService} from '~/server/services/category.service';
 
 export interface CategoryFormFields {
   name?: string;

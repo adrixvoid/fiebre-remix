@@ -22,7 +22,7 @@ export type Product = {
   productType: keyof typeof ProductType;
   stock: number;
   externalUrl?: string;
-  localFile?: MapFile;
+  storedFile?: MapFile;
 
   categoryId: string;
   downloadVerification?: string[];

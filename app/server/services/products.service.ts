@@ -1,24 +1,14 @@
 import {z} from 'zod';
-import {slugify} from '~/lib/url';
 import {toObjectId} from '~/server/lib/mongoose';
 import productModel from '~/server/mongoose/schema/product.schema';
+import {Product} from '~/types/product';
 import {ProductSchema} from '../zod/products.zod';
 
 export const productService = {
   find: async () => {
     return productModel.find().lean();
   },
-  create: async (form: z.infer<typeof ProductSchema>) => {
-    form.slug = slugify(form.slug || form.name);
-
-    // if (form.tags) {
-    //   if (form.tags instanceof String) {
-    //     form.tags = [form.tags] as string[];
-    //   }
-    // } else {
-    //   form.tags = [];
-    // }
-
+  create: async (form: Omit<Product, 'id'>) => {
     const model = await productModel.create(form);
     if (!model) {
       throw new Error('Could not save the record');

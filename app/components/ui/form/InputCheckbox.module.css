@@ -6,7 +6,7 @@
   height: 1cap;
   padding: 0.5rem;
 
-  border-radius: var(--radius-sm);
+  border-radius: .15em;
   border-width: 1px;
   box-shadow: 0 0 0 1px hsl(var(--border));
   border-style: solid;

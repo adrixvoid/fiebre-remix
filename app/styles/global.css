@@ -61,26 +61,13 @@ body {
   scrollbar-gutter: stable;
 }
 
-button,
-img,
-figure,
-svg {
-  user-select: none;
-}
-
 pre {
-  padding: 1rem;
-  background: hsl(var(--card));
-  border: 1px solid var(--border);
-  margin: 2.5rem 0;
-  line-height: 1.5;
+  background-color: hsl(var(--card));
+  border-color: var(--border);
 }
 
 hr {
-  border: none;
-  border-top: 1px solid hsl(var(--border));
-  width: 100%;
-  display: block;
+  border-top-color: hsl(var(--border));
 }
 
 nav ul,
@@ -92,6 +79,10 @@ nav ol {
 /**
 * Global classes
 */
+
+.background-gradients {
+  background-image: radial-gradient(closest-side at 50% 50%, #ff4785, rgba(255, 71, 133, 0)), url(/home/texture.svg);
+}
 
 .sr-only {
   position: absolute;

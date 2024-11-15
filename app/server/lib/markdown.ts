@@ -3,15 +3,21 @@ import path from 'path';
 
 import {parse} from '~/lib/marked';
 import {sanitizeUrl} from '~/lib/sanitizeUrl';
+import {slugify} from '~/lib/url';
+
 import {
   type MarkdownDocument,
-  MarkdownPost,
   type MarkdownType,
   getDocument,
-  getDocuments,
+  getDocumentsByType,
   getPath,
   markdownTemplate
 } from '~/server/lib/front-matter';
+import {Post} from '~/types/post';
+
+export const isValidPostAttribute = (attributes: any): attributes is Post => {
+  return typeof attributes.title === 'string';
+};
 
 const markdown = {
   readOne: async (url: string): Promise<MarkdownDocument | null> => {
@@ -40,12 +46,15 @@ const markdown = {
       return undefined;
     }
   },
-  readAllByType: async (type: string): Promise<MarkdownDocument[] | null> => {
-    const documents = await getDocuments(type);
-    return documents;
+  readAllByType: async <T>(type: string): Promise<T[] | null> => {
+    return await getDocumentsByType<T>(type);
   },
-  create: async (post: MarkdownPost): Promise<boolean> => {
+  create: async <T>(post: T): Promise<boolean> => {
     try {
+      if (!isValidPostAttribute(post)) {
+        throw new Error('Invalid attributes');
+      }
+
       // if directory does not exist, create it
       const directory = await getPath(post.type as MarkdownType);
 
@@ -60,8 +69,10 @@ const markdown = {
         throw new Error('File already exists');
       }
 
-      // create file
-      const markdown = markdownTemplate(post);
+      const markdown = markdownTemplate({
+        ...post,
+        slug: slugify(post.title)
+      });
       await fs.writeFile(path.join(directory, `${post.slug}.md`), markdown);
       return true;
     } catch (error) {

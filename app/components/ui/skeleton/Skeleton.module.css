@@ -1,11 +1,8 @@
 .skeleton {
-  /* --skeleton-background-color: hsl(var(--card) / .75); */
-  --skeleton-background-color: #f4f4f4;
-  /* hsl(271.44deg 11.65% 58.58% / 10%) */
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--skeleton-background-color);
+  background-color: hsl(var(--low-contrast));
   color: hsl(var(--foreground));
   flex-shrink: 0;
 }
@@ -16,10 +13,4 @@
 
 .circle {
   border-radius: 50%;
-}
-
-@media (prefers-color-scheme: dark) {
-  .skeleton {
-    --skeleton-background-color: color-mix(in hsl, hsl(var(--background)), hsl(var(--card)) 90%);
-  }
 }
