@@ -19,7 +19,7 @@ label[for] {
   border-color: hsl(var(--border));
   border-width: 1px;
   border-style: solid;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-xs);
   color: hsl(var(--foreground));
 }
 
@@ -31,7 +31,7 @@ label[for] {
 
 .input:focus,
 .input:focus-visible {
-  box-shadow: var(--tw-ring-offset-shadow), var(--ring-1);
+  box-shadow: var(--ring-1);
   outline: 2px solid transparent;
   outline-offset: 2px;
 }

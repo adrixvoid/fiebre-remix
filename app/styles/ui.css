@@ -27,7 +27,7 @@
 }
 
 .ring-0 {
-  box-shadow: var(--ring-1-0)
+  box-shadow: var(--ring-0)
 }
 
 .ring-1 {
@@ -56,4 +56,29 @@
 
 .mix {
   box-shadow: var(--shadow-xl), var(--ring-2);
+}
+
+.swatch {
+  border: 1px solid hsl(var(--border) / 0.5);
+  width: 100%;
+  aspect-ratio: 1/1;
+  text-align: center;
+  box-sizing: border-box;
+  padding: 1em;
+  position: relative;
+  font-size: 0.8em;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 6rem;
+}
+
+.swatch .swatch {
+  width: 80%;
+  max-width: unset;
+  aspect-ratio: 2/1;
+  font-size: 0.8em;
+  position: absolute;
+  translate: 0 80%;
+  z-index: 1;
+  margin-bottom: 0;
 }

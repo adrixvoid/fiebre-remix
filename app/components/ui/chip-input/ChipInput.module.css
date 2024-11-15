@@ -11,7 +11,7 @@
   border-color: hsl(var(--border));
   border-width: 1px;
   border-style: solid;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
 
   background-color: hsl(var(--input) / 0.5);
   cursor: text;

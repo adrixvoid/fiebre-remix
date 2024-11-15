@@ -1,5 +1,6 @@
 import {useLoaderData, useLocation} from '@remix-run/react';
 import {Breadcrumb} from '~/types/breadcrumb';
+import useDocument from './useDocument';
 
 type LocationState = {
   breadcrumb?: Breadcrumb[] | [];
@@ -7,7 +8,13 @@ type LocationState = {
   [key: string]: any;
 };
 
-function useReferrer() {
+interface HookReferrerProps {
+  defaultReferrer?: string;
+}
+
+// export const useToggle = (defaultVisibility = false): [Boolean, () => void] => {
+function useReferrer(props?: HookReferrerProps) {
+  const document = useDocument();
   const {referrer: referrerFromParams} = useLoaderData<{
     referrer: string;
   }>() as {referrer: string};
@@ -17,10 +24,16 @@ function useReferrer() {
       ? document.referrer
       : '';
 
+  const finalReferrer =
+    docReferrer !== document?.location.href
+      ? docReferrer
+      : props?.defaultReferrer;
+
   return (
     referrerFromParams ||
     (location?.state?.referrer as string) ||
-    encodeURIComponent(docReferrer)
+    finalReferrer ||
+    ''
   );
 }
 

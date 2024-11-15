@@ -3,11 +3,11 @@
   text-underline-offset: .2rem;
 }
 
-.link:hover {
-  color: hsl(var(--color-brand5))
-}
-
 .link:focus-visible {
   outline: 4px solid hsl(var(--ring));
   outline-offset: 5px;
+}
+
+.link:hover {
+  color: hsl(var(--accent));
 }

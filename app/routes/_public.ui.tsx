@@ -1,5 +1,7 @@
 import { LinksFunction } from '@remix-run/node';
-import { EllipsisVertical, Music, Pencil, Ticket, Trash2, User } from 'lucide-react';
+import { EllipsisVertical, Music, Pencil, ShoppingCart, Ticket, Trash2, User } from 'lucide-react';
+import { PropsWithChildren } from 'react';
+import { Alert } from '~/components/ui/alert/Alert';
 
 import { Button } from "~/components/ui/button/Button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardImageCover, CardPadding, CardTitle } from "~/components/ui/card/Card";
@@ -15,6 +17,7 @@ import { FormBlock } from '~/components/ui/form/FormBlock';
 import Input from "~/components/ui/form/Input";
 import { Select } from "~/components/ui/form/Select";
 import TextArea from '~/components/ui/form/TextArea';
+import { Grid } from '~/components/ui/grid/Grid';
 import { Link } from '~/components/ui/link/Link';
 import { Section } from "~/components/ui/section/Section";
 import { Text, Title } from '~/components/ui/text/Text';
@@ -28,6 +31,57 @@ export const links: LinksFunction = () => [
         href: styles,
     },
 ];
+
+function Swatch({ name, children, ...props }: { name: string } & PropsWithChildren) {
+    return (
+        <Flex direction='column' className="swatch" style={{ backgroundColor: `hsl(var(${name}))` }} {...props}>
+            <Center variant='all' className="swatch-label">{name}</Center>
+            {children}
+        </Flex>
+    )
+}
+
+const swatches: {
+    background: string,
+    foreground?: string
+}[] = [{
+    background: "--color-brand"
+}, {
+    background: "--color-brand-secondary"
+}, {
+    background: "--color-brand-light"
+}, {
+    background: "--color-brand-highlight"
+}, {
+    background: "--color-brand-a90"
+}, {
+    background: "--background",
+    foreground: "--foreground"
+}, {
+    background: "--card",
+    foreground: "--card-foreground"
+}, {
+    background: "--popover",
+    foreground: "--popover-foreground",
+}, {
+    background: "--button",
+    foreground: "--button-foreground",
+}, {
+    background: "--primary",
+    foreground: "--primary-foreground",
+}, {
+    background: "--secondary",
+    foreground: "--secondary-foreground",
+}, {
+    background: "--muted",
+    foreground: "--muted-foreground",
+}, {
+    background: "--accent",
+    foreground: "--accent-foreground",
+}, {
+    background: "--destructive",
+    foreground: "--destructive-foreground",
+}];
 
 function ProductRoute() {
     return (
@@ -75,24 +129,41 @@ function ProductRoute() {
                     </div>
                     <hr style={{ margin: "4rem 0" }} />
                     <div className="mt-10">
+                        <h2>Color</h2>
+                        <Grid className='swatches' columns='4' style={{ gridTemplateColumns: "1fr 1fr 1fr 1fr" }}>
+                            {swatches.map(s => <Swatch key={s.background} name={s.background}>
+                                {s.foreground && <Swatch name={s.foreground} />}
+                            </Swatch>
+                            )}
+                            <Center variant='all' className="swatch" style={{ backgroundColor: "hsl(var(--border))" }}>
+                                --border
+                            </Center>
+                            <Center variant='all' className="swatch" style={{ backgroundColor: "hsl(var(--input))" }}>
+                                --input
+                            </Center>
+                            <Center variant='all' className="swatch" style={{ backgroundColor: "hsl(var(--ring))" }}>
+                                --ring
+                            </Center>
+                        </Grid>
+                    </div>
+                    <hr style={{ margin: "4rem 0" }} />
+                    <div className="mt-10">
                         <h2>Contrast</h2>
 
-                        <div style={{
-                            display: "grid",
-                            gap: 20,
-                            marginTop: 20,
-                            gridTemplateColumns: "1fr 1fr 1fr 1fr",
-                        }}>
+                        <Grid columns='3' style={{ gridTemplateColumns: "1fr 1fr 1fr" }} >
                             <div>
-                                <div style={{ width: '32px', height: '32px', backgroundColor: "var(--low-contrast)" }}></div>
-                                Low Contrast</div>
+                                <Swatch name="--low-contrast"></Swatch>
+                                <Center style={{ color: "hsl(var(--low-contrast))" }}>Low Contrast</Center>
+                            </div>
                             <div>
-                                <div style={{ width: '32px', height: '32px', backgroundColor: "var(--medium-contrast)" }}></div>
-                                Medium Contrast</div>
+                                <Swatch name="--medium-contrast"></Swatch>
+                                <Center style={{ color: "hsl(var(--medium-contrast))" }}>Medium Contrast</Center>
+                            </div>
                             <div>
-                                <div style={{ width: '32px', height: '32px', backgroundColor: "var(--high-contrast)" }}></div>
-                                High Contrast</div>
-                        </div>
+                                <Swatch name="--high-contrast"></Swatch>
+                                <Center style={{ color: "hsl(var(--high-contrast))" }}>High Contrast</Center>
+                            </div>
+                        </Grid>
                     </div>
                     <hr style={{ margin: "4rem 0" }} />
                     <div className="mt-10">
@@ -132,37 +203,28 @@ function ProductRoute() {
                         </div>
                     </div>
                     <hr style={{ margin: "4rem 0" }} />
-                    <div className="mt-10">
-                        <h2>Color</h2>
-
-                        <div style={{
-                            display: "grid",
-                            gap: 20,
-                            marginTop: 20,
-                            gridTemplateColumns: "1fr 1fr 1fr 1fr",
-                        }}>
-                            <div><div style={{ width: '32px', height: '32px', border: "1px solid hsl(var(--foreground) / 0.2)", backgroundColor: "hsl(var(--background))" }}></div>--background</div>
-                            <div><div style={{ width: '32px', height: '32px', border: "1px solid hsl(var(--foreground) / 0.2)", backgroundColor: "hsl(var(--foreground))" }}></div>--foreground</div>
-                            <div><div style={{ width: '32px', height: '32px', border: "1px solid hsl(var(--foreground) / 0.2)", backgroundColor: "hsl(var(--card))" }}></div>--card</div>
-                            <div><div style={{ width: '32px', height: '32px', border: "1px solid hsl(var(--foreground) / 0.2)", backgroundColor: "hsl(var(--card-foreground))" }}></div>--card-foreground</div>
-                            <div><div style={{ width: '32px', height: '32px', border: "1px solid hsl(var(--foreground) / 0.2)", backgroundColor: "hsl(var(--popover))" }}></div>--popover</div>
-                            <div><div style={{ width: '32px', height: '32px', border: "1px solid hsl(var(--foreground) / 0.2)", backgroundColor: "hsl(var(--popover-foreground))" }}></div>--popover-foreground</div>
-                            <div><div style={{ width: '32px', height: '32px', border: "1px solid hsl(var(--foreground) / 0.2)", backgroundColor: "hsl(var(--button))" }}></div>--button</div>
-                            <div><div style={{ width: '32px', height: '32px', border: "1px solid hsl(var(--foreground) / 0.2)", backgroundColor: "hsl(var(--button-foreground))" }}></div>--button-foreground</div>
-                            <div><div style={{ width: '32px', height: '32px', border: "1px solid hsl(var(--foreground) / 0.2)", backgroundColor: "hsl(var(--primary))" }}></div>--primary</div>
-                            <div><div style={{ width: '32px', height: '32px', border: "1px solid hsl(var(--foreground) / 0.2)", backgroundColor: "hsl(var(--primary-foreground))" }}></div>--primary-foreground</div>
-                            <div><div style={{ width: '32px', height: '32px', border: "1px solid hsl(var(--foreground) / 0.2)", backgroundColor: "hsl(var(--secondary))" }}></div>--secondary</div>
-                            <div><div style={{ width: '32px', height: '32px', border: "1px solid hsl(var(--foreground) / 0.2)", backgroundColor: "hsl(var(--secondary-foreground))" }}></div>--secondary-foreground</div>
-                            <div><div style={{ width: '32px', height: '32px', border: "1px solid hsl(var(--foreground) / 0.2)", backgroundColor: "hsl(var(--muted))" }}></div>--muted</div>
-                            <div><div style={{ width: '32px', height: '32px', border: "1px solid hsl(var(--foreground) / 0.2)", backgroundColor: "hsl(var(--muted-foreground))" }}></div>--muted-foreground</div>
-                            <div><div style={{ width: '32px', height: '32px', border: "1px solid hsl(var(--foreground) / 0.2)", backgroundColor: "hsl(var(--accent))" }}></div>--accent</div>
-                            <div><div style={{ width: '32px', height: '32px', border: "1px solid hsl(var(--foreground) / 0.2)", backgroundColor: "hsl(var(--accent-foreground))" }}></div>--accent-foreground</div>
-                            <div><div style={{ width: '32px', height: '32px', border: "1px solid hsl(var(--foreground) / 0.2)", backgroundColor: "hsl(var(--destructive))" }}></div>--destructive</div>
-                            <div><div style={{ width: '32px', height: '32px', border: "1px solid hsl(var(--foreground) / 0.2)", backgroundColor: "hsl(var(--destructive-foreground))" }}></div>--destructive-foreground</div>
-                            <div><div style={{ width: '32px', height: '32px', border: "1px solid hsl(var(--foreground) / 0.2)", backgroundColor: "hsl(var(--border))" }}></div>--border</div>
-                            <div><div style={{ width: '32px', height: '32px', border: "1px solid hsl(var(--foreground) / 0.2)", backgroundColor: "hsl(var(--input))" }}></div>--input</div>
-                            <div><div style={{ width: '32px', height: '32px', border: "1px solid hsl(var(--foreground) / 0.2)", backgroundColor: "hsl(var(--ring))" }}></div>--ring</div>
-                        </div>
+                    <div style={{ margin: "2rem 0" }}>
+                        <h3>Alert</h3>
+                        <Flex direction='column'>
+                            <Alert variant="info" title="Information">
+                                This is an informational alert.
+                            </Alert>
+                            <Alert variant="warning" title="Warning">
+                                This is a warning alert.
+                            </Alert>
+                            <Alert variant="danger" title="Error" onClose={() => console.log('Alert closed')}>
+                                This is an error alert with a close button.
+                            </Alert>
+                            <Alert variant="success">
+                                This is a success alert without a title.
+                            </Alert>
+                            <Alert variant="light" title="Light Theme">
+                                This is a light-themed alert.
+                            </Alert>
+                            <Alert variant="dark" title="Dark Theme">
+                                This is a dark-themed alert.
+                            </Alert>
+                        </Flex>
                     </div>
                     <hr style={{ margin: "4rem 0" }} />
                     <div className="mt-10">
@@ -256,6 +318,16 @@ function ProductRoute() {
                                 <User />
                                 User
                             </Button>
+                            <Button variant="outline" size='sm'><ShoppingCart /> Agregar al carrito</Button>
+                            <Button variant="outline" size='md'><ShoppingCart /> Agregar al carrito</Button>
+                            <Button variant="outline" size='lg'><ShoppingCart /> Agregar al carrito</Button>
+                        </Flex>
+                        <div style={{ margin: "2rem 0" }} />
+                        <h3>Radius</h3>
+                        <Flex align='center' style={{ margin: "2rem 0", flexWrap: 'wrap' }}>
+                            <Button variant="outline" radius='sm'><ShoppingCart /> Button Radius sm</Button>
+                            <Button variant="outline" radius='md'><ShoppingCart /> Button Radius md</Button>
+                            <Button variant="outline" radius='lg'><ShoppingCart /> Button Radius lg</Button>
                         </Flex>
                         <div style={{ margin: "2rem 0" }} />
                         <h3>More...</h3>
@@ -524,18 +596,24 @@ function ProductRoute() {
                         </div>
                         <div style={{ margin: "2rem 0" }}>
                             <h3>Chip</h3>
-                            <Flex>
+                            <Flex align='center' wrap="wrap">
                                 <Chip variant='outlined'>Art</Chip>
-                                <Chip><Music /> Music</Chip>
+                                <Chip onDismiss={() => console.log("dismiss")} variant='outlined'><Music size={16} /> Art</Chip>
+                                <Chip><Music size={16} /> Music</Chip>
                                 <Chip>Shows <Ticket size={20} /></Chip>
                                 <Chip onDismiss={() => console.log("dismiss")}>Dacing</Chip>
-                                <Chip variant='outlined' onDismiss={() => console.log("dismiss")}>Outlined</Chip>
+                                <Chip variant='filled' color='success' onDismiss={() => console.log("dismiss")}>Success</Chip>
+                                <Chip variant='outlined' color='success' onDismiss={() => console.log("dismiss")}>Success</Chip>
+                                <Chip variant='filled' color='warning' onDismiss={() => console.log("dismiss")}>Warning</Chip>
+                                <Chip variant='outlined' color='warning' onDismiss={() => console.log("dismiss")}>Warning</Chip>
+                                <Chip variant='filled' color='error' onDismiss={() => console.log("dismiss")}>Error</Chip>
+                                <Chip variant='outlined' color='error' onDismiss={() => console.log("dismiss")}>Error</Chip>
                             </Flex>
                         </div>
                     </div>
                 </div>
             </Container>
-        </Section>
+        </Section >
     )
 }
 

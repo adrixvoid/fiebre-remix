@@ -9,6 +9,7 @@
   line-height: 1.25rem;
   transition: all 150ms ease-in-out;
   cursor: default;
+  color: hsl(var(--foreground));
 }
 
 .clickable {
@@ -19,20 +20,46 @@
   padding-right: 0.5rem;
 }
 
+.dismissButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.125rem;
+  margin-left: 0.25rem;
+  border-radius: 9999px;
+  border-width: 0;
+  transition: all 150ms ease-in-out;
+  opacity: 0.7;
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+}
+
+.dismissButton:hover {
+  opacity: 1;
+}
+
 /* Variants */
 .filled {
-  background-color: #e2e8f0;
-  color: #1e293b;
+  background-color: color-mix(in hsl, hsl(var(--button)), white 20%);
 }
 
 .filled:hover {
-  background-color: #cbd5e1;
+  background-color: color-mix(in hsl, hsl(var(--button)), white 25%);
+}
+
+@media (prefers-color-scheme: dark) {
+  .filled {
+    background-color: color-mix(in hsl, hsl(var(--background)), white 20%);
+  }
+
+  .filled:hover {
+    background-color: color-mix(in hsl, hsl(var(--background)), white 25%);
+  }
 }
 
 .outlined {
   background-color: transparent;
-  border: 1px solid #e2e8f0;
-  color: #1e293b;
+  border: 1px solid hsl(var(--border));
 }
 
 .outlined:hover {
@@ -60,75 +87,89 @@
 }
 
 .success {
-  background-color: #22c55e;
-  color: white;
+  background-color: hsl(var(--color-success-background));
+  color: hsl(var(--color-success-foreground));
 }
 
 .success:hover {
-  background-color: #16a34a;
+  background-color: color-mix(in hsl, hsl(var(--color-success-background)), white 25%);
 }
 
 .success.outlined {
-  border-color: #22c55e;
-  color: #22c55e;
-  background-color: transparent;
+  border-color: color-mix(in hsl, hsl(var(--color-success-background)), black 5%);
+  color: hsl(var(--color-success-foreground));
+  background-color: hsl(var(--color-success-foreground), 0.01);
 }
 
 .success.outlined:hover {
-  background-color: rgba(34, 197, 94, 0.1);
+  background-color: hsl(var(--color-success), 0.1);
+}
+
+.success .dismissButton {
+  color: hsl(var(--color-success-foreground));
+  background-color: hsl(var(--background));
+}
+
+.success.outlined .dismissButton {
+  background-color: hsl(var(--color-success-background));
+  color: hsl(var(--color-success-foreground));
 }
 
 .warning {
-  background-color: #f59e0b;
-  color: white;
+  background-color: hsl(var(--color-warning-background));
+  color: hsl(var(--color-warning-foreground));
 }
 
 .warning:hover {
-  background-color: #d97706;
+  background-color: color-mix(in hsl, hsl(var(--color-warning-background)), white 25%);
 }
 
 .warning.outlined {
-  border-color: #f59e0b;
-  color: #f59e0b;
-  background-color: transparent;
+  border-color: color-mix(in hsl, hsl(var(--color-warning)), black 5%);
+  color: hsl(var(--color-warning-foreground));
+  background-color: hsl(var(--color-warning-background), 0.01);
 }
 
 .warning.outlined:hover {
-  background-color: rgba(245, 158, 11, 0.1);
+  background-color: hsl(var(--color-warning-background), 0.3);
+}
+
+.warning .dismissButton {
+  color: hsl(var(--color-warning-foreground));
+  background-color: hsl(var(--background));
+}
+
+.warning.outlined .dismissButton {
+  background-color: hsl(var(--color-warning-background));
+  color: hsl(var(var(--button-warning-dark)));
 }
 
 .error {
-  background-color: #ef4444;
-  color: white;
+  background-color: hsl(var(--color-danger-background));
+  color: hsl(var(--color-danger-foreground));
 }
 
 .error:hover {
-  background-color: #dc2626;
+  background-color: color-mix(in hsl, hsl(var(--color-danger-background)), white 25%);
 }
 
 .error.outlined {
-  border-color: #ef4444;
-  color: #ef4444;
+  border-color: hsl(var(--color-danger));
+  color: hsl(var(--color-danger));
   background-color: transparent;
 }
 
 .error.outlined:hover {
-  background-color: rgba(239, 68, 68, 0.1);
+  background-color: hsl(var(--color-danger-background), 0.3);
 }
 
-.dismissButton {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.125rem;
-  margin-left: 0.25rem;
-  border-radius: 9999px;
-  transition: all 150ms ease-in-out;
-  opacity: 0.7;
-  background-color: hsl(var(--primary));
-  color: hsl(var(--primary-foreground));
+.error .dismissButton {
+  color: hsl(var(--foreground));
+  background-color: hsl(var(--background));
+  border-color: hsl(var(--color-danger));
 }
 
-.dismissButton:hover {
-  opacity: 1;
+.error.outlined .dismissButton {
+  background-color: hsl(var(--color-danger));
+  color: hsl(var(--background));
 }

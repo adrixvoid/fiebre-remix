@@ -20,7 +20,7 @@
   background-color: color-mix(in hsl, hsl(var(--input) / 0.8%), transparent 90%);
   border-color: hsl(var(--border));
   border-width: 1px;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-sm);
 
   appearance: none;
 }

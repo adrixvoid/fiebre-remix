@@ -24,6 +24,9 @@ const flexVariants = cva(
     mobile: {
       'direction-row': styles['mobile-row'],
       'direction-column': styles['mobile-column']
+    },
+    wrap: {
+      wrap: styles.wrap
     }
   },
   defaultVariants: {
@@ -37,9 +40,9 @@ export interface FlexProps extends React.HTMLAttributes<HTMLDivElement>,
   gap?: string;
 }
 
-export function Flex({ className, justify, align, direction, mobile, gap, style, ...props }: FlexProps) {
+export function Flex({ className, justify, align, direction, mobile, gap, wrap, style, ...props }: FlexProps) {
   return (
-    <div className={flexVariants({ justify, align, direction, mobile, className })} {...props} style={{
+    <div className={flexVariants({ justify, align, direction, mobile, wrap, className })} {...props} style={{
       ...style,
       gap
     }} />

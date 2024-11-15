@@ -10,7 +10,6 @@
     padding-right: .5em;
     line-height: 1.8;
 
-    border-radius: var(--radius-md);
     border-style: solid;
     border-width: 1px;
     font-weight: 500;
@@ -33,6 +32,10 @@ a.button {
     text-decoration: none !important;
 }
 
+.button:active {
+    animation: fade-in-out 500ms forwards;
+}
+
 .button:focus-visible {
     outline: 2px solid hsl(var(--ring));
     outline-offset: 2px;
@@ -44,6 +47,15 @@ a.button {
 .button:disabled:focus-within {
     pointer-events: none;
     opacity: 0.5;
+}
+
+.button svg {
+    max-width: 1.5cap;
+    margin-left: 0.5cap;
+}
+
+.button:hover svg {
+    scale: 1.05;
 }
 
 /**
@@ -59,6 +71,7 @@ a.button {
 }
 
 .base:hover {
+    color: hsl(var(--button-foreground));
     background-color: color-mix(in hsl shorter hue, hsl(var(--button)), white 20%);
 }
 
@@ -95,7 +108,7 @@ a.button {
 
 .dashed:focus,
 .dashed:focus-within {
-    /* box-shadow: var(--shadow-sm), var(--ring-1-0); */
+    /* box-shadow: var(--shadow-sm), var(--ring-0); */
 }
 
 .ghost {
@@ -109,7 +122,7 @@ a.button {
 .ghost:focus-within {
     color: hsl(var(--button-foreground));
     fill: currentColor;
-    /* box-shadow: var(--ring-1-0); */
+    /* box-shadow: var(--ring-0); */
 }
 
 .ghost {
@@ -183,11 +196,16 @@ a.button {
     font-size: var(--text-xl);
 }
 
+.radius-sm {
+    border-radius: 0.15em;
+}
 
-/* Icons */
+.radius-md {
+    border-radius: 0.35em;
+}
 
-.button svg {
-    margin-left: -0.1cap;
+.radius-lg {
+    border-radius: 2em;
 }
 
 .fullWidth {
@@ -239,6 +257,7 @@ a.button {
 
 @keyframes rainbow2 {
     0% {
+        scale: 1;
         box-shadow:
             0 0 0 0 hsl(179, 100%, 76%),
             0 0 0 0 hsl(306 100% 83% / 0.9),
@@ -247,6 +266,7 @@ a.button {
     }
 
     10% {
+        scale: 1.1;
         box-shadow:
             0 0 0 2px hsl(179, 100%, 76%),
             0 0 0 6px hsl(306 100% 83% / 0.9),
@@ -255,10 +275,11 @@ a.button {
     }
 
     90% {
+        scale: 1;
         box-shadow:
-            0 0 0 0 hsl(179, 100%, 76%),
-            0 0 0 0 hsl(306 100% 83% / 0.9),
-            0 0 0 0 hsl(76.45 100% 75.69% / 0.8),
-            0 0 0 0 hsl(var(--primary) / .6)
+            0 0 5px 2px hsl(179, 100%, 76%),
+            0 0 10px 4px hsl(306 100% 83% / 0.9),
+            0 0 20px 6px hsl(76.45 100% 75.69% / 0.8),
+            0 0 30px -6 hsl(var(--primary) / .6)
     }
 }

@@ -1,23 +1,4 @@
 :root {
-  --color-brand: 318.52deg 100% 70.16%;
-  --color-brand-secondary: hsl(269, 100%, 38%);
-  --color-brand-light: #bd9af4;
-  --color-brand-highlight: #b5fc00;
-  --color-brand-a90: #ff55cb;
-
-  --accent-bg: var(--color-brand);
-  --accent-bg-hover: var(--color-brand-highlight);
-
-  --color-danger: hsl(327 95% 55% / 1);
-  --color-success: hsl(103, 78%, 59%);
-  --color-warning: #fff242;
-
-  --low-contrast: #eaeaea;
-  --medium-contrast: #c9c9c9;
-  --high-contrast: #333333;
-
-  --fieldset-bg: #f4f4f4;
-
   --breakpoint-sm: 640px;
   --breakpoint-md: 768px;
   --breakpoint-lg: 1024px;
@@ -33,58 +14,28 @@
 
   --font-family: Inter, "Montserrat", Avenir, Helvetica, Arial, sans-serif;
 
-  --shadow-color: 258.11 100% 91.28%;
+  --radius-xs: 0.35em;
+  --radius-sm: 0.5em;
+  --radius-md: 1.5em;
+  --radius-lg: 2em;
+  --radius-xl: 3em;
+  --radius-2xl: 4em;
 
-
-  --radius-xs: calc(var(--radius) - 8px);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 2px);
-  --radius-2xl: calc(var(--radius) + 16px);
-
-  --tw-ring-color: hsl(var(--ring));
-  --tw-ring-offset-color: hsl(var(--ring));
   --tw-ring-offset-width: 2px;
-  --tw-ring-inset: inset;
+  --tw-ring-offset-shadow: 0 0 0 var(--tw-ring-offset-width) hsl(var(--ring));
 
-  --tw-ring-offset-shadow: inset 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
-
-  --ring-1-0: inset 0 0 0 calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-  --ring-1: inset 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-  --ring-2: inset 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-  --ring-3: inset 0 0 0 calc(3px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-  --ring-4: inset 0 0 0 calc(4px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-  --ring-8: inset 0 0 0 calc(8px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  --ring-0: 0 0 0 var(--tw-ring-offset-width) hsl(var(--ring));
+  --ring-1: 0 0 0 calc(1px + var(--tw-ring-offset-width)) hsl(var(--ring));
+  --ring-2: 0 0 0 calc(2px + var(--tw-ring-offset-width)) hsl(var(--ring));
+  --ring-3: 0 0 0 calc(3px + var(--tw-ring-offset-width)) hsl(var(--ring));
+  --ring-4: 0 0 0 calc(4px + var(--tw-ring-offset-width)) hsl(var(--ring));
+  --ring-8: 0 0 0 calc(8px + var(--tw-ring-offset-width)) hsl(var(--ring));
 
   --shadow-sm: 0px 0px 1px 0px hsl(var(--shadow-color)), 0px 2px 2px 1px hsl(var(--shadow-color) / .5), 0px 2px 10px 2px hsl(var(--shadow-color) / .2);
   --shadow-md: 0px 0px 1px 0px hsl(var(--shadow-color)), 0 4px 10px 2px hsl(var(--shadow-color) / .5), 0 4px 10px 4px hsl(var(--shadow-color) / .1);
   --shadow-lg: 0 8px 25px -5px hsl(var(--shadow-color)), 0 8px 10px -6px hsl(var(--shadow-color));
   --shadow-xl: 0 25px 45px 10px hsl(var(--shadow-color) / .5), 0 12px 22px -8px hsl(var(--shadow-color));
   --shadow-inner: inset 0 2px 4px 0 hsl(var(--shadow-color));
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-danger: rgb(185 28 28);
-    --color-success: #40e240;
-    --color-warning: #fff254;
-
-    /* --backgrounds: #402255; */
-    --high-contrast: var(--color-brand-secondary);
-    --medium-contrast: #2e2344;
-    --low-contrast: #3a2e52;
-
-    --special-text: var(--color-brand-light);
-
-    --accent-bg: #9adbf4;
-
-    --fieldset-bg: var(--medium-contrast);
-
-    --shadow-color: 264.11 100% 24%;
-    --shadow-color: 264.11 100% 13.86%;
-    /* --shadow-color: 266.22, 54.22%, 51.18%; */
-  }
 }
 
 ::selection {
@@ -203,7 +154,7 @@ nav ol {
   }
 }
 
-/** 
+/**
 MISC
 **/
 
@@ -214,20 +165,6 @@ MISC
   display: block;
 }
 
-/* .box {
-  border-radius: var(--radius);
-  padding: 0.5rem;
-} */
-
-/* .paper {
-  background: hsl(var(--card));
-} */
-
-/* .thumbnail-1 {
-  max-width: 10dvh;
-  max-height: 10dvw;
-} */
-
 /* Colors */
 
 .bg-danger {
@@ -235,11 +172,11 @@ MISC
 }
 
 .bg-success {
-  background-color: var(--color-success);
+  background-color: hsl(var(--color-success));
 }
 
 .bg-warning {
-  background-color: var(--color-warning);
+  background-color: hsl(var(--color-warning));
 }
 
 .color-danger {
@@ -247,11 +184,11 @@ MISC
 }
 
 .color-success {
-  color: var(--color-success);
+  color: hsl(var(--color-success));
 }
 
 .color-warning {
-  color: var(--color-warning);
+  color: hsl(var(--color-warning));
 }
 
 .fill-brand {

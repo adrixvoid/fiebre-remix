@@ -21,6 +21,7 @@ import { Section } from "~/components/ui/section/Section";
 import { actionAdminProductForm, LoaderAdminProduct, loaderAdminProductForm } from "~/server/controllers/products.controller";
 
 import { Title } from "~/components/ui/text/Text";
+import { ROUTE_PATH_ADMIN } from "~/constants";
 import useReferrer from "~/hooks/useReferrer";
 import { t } from "~/i18n/translate";
 import { ProductType } from "~/types/product";
@@ -33,7 +34,7 @@ export const action: ActionFunction = actionAdminProductForm;
 
 export default function AdminProductForm() {
   const { category, product } = useLoaderData<typeof loader>() as LoaderAdminProduct;
-  const referrer = useReferrer();
+  const referrer = useReferrer({ defaultReferrer: ROUTE_PATH_ADMIN.PRODUCT_LIST });
   const error = useActionData<typeof action>()
   const location = useLocation();
   const [productType, setProductType] = useAtom(currentProductType)

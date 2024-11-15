@@ -83,7 +83,7 @@ export function ProductQuantity() {
 
 export function ProductButtonAddToCart({ priceHidden, ...props }: ButtonProps & { priceHidden?: boolean }) {
   return (
-    <Button variant="primary" size="lg" className={styles['add-to-cart']} fullWidth {...props}>
+    <Button variant="outline" size="lg" className={styles['add-to-cart']} fullWidth {...props}>
       <ShoppingCart width={24} height={24} />
       {!priceHidden ? t("ADD_TO_CART") : t("INQUIRE")}
     </Button>

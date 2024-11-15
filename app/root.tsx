@@ -12,10 +12,11 @@ import {
 import Button from "~/components/ui/button/Button";
 import { Container } from "~/components/ui/container/Container";
 import { SITE_DESCRIPTION, SITE_TITLE } from "~/constants";
-import globalStyles from "~/styles/global.css";
-import resetStyles from "~/styles/helpers/reset.css";
-import tailwindStyles from "~/styles/tailwind.css";
 import { BaseHead } from "./components/BaseHead";
+
+import resetStyles from "~/styles/helpers/reset.css";
+import paletteColor from "~/styles/palette-color.css";
+import globalStyles from "~/styles/global.css";
 
 export const meta: MetaFunction = () => {
   return [
@@ -43,7 +44,7 @@ export const links: LinksFunction = () => [
   },
   {
     rel: "stylesheet",
-    href: tailwindStyles
+    href: paletteColor
   },
   {
     rel: "stylesheet",

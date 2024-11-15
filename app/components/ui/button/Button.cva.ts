@@ -8,7 +8,7 @@ export type ButtonVariants = VariantProps<typeof buttonVariants>;
 export const buttonVariants = cva(styles.button, {
   variants: {
     variant: {
-      default: styles.base,
+      base: styles.base,
       primary: styles.primary,
       destructive: styles.destructive,
       outline: styles.outline,
@@ -17,17 +17,23 @@ export const buttonVariants = cva(styles.button, {
       link: styles.link
     },
     size: {
-      default: styles.medium,
-      md: styles.medium,
+      xs: styles.xsmall,
       sm: styles.small,
+      md: styles.medium,
       lg: styles.large
+    },
+    radius: {
+      sm: styles['radius-sm'],
+      md: styles['radius-md'],
+      lg: styles['radius-lg']
     }
   },
   // compoundVariants: [
   //   { variant: "default", size: "default", className: styles.primaryMedium },
   // ],
   defaultVariants: {
-    variant: 'default',
-    size: 'default'
+    variant: 'base',
+    size: 'md',
+    radius: 'md'
   }
 });

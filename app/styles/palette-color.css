@@ -1,0 +1,116 @@
+@layer base {
+  :root {
+    --color-brand: 318.52 100% 70.16%;
+    --color-brand-secondary: 269, 100%, 38%;
+    --color-brand-light: 263, 80%, 78%;
+    --color-brand-highlight: 77, 100%, 49%;
+    --color-brand-a90: 318, 100%, 67%;
+
+    --background: 0 0% 100%;
+    --foreground: 271.44 7.9% 15.7%;
+    --card: 257.59 100% 98.6%;
+    --card-foreground: 271.44 7.9% 15.7%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 271.44 7.9% 15.7%;
+    --button: 255 100% 95%;
+    --button-foreground: 269.53 100% 51.04%;
+    --primary: 318.52 100% 70.16%;
+    --primary-foreground: 210 20% 98%;
+    --secondary: 78.82 100% 60%;
+    --secondary-foreground: 268.1 100% 50%;
+    --muted: 220 14.3% 95.9%;
+    --muted-foreground: 220 8.9% 46.1%;
+    --accent: 269.53 100% 51.04%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 342 84.2% 60.2%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 286.67 13.25% 88.99%;
+    --input: 0 0% 99%;
+    --ring: 274.73 78.73% 55.11%;
+    --radius: 0.5rem;
+
+    --accent-bg: var(--color-brand);
+    --accent-bg-hover: var(--color-brand-highlight);
+
+    --shadow-color: 258 10% 91.28%;
+
+    --low-contrast: 0, 0%, 90%;
+    --medium-contrast: 0, 0%, 70%;
+    --high-contrast: 0, 0%, 20%;
+
+    --color-danger: 327 95% 55%;
+    --color-success: 103, 78%, 59%;
+    --color-warning: 56, 100%, 63%;
+
+    --color-info-background: 267.72, 100%, 95.62%;
+    --color-info-foreground: 272.15, 96%, 32%;
+    --color-warning-background: 72.49, 96%, 89%;
+    --color-warning-foreground: 57.69, 81%, 29%;
+    --color-danger-background: 327, 96%, 89%;
+    --color-danger-foreground: 327, 74%, 42%;
+    --color-success-background: 142, 76%, 87%;
+    --color-success-foreground: 142, 72%, 29%;
+    --color-light-background: 220, 14%, 96%;
+    --color-light-foreground: 220, 9%, 46%;
+    --color-dark-background: 215, 28%, 17%;
+    --color-dark-background: 234, 28%, 17%;
+    --color-dark-foreground: 220, 14%, 96%;
+    --color-text-light: 220, 9%, 46%;
+    --color-text-dark: 0, 0%, 100%;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background: 265.56 58.7% 18.04%;
+      --foreground: 210 20% 98%;
+      --card: 263.33 65.91% 17.1%;
+      --card-foreground: 266.22, 54.22%, 51.18%;
+      --popover: 262.27 71.4% 4.1%;
+      --popover-foreground: 210 20% 98%;
+      --button: 306, 100%, 83%;
+      --button: 266.33 75.36% 68.04%;
+      --button-foreground: 266.22, 54.22%, 51.18%;
+      --button-foreground: 210 20% 98%;
+      --primary: 314.16 100% 65.1%;
+      --primary-foreground: 0 0 100%;
+      --secondary: 240.92 28.18% 19.35%;
+      --secondary-foreground: 210 20% 98%;
+      --muted: 240.92 28.18% 19.35%;
+      --muted-foreground: 264.74 100% 95.97%;
+      --accent: 78.82 100% 60%;
+      --accent-foreground: 260 41.45% 9.18%;
+      --destructive: 337 86% 37%;
+      --destructive-foreground: 210 20% 98%;
+      --border: 240.92 28.18% 19.35%;
+      --border: 260 28.13% 25.1%;
+      --border: 266 36% 56%;
+      --input: 265.38 61.02% 15.6%;
+      --ring: 263.4 70% 50.4%;
+      --ring: var(--accent);
+
+      --color-danger: 0, 84%, 60%;
+      --color-success: 120, 71%, 43%;
+      --color-warning: 58, 92%, 50%;
+
+      --high-contrast: 269, 100%, 38%;
+      --medium-contrast: 260, 32%, 20%;
+      --low-contrast: 260, 28%, 25%;
+
+      --shadow-color: 264.11 100% 24%;
+      --shadow-color: 264.11 100% 13.86%;
+
+      --color-info-background: 201, 96%, 32%;
+      --color-info-foreground: 204, 94%, 94%;
+      --color-warning-background: 32, 81%, 29%;
+      --color-warning-foreground: 48, 96%, 89%;
+      --color-danger-background: 0, 74%, 42%;
+      --color-danger-foreground: 0, 96%, 89%;
+      --color-success-background: 163.87, 47.76%, 26.27%;
+      --color-success-foreground: 142, 76%, 87%;
+      --color-light-background: 215, 28%, 17%;
+      --color-light-foreground: 220, 14%, 96%;
+      --color-dark-background: 220, 14%, 96%;
+      --color-dark-foreground: 215, 28%, 17%;
+    }
+  }
+}
