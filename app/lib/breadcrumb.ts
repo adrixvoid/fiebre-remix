@@ -2,7 +2,7 @@ import {Breadcrumb} from '~/types/breadcrumb';
 
 export function toPathObject(slugs: string[]) {
   const temp = [...slugs];
-  const response = slugs.map((slug) => {
+  const response = slugs.reverse().map((slug) => {
     const toReturn = [...temp];
     temp.pop();
     return {
@@ -14,8 +14,8 @@ export function toPathObject(slugs: string[]) {
 }
 
 export function getBreadcrumb<
-  GenericData extends {path: string; slug: string; name: string}
->(path: string | undefined, data: GenericData[]) {
+  GenericData extends {path: string | null; slug: string; name: string}
+>(path: string = '', data: GenericData[]) {
   let breadcrumb = <Breadcrumb[]>{};
 
   if (!path || !data) {

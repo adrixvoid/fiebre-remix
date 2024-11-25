@@ -10,13 +10,15 @@ import { loaderAdminProductList } from "~/server/controllers/products.controller
 
 import Button from "~/components/ui/button/Button";
 import { Container } from "~/components/ui/container/Container";
+import { Flex } from "~/components/ui/flex/Flex";
 import { Link } from "~/components/ui/link/Link";
 import { Section } from "~/components/ui/section/Section";
 import { Skeleton } from "~/components/ui/skeleton/Skeleton";
 import AdminTable from "~/components/ui/table/AdminTable";
 import { TableCellAction, TableHeadAction } from "~/components/ui/table/Table";
+import { Title } from "~/components/ui/text/Text";
 import { Toggle } from "~/components/ui/toggle/Toggle";
-import { formatCurrency } from "~/lib/currency";
+import { formatCurrencyInCents } from "~/lib/currency";
 
 const styles = {
   images: {
@@ -39,7 +41,7 @@ const columns = [
   columnHelper.accessor('priceInCents', {
     id: 'priceInCents',
     header: () => <span>{t('PRODUCT.PRICE')}</span>,
-    cell: props => formatCurrency(props.getValue() || 0)
+    cell: props => formatCurrencyInCents(props.getValue())
   }),
   columnHelper.accessor('published', {
     id: 'published',
@@ -53,7 +55,7 @@ const columns = [
     header: () => <TableHeadAction>{t('ACTIONS')}</TableHeadAction>,
     cell: (props) => {
       const slug = props.row.original.slug as string;
-      const id = props.row.original._id?.toString() || "";
+      const id = props.row.original.id?.toString() || "";
       const name = props.row.original.name as string;
 
       const editPath = `${ROUTE_PATH_ADMIN.PRODUCT_FORM}/${id}`;
@@ -74,10 +76,10 @@ const columns = [
 
       return (
         <TableCellAction>
-          <Button asChild variant="outline">
+          <Button asChild variant="outline" size='sm'>
             <Link to={editPath}>{t('EDIT')}</Link>
           </Button>
-          <Button onClick={handleOnDelete} aria-label="delete" disabled={isDisabled} variant="destructive" color="danger">
+          <Button onClick={handleOnDelete} aria-label="delete" disabled={isDisabled} variant="destructive" color="danger" size='sm'>
             <Trash2 />
             <span className="sr-only">{t('DELETE')}</span>
           </Button>
@@ -104,16 +106,12 @@ export default function AdminProductList() {
   return (
     <Section marginBottom>
       <Container>
-        <h1 className="h1 text-2xl font-600 tracking-tight">{t("PRODUCT.LIST")}</h1>
-        <div className="flex admin-top text-sm mt-2 py-2 justify-between items-center">
-          <div className="justify-end">
-            <div className="actions flex" style={{ gap: "0.5rem" }}>
-              <Button asChild size="sm">
-                <Link to={pathToNewProduct}><FilePlus2 size={16} />{t('PRODUCT.NEW')}</Link>
-              </Button>
-            </div>
-          </div>
-        </div>
+        <Title size='sm'>{t("PRODUCT.LIST")}</Title>
+        <Flex justify='end'>
+          <Button asChild size="sm" variant='outline'>
+            <Link to={pathToNewProduct}><FilePlus2 size={16} />{t('PRODUCT.NEW')}</Link>
+          </Button>
+        </Flex>
         <div className="admin-list mt-2">
           <div>
             {products.length > 0

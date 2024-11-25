@@ -75,5 +75,13 @@
   ],
   "editor.fontSize": 12,
   "[markdown]": {},
-  "cSpell.ignoreWords": ["Spacebar", "xsmall"]
+  "cSpell.ignoreWords": ["Spacebar", "xsmall"],
+  "editor.stickyTabStops": false,
+  "editor.tabFocusMode": false,
+  "workbench.editor.pinnedTabsOnSeparateRow": true,
+  "workbench.editor.scrollToSwitchTabs": false,
+  "editor.useTabStops": true,
+  "workbench.editor.highlightModifiedTabs": false,
+  "workbench.editor.tabActionCloseVisibility": true,
+  "workbench.editor.wrapTabs": true
 }

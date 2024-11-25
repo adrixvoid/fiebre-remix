@@ -15,7 +15,7 @@ export function CategorySelect(props: SelectProps) {
   return (
     <Select {...props}>
       <option value="">...</option>
-      {categories.map((category) => <option key={category._id} value={category._id}>{category.name}</option>)}
+      {categories.map((category) => <option key={category.id} value={category.id}>{category.name}</option>)}
     </Select>
   )
 }

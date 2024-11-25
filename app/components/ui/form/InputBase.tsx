@@ -2,14 +2,14 @@ import { cx } from "class-variance-authority";
 import { Label } from "./Label";
 
 import { forwardRef } from "react";
-import { ErrorMessage } from "./ErrorMessage";
+import { ErrorMessage, InputErrorMessage } from "./ErrorMessage";
 
 import styles from './InputBase.module.css';
 
 export interface InputBaseProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   labelProps?: React.LabelHTMLAttributes<HTMLLabelElement>;
-  error?: string;
+  error?: InputErrorMessage;
 }
 
 const InputBase = forwardRef<HTMLInputElement, InputBaseProps>(

@@ -7,7 +7,3 @@
   outline: 4px solid hsl(var(--ring));
   outline-offset: 5px;
 }
-
-.link:hover {
-  color: hsl(var(--accent));
-}

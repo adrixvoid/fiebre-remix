@@ -22,15 +22,17 @@ model Category {
   updatedAt     DateTime   @updatedAt
   parent        Category?  @relation("CategoryToSubcategory", fields: [parentId], references: [id], onDelete: Cascade)
   subcategories Category[] @relation("CategoryToSubcategory")
+  Product       Product[]
 }
 
 model Product {
   id                    String                 @id @default(uuid())
+  categoryId            String
   name                  String
   description           String?                @map("body")
   priceHidden           Boolean                @default(false)
   priceInCents          Int                    @default(0)
-  images                String                 @default("[]") // Json
+  images                String?
   primaryImage          Int                    @default(0)
   tags                  String                 @default("[]") // Json
   published             Boolean                @default(false)
@@ -41,8 +43,9 @@ model Product {
   storedFile            String? // filePath
   createdAt             DateTime               @default(now())
   updatedAt             DateTime               @updatedAt
-  orders                Order[]
+  category              Category               @relation(fields: [categoryId], references: [id], onDelete: Restrict)
   downloadVerifications DownloadVerification[]
+  orders                Order[]
 }
 
 model User {

@@ -21,10 +21,6 @@ export function slugify(title: string): string {
   return slug;
 }
 
-export function createPath(parentPath: string, localName: string) {
-  if (parentPath) {
-    return `${parentPath}/${slugify(localName)}`;
-  } else {
-    return slugify(localName);
-  }
+export function createPath(path: string, slug: string) {
+  return `${path}/${slugify(slug)}`;
 }

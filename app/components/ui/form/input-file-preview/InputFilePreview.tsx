@@ -5,7 +5,7 @@ import { t } from '~/i18n/translate';
 import useFilePreview from './useFilePreview';
 
 import { Button } from '~/components/ui/button/Button';
-import { ErrorMessage } from '../ErrorMessage';
+import { ErrorMessage, InputErrorMessage } from '../ErrorMessage';
 import ImageBlob from "./ImageBlob";
 import { FilePreview } from './InputFilePreview.types';
 import { PreviewList, PreviewListActions, PreviewListBadge, PreviewListItem } from './PreviewList';
@@ -23,7 +23,7 @@ export interface InputFilePreviewProps
     extends React.InputHTMLAttributes<HTMLInputElement> {
     label?: string;
     labelProps?: React.LabelHTMLAttributes<HTMLLabelElement>;
-    error?: string;
+    error?: InputErrorMessage;
     component?: ComponentType<any>;
 }
 
@@ -84,23 +84,19 @@ export default function InputFilePreview({
             saveBuffer(event.dataTransfer.files);
         }
 
-        if (event.dataTransfer.items) {
-            // Use DataTransferItemList interface to access the file(s)
-            [...event.dataTransfer.items].forEach((item, i) => {
-                // If dropped items aren't files, reject them
-                if (item.kind === "file") {
-                    const file = item.getAsFile();
-                }
-            });
-        } else {
-            // Use DataTransfer interface to access the file(s)
-            [...event.dataTransfer.files].forEach((file, i) => {
-            });
-
-            if (inputRef?.current?.files) {
-                inputRef.current.files = event.dataTransfer.files;
-            }
-        }
+        // if (event.dataTransfer.items) {
+        // Use DataTransferItemList interface to access the file(s)
+        // [...event.dataTransfer.items].forEach((item, i) => {
+        // If dropped items aren't files, reject them
+        // if (item.kind === "file") {
+        //     const file = item.getAsFile();
+        // }
+        // });
+        // }
+        // else {
+        //     // Use DataTransfer interface to access the file(s)
+        //     [...event.dataTransfer.files].forEach((file, i) => {});
+        // }
 
         if (inputRef?.current?.files) {
             inputRef.current.files = event.dataTransfer.files;

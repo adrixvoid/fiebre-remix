@@ -1,4 +1,4 @@
-import { ErrorMessage } from "./ErrorMessage";
+import { ErrorMessage, InputErrorMessage } from "./ErrorMessage";
 import { Label } from "./Label";
 
 import clsx from "clsx";
@@ -7,7 +7,7 @@ import styles from './InputFile.module.css';
 export interface InputFileProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   labelProps?: React.LabelHTMLAttributes<HTMLLabelElement>;
-  error?: string;
+  error?: InputErrorMessage;
 }
 
 export function InputFile({ label, labelProps, id, name, error, className, ...rest }: InputFileProps) {

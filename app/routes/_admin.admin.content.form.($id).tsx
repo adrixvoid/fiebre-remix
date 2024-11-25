@@ -1,6 +1,5 @@
 import { type ActionFunction, type LoaderFunction } from "@remix-run/node";
 import { useLoaderData, useLocation, useNavigation } from "@remix-run/react";
-import { ValidatedForm } from "remix-validated-form";
 
 import { MARKDOWN_TYPE } from "~/constants";
 import useReferrer from "~/hooks/useReferrer";
@@ -8,6 +7,7 @@ import useReferrer from "~/hooks/useReferrer";
 import { contentAction, contentLoader } from "~/server/controllers/content.controller";
 import { formValidator } from "~/server/zod/content.zod";
 
+import { useForm } from "@rvf/remix";
 import Button from "~/components/ui/button/Button";
 import { Container } from "~/components/ui/container/Container";
 import { Fieldset } from "~/components/ui/form/Fieldset";
@@ -17,7 +17,6 @@ import InputFilePreview from "~/components/ui/form/input-file-preview/InputFileP
 import InputImageList from "~/components/ui/form/input-file-preview/UploadedImages";
 import { Select } from "~/components/ui/form/Select";
 import TextEditor from "~/components/ui/form/text-editor/TextEditor";
-import ValidateInput from "~/components/ui/form/ValidateInput";
 import { Section } from "~/components/ui/section/Section";
 
 
@@ -31,15 +30,21 @@ export default function UploadContent() {
     const navigation = useNavigation()
     const isSubmitting = navigation.state === "submitting";
 
+    const form = useForm({
+        method: 'post',
+        encType: "multipart/form-data",
+        validator: formValidator,
+        defaultValues: {
+            ...content,
+            name: content?.name || "",
+        }
+    });
+
     return (
         <Section marginBottom>
             <Container>
                 <h1>New Content</h1>
-                <ValidatedForm
-                    validator={formValidator}
-                    method="post"
-                    encType="multipart/form-data"
-                >
+                <form {...form.getFormProps()}>
                     <Fieldset>
                         <FormBlock>
                             <label htmlFor="type">
@@ -57,9 +62,7 @@ export default function UploadContent() {
                     <hr />
                     <Fieldset>
                         <FormBlock>
-                            <ValidateInput name="title">
-                                <Input label="Title" id="title" name="title" placeholder="Noche de Reyes" />
-                            </ValidateInput>
+                            <Input label="Title" id="title" name="title" placeholder="Noche de Reyes" />
                         </FormBlock>
                         <FormBlock>
                             <TextEditor label='Description' id="description" name="description" rows={5} defaultValue={content?.description} />
@@ -78,14 +81,9 @@ export default function UploadContent() {
                     <Fieldset>
                         <div className="mt-6">
                             <FormBlock>
-                                <ValidateInput name='toDelete' className='mb-2'>
-                                    <InputImageList source={content?.preview} />
-                                </ValidateInput>
-                            </FormBlock>
-                            <FormBlock>
-                                <ValidateInput type="file" name="preview" label="Preview" className='mb-2'>
-                                    <InputFilePreview id="preview" name="preview" label='Add preview' />
-                                </ValidateInput>
+                                <InputImageList name='toDelete' source={content?.preview}>
+                                    <InputFilePreview type="file" id="preview" name="preview" label='Add preview' />
+                                </InputImageList>
                             </FormBlock>
                         </div>
                     </Fieldset>
@@ -102,7 +100,7 @@ export default function UploadContent() {
                         <input type="hidden" name="referrer" value={referrer} />
                         <Button color="primary" type="submit" disabled={isSubmitting}>{isSubmitting ? "Please Wait..." : "Save markdown"}</Button>
                     </div>
-                </ValidatedForm>
+                </form>
             </Container>
         </Section>
     );

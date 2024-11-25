@@ -2,8 +2,8 @@ import { cx } from "class-variance-authority";
 import { atom, useAtom } from 'jotai';
 import { forwardRef } from "react";
 
-import { formatCurrency } from "~/lib/currency";
-import { ErrorMessage } from "./ErrorMessage";
+import { formatCurrencyInCents } from "~/lib/currency";
+import { ErrorMessage, InputErrorMessage } from "./ErrorMessage";
 import { InputBaseProps } from "./InputBase";
 import styles from './InputBase.module.css';
 import stylesPrice from './InputPrice.module.css';
@@ -12,7 +12,7 @@ import { Label } from "./Label";
 export interface InputPriceProps extends InputBaseProps {
   label?: string;
   labelProps?: React.LabelHTMLAttributes<HTMLLabelElement>;
-  error?: string;
+  error?: InputErrorMessage;
 }
 
 export const priceAtom = atom<number | undefined>(undefined);
@@ -38,7 +38,7 @@ const InputPrice = forwardRef<HTMLInputElement, InputPriceProps>(
           value={priceInCents || Number(defaultValue)}
           onChange={handleOnChange}
         />
-        <label htmlFor={name} className={stylesPrice.text}>{formatCurrency((priceInCents || Number(defaultValue) || 0) / 100)}</label>
+        <label htmlFor={name} className={stylesPrice.text}>{formatCurrencyInCents((priceInCents || Number(defaultValue) || 0))}</label>
         <ErrorMessage name={name} error={error} />
       </>
     )

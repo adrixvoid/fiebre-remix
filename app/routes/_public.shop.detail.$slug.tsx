@@ -7,11 +7,11 @@ import type { MapImage } from "~/types/file";
 import type { Product } from "~/types/product";
 
 import { parse } from '~/lib/marked';
-import productModel from '~/server/mongoose/schema/product.schema';
 
 import { ProductButtonAddToCart, ProductDescription, ProductGallery, ProductGrid, ProductImagePreview, ProductPrice, ProductQuantity, ProductTags, ProductTitle } from "~/components/products/detail/ProductDetail";
 import { Container } from "~/components/ui/container/Container";
 import { Section } from "~/components/ui/section/Section";
+import { productService } from "~/server/services/products.service";
 
 const ACTIONS = {
     ADD_TO_CART: "add-to-cart"
@@ -23,12 +23,7 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
             throw new Error('The slug is required');
         }
 
-        const product = await productModel.findOne({ slug: params.slug }).exec();
-
-
-        if (!product) {
-            throw new Error('Product not found');
-        }
+        const product = await productService.findWhere({ slug: params.slug });
 
         const gallery: MapImage[] = product && product.images ? [...product.images as Product['images']] : [];
         if (gallery.length > 1) {

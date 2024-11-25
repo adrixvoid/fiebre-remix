@@ -1,16 +1,17 @@
-import InputCheckbox, { InputCheckboxProps } from "./InputCheckbox";
+import { forwardRef } from "react";
 import { InputBase, InputBaseProps } from "./InputBase";
+import InputCheckbox, { InputCheckboxProps } from "./InputCheckbox";
 
 export type InputProps = InputCheckboxProps | InputBaseProps | React.InputHTMLAttributes<HTMLInputElement> & { label?: string };
 
-export function Input(props: InputProps) {
+export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   switch (props.type) {
     case 'checkbox':
     case 'radio':
-      return <InputCheckbox {...props} label={props.label || ''} />;
+      return <InputCheckbox ref={ref} {...props} label={props.label || ''} />;
     default:
-      return <InputBase {...props} />;
+      return <InputBase ref={ref} {...props} />;
   }
-}
+})
 
 export default Input;

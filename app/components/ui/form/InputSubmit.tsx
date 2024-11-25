@@ -1,4 +1,3 @@
-import { useIsSubmitting } from "remix-validated-form";
 import Button from "~/components/ui/button/Button";
 
 export const InputSubmit = ({
@@ -16,6 +15,7 @@ export const InputSubmitValidator = ({
 }: {
   label?: string;
 }) => {
-  const isSubmitting = useIsSubmitting();
+  // const isSubmitting = useIsSubmitting();
+  const isSubmitting = false;
   return <InputSubmit isSubmitting={isSubmitting} label={label} />;
 };

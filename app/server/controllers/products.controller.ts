@@ -4,16 +4,16 @@ import {
   LoaderFunctionArgs,
   redirect
 } from '@remix-run/node';
-import {validationError} from 'remix-validated-form';
 
+import {validationError} from '@rvf/remix';
 import {ASSET_PATH, ROUTE_PATH_ADMIN} from '~/constants';
 import {slugify} from '~/lib/url';
-import categoryModel from '~/server/mongoose/schema/category.schema';
-import productModel from '~/server/mongoose/schema/product.schema';
 import {productService} from '~/server/services/products.service';
 import {Category} from '~/types/category';
+import {MapImage} from '~/types/file';
 import {Product} from '~/types/product';
 import {fileService} from '../lib/file';
+import {categoryService} from '../services/category.service';
 import {productSchemaValidator} from '../zod/products.zod';
 
 export const PRODUCT_PARAMS = {
@@ -25,8 +25,8 @@ export const PRODUCT_PARAMS = {
 export interface LoaderAdminProduct {
   category?: Category;
   categories?: Category[];
-  product?: Product | null;
-  referrer?: string | null;
+  product?: Product;
+  referrer: string | null;
 }
 
 export async function loaderAdminProductForm({
@@ -38,22 +38,21 @@ export async function loaderAdminProductForm({
   let categoryId = url.searchParams.get(PRODUCT_PARAMS.CATEGORY_ID);
   const referrer = url.searchParams.get('referrer');
 
-  let product = null;
+  let product: LoaderAdminProduct['product'];
 
-  if (Boolean(productId)) {
-    product = await productModel.findOne({_id: productId});
-    categoryId = product?.categoryId?.toString() || categoryId;
+  if (productId) {
+    product = await productService.find(productId);
+    if (product) categoryId = product?.categoryId?.toString();
   }
 
-  const categories = await categoryModel.find();
-
-  let category = categories.find((c) => c._id.toString() === categoryId);
+  const categories = await categoryService.findMany();
+  let category = categories.find((c) => c.id.toString() === categoryId);
 
   return {category, product, categories, referrer};
 }
 
 export async function loaderAdminProductList({params}: LoaderFunctionArgs) {
-  const products = await productModel.find();
+  const products: Product[] = await productService.findMany();
   return {products};
 }
 
@@ -63,28 +62,28 @@ export async function actionAdminProductForm({request}: ActionFunctionArgs) {
   const formData = await request.formData();
   const validation = await productSchemaValidator.validate(formData);
 
-  if (validation.error) {
-    return validationError(validation.error);
-  }
+  if (validation.error) return validationError(validation.error);
 
-  let {referrer, toDelete, id, ...data} = validation.data;
+  let {referrer, imagesToDelete, images, id, ...data} = validation.data;
 
-  let dataFromDB = null;
+  let originalProduct;
+  let insertImages: MapImage[] = [];
 
   if (id) {
-    dataFromDB = await productModel.findById(id);
+    originalProduct = await productService.find(id);
+    if (originalProduct?.images) insertImages = originalProduct.images;
   }
 
-  let images =
-    dataFromDB && Boolean(dataFromDB?.images) ? dataFromDB.images : [];
-  if (data.images) {
-    const newImages = await fileService.saveAll(
-      ASSET_PATH.PRODUCTS,
-      data.images
+  if (imagesToDelete && insertImages) {
+    insertImages = insertImages.filter(
+      (img) => !imagesToDelete.includes(img.filePath)
     );
-    images = images.concat(newImages);
   }
-  images = images.filter((img) => !toDelete.includes(img.filePath));
+
+  if (images) {
+    const newImages = await fileService.saveAll(ASSET_PATH.PRODUCTS, images);
+    if (newImages) insertImages = insertImages.concat(newImages);
+  }
 
   let file = null;
   if (data.storedFile) {
@@ -93,36 +92,25 @@ export async function actionAdminProductForm({request}: ActionFunctionArgs) {
 
   const tags = data.tags && typeof data.tags === 'string' ? [data.tags] : [];
 
-  const toSave = Object.assign(data, {
+  const insertData = Object.assign(data, {
     slug: slugify(data.slug || data.name),
     primaryImage: 0,
     tags,
     stock: data.stock || 0,
     storedFile: file,
-    images
+    images: insertImages
   });
 
   if (id) {
-    await productService.update(toSave, id);
+    await productService.update(insertData, id);
   } else {
-    await productService.create(toSave);
+    await productService.create(insertData);
   }
 
-  fileService.deleteAll(toDelete as string[]);
+  if (imagesToDelete) fileService.deleteAll(imagesToDelete);
 
   return redirect(referrer || ROUTE_PATH_ADMIN.PRODUCT_LIST);
 }
-
-// export async function actionAdminProduct({request}: ActionFunctionArgs) {
-//   const formData = await request.formData();
-//   const validation = await productSchemaValidator.validate(formData);
-// const result = adminProductCreateSchema.safeParse(
-//   Object.fromEntries(formData)
-// );
-// if (!result.success) {
-//   return result.error.formErrors.fieldErrors;
-// }
-// }
 
 export async function actionAdminProductDelete({request}: ActionFunctionArgs) {
   let formData = await request.formData();
@@ -132,9 +120,7 @@ export async function actionAdminProductDelete({request}: ActionFunctionArgs) {
     return json({ok: false}, {status: 404});
   }
 
-  const deleted = await productModel.findOneAndDelete({
-    _id: id
-  });
+  const deleted = await productService.delete(id);
 
   return json({ok: true, category: deleted});
 }

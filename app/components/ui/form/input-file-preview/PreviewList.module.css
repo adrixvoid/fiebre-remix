@@ -12,11 +12,10 @@
   display: grid;
   grid-template-columns: 10dvw 1fr auto;
   align-items: center;
-  border-top: 1px solid var(--border);
   position: relative;
   gap: 1.5rem;
-  background-color: hsl(var(--card));
   padding: 0.5rem;
+  background: hsl(var(--card))
 }
 
 .item:first-child {
@@ -40,10 +39,8 @@
   display: inline-block;
   text-overflow: ellipsis;
   max-width: 100%;
-  font-size: var(--text-xs);
-  background-color: hsl(var(--background));
+  font-size: 0.8em;
   padding: 0.1rem 0.2rem;
-  border-radius: var(--radius);
 }
 
 .badge-disabled {

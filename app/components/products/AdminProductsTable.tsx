@@ -42,7 +42,7 @@ const columns = [
             const location = useLocation();
 
             const slug = props.row.original.slug as string;
-            const id = props.row.original._id?.toString() || "";
+            const id = props.row.original.id?.toString() || "";
             const name = props.row.original.name as string;
 
             const editPath = `${ROUTE_PATH_ADMIN.PRODUCT_FORM}/${id}?referrer=${location.pathname}`;

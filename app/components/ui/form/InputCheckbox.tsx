@@ -1,6 +1,6 @@
 import clsx from "clsx";
-import React from "react";
-import { ErrorMessage } from "./ErrorMessage";
+import React, { forwardRef } from "react";
+import { ErrorMessage, InputErrorMessage } from "./ErrorMessage";
 import { Label } from "./Label";
 
 import styles from './InputCheckbox.module.css';
@@ -8,19 +8,21 @@ import styles from './InputCheckbox.module.css';
 export interface InputCheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
   labelProps?: React.LabelHTMLAttributes<HTMLLabelElement>;
-  error?: string;
+  error?: InputErrorMessage;
 }
 
-export function InputCheckbox({ label, labelProps, id, name, type, error, className, ...rest }: InputCheckboxProps) {
+export const InputCheckbox = forwardRef<HTMLInputElement, InputCheckboxProps>(({ label, labelProps, id, name, type, error, className, ...rest }, ref) => {
   return (
     <>
       <Label name={name} {...labelProps} className={clsx(styles.label, labelProps?.className)} type="checkbox">
-        <input className={clsx(
-          className,
-          styles.base, {
-          [styles.checkbox]: type === "checkbox",
-          [styles.radio]: type === "radio"
-        })}
+        <input
+          ref={ref}
+          className={clsx(
+            className,
+            styles.base, {
+            [styles.checkbox]: type === "checkbox",
+            [styles.radio]: type === "radio"
+          })}
           type={type || "checkbox"}
           name={name}
           {...rest}
@@ -30,6 +32,6 @@ export function InputCheckbox({ label, labelProps, id, name, type, error, classN
       <ErrorMessage name={name} error={error} />
     </>
   )
-}
+})
 
 export default InputCheckbox;

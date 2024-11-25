@@ -10,10 +10,11 @@ import Button from "~/components/ui/button/Button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardImageCover, CardTitle } from "~/components/ui/card/Card";
 import { Container } from "~/components/ui/container/Container";
 import { Grid } from "~/components/ui/grid/Grid";
+import { Link } from "~/components/ui/link/Link";
 import { Section } from "~/components/ui/section/Section";
 
 export const loader: LoaderFunction = async () => {
-    const products = await productService.find();
+    const products = await productService.findMany();
     return { products };
 }
 
@@ -29,7 +30,9 @@ const Store = () => {
                                 <img src={product.images?.[0]?.url} alt={product.name} aria-hidden loading="lazy" />
                             </CardImageCover>
                             <CardHeader>
-                                <CardTitle>{product.name}</CardTitle>
+                                <Link to={`${ROUTE_PATH.SHOP_DETAIL}/${product.slug}`}>
+                                    <CardTitle>{product.name}</CardTitle>
+                                </Link>
                             </CardHeader>
                             <CardContent>
                                 <CardDescription>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo sint expedita modi doloremque at quisquam, dolore corporis ea. Laboriosam sint natus neque vel dolorem expedita repellendus, in iusto iste nostrum?</CardDescription>

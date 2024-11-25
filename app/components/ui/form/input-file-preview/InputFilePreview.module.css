@@ -7,7 +7,7 @@
 .label {
     cursor: pointer;
     text-align: center;
-    background-color: hsl(var(--input) / 18%);
+    background-color: hsl(var(--input) / 20%);
     border: 1px dashed hsl(var(--border));
 
     display: flex;

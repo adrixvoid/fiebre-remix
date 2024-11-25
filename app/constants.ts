@@ -32,6 +32,7 @@ export const ROUTE_PATH = {
 
 export const ROUTE_PATH_ADMIN = {
   CATEGORY_LIST: '/admin/categories',
+  CATEGORY_FORM: '/admin/categories/form',
   CATEGORY_CREATE: '/admin/categories/create',
   CATEGORY_EDIT: '/admin/categories/edit',
   CATEGORY_DELETE: '/admin/categories/delete',

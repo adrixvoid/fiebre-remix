@@ -3,7 +3,7 @@
   width: 15%;
   aspect-ratio: 1 /1;
   font-size: 0.8em;
-  background-color: rgb(255 255 255 / 0.5);
+  background-color: color-mix(in hsl, hsl(var(--foreground)) 10%, hsl(var(--background)) 90%);
 }
 
 .shadow-sm {

@@ -44,32 +44,74 @@ schema.set('toJSON', {
   }
 });
 
-schema.pre('save', {document: true}, async function (next) {
-  try {
-    if (!this.isNew) {
-      next();
-      return;
-    }
+async function getPathFromParentId(parentId: string) {
+  const parentDoc = await mongoose.models.Category.findById(parentId);
+  if (parentDoc && parentDoc.path) {
+    return createPath(parentDoc.path, parentDoc.slug);
+  } else {
+    return '/';
+  }
+}
 
-    this.updatedAt = new Date();
-    this.slug = slugify(this.name);
-    this.path = this.slug;
+schema.pre('save', {document: true}, async function (error, doc) {
+  if (!this.isNew) {
+    return error;
+  }
 
+  this.updatedAt = new Date();
+  this.slug = slugify(this.name);
+  this.path = '';
+
+  if (this.parentId) {
     // Add parent path
-    if (this.parentId) {
-      const parentDoc = await mongoose.models.Category.findById(this.parentId);
-      if (parentDoc && parentDoc.path) {
-        this.path = createPath(parentDoc?.path, this.slug);
-      }
-    }
-
-    next();
-  } catch (error) {
-    next(error);
+    this.path = await getPathFromParentId(this.parentId);
   }
 });
 
-schema.post('findOneAndDelete', async function (doc) {
+schema.post('save', async function (doc) {
+  if (doc.parentId) {
+    await mongoose.models.Category.findOneAndUpdate(
+      {_id: doc.parentId},
+      {
+        $push: {subcategories: doc._id}
+      }
+    );
+  }
+});
+
+schema.pre('findOneAndUpdate', async function () {
+  const original = await this.model.findOne(this.getQuery());
+
+  // update subcategory from parent
+  if (original.parentId) {
+    // remove old parent
+    await mongoose.models.Category.findOneAndUpdate(
+      {_id: original.parentId},
+      {
+        $pull: {subcategories: original._id}
+      }
+    );
+  }
+});
+
+schema.post('findOneAndUpdate', async function (doc) {
+  // update subcategories path
+  if (doc.subcategories && doc.subcategories.length > 0) {
+    updateSubcategoriesPath(doc.path, doc.subcategories);
+  }
+
+  if (doc.parentId) {
+    // add new parent
+    await mongoose.models.Category.findOneAndUpdate(
+      {_id: doc.parentId},
+      {
+        $push: {subcategories: doc._id}
+      }
+    );
+  }
+});
+
+schema.post('findOneAndDelete', async function (doc, next) {
   // Delete parent reference
   if (doc && doc.parentId) {
     await mongoose.models.Category.updateOne(
@@ -80,7 +122,30 @@ schema.post('findOneAndDelete', async function (doc) {
     );
   }
 
-  // Delete subfolder reference
+  next();
 });
+
+async function updateSubcategoriesPath(
+  newPath: string,
+  subcategories: CategoryDocument[] | Category[]
+) {
+  return Promise.all(
+    subcategories.map(async (subcategory) => {
+      const doc = await mongoose.models.Category.findOneAndUpdate(
+        {
+          _id: subcategory.id
+        },
+        {$set: {path: newPath}},
+        {
+          new: true
+        }
+      ).populate('subcategories');
+
+      if (doc) {
+        await updateSubcategoriesPath(doc.path, doc.subcategories);
+      }
+    })
+  );
+}
 
 export default mongoose.model('Category', schema);

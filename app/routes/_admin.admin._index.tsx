@@ -1,7 +1,7 @@
 import type { LoaderFunctionArgs } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 
-import { formatCurrency, formatNumber } from "~/lib/currency";
+import { formatCurrencyInCents, formatNumber } from "~/lib/currency";
 import prisma from "~/server/lib/prisma";
 
 import { DashboardCard } from "~/components/dashboard/dashboard-card";
@@ -67,8 +67,8 @@ export default function Admin() {
     <Section style={{ marginTop: "1rem" }}>
       <Container>
         <div>
-          <Grid columns={3}>
-            <DashboardCard title="Sales" subtitle={`${formatNumber(salesData.numberOfSales)} Orders`} body={<p>{formatCurrency(salesData.amount)}</p>} />
+          <Grid columns="3">
+            <DashboardCard title="Sales" subtitle={`${formatNumber(salesData.numberOfSales)} Orders`} body={<p>{formatCurrencyInCents(salesData.amount)}</p>} />
             <DashboardCard title="Customers" subtitle={`${formatNumber(userData.averageValuePerUser)} Average Value`} body={<p>{userData.userCount}</p>} />
             <DashboardCard title="Active Products" subtitle={`${formatNumber(productData.inactiveCount)} Inactive`} body={<p>{productData.activeCount}</p>} />
           </Grid>

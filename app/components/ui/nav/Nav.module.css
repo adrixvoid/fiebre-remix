@@ -8,5 +8,4 @@
 .active {
   color: hsl(var(--primary));
   font-weight: bolder;
-  text-decoration: underline;
 }

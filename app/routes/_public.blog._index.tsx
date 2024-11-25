@@ -4,10 +4,10 @@ import { ROUTE_PATH } from "~/constants";
 
 import markdownService from "~/server/lib/markdown";
 
-import Button from "~/components/ui/button/Button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardImageCover, CardPadding, CardTitle } from "~/components/ui/card/Card";
+import { Card, CardContent, CardDescription, CardHeader, CardImageCover, CardPadding, CardTitle } from "~/components/ui/card/Card";
 import { Container } from "~/components/ui/container/Container";
 import { Grid } from "~/components/ui/grid/Grid";
+import { Link } from "~/components/ui/link/Link";
 import { Section } from "~/components/ui/section/Section";
 import { Post } from "~/types/post";
 
@@ -26,21 +26,18 @@ function BlogPage() {
           {documents.map((content) => (
             <Card as="article" key={content.title}>
               <CardPadding>
-                <CardImageCover src={content.preview}>
-                  <img src={content.preview} alt={content.title} aria-hidden />
-                </CardImageCover>
+                <Link to={`${ROUTE_PATH.BLOG}/${content.slug}`}>
+                  <CardImageCover src={content.preview} />
+                </Link>
               </CardPadding>
               <CardHeader>
-                <CardTitle>{content.title}</CardTitle>
+                <Link to={`${ROUTE_PATH.BLOG}/${content.slug}`}>
+                  <CardTitle>{content.title}</CardTitle>
+                </Link>
               </CardHeader>
               <CardContent>
                 <CardDescription>{content.description}</CardDescription>
               </CardContent>
-              <CardFooter>
-                <Button to={`${ROUTE_PATH.BLOG}/${content.slug}`}>
-                  Read More...
-                </Button>
-              </CardFooter>
             </Card>
           ))}
         </Grid>

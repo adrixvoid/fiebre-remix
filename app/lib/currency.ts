@@ -21,6 +21,10 @@ export function formatCurrency(amount: number) {
   return CURRENCY_FORMATTER['en-US'].format(amount);
 }
 
+export function formatCurrencyInCents(amount: number = 0) {
+  return CURRENCY_FORMATTER['en-US'].format(amount / 100);
+}
+
 export function formatNumber(number: number) {
   return NUMBER_FORMATTER['en-US'].format(number);
 }

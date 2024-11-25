@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import {slugify} from '~/lib/url';
-import {Product, ProductType} from '~/types/product';
+import {Product, PRODUCT_TYPE} from '~/types/product';
 
 const Schema = mongoose.Schema;
 
@@ -23,7 +23,7 @@ export const schema = new Schema<ProductDocument>(
 
     productType: {
       type: String,
-      enum: ProductType,
+      enum: PRODUCT_TYPE,
       required: true
     },
     stock: {type: Number, default: 0},

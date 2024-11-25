@@ -5,12 +5,10 @@ import { Trash2 } from 'lucide-react';
 import { t } from '~/i18n/translate';
 import { MapImage } from "~/types/file";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Button } from '~/components/ui/button/Button';
 import styles from "./InputFilePreview.module.css";
 import { PreviewList, PreviewListActions, PreviewListBadge, PreviewListImage, PreviewListItem } from './PreviewList';
-
-const DELETE_INPUT_NAME = 'toDelete';
 
 interface ImagePreviewProps {
   source: MapImage,
@@ -34,9 +32,9 @@ export function ImagePreview({ source, onDelete, checked = false }: ImagePreview
         <Button
           aria-label="delete"
           type="button"
-          variant={checked ? "default" : "destructive"}
+          variant={checked ? "base" : "destructive"}
           size='sm'
-          onClick={(event) => {
+          onClick={(event: React.MouseEvent) => {
             event.preventDefault();
             onDelete?.(source)
           }}
@@ -50,20 +48,22 @@ export function ImagePreview({ source, onDelete, checked = false }: ImagePreview
 }
 
 type InputImageListProps = React.InputHTMLAttributes<HTMLInputElement> & {
-  source: MapImage[] | MapImage | undefined;
+  source?: MapImage[] | MapImage | null;
   className?: string;
   children?: React.ReactNode;
   multiple?: boolean;
 }
 
-export function InputImageList({ className, source, multiple, ...rest }: InputImageListProps) {
+export function InputImageList({ className, source, multiple, children, ...rest }: InputImageListProps) {
   const [deleteSetList, setDeleteList] = useAtom(deleteSetListAtom)
-  const [showUploadFile, setShowUploadFile] = useAtom(showUploadAtom)
+  const [showUploadFile, setShowUploadFile] = useState(false)
 
   useEffect(() => {
     if (multiple || !source) {
       setShowUploadFile(true);
     }
+
+    return setDeleteList(new Set());
   }, [])
 
   let imageComponent = null;
@@ -71,6 +71,9 @@ export function InputImageList({ className, source, multiple, ...rest }: InputIm
   const handleOnDelete = (source: MapImage) => {
     if (deleteSetList.has(source.filePath)) {
       deleteSetList.delete(source.filePath)
+      if (!multiple) {
+        setShowUploadFile(false);
+      }
     } else {
       deleteSetList.add(source.filePath)
     }
@@ -97,9 +100,10 @@ export function InputImageList({ className, source, multiple, ...rest }: InputIm
       </div>
       <span style={{ display: "none" }}>
         {Array.from(deleteSetList).map((d) => (
-          <input key={d} type='checkbox' name={DELETE_INPUT_NAME} checked={true} onChange={() => { }} value={d} {...rest} />
+          <input key={d} type='checkbox' checked={true} onChange={() => { }} value={d} {...rest} />
         ))}
       </span>
+      {showUploadFile && <div style={{ marginTop: '0.5em' }}>{children}</div>}
     </>
   )
 }

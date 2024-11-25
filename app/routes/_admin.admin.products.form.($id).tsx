@@ -1,11 +1,10 @@
 import { type ActionFunction, type LoaderFunction } from "@remix-run/node";
 import { useActionData, useLoaderData, useLocation } from "@remix-run/react";
+import { useForm } from "@rvf/remix";
 import { atom, useAtom } from 'jotai';
 
-import { ValidatedForm } from "remix-validated-form";
-import { productSchemaValidator } from "~/server/zod/products.zod";
-
 import { CategorySelect } from "~/components/categories/CategorySelect";
+import { Alert } from "~/components/ui/alert/Alert";
 import { Container } from "~/components/ui/container/Container";
 import { Fieldset } from "~/components/ui/form/Fieldset";
 import { FormBlock } from "~/components/ui/form/FormBlock";
@@ -13,18 +12,18 @@ import Input from "~/components/ui/form/Input";
 import InputFilePreview from "~/components/ui/form/input-file-preview/InputFilePreview";
 import { InputImageList } from "~/components/ui/form/input-file-preview/UploadedImages";
 import { InputPrice } from "~/components/ui/form/InputPrice";
-import { InputSubmitValidator } from "~/components/ui/form/InputSubmit";
+import { InputSubmit } from "~/components/ui/form/InputSubmit";
 import TextEditor from "~/components/ui/form/text-editor/TextEditor";
-import ValidateInput from "~/components/ui/form/ValidateInput";
 import { Section } from "~/components/ui/section/Section";
+import { Title } from "~/components/ui/text/Text";
 
 import { actionAdminProductForm, LoaderAdminProduct, loaderAdminProductForm } from "~/server/controllers/products.controller";
+import { productSchemaValidator } from "~/server/zod/products.zod";
 
-import { Title } from "~/components/ui/text/Text";
 import { ROUTE_PATH_ADMIN } from "~/constants";
 import useReferrer from "~/hooks/useReferrer";
 import { t } from "~/i18n/translate";
-import { ProductType } from "~/types/product";
+import { PRODUCT_TYPE } from "~/types/product";
 
 const priceHidden = atom(false);
 const currentProductType = atom("stock");
@@ -40,81 +39,69 @@ export default function AdminProductForm() {
   const [productType, setProductType] = useAtom(currentProductType)
   const [isPriceHidden, setPriceHidden] = useAtom(priceHidden)
 
+  const form = useForm({
+    method: 'post',
+    encType: "multipart/form-data",
+    validator: productSchemaValidator,
+    defaultValues: {
+      ...product,
+      name: product?.name || "",
+    }
+  });
+
   return (
     <Section marginBottom>
       <Container>
         <Title as='h1' size='lg'>{Boolean(product) ? "Edit Product" : "New Product"}</Title>
-        <ValidatedForm
-          validator={productSchemaValidator}
-          method="post"
-          encType="multipart/form-data"
-        >
+        <form {...form.getFormProps()}>
           <Fieldset>
             <FormBlock>
-              <ValidateInput name="name">
-                <Input type="text" label="Product Name" id="name" name="name" placeholder="My wonderful product!" required defaultValue={product?.name} />
-              </ValidateInput>
+              <Input type="text" label="Product Name" id="name" name="name" placeholder="My wonderful product!" required defaultValue={product?.name} {...form.getInputProps("name")} error={form.error("name")} />
             </FormBlock>
             <FormBlock>
-              <ValidateInput name="categoryId">
-                <CategorySelect defaultValue={category?._id} label="Category" placeholder="Select a category" />
-              </ValidateInput>
+              <CategorySelect id="categoryId" name="categoryId" label="Category" placeholder="Select a category" defaultValue={category?.id} error={form.error("categoryId")} />
             </FormBlock>
             <FormBlock>
-              <TextEditor label='Description' id="description" name="description" rows={5} defaultValue={product?.description} />
+              <TextEditor label='Description' id="description" name="description" rows={5} defaultValue={product?.description || ''} error={form.error("description")} />
             </FormBlock>
           </Fieldset>
           <hr />
           <Fieldset>
             <FormBlock>
-              <ValidateInput name='toDelete' className='mb-2'>
-                <InputImageList source={product?.images} multiple={true} />
-              </ValidateInput>
-              <ValidateInput type="file" name="images" label="Images" className='mb-2' multiple={true} accept="images/*">
-                <InputFilePreview />
-              </ValidateInput>
+              <InputImageList name="imagesToDelete" source={product?.images} multiple={true} />
+              <InputFilePreview type="file" name="images" label="Images" multiple={true} accept="images/*" error={form.error("images")} />
             </FormBlock>
-            {error?.images && <p className="box paper color-danger">{error.images}</p>}
+            {error?.images && <Alert variant='danger'>{error.images}</Alert>}
           </Fieldset>
           <hr />
           <Fieldset>
             <FormBlock>
               <legend>{t('PRODUCT.PRICE')}</legend>
-              <ValidateInput name="priceHidden">
-                <Input type="checkbox" id="priceHidden" name="priceHidden" label="Don't show" labelProps={{ className: "flex items-center mb-1" }} defaultChecked={false} onChange={() => setPriceHidden(!isPriceHidden)} defaultValue={product?.name} />
-              </ValidateInput>
+              <Input type="checkbox" id="priceHidden" name="priceHidden" label="Don't show" defaultChecked={false} onChange={() => setPriceHidden(!isPriceHidden)} />
             </FormBlock>
 
             <FormBlock>
-              <ValidateInput name="priceHidden">
-                <InputPrice type="text" id="priceInCents" name="priceInCents" label="Amount in cents" placeholder="1000 = $1.00" disabled={isPriceHidden} defaultValue={product?.priceInCents || 0} />
-              </ValidateInput>
+              <InputPrice type="text" id="priceInCents" name="priceInCents" label="Amount in cents" placeholder="1000 = $1.00" disabled={isPriceHidden} defaultValue={product?.priceInCents || 0} />
             </FormBlock>
           </Fieldset>
           <hr />
           <Fieldset>
             <legend>{t('PRODUCT.PRODUCT_TYPE')}</legend>
             <FormBlock variant="inline">
-              <Input type="radio" id={`productType[${ProductType.stock}]`} name="productType" label="Physical Stock" value="stock" onChange={() => setProductType(ProductType.stock)} checked={productType === ProductType.stock} />
-              <Input type="radio" id={`productType[${ProductType.externalUrl}]`} name="productType" label="External URL" value="externalUrl" onChange={() => setProductType(ProductType.externalUrl)} checked={productType === ProductType.externalUrl} />
-              <Input type="radio" id={`productType[${ProductType.file}]`} name="productType" label="Download File" value="file" onChange={() => setProductType(ProductType.file)} checked={productType === ProductType.file} />
+              <Input type="radio" id={`productType[${PRODUCT_TYPE.stock}]`} name="productType" label="Physical Stock" value="stock" onChange={() => setProductType(PRODUCT_TYPE.stock)} checked={productType === PRODUCT_TYPE.stock} />
+              <Input type="radio" id={`productType[${PRODUCT_TYPE.externalUrl}]`} name="productType" label="External URL" value="externalUrl" onChange={() => setProductType(PRODUCT_TYPE.externalUrl)} checked={productType === PRODUCT_TYPE.externalUrl} />
+              <Input type="radio" id={`productType[${PRODUCT_TYPE.storedFile}]`} name="productType" label="Download File" value="file" onChange={() => setProductType(PRODUCT_TYPE.storedFile)} checked={productType === PRODUCT_TYPE.storedFile} />
             </FormBlock>
             <FormBlock>
-              {productType === ProductType.stock && (
-                <ValidateInput name="stock">
-                  <Input type="text" key="stock" id="stock" name={ProductType.stock} label='Stock' placeholder="0" defaultValue={product?.stock} />
-                </ValidateInput>
+              {productType === PRODUCT_TYPE.stock && (
+                <Input type="text" key="stock" id="stock" name={PRODUCT_TYPE.stock} label='Stock' placeholder="0" defaultValue={product?.stock} />
               )}
-              {productType === ProductType.externalUrl && (
-                <ValidateInput name={ProductType.externalUrl}>
-                  <Input type="text" key="externalUrl" id="externalUrl" name={ProductType.externalUrl} label='Download URL' placeholder="https://fiebrediseno.empretienda.com.ar/plantillas-para-redes/flower-power-kit-de-dibujos" defaultValue={product?.externalUrl} />
-                </ValidateInput>
+              {productType === PRODUCT_TYPE.externalUrl && (
+                <Input type="text" key="externalUrl" id="externalUrl" name={PRODUCT_TYPE.externalUrl} label='Download URL' placeholder="https://fiebrediseno.empretienda.com.ar/plantillas-para-redes/flower-power-kit-de-dibujos" defaultValue={product?.externalUrl || ''} />
               )}
-              {productType === ProductType.file && (
+              {productType === PRODUCT_TYPE.storedFile && (
                 <>
-                  <ValidateInput name={ProductType.file}>
-                    <Input type="file" label="File" id="file" name={ProductType.file} />
-                  </ValidateInput>
+                  <Input type="file" label="File" id="file" name={PRODUCT_TYPE.storedFile} error={form.error(PRODUCT_TYPE.storedFile)} />
                   <p className='mb-2'>{product?.storedFile?.url}</p>
                 </>
               )}
@@ -125,14 +112,10 @@ export default function AdminProductForm() {
 
           <Fieldset>
             <FormBlock>
-              <ValidateInput name="tags">
-                <Input type="text" label='Tags' key="tags" id="tags" name="tags" placeholder="illustration, sunset, beer" defaultValue={product?.tags} />
-              </ValidateInput>
+              <Input type="text" label='Tags' key="tags" id="tags" name="tags" placeholder="illustration, sunset, beer" defaultValue={product?.tags} />
             </FormBlock>
             <FormBlock>
-              <ValidateInput name="slug">
-                <Input type="text" label='Slug' key="slug" id="slug" name="slug" placeholder="my-custom-slug-for-SEO" defaultValue={product?.slug} />
-              </ValidateInput>
+              <Input type="text" label='Slug' key="slug" id="slug" name="slug" placeholder="my-custom-slug-for-SEO" defaultValue={product?.slug} />
             </FormBlock>
           </Fieldset>
 
@@ -147,10 +130,11 @@ export default function AdminProductForm() {
           <Fieldset>
             <input type="hidden" name="state" value={JSON.stringify(location.state) || ""} />
             <input type="hidden" name="referrer" value={referrer} />
-            <input type="hidden" id="id" name="id" value={product?.id} />
-            <InputSubmitValidator label="Save" />
+            <input type="hidden" id="id" name="id" value={product?.id} readOnly />
+            <input type="hidden" name="_action" value={location.pathname} readOnly />
+            <InputSubmit label="Save" />
           </Fieldset>
-        </ValidatedForm>
+        </form>
       </Container>
     </Section>
   );

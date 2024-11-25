@@ -1,12 +1,11 @@
-import {withZod} from '@remix-validated-form/with-zod';
+import {withZod} from '@rvf/zod';
 import {z} from 'zod';
 import {zfd} from 'zod-form-data';
-import {ProductType} from '~/types/product';
+import {PRODUCT_TYPE} from '~/types/product';
 
 const MAX_FILE_SIZE = 1024 * 1024 * 5;
-const imageSchema = z
+const imageMultiSchema = z
   .any()
-  // .refine((files) => files?.[0]?.size > 0, 'Image required')
   .refine(
     (files) =>
       files?.[0]?.size > 0 ? files?.[0]?.size <= MAX_FILE_SIZE : true,
@@ -24,15 +23,15 @@ export const ProductSchema = z.object({
   description: z.string(),
   priceHidden: z.coerce.boolean(),
   priceInCents: z.coerce.number().int().default(0),
-  images: imageSchema.optional(),
+  images: imageMultiSchema.optional(),
   tags: z.string().optional(),
   published: z.coerce.boolean(),
   slug: z.string().optional(),
 
   productType: z.union([
-    z.literal(ProductType.stock),
-    z.literal(ProductType.externalUrl),
-    z.literal(ProductType.file)
+    z.literal(PRODUCT_TYPE.stock),
+    z.literal(PRODUCT_TYPE.externalUrl),
+    z.literal(PRODUCT_TYPE.storedFile)
   ]),
   stock: z.coerce.number().int().optional(),
   externalUrl: z.string().url().optional(),
@@ -42,7 +41,7 @@ export const ProductSchema = z.object({
 });
 
 export const FormSchema = z.object({
-  toDelete: zfd.repeatable(),
+  imagesToDelete: zfd.repeatable().optional(),
   referrer: z.string().optional()
 });
 
@@ -58,32 +57,32 @@ export const productSchemaValidator = withZod(
     )
     .refine(
       (data) =>
-        data.productType === ProductType.stock && data.stock
+        data.productType === PRODUCT_TYPE.stock && data.stock
           ? data.stock >= 0
           : true,
       {
         message: 'Stock have at least 1 product',
-        path: [ProductType.stock, 'productType']
+        path: [PRODUCT_TYPE.stock, 'productType']
       }
     )
     .refine(
       (data) =>
-        data.productType === ProductType.externalUrl
+        data.productType === PRODUCT_TYPE.externalUrl
           ? data.externalUrl !== ''
           : true,
       {
         message: 'Should have a valid URL',
-        path: [ProductType.externalUrl, 'productType']
+        path: [PRODUCT_TYPE.externalUrl, 'productType']
       }
     )
     .refine(
       (data) =>
-        data.productType === ProductType.file
+        data.productType === PRODUCT_TYPE.storedFile
           ? Boolean(data?.storedFile?.size)
           : true,
       {
         message: 'File Required',
-        path: [ProductType.file, 'productType']
+        path: [PRODUCT_TYPE.storedFile, 'productType']
       }
     )
     .refine((data) => data.categoryId, {

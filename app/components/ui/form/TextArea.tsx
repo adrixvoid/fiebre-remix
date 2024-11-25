@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { forwardRef } from 'react';
 import { Label } from './Label';
 
-import { ErrorMessage } from './ErrorMessage';
+import { ErrorMessage, InputErrorMessage } from './ErrorMessage';
 
 import inputStyles from './InputBase.module.css';
 import styles from "./TextArea.module.css";
@@ -12,7 +12,7 @@ export interface TextAreaProps
   name: string;
   label?: string;
   labelProps?: React.LabelHTMLAttributes<HTMLLabelElement>;
-  error?: string;
+  error?: InputErrorMessage;
 }
 
 export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
