@@ -1,32 +1,27 @@
-import {marked} from 'marked';
+import {marked, RendererObject} from 'marked';
 
-// Create a new renderer
-const renderer = new marked.Renderer();
+// Crear un render personalizado
+const renderer: RendererObject | null | undefined = {
+  listitem({type, raw, task, checked, loose, text, tokens}) {
+    // Buscar si el texto del elemento empieza con un emoji y un espacio
+    const emojiMatch = text.match(
+      /^(\p{Emoji_Presentation}|\p{Emoji}\uFE0F)\s/u
+    );
 
-// Override the image method
-renderer.image = function (href, title, text) {
-  // let template = '';
-  // template += `<figure class="markdown-figure" aria-hidden>`;
-  // template += `<img src="${href}" alt="${text}" class="markdown-image" />`;
-  // if (title) {
-  //   template += `<figcaption class="markdown-figcaption">${title}</figcaption>`;
-  // }
-  // template += `</figure>`;
-  // return template;
-  return `<img src="${href}" aria-hidden />`;
-};
+    if (emojiMatch) {
+      const emoji = emojiMatch[0].trim();
+      text = text.replace(emojiMatch[0], '').trim(); // Eliminar el emoji del contenido
 
-// Override the paragraph method
-renderer.paragraph = function (text) {
-  if (text.length > 0 && !text.match(/^\<\w+/)) {
-    return `<p>${text}</p>`;
+      // Insertar el emojiSpan al principio del <li>
+      text = `<li class="custom-list-style" style="list-style:none;">${emoji} ${text}</li>`;
+    }
+
+    return text;
+  },
+  image({href, title, text}) {
+    return `<img src="${href}" aria-hidden />`;
   }
-
-  return text;
 };
-
-// Set the options to use the custom renderer
-marked.setOptions({renderer, breaks: false});
 
 /**
  * Parse the markdown file
@@ -34,14 +29,10 @@ marked.setOptions({renderer, breaks: false});
  * @returns string
  */
 export const parse = async (body: string): Promise<string> => {
-  try {
-    return await marked(body);
-  } catch (error) {
-    throw new Error('Cannot parse markdown file');
-  }
+  marked.use({renderer, breaks: false});
+  return marked.parse(body);
 };
 
-// ${images?.map((image) => formatImage(image.url, image.name)).join('\n')}
 export function formatImage(url: string, name: string): string {
   return `![${name}](${url})`;
 }

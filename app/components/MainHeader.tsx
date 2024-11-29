@@ -16,6 +16,7 @@ import { navigationLinks } from "~/constants";
 import useStickyHeader from "~/hooks/useStickyHeader";
 import styles from './MainHeader.module.css';
 import { Drawer, DrawerCloseButton, DrawerContent, DrawerTrigger } from "./ui/drawer/Drawer";
+import LucideIcon from "./ui/icon/LucideIcon";
 
 function MainHeader() {
   const [, setShowModal] = useAtom(showModalAtom);
@@ -34,8 +35,8 @@ function MainHeader() {
               </Link>
               <Nav className={styles.navigation}>
                 {
-                  navigationLinks.map(({ label, href }) => (
-                    <NavLink key={label} to={href}>{label}</NavLink>
+                  navigationLinks.map(({ label, href, icon }) => (
+                    <NavLink key={label} to={href}>{icon && <LucideIcon size={18} icon={icon} />} {label}</NavLink>
                   ))
                 }
               </Nav>
@@ -68,9 +69,9 @@ function MainHeader() {
         </header>
         <MobileMenu.Nav>
           {
-            navigationLinks.map(({ label, href }) => (
+            navigationLinks.map(({ href, label, icon }) => (
               <DrawerCloseButton asChild key={label} size='sm'>
-                <NavLink to={href}>{label}</NavLink>
+                <NavLink to={href}>{icon && <LucideIcon icon={icon} />} {label}</NavLink>
               </DrawerCloseButton>
             ))
           }

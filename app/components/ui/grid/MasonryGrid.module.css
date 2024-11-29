@@ -1,7 +1,12 @@
 .masonry {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: masonry;
+  --columns: 4;
+  display: block;
+  columns: var(--columns) auto;
+  gap: 0.5em;
+}
+
+.masonry>* {
+  margin-bottom: 0.5em;
 }
 
 @media screen and (min-width: 768px) {}

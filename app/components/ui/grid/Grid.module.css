@@ -1,15 +1,28 @@
 .grid {
   display: grid;
   gap: 1rem;
+  grid-template-columns: repeat(var(--repeat-number), 1fr);
+}
+
+.two {
+  grid-template-columns: 1fr;
+}
+
+.three {
+  grid-template-columns: 1fr;
+}
+
+.four {
+  grid-template-columns: 1fr;
 }
 
 @media screen and (min-width: 480px) {
   .three {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 
   .four {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
   }
 }
 

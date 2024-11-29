@@ -5,7 +5,6 @@ import { Send } from 'lucide-react';
 import { ROUTE_PATH } from "~/constants";
 import { Product } from "~/types/product";
 
-import productModel from '~/server/mongoose/schema/product.schema';
 
 import Button from "~/components/ui/button/Button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardImageCover, CardPadding, CardTitle } from "~/components/ui/card/Card";
@@ -13,9 +12,11 @@ import { Center } from "~/components/ui/center/Center";
 import { Container } from "~/components/ui/container/Container";
 import Input from "~/components/ui/form/Input";
 import { Grid } from "~/components/ui/grid/Grid";
+import { Link } from "~/components/ui/link/Link";
 import { Section } from "~/components/ui/section/Section";
 import { Skeleton } from "~/components/ui/skeleton/Skeleton";
 import { Text } from "~/components/ui/text/Text";
+import { productService } from "~/server/services/products.service";
 
 export const meta: MetaFunction = () => {
   return [
@@ -25,7 +26,7 @@ export const meta: MetaFunction = () => {
 };
 
 export const loader: LoaderFunction = async () => {
-  const products = await productModel.find();
+  const products = await productService.findMany();
   return { products };
 }
 
@@ -109,7 +110,7 @@ export default function Index() {
         </Grid>
       </Container>
       <Container style={{ marginTop: "2.5rem" }}>
-        <Grid columns={2}>
+        <Grid columns="2">
           <Skeleton width="100%" height={535} />
           <CardContent>
             <CardTitle>Curso de diseño gráfico para  emprendedoras</CardTitle>
@@ -132,7 +133,7 @@ export default function Index() {
         <Center variant="all" style={{ height: "10rem" }}>
           <h2>Proyectos destacados</h2>
         </Center>
-        <Grid>
+        <Grid columns='3'>
           <Skeleton width="100%" height={320} />
           <Skeleton width="100%" height={320} />
           <Skeleton width="100%" height={320} />
@@ -145,28 +146,22 @@ export default function Index() {
         </Center>
       </Container>
       <Container style={{ marginTop: "2.5rem" }}>
-        <Grid columns={4}>
+        <Grid columns="4">
           {products && products.map(product => {
             return (
               <Card as="article" key={product.name} border>
                 {product.images?.[0] &&
                   <CardPadding>
-                    <CardImageCover src={product.images?.[0].url}>
-                      <img src={product.images?.[0].url} alt={product.name} aria-hidden />
-                    </CardImageCover>
+                    <Link to={`${ROUTE_PATH.SHOP_DETAIL}/${product.slug}`}>
+                      <CardImageCover src={product.images?.[0].url} />
+                    </Link>
                   </CardPadding>
                 }
-                <CardHeader>
-                  <CardTitle>{product.name}</CardTitle>
-                </CardHeader>
                 <CardContent>
-                  <CardDescription>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nostrum ipsa assumenda fugit, magni perspiciatis aliquam, qui reprehenderit ullam at nam nobis consequatur! Eum earum dolor assumenda! Illo suscipit ea sequi.</CardDescription>
+                  <Link to={`${ROUTE_PATH.SHOP_DETAIL}/${product.slug}`}>
+                    <CardTitle size='sm'>{product.name}</CardTitle>
+                  </Link>
                 </CardContent>
-                <CardFooter>
-                  <Button to={`${ROUTE_PATH.SHOP_DETAIL}/${product.slug}`}>
-                    Read More...
-                  </Button>
-                </CardFooter>
               </Card>
             )
           })}
@@ -176,7 +171,7 @@ export default function Index() {
         <Container>
           <Center direction="column" variant="all">
             <Center variant="text" style={{ maxWidth: "700px" }}>
-              <Text variant="muted">Suscribite para obtener descuentos únicos y plantillas gratuitas!</Text>
+              <Text variant="muted">Suscribite y obtené descuentos únicos y plantillas gratuitas!</Text>
             </Center>
             <Center direction="row" variant="flex" style={{ borderRadius: "var(--radius)", padding: "0 1rem", width: "50dvw", fontSize: "2rem", lineHeight: "2.5rem", height: "auto", backgroundColor: "color-mix(in hsl, hsl(var(--background)), transparent 5%)" }}>
               <Input name="subscribe" placeholder="your@email.com" style={{ border: 0, padding: "1rem 0", width: "50dvw", fontSize: "1.2rem", lineHeight: "1.5rem", height: "auto", backgroundColor: "transparent", boxShadow: "none!important" }} />

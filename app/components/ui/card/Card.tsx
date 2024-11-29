@@ -84,7 +84,7 @@ const CardImage = React.forwardRef<HTMLImageElement, CardImageProps>(({ classNam
       {
         asCover ? (
           <div
-            className={clsx(styles.image, styles["image-cover"], className)}
+            className={clsx(styles["image-cover"], className)}
             style={styleExtended}
             aria-hidden="true"
           >

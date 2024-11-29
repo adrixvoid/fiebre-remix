@@ -93,7 +93,7 @@ export const isValidMarkdownAttributes = (
   return typeof attributes.title === 'string';
 };
 
-export async function readMarkdownFile<T>(path: string) {
+export async function readMarkdownFile<T>(path: string, fileName: string) {
   const file = await fs.readFile(path, 'utf-8');
   let {attributes, body} = fm<T>(file.toString());
 
@@ -101,7 +101,7 @@ export async function readMarkdownFile<T>(path: string) {
     throw new Error('Invalid attributes');
   }
 
-  attributes.slug = attributes.slug || slugify(attributes.title);
+  attributes.slug = slugify(fileName.replace('.md', ''));
 
   return {
     ...attributes,
@@ -119,7 +119,10 @@ export async function getDocumentsByType<T>(type: MarkdownType): Promise<T[]> {
     const documents = await Promise.all(
       fileNames
         .map(async (fileName) => {
-          return await readMarkdownFile<T>(path.join(route, fileName));
+          return await readMarkdownFile<T>(
+            path.join(route, fileName),
+            fileName
+          );
         })
         .filter(Boolean)
     );
@@ -138,7 +141,8 @@ export async function getDocument(
     return null;
   }
   const markdownDocument = await readMarkdownFile(
-    path.join(directory, fileName)
+    path.join(directory, fileName),
+    fileName
   );
   return markdownDocument;
 }

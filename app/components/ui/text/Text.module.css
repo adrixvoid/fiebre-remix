@@ -64,33 +64,28 @@
 }
 
 .titleXSmall {
-  font-size: 1rem;
-  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  font-size: 1em;
 }
 
 .titleSmall {
-  font-size: 1.85rem;
+  font-size: 1.25em;
   line-height: 1;
-  font-size: clamp(1.5rem, 2.5vw, 1.75rem);
 }
 
 .titleMedium {
-  font-size: 2.5rem;
-  font-size: clamp(2rem, 2.5vw, 2.75rem);
+  font-size: 1.85em;
 }
 
 .titleLarge {
-  font-size: 3.5rem;
-  font-size: clamp(3rem, 3.5vw, 3.75rem);
+  font-size: 2.5em;
 }
 
 .titleXLarge {
-  font-size: 4.5rem;
-  font-size: clamp(4rem, 5vw, 4.75rem);
+  font-size: 3.5em;
 }
 
 .titleXXLarge {
-  font-size: 5.5rem;
+  font-size: 4.5rem;
   font-size: clamp(5rem, 5vw, 5.75rem);
 }
 

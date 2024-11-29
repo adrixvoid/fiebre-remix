@@ -1,5 +1,6 @@
 // Place any global data in this file.
 // You can import this data from anywhere in your site by using the `import` keyword.
+import {icons} from 'lucide-react';
 import type {iconPaths} from '~/components/ui/icon/IconPaths';
 
 export const SITE_TITLE = 'F I E B R E ®';
@@ -42,10 +43,14 @@ export const ROUTE_PATH_ADMIN = {
 };
 
 /** Main menu items */
-export const navigationLinks: {label: string; href: string}[] = [
+export const navigationLinks: {
+  label: string;
+  href: string;
+  icon?: keyof typeof icons;
+}[] = [
   {label: 'Sobre mi', href: '/about'},
   {label: 'Proyectos', href: '/portfolio'},
-  {label: 'Shop', href: '/shop'},
+  {label: 'Shop', href: '/shop', icon: 'ShoppingCart'},
   {label: 'Blog', href: '/blog'},
   {label: 'Courses', href: '/courses'}
   // {label: 'Servicios', href: '/#services'},
