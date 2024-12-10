@@ -17,7 +17,7 @@ import TextEditor from "~/components/ui/form/text-editor/TextEditor";
 import { Section } from "~/components/ui/section/Section";
 import { Title } from "~/components/ui/text/Text";
 
-import { actionAdminProductForm, LoaderAdminProduct, loaderAdminProductForm } from "~/server/controllers/products.controller";
+import { action_AdminProductForm, loader_AdminProductForm, LoaderAdminProduct } from "~/server/controllers/products.controller";
 import { productSchemaValidator } from "~/server/zod/products.zod";
 
 import { ROUTE_PATH_ADMIN } from "~/constants";
@@ -28,8 +28,8 @@ import { PRODUCT_TYPE } from "~/types/product";
 const priceHidden = atom(false);
 const currentProductType = atom("stock");
 
-export const loader: LoaderFunction = loaderAdminProductForm;
-export const action: ActionFunction = actionAdminProductForm;
+export const loader: LoaderFunction = loader_AdminProductForm;
+export const action: ActionFunction = action_AdminProductForm;
 
 export default function AdminProductForm() {
   const { category, product } = useLoaderData<typeof loader>() as LoaderAdminProduct;

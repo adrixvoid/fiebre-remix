@@ -3,7 +3,7 @@ import { json } from "@remix-run/node";
 
 import markdownService from "~/server/lib/markdown";
 
-import { MarkdownPage } from "~/components/markdown/Markdown";
+import { MarkdownErrorBoundary, MarkdownPage } from "~/components/markdown/Markdown";
 
 export const loader: LoaderFunction = async ({ params }) => {
     try {
@@ -16,3 +16,5 @@ export const loader: LoaderFunction = async ({ params }) => {
 }
 
 export default MarkdownPage
+
+export const ErrorBoundary = MarkdownErrorBoundary;

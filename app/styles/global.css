@@ -133,7 +133,7 @@ nav ol {
 
 @media (prefers-color-scheme: dark) {
   body {
-    background-image: url('/hero/hero.jpg');
+    /* background-image: url('/hero/hero.jpg'); */
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: fixed;

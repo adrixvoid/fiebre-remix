@@ -41,7 +41,7 @@ export function Chip({
       role={onClick ? 'button' : 'status'}
       tabIndex={onClick ? 0 : undefined}
     >
-      {icon && <span className={styles.icon}>{icon}</span>}
+      {icon && <span>{icon}</span>}
       {children}
       {onDismiss && (
         <button

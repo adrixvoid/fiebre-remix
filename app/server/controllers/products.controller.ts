@@ -29,7 +29,7 @@ export interface LoaderAdminProduct {
   referrer: string | null;
 }
 
-export async function loaderAdminProductForm({
+export async function loader_AdminProductForm({
   request,
   params
 }: LoaderFunctionArgs): Promise<LoaderAdminProduct> {
@@ -51,14 +51,14 @@ export async function loaderAdminProductForm({
   return {category, product, categories, referrer};
 }
 
-export async function loaderAdminProductList({params}: LoaderFunctionArgs) {
+export async function loader_AdminProductList({params}: LoaderFunctionArgs) {
   const products: Product[] = await productService.findMany();
   return {products};
 }
 
 // ----- actions
 
-export async function actionAdminProductForm({request}: ActionFunctionArgs) {
+export async function action_AdminProductForm({request}: ActionFunctionArgs) {
   const formData = await request.formData();
   const validation = await productSchemaValidator.validate(formData);
 
@@ -112,15 +112,26 @@ export async function actionAdminProductForm({request}: ActionFunctionArgs) {
   return redirect(referrer || ROUTE_PATH_ADMIN.PRODUCT_LIST);
 }
 
-export async function actionAdminProductDelete({request}: ActionFunctionArgs) {
+export async function action_AdminProductList({request}: ActionFunctionArgs) {
   let formData = await request.formData();
+  let action = String(formData.get('action'));
   let id = String(formData.get('id'));
 
-  if (!id) {
-    return json({ok: false}, {status: 404});
+  if (action === 'actionToggleProductPublished') {
+    let published = String(formData.get('published')).toLowerCase();
+
+    if (id) {
+      const product = productService.updatePublished(published === 'true', id);
+      return json({...product});
+    }
   }
 
-  const deleted = await productService.delete(id);
+  if (action === 'actionDeleteProduct') {
+    if (id) {
+      const product = productService.delete(id);
+      return json({...product});
+    }
+  }
 
-  return json({ok: true, category: deleted});
+  return json({success: false});
 }

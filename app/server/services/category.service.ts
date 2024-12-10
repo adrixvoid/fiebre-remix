@@ -48,7 +48,12 @@ export const categoryService = {
     } else {
       where = {parentId: null};
     }
-    const categories = await prisma.category.findMany({where});
+    const categories = await prisma.category.findMany({
+      where,
+      include: {
+        subcategories: true
+      }
+    });
     return categories.map((category) => ({
       ...category,
       image: category.image ? (JSON.parse(category.image) as MapImage) : null

@@ -36,11 +36,6 @@
   border-radius: 0.5rem;
 }
 
-.price {
-  font-size: var(--text-2xl);
-  font-weight: 700;
-}
-
 .add-to-cart,
 .price,
 .quantity,
@@ -50,10 +45,6 @@
 
 .quantity label {
   margin-right: 0.5rem;
-}
-
-.quantity input {
-  max-width: 7.5rem;
 }
 
 .tags {

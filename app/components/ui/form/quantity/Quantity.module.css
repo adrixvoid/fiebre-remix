@@ -1,0 +1,54 @@
+.quantityContainer {
+  border: 1px solid hsl(var(--button));
+  display: inline-flex;
+  align-items: center;
+  border-radius: 0.5em;
+  overflow: hidden;
+}
+
+.quantityContainer,
+.quantityButton {
+  background-color: hsl(var(--button));
+  color: hsl(var(--button-foreground));
+}
+
+.quantityButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  border: 0;
+}
+
+.quantityButton:hover {
+  color: hsl(var(--button-foreground));
+  background-color: color-mix(in hsl shorter hue, hsl(var(--button)), white 20%);
+}
+
+.quantityButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.quantityInput {
+  width: 3rem;
+  height: 2rem;
+  text-align: center;
+  background-color: transparent;
+  color: hsl(var(--foreground));
+  border-radius: 0;
+  border: 0;
+}
+
+.quantityInput::-webkit-inner-spin-button,
+.quantityInput::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.quantityInput[type=number] {
+  -moz-appearance: textfield;
+}

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { ButtonBase, ButtonBaseProps } from '../button/ButtonBase';
 import styles from './Toggle.module.css';
 
-type ToggleProps = ButtonBaseProps & {
+export type ToggleProps = Omit<ButtonBaseProps, 'onChange'> & {
   label?: string;
   defaultChecked?: boolean;
   onChange?: (checked: boolean) => void;

@@ -1,4 +1,4 @@
-import { Container } from "../container/Container"
+import { Container } from "~/components/ui/container/Container"
 
 function FooterTienda() {
     return (
@@ -7,7 +7,7 @@ function FooterTienda() {
                 <div className="product-footer-items flex gap-4 items-start" uk-grid="">
                     <div className="">
                         <h5 className="product-footer-title">Medios de pago</h5>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit...
+                        {/* medios de pago  */}
                     </div>
                     <div>
                         <h5 className="footer__top__title text--primary">Nuestras redes sociales</h5>

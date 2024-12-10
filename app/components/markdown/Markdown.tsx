@@ -7,6 +7,12 @@ import { Section } from "~/components/ui/section/Section";
 import { Title } from "../ui/text/Text";
 import styles from "./Markdown.module.css";
 
+export function Markdown({ body, ...props }: React.HTMLAttributes<HTMLDivElement> & { body: string }) {
+  return (
+    <div className={styles.markdown} dangerouslySetInnerHTML={{ __html: body || '' }} />
+  )
+}
+
 export function MarkdownPage() {
   const { content } = useLoaderData<{ content: MarkdownDocument }>() as { content: MarkdownDocument };
   return (
@@ -17,7 +23,7 @@ export function MarkdownPage() {
           <div className={styles.preview} style={{ backgroundImage: `url('${content.preview}')` }} />
         )} */}
       </Container>
-      <div className={styles['markdown-content']} dangerouslySetInnerHTML={{ __html: content.body || '' }} />
+      <Markdown body={content.body} />
     </Section>
   )
 }

@@ -1,0 +1,58 @@
+.categoryList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  color: currentColor;
+}
+
+.categoryList li {
+  list-style-type: none;
+}
+
+.categoryDropZone {
+  margin: 5px 0;
+  background-color: hsl(var(--background));
+  display: flex;
+  align-items: center;
+  padding: .5rem 1rem .5rem .25rem;
+  border-width: 2px;
+  border-style: dashed;
+  border-color: hsl(var(--border));
+}
+
+.categoryDropZone:hover {
+  background-color: color-mix(in hsl, hsl(var(--background)), white 10%);
+}
+
+.categoryMove {
+  cursor: move;
+}
+
+.over {
+  border-color: #999;
+}
+
+.dragging {
+  opacity: 0.5;
+}
+
+.nestedCategories {
+  margin-left: .5rem;
+}
+
+.mainDropZone {
+  border-width: 2px;
+  border-style: dashed;
+  border-color: transparent;
+  padding: 10px;
+  margin-top: 10px;
+  text-align: center;
+  opacity: 0;
+}
+
+.mainDropZone.over {
+  opacity: 1;
+  border-color: hsl(var(--border));
+  background-color: hsl(var(--input));
+  transition: opacity 200ms;
+}

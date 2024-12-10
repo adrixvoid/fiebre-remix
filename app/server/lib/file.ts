@@ -1,7 +1,3 @@
-import {
-  unstable_createFileUploadHandler,
-  unstable_parseMultipartFormData
-} from '@remix-run/node';
 import fs from 'fs/promises';
 import path from 'path';
 import {createName} from '~/server/lib/upload';
@@ -17,6 +13,11 @@ export const fileService = {
     const url = path.join(directory.replace(/(\/?)public/i, '/'), newName);
     await fs.mkdir(directory, {recursive: true});
     await fs.writeFile(filePath, Buffer.from(await file.arrayBuffer()));
+
+    // await fs.mkdir('products', {recursive: true});
+    // const filePath = `products/${crypto.randomUUID()}-${data.file.name}`;
+    // await fs.writeFile(filePath, Buffer.from(await data.file.arrayBuffer()));
+
     return {
       url,
       fileName: newName,
@@ -65,28 +66,5 @@ export const fileService = {
     return [await fileService.delete(paths)];
   }
 };
-
-export async function deprecated_uploadFilesAction(
-  request: Request,
-  options?: {relativePath: string}
-): Promise<FormData | null> {
-  try {
-    const uploadHandler = unstable_createFileUploadHandler({
-      maxPartSize: 10_000_000,
-      directory: path.join(
-        process.cwd(),
-        'public',
-        options?.relativePath || ''
-      ),
-      file: ({filename}) => createName(filename),
-      filter: ({contentType}) => contentType.includes('image')
-    });
-
-    return await unstable_parseMultipartFormData(request, uploadHandler);
-  } catch (error) {
-    console.error(error.message);
-    return null;
-  }
-}
 
 export default fileService;

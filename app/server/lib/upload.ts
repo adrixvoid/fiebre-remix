@@ -53,14 +53,3 @@ export const prepareFileDataForDB = (file: NodeOnDiskFile): MapFile => {
     filePath: file?.getFilePath()
   };
 };
-
-// await fs.mkdir('products', {recursive: true});
-// const filePath = `products/${crypto.randomUUID()}-${data.file.name}`;
-// await fs.writeFile(filePath, Buffer.from(await data.file.arrayBuffer()));
-
-// await fs.mkdir('public/products', {recursive: true});
-// const imagePath = `/products/${crypto.randomUUID()}-${data.file.name}`;
-// await fs.writeFile(
-//   `public/${imagePath}`,
-//   Buffer.from(await data.file.arrayBuffer())
-// );

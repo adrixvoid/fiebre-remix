@@ -3,12 +3,8 @@
   letter-spacing: -0.025em;
   margin-inline: auto;
   margin-block: 3.5rem;
-  max-width: 48rem;
+  /* max-width: 48rem; */
   text-align: center;
-}
-
-.articles article>div {
-  height: 100%;
 }
 
 .preview {
@@ -21,113 +17,108 @@
   text-align: center;
 }
 
-.markdown-content {
+.markdown {
   margin-inline: auto;
   color: hsl(var(--high-contrast));
 }
 
-.markdown-content>*:not(img),
-.markdown-content figcaption {
-  width: 65dvw;
-  margin-inline: auto;
+.markdown>* {
+  /* max-width: 60vw; */
+  margin-block: 2rem;
+  font-size: 1.1rem;
+  line-height: 1.35;
+}
+
+.markdown>*:not(img),
+.markdown figcaption {
+  /* max-width: 45vw; */
 }
 
 @media screen and (width > 640px) {
 
-  .markdown-content>*:not(img),
-  .markdown-content figcaption {
-    width: 60dvw;
+  .markdown>*:not(img),
+  .markdown figcaption {
+    /* width: 60dvw; */
   }
 
-  .markdown-content {
-    max-width: 85dvw;
+  .markdown {
+    /* max-width: 85dvw; */
   }
 }
 
 @media screen and (width > 780px) {
 
-  .markdown-content>*:not(img),
-  .markdown-content figcaption {
-    width: 50dvw;
+  .markdown>*:not(img),
+  .markdown figcaption {
+    /* width: 50dvw; */
   }
 }
 
-.markdown-content>*:not(img) {
+.markdown>*:not(img) {
   margin-block: 2rem;
 }
 
-.markdown-content figure {
-  width: 100%;
-}
-
-.markdown-content p {
+.markdown>p {
   font-size: var(--text-md);
 }
 
-.markdown-content img {
+.markdown>ul {
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.markdown img {
   width: 100%;
   display: block;
   object-fit: contain;
-  /* aspect-ratio: 16 / 9; */
 }
 
-.markdown-content figcaption {
+.markdown>figure {
+  width: 100%;
+}
+
+.markdown figcaption {
   background-color: hsl(var(--card));
   padding: 0.5rem;
 }
 
-.markdown-content blockquote {
+.markdown blockquote {
   margin-block: 2.5rem;
   padding: 2rem 1rem;
   border-radius: var(--radius);
   background-color: hsl(var(--card));
 }
 
-.markdown-content blockquote p {
+.markdown blockquote p {
   margin: 0;
 }
 
-.markdown-content h1 {
+.markdown h1 {
   font-size: var(--text-2xl);
   line-height: 2rem;
 }
 
-.markdown-content h2 {
+.markdown h2 {
   font-size: var(--text-xl);
   line-height: 1.75rem;
 }
 
-.markdown-content h3 {
+.markdown h3 {
   font-size: var(--text-lg);
   line-height: 1.75rem;
 }
 
-.markdown-content h4 {
+.markdown h4 {
   font-size: var(--text-md);
   line-height: 1.5rem;
 }
 
-.markdown-content h5 {
+.markdown h5 {
   font-size: var(--text-sm);
   line-height: 1.25rem;
 }
 
-.markdown-content h6 {
+.markdown h6 {
   font-size: var(--text-xs);
   line-height: 1.2rem;
-}
-
-.markdown-content>ul {
-  padding-left: 1.5rem;
-}
-
-.markdown-content {
-  margin-inline: auto;
-}
-
-.markdown-content>* {
-  max-width: 60cqw;
-  margin: 2rem auto;
-  font-size: 1.1rem;
-  line-height: 1.35;
 }

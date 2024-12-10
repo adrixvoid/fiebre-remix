@@ -2,12 +2,13 @@ import { useLoaderData, useNavigation, useParams, useSubmit } from "@remix-run/r
 import { createColumnHelper } from '@tanstack/react-table';
 import { FilePlus2, Trash2 } from "lucide-react";
 
-import { ROUTE_PATH_ADMIN } from "~/constants";
+import { ROUTE_PATH, ROUTE_PATH_ADMIN } from "~/constants";
 import { t } from "~/i18n/translate";
 import { Product } from '~/types/product';
 
-import { loaderAdminProductList } from "~/server/controllers/products.controller";
+import { action_AdminProductList, loader_AdminProductList } from "~/server/controllers/products.controller";
 
+import TogglePublishedProduct from "~/components/products/TogglePublishedProduct";
 import Button from "~/components/ui/button/Button";
 import { Container } from "~/components/ui/container/Container";
 import { Flex } from "~/components/ui/flex/Flex";
@@ -17,7 +18,6 @@ import { Skeleton } from "~/components/ui/skeleton/Skeleton";
 import AdminTable from "~/components/ui/table/AdminTable";
 import { TableCellAction, TableHeadAction } from "~/components/ui/table/Table";
 import { Title } from "~/components/ui/text/Text";
-import { Toggle } from "~/components/ui/toggle/Toggle";
 import { formatCurrencyInCents } from "~/lib/currency";
 
 const styles = {
@@ -36,7 +36,7 @@ const columns = [
   columnHelper.accessor('name', {
     id: 'name',
     header: () => <span>{t('PRODUCT.PRODUCT')}</span>,
-    cell: props => props.getValue()
+    cell: props => <Link to={`${ROUTE_PATH.SHOP_DETAIL}/${props.row.original.slug}`} target="_blank">{props.getValue()}</Link>
   }),
   columnHelper.accessor('priceInCents', {
     id: 'priceInCents',
@@ -47,7 +47,7 @@ const columns = [
     id: 'published',
     header: () => <span>{t('PRODUCT.AVAILABLE_FOR_PURCHASE')}</span>,
     cell: props => {
-      return <Toggle defaultChecked={props.getValue()} onChange={(checked) => console.log(checked)} size='xs' />
+      return <TogglePublishedProduct defaultChecked={props.getValue()} id={props.row.original.id} size='xs' />
     }
   }),
   columnHelper.display({
@@ -59,7 +59,6 @@ const columns = [
       const name = props.row.original.name as string;
 
       const editPath = `${ROUTE_PATH_ADMIN.PRODUCT_FORM}/${id}`;
-      const deletePath = `${ROUTE_PATH_ADMIN.PRODUCT_LIST}/${id}`;
 
       const params = useParams();
       const navigation = useNavigation();
@@ -70,7 +69,13 @@ const columns = [
         if (confirm(`Confirma que desea eliminar el siguiente Item?\n${name}`)) {
           const formData = new FormData();
           formData.append("id", id);
-          submit(formData, { method: "post", action: deletePath, navigate: false });
+          formData.append("action", "actionDeleteProduct");
+          submit(formData, {
+            method: "post",
+            action: "?",
+            navigate: false,
+            fetcherKey: "actionDeleteProduct"
+          });
         }
       }
 
@@ -89,7 +94,8 @@ const columns = [
   }),
 ];
 
-export const loader = loaderAdminProductList;
+export const loader = loader_AdminProductList;
+export const action = action_AdminProductList;
 
 export default function AdminProductList() {
   const { products } = useLoaderData<typeof loader>() as { products: Product[]; }
@@ -97,10 +103,6 @@ export default function AdminProductList() {
   const pathToNewProduct = {
     pathname: ROUTE_PATH_ADMIN.PRODUCT_FORM,
     search: ''
-  };
-
-  const pathToNewCategory = {
-    pathname: ROUTE_PATH_ADMIN.CATEGORY_CREATE
   };
 
   return (

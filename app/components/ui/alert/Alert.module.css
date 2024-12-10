@@ -52,31 +52,31 @@
 
 /* Variants */
 .info {
-  background-color: hsl(var(--color-info-background));
+  background-color: hsl(var(--color-info));
   color: hsl(var(--color-info-foreground));
 }
 
 .warning {
-  background-color: hsl(var(--color-warning-background));
+  background-color: hsl(var(--color-warning));
   color: hsl(var(--color-warning-foreground));
 }
 
 .danger {
-  background-color: hsl(var(--color-danger-background));
+  background-color: hsl(var(--color-danger));
   color: hsl(var(--color-danger-foreground));
 }
 
 .success {
-  background-color: hsl(var(--color-success-background));
+  background-color: hsl(var(--color-success));
   color: hsl(var(--color-success-foreground));
 }
 
 .light {
-  background-color: hsl(var(--color-light-background));
+  background-color: hsl(var(--color-light));
   color: hsl(var(--color-light-foreground));
 }
 
 .dark {
-  background-color: hsl(var(--color-dark-background));
+  background-color: hsl(var(--color-dark));
   color: hsl(var(--color-dark-foreground));
 }

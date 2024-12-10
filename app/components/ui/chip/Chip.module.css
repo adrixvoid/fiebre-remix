@@ -87,16 +87,16 @@
 }
 
 .success {
-  background-color: hsl(var(--color-success-background));
+  background-color: hsl(var(--color-success));
   color: hsl(var(--color-success-foreground));
 }
 
 .success:hover {
-  background-color: color-mix(in hsl, hsl(var(--color-success-background)), white 25%);
+  background-color: color-mix(in hsl, hsl(var(--color-success)), white 25%);
 }
 
 .success.outlined {
-  border-color: color-mix(in hsl, hsl(var(--color-success-background)), black 5%);
+  border-color: color-mix(in hsl, hsl(var(--color-success)), black 5%);
   color: hsl(var(--color-success-foreground));
   background-color: hsl(var(--color-success-foreground), 0.01);
 }
@@ -111,27 +111,27 @@
 }
 
 .success.outlined .dismissButton {
-  background-color: hsl(var(--color-success-background));
+  background-color: hsl(var(--color-success));
   color: hsl(var(--color-success-foreground));
 }
 
 .warning {
-  background-color: hsl(var(--color-warning-background));
+  background-color: hsl(var(--color-warning));
   color: hsl(var(--color-warning-foreground));
 }
 
 .warning:hover {
-  background-color: color-mix(in hsl, hsl(var(--color-warning-background)), white 25%);
+  background-color: color-mix(in hsl, hsl(var(--color-warning)), white 25%);
 }
 
 .warning.outlined {
   border-color: color-mix(in hsl, hsl(var(--color-warning)), black 5%);
   color: hsl(var(--color-warning-foreground));
-  background-color: hsl(var(--color-warning-background), 0.01);
+  background-color: hsl(var(--color-warning), 0.01);
 }
 
 .warning.outlined:hover {
-  background-color: hsl(var(--color-warning-background), 0.3);
+  background-color: hsl(var(--color-warning), 0.3);
 }
 
 .warning .dismissButton {
@@ -140,17 +140,17 @@
 }
 
 .warning.outlined .dismissButton {
-  background-color: hsl(var(--color-warning-background));
+  background-color: hsl(var(--color-warning));
   color: hsl(var(var(--button-warning-dark)));
 }
 
 .error {
-  background-color: hsl(var(--color-danger-background));
+  background-color: hsl(var(--color-danger));
   color: hsl(var(--color-danger-foreground));
 }
 
 .error:hover {
-  background-color: color-mix(in hsl, hsl(var(--color-danger-background)), white 25%);
+  background-color: color-mix(in hsl, hsl(var(--color-danger)), white 25%);
 }
 
 .error.outlined {
@@ -160,7 +160,7 @@
 }
 
 .error.outlined:hover {
-  background-color: hsl(var(--color-danger-background), 0.3);
+  background-color: hsl(var(--color-danger), 0.3);
 }
 
 .error .dismissButton {

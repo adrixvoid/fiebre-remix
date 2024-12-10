@@ -1,14 +1,16 @@
 import { ShoppingCart } from "lucide-react";
 
 import { t } from "~/i18n/translate";
-import { accessibilityPrice, formatCurrency } from '~/lib/currency';
 import { MapImage } from '~/types/file';
 
 import Button, { ButtonProps } from "~/components/ui/button/Button";
-import Input from '~/components/ui/form/Input';
 import { Link } from "~/components/ui/link/Link";
 import { Title } from "~/components/ui/text/Text";
 
+import { Markdown } from "~/components/markdown/Markdown";
+import { Chip } from "~/components/ui/chip/Chip";
+import { Quantity } from "~/components/ui/form/quantity/Quantity";
+import { Money } from "~/components/ui/money/Money";
 import styles from './ProductDetail.module.css';
 
 export function NavigationBack({ children }: { children: React.ReactNode }) {
@@ -50,40 +52,37 @@ export function ProductGallery({ images }: { images: MapImage[] }) {
 
 export function ProductTitle({ title }: { title: string }) {
   return (
-    <Title size="xl" className={styles.title} itemProp="name">{title}</Title>
+    <Title size="sm" className={styles.title} itemProp="name">{title}</Title>
   );
 }
 
 export function ProductPrice({ priceInCents }: { priceInCents: number }) {
   return (
-    <p
-      className={styles.price}
-      itemProp="offers"
-      itemScope={false}
-      itemType="http://schema.org/Offer"
-    >
-      <meta itemProp="price" content="35129" />
+    <Title className={styles.price} style={{ fontWeight: 700 }}>
       <span className='sr-only'>{t("PRODUCT.PRICE")}</span>
-      <span className="sr-only">{accessibilityPrice(priceInCents)}</span>
-      <span aria-hidden>
-        {priceInCents === 0 ? "Gratis" : formatCurrency(priceInCents)}
-      </span>
-      {priceInCents > 0 && <span className="sr-only">{t('CURRENCY.ARGENTINIAN_PESOS')}</span>}
-    </p>
+      <Money priceInCents={priceInCents} />
+    </Title>
   );
 }
 
 export function ProductQuantity() {
   return (
     <div className={styles.quantity}>
-      <Input label="Quantity" id="product-quantity" name="product-quantity" type="number" defaultValue="1" />
+      <Quantity
+        initialValue={1}
+        min={1}
+        max={10}
+        onChange={(value) => console.log(`New quantity: ${value}`)}
+        id="product-quantity" name="product-quantity" type="number" defaultValue="1"
+      />
+      {/* label="Quantity" */}
     </div>
   )
 }
 
 export function ProductButtonAddToCart({ priceHidden, ...props }: ButtonProps & { priceHidden?: boolean }) {
   return (
-    <Button variant="outline" size="lg" className={styles['add-to-cart']} fullWidth {...props}>
+    <Button variant="outline" size='lg' radius='lg' className={styles['add-to-cart']} fullWidth {...props}>
       <ShoppingCart width={24} height={24} />
       {!priceHidden ? t("ADD_TO_CART") : t("INQUIRE")}
     </Button>
@@ -92,21 +91,19 @@ export function ProductButtonAddToCart({ priceHidden, ...props }: ButtonProps & 
 
 export function ProductDescription({ description }: { description: string }) {
   return (
-    <div itemProp="description" className={styles.description}>
-      <div dangerouslySetInnerHTML={{ __html: description }} />
-    </div>
+    <Markdown itemProp="description markdown" className={styles.description} body={description} />
   );
 }
 
 export function ProductTags({ tags = [] }: { tags?: string[] }) {
   return (
     <div className={styles.tags}>
-      <span>{t("PRODUCT.TAGS")}</span>
-      <ul>
+      <Title as='h4' size='xs'>{t("PRODUCT.TAGS")}</Title>
+      <div role="list">
         {tags.map((tag) => (
-          <li key={tag}>{tag}</li>
+          <Chip key={tag}>{tag}</Chip>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }

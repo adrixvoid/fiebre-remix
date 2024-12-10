@@ -147,10 +147,18 @@ export const productService = {
       }
     });
 
-    return {success: true, record: product};
+    return {success: true, data: product};
+  },
+  updatePublished: async (isPublished: Product['published'], id: string) => {
+    const product = await prisma.product.update({
+      data: {published: isPublished},
+      where: {id}
+    });
+
+    return {success: true, data: product};
   },
   delete: async (id: string) => {
-    const product = await prisma.category.delete({
+    const product = await prisma.product.delete({
       where: {id}
     });
 
@@ -192,6 +200,6 @@ export const productService = {
     //   {$set: data},
     //   {new: true}
     // );
-    // return {success: true, record: doc};
+    // return {success: true, data: doc};
   }
 };

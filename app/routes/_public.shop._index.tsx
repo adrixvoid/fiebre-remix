@@ -11,6 +11,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardImageCo
 import { Container } from "~/components/ui/container/Container";
 import { Grid } from "~/components/ui/grid/Grid";
 import { Link } from "~/components/ui/link/Link";
+import { Money } from "~/components/ui/money/Money";
 import { Section } from "~/components/ui/section/Section";
 
 export const loader: LoaderFunction = async () => {
@@ -31,15 +32,17 @@ const Store = () => {
                             </CardImageCover>
                             <CardHeader>
                                 <Link to={`${ROUTE_PATH.SHOP_DETAIL}/${product.slug}`}>
-                                    <CardTitle>{product.name}</CardTitle>
+                                    <CardTitle size='sm'>{product.name}</CardTitle>
                                 </Link>
                             </CardHeader>
                             <CardContent>
-                                <CardDescription>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo sint expedita modi doloremque at quisquam, dolore corporis ea. Laboriosam sint natus neque vel dolorem expedita repellendus, in iusto iste nostrum?</CardDescription>
+                                <CardDescription>
+                                    <Money priceInCents={product.priceInCents} />
+                                </CardDescription>
                             </CardContent>
                             <CardFooter>
                                 <Button to={`${ROUTE_PATH.SHOP_DETAIL}/${product.slug}`}>
-                                    More Details
+                                    See product
                                 </Button>
                             </CardFooter>
                         </Card>

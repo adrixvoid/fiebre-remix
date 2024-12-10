@@ -1,11 +1,12 @@
 import { ActionFunction, json } from "@remix-run/node";
 import { useLoaderData, useLocation, useNavigation, useParams, useSubmit } from "@remix-run/react";
 import { CellContext, createColumnHelper } from '@tanstack/react-table';
-import { FilePlus2, Trash2 } from "lucide-react";
+import { FilePlus2, FolderPlus, Trash2 } from "lucide-react";
 
 import { ROUTE_PATH_ADMIN } from "~/constants";
 import { t } from "~/i18n/translate";
 import { Breadcrumb } from '~/types/breadcrumb';
+import { Category } from "~/types/category";
 
 import { AdminCategoryLoaderList, CATEGORY_PARAMS, loaderAdminCategoriesList } from "~/server/controllers/categories.controller";
 import { PRODUCT_PARAMS } from "~/server/controllers/products.controller";
@@ -14,15 +15,12 @@ import AdminCategoryBreadcrumb from "~/components/categories/AdminCategoryBreadc
 import AdminProductsTable from "~/components/products/AdminProductsTable";
 import { Button } from "~/components/ui/button/Button";
 import { Container } from "~/components/ui/container/Container";
-import AdminTable from "~/components/ui/table/AdminTable";
-
-import { FolderPlus } from "lucide-react";
 import { Flex } from "~/components/ui/flex/Flex";
 import { Link } from "~/components/ui/link/Link";
 import { Section } from "~/components/ui/section/Section";
+import AdminTable from "~/components/ui/table/AdminTable";
 import { TableCellAction } from "~/components/ui/table/Table";
 import { categoryService } from "~/server/services/category.service";
-import { Category } from "~/types/category";
 
 const ACTIONS = {
   DELETE: "delete"
@@ -146,6 +144,11 @@ function AdminCategoriesList() {
   const pathToNewProduct = {
     pathname: ROUTE_PATH_ADMIN.PRODUCT_FORM,
     search: category?.slug ? `?${PRODUCT_PARAMS.CATEGORY_ID}=${category.id}` : ''
+  };
+
+  const handleUpdateCategories = (category: Category, updatedCategories: Category[]) => {
+    console.log('Category updated:', category);
+    console.log('Categories updated:', updatedCategories);
   };
 
   return (
